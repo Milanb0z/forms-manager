@@ -30,7 +30,7 @@ const NewForm = () => {
 
   const addAnswer = (questionId) => {
     let prevQuestions = [...questions];
-    prevQuestions[questionId].options.push("");
+    prevQuestions[questionId].options.push({ optionText: "" });
     console.log(prevQuestions[questionId]);
     setQuestions([...prevQuestions]);
   };
@@ -46,9 +46,22 @@ const NewForm = () => {
   const onOptionTextChange = ({ target }, questionId, optionId) => {
     console.log(target.value);
     let prevQuestion = [...questions];
-    prevQuestion[questionId].options[optionId] = target.value;
+    prevQuestion[questionId].options[optionId].optionText = target.value;
     console.log(prevQuestion);
     setQuestions([...prevQuestion]);
+  };
+
+  const onFormSubmit = (e) => {
+    let formSubmitData = { name: heading, description, questions };
+    console.log(formSubmitData);
+    axios
+      .post("/form/new", formSubmitData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
@@ -98,7 +111,7 @@ const NewForm = () => {
                       id="outlined-basic"
                       label="answer"
                       variant="outlined"
-                      value={ans}
+                      value={ans.optionText}
                       onChange={(e) => onOptionTextChange(e, index, i)}
                     />
                   ))}
@@ -111,6 +124,10 @@ const NewForm = () => {
             ))}
             <Button variant="contained" onClick={addNewQuestion}>
               Add New
+            </Button>
+
+            <Button variant="contained" onClick={onFormSubmit}>
+              Submit Form
             </Button>
           </div>
         </Box>

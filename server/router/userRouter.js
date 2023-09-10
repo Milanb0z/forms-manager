@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const { User } = require("../models/userModel");
+const generateToken = require("../utils/generateToken");
 
 //Create User
 router.post("/signup", async (req, res) => {

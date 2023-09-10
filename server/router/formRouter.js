@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get All Forms
+// Get Forms By ID
 router.get("/:formId", async (req, res) => {
   try {
     const { formId } = req.params;

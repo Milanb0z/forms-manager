@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const questionSchema = new mognoose.Schema({
+const questionSchema = new mongoose.Schema({
   questionText: {
     type: String,
     trim: true,
@@ -8,7 +8,7 @@ const questionSchema = new mognoose.Schema({
   },
   options: [
     {
-      optionText: String,
+      optionText: { type: String, trim: true, required: true },
     },
   ],
 });
@@ -37,3 +37,5 @@ const formSchema = new mongoose.Schema(
 const Form = mongoose.model("Form", formSchema);
 
 module.exports = { Form };
+
+// [{questionText: Favorite Color?, options: [{optionText: "red"}, {optionText: "blue"}, {optionText: "yellow"}]}]

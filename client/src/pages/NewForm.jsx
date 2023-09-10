@@ -1,16 +1,56 @@
-import React from "react";
+import { useState } from "react";
 
 import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import axios from "../axios.default";
 
+import { Box, Button } from "@mui/material";
+
+import useInput from "../hooks/useInput";
+
 const defaultTheme = createTheme();
 
-const newForm = () => {
+const NewForm = () => {
+  const [heading, setHeading] = useInput("");
+  const [description, setDescription] = useInput("");
+
+  const [questions, setQuestions] = useState([]);
+
+  const addNewQuestion = () => {
+    setQuestions((prevQuestion) => [
+      { questionText: "", options: [] },
+      ...prevQuestion,
+    ]);
+  };
+
+  const addAnswer = (questionId) => {
+    let prevQuestions = [...questions];
+    prevQuestions[questionId].options.push("");
+    console.log(prevQuestions[questionId]);
+    setQuestions([...prevQuestions]);
+  };
+
+  const onQuestionTitleChange = ({ target }, index) => {
+    console.log(target.value);
+    let prevQuestion = [...questions];
+    prevQuestion[index].questionText = target.value;
+    console.log(prevQuestion);
+    setQuestions([...prevQuestion]);
+  };
+
+  const onOptionTextChange = ({ target }, questionId, optionId) => {
+    console.log(target.value);
+    let prevQuestion = [...questions];
+    prevQuestion[questionId].options[optionId] = target.value;
+    console.log(prevQuestion);
+    setQuestions([...prevQuestion]);
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
@@ -21,9 +61,62 @@ const newForm = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <main>{/* Hero unit */}</main>
+      <main>
+        <Box>
+          <div>
+            <TextField
+              id="outlined-basic"
+              value={heading}
+              onChange={setHeading}
+              label="Title"
+              variant="outlined"
+            />
+          </div>
+          <div>
+            <TextField
+              id="outlined-basic"
+              value={description}
+              onChange={setDescription}
+              label="Description"
+              variant="outlined"
+            />
+          </div>
+          <div>
+            {questions.map((opt, index) => (
+              <div key={index}>
+                <TextField
+                  id="outlined-basic"
+                  label="Question Title"
+                  variant="outlined"
+                  value={opt.questionText}
+                  onChange={(e) => onQuestionTitleChange(e, index)}
+                />
+                <div>
+                  {opt.options.map((ans, i) => (
+                    <TextField
+                      key={`answer-${i}`}
+                      id="outlined-basic"
+                      label="answer"
+                      variant="outlined"
+                      value={ans}
+                      onChange={(e) => onOptionTextChange(e, index, i)}
+                    />
+                  ))}
+
+                  <Button variant="contained" onClick={() => addAnswer(index)}>
+                    Add Answer
+                  </Button>
+                </div>
+              </div>
+            ))}
+            <Button variant="contained" onClick={addNewQuestion}>
+              Add New
+            </Button>
+          </div>
+        </Box>
+      </main>
     </ThemeProvider>
   );
 };
 
-export default newForm;
+export default NewForm;

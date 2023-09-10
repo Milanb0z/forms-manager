@@ -24,7 +24,8 @@ const defaultTheme = createTheme();
 
 const SingleForm = () => {
   const { formId } = useParams();
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState(null);
+  console.log(formId);
 
   useEffect(() => {
     axios.get(`/form/${formId}`).then((res) => {
@@ -37,6 +38,9 @@ const SingleForm = () => {
     console.log(e.target);
   };
 
+  if (!form) {
+    return <p>loading</p>;
+  }
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />

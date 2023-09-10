@@ -1,16 +1,17 @@
 const router = require("express").Router();
 
+const auth = require("../middleware/auth");
 const { Form } = require("../models/formModel");
 
 // Create Form
-router.post("/new", async (req, res) => {
+router.post("/new", auth, async (req, res) => {
   try {
     const { name, description, questions } = req.body;
 
     const newForm = new Form({
       name,
       description,
-      createdBy: "64fdaaec0096d86deaf0aed9",
+      createdBy: req.user._id,
       questions,
     });
 
@@ -26,6 +27,7 @@ router.post("/new", async (req, res) => {
 // Get All Forms
 router.get("/", async (req, res) => {
   try {
+    console.log(req.user);
     const forms = await Form.find();
 
     res.send(forms);

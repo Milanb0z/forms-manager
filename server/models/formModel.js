@@ -19,6 +19,10 @@ const formSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    isOpen: {
+      type: Boolean,
+      default: true,
+    },
     name: {
       type: String,
       trim: true,

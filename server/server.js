@@ -14,6 +14,7 @@ app.use(cors());
 app.use(cookieParser());
 
 //Router
+app.use("/api/user", require("./router/userRouter"));
 
 app.get("/", (req, res) => {
   res.send("Online");

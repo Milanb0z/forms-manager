@@ -4,9 +4,7 @@ const { User } = require("../models/userModel");
 const auth = async (req, res, next) => {
   let token;
 
-  token = req.cookies.jwt;
-
-  console.log(token);
+  token = req.headers["token"];
 
   if (token) {
     try {

@@ -12,6 +12,7 @@ import axios from "../axios.default";
 import { Box, Button } from "@mui/material";
 
 import useInput from "../hooks/useInput";
+import NewQuestionForm from "../components/NewQuestionForm";
 
 const defaultTheme = createTheme();
 
@@ -70,12 +71,19 @@ const NewForm = () => {
       <AppBar position="relative">
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Create Form
+            Nova Forma
           </Typography>
         </Toolbar>
       </AppBar>
       <main>
-        <Box sx={{ mt: 1 }}>
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            pt: 8,
+            pb: 6,
+            px: 4,
+          }}
+        >
           <div>
             <TextField
               margin="normal"
@@ -98,33 +106,14 @@ const NewForm = () => {
           </div>
           <div>
             {questions.map((opt, index) => (
-              <div key={index}>
-                <TextField
-                  margin="normal"
-                  id="outlined-basic"
-                  label="Question Title"
-                  variant="outlined"
-                  value={opt.questionText}
-                  onChange={(e) => onQuestionTitleChange(e, index)}
-                />
-                <div>
-                  {opt.options.map((ans, i) => (
-                    <TextField
-                      margin="normal"
-                      key={`answer-${i}`}
-                      id="outlined-basic"
-                      label="answer"
-                      variant="outlined"
-                      value={ans.optionText}
-                      onChange={(e) => onOptionTextChange(e, index, i)}
-                    />
-                  ))}
-
-                  <Button variant="contained" onClick={() => addAnswer(index)}>
-                    Add Answer
-                  </Button>
-                </div>
-              </div>
+              <NewQuestionForm
+                key={index}
+                option={opt}
+                index={index}
+                onTitleEdit={onQuestionTitleChange}
+                onOptionEdit={onOptionTextChange}
+                newAnswer={addAnswer}
+              />
             ))}
             <Button variant="contained" onClick={addNewQuestion}>
               Add New

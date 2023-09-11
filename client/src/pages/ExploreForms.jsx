@@ -41,7 +41,6 @@ const ExploreForms = () => {
         </Toolbar>
       </AppBar>
       <main>
-        {/* Hero unit */}
         <Box
           sx={{
             bgcolor: "background.paper",

@@ -23,8 +23,8 @@ const NewForm = () => {
 
   const addNewQuestion = () => {
     setQuestions((prevQuestion) => [
-      { questionText: "", options: [] },
       ...prevQuestion,
+      { questionText: "", options: [] },
     ]);
   };
 
@@ -75,9 +75,10 @@ const NewForm = () => {
         </Toolbar>
       </AppBar>
       <main>
-        <Box>
+        <Box sx={{ mt: 1 }}>
           <div>
             <TextField
+              margin="normal"
               id="outlined-basic"
               value={heading}
               onChange={setHeading}
@@ -87,6 +88,7 @@ const NewForm = () => {
           </div>
           <div>
             <TextField
+              margin="normal"
               id="outlined-basic"
               value={description}
               onChange={setDescription}
@@ -98,6 +100,7 @@ const NewForm = () => {
             {questions.map((opt, index) => (
               <div key={index}>
                 <TextField
+                  margin="normal"
                   id="outlined-basic"
                   label="Question Title"
                   variant="outlined"
@@ -107,6 +110,7 @@ const NewForm = () => {
                 <div>
                   {opt.options.map((ans, i) => (
                     <TextField
+                      margin="normal"
                       key={`answer-${i}`}
                       id="outlined-basic"
                       label="answer"

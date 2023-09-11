@@ -12,17 +12,23 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import axios from "../axios.default";
+
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
-export default function Login() {
+const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const submitData = {
       email: data.get("email"),
       password: data.get("password"),
+    };
+    axios.post("/user/login", submitData).then((res) => {
+      console.log(res.data);
+      localStorage.setItem("token", res.data.token);
     });
   };
 
@@ -94,4 +100,6 @@ export default function Login() {
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default Login;

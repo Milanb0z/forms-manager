@@ -16,9 +16,9 @@ router.post("/signup", async (req, res) => {
 
     const savedUser = await newUser.save();
 
-    generateToken(res, savedUser._id);
+    let token = generateToken(res, savedUser._id);
 
-    res.send(savedUser);
+    res.send({ user: savedUser, token });
   } catch (error) {
     console.log(error);
     res.status(500).send({ error });
@@ -38,9 +38,9 @@ router.post("/login", async (req, res) => {
       return res.status(401).send({ error: "Password is incorrect" });
     }
 
-    generateToken(res, foundUser._id);
+    let token = generateToken(res, foundUser._id);
 
-    res.send(foundUser);
+    res.send({ user: foundUser, token });
   } catch (error) {
     console.log(error);
     res.status(500).send({ error });

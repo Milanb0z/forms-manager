@@ -23,8 +23,7 @@ const ExploreForms = () => {
   const [forms, setForms] = useState([]);
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
-    axios.get("/form", { headers: { token } }).then((res) => {
+    axios.get("/form").then((res) => {
       console.log(res.data);
       setForms(res.data);
     });

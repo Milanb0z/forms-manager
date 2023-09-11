@@ -37,26 +37,22 @@ const NewForm = () => {
   };
 
   const onQuestionTitleChange = ({ target }, index) => {
-    console.log(target.value);
     let prevQuestion = [...questions];
     prevQuestion[index].questionText = target.value;
-    console.log(prevQuestion);
     setQuestions([...prevQuestion]);
   };
 
   const onOptionTextChange = ({ target }, questionId, optionId) => {
-    console.log(target.value);
     let prevQuestion = [...questions];
     prevQuestion[questionId].options[optionId].optionText = target.value;
-    console.log(prevQuestion);
     setQuestions([...prevQuestion]);
   };
 
   const onFormSubmit = (e) => {
     let formSubmitData = { name: heading, description, questions };
-    console.log(formSubmitData);
+    let token = localStorage.getItem("token");
     axios
-      .post("/form/new", formSubmitData)
+      .post("/form/new", formSubmitData, { headers: { token } })
       .then((res) => {
         console.log(res);
       })

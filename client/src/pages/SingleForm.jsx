@@ -25,17 +25,21 @@ const defaultTheme = createTheme();
 const SingleForm = () => {
   const { formId } = useParams();
   const [form, setForm] = useState(null);
-  console.log(formId);
+  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     axios.get(`/form/${formId}`).then((res) => {
       console.log(res.data);
       setForm(res.data);
+      let answers = res.data.questions.map(() => null);
+      setAnswers(answers);
     });
   }, [formId]);
 
-  const handleChange = (e) => {
-    console.log(e.target);
+  const handleChange = (e, questionIndex, ansIndex) => {
+    let newAnswers = [...answers];
+    newAnswers[questionIndex] = ansIndex;
+    setAnswers(newAnswers);
   };
 
   if (!form) {
@@ -52,68 +56,69 @@ const SingleForm = () => {
         </Toolbar>
       </AppBar>
       <main>
-        {/* Hero unit */}
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              {form.name}
-            </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              {form.description}
-            </Typography>
-            <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-            ></Stack>
-          </Container>
+        <Container sx={{ py: 2 }} maxWidth="md">
+          {/* Hero unit */}
+          <Box
+            sx={{
+              bgcolor: "background.paper",
+              pt: 8,
+              pb: 6,
+            }}
+          >
+            <Container maxWidth="sm">
+              <Typography
+                component="h1"
+                variant="h2"
+                align="center"
+                color="text.primary"
+                gutterBottom
+              >
+                {form.name}
+              </Typography>
+              <Typography
+                variant="h5"
+                align="center"
+                color="text.secondary"
+                paragraph
+              >
+                {form.description}
+              </Typography>
+              <Stack
+                sx={{ pt: 4 }}
+                direction="row"
+                spacing={2}
+                justifyContent="center"
+              ></Stack>
+            </Container>
 
-          {form.questions.map((question, index) => (
-            <FormControl
-              key={index}
-              sx={{ m: 3 }}
-              component="fieldset"
-              variant="standard"
-            >
-              <FormLabel component="h1">{question.questionText}</FormLabel>
-              <FormGroup>
-                {question.options.map((opt) => (
-                  <FormControlLabel
-                    key={opt._id}
-                    control={
-                      <Checkbox
-                        checked={false}
-                        onChange={handleChange}
-                        name="gilad"
-                      />
-                    }
-                    label={opt.optionText}
-                  />
-                ))}
-              </FormGroup>
-              <FormHelperText>Be careful</FormHelperText>
-            </FormControl>
-          ))}
-        </Box>
-        <Container sx={{ py: 8 }} maxWidth="md"></Container>
+            {form.questions.map((question, index) => (
+              <FormControl
+                key={index}
+                sx={{ m: 3 }}
+                component="fieldset"
+                variant="standard"
+              >
+                <FormLabel component="h1">{question.questionText}</FormLabel>
+                <FormGroup>
+                  {question.options.map((opt, ansIndex) => (
+                    <FormControlLabel
+                      key={opt._id}
+                      control={
+                        <Checkbox
+                          checked={answers[index] === ansIndex ? true : false}
+                          onChange={(e) => handleChange(e, index, ansIndex)}
+                          name="gilad"
+                        />
+                      }
+                      label={opt.optionText}
+                    />
+                  ))}
+                </FormGroup>
+                <FormHelperText>Be careful</FormHelperText>
+              </FormControl>
+            ))}
+          </Box>
+        </Container>
       </main>
     </ThemeProvider>
   );

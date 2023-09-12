@@ -11,7 +11,7 @@ router.post("/:formId", async (req, res) => {
 
     await newResponse.save();
 
-    res.send(deletedFrom);
+    res.send(newResponse);
   } catch (error) {
     console.log({ error });
     res.status(error).send({ error });

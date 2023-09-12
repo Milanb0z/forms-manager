@@ -9,7 +9,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
@@ -24,6 +24,7 @@ const defaultTheme = createTheme();
 
 const SingleForm = () => {
   const { formId } = useParams();
+  const navigate = useNavigate();
   const [form, setForm] = useState(null);
   const [answers, setAnswers] = useState([]);
 
@@ -31,15 +32,26 @@ const SingleForm = () => {
     axios.get(`/form/${formId}`).then((res) => {
       setForm(res.data);
       console.log(res.data);
-      let answers = res.data.questions.map(() => null);
+      let answers = res.data.questions.map((question) => ({
+        questionId: question._id,
+        optionValue: null,
+      }));
       setAnswers(answers);
     });
   }, [formId]);
 
-  const handleChange = (e, questionIndex, ansIndex) => {
+  const handleChange = (e, questionIndex, val) => {
     let newAnswers = [...answers];
-    newAnswers[questionIndex] = ansIndex;
+    newAnswers[questionIndex].optionValue = val;
     setAnswers(newAnswers);
+  };
+
+  const handleSubmit = () => {
+    const submitData = { response: answers };
+    axios.post(`/response/${formId}`, submitData).then((res) => {
+      console.log(res);
+      navigate("/form");
+    });
   };
 
   if (!form) {
@@ -105,8 +117,10 @@ const SingleForm = () => {
                       key={opt._id}
                       control={
                         <Checkbox
-                          checked={answers[index] === ansIndex ? true : false}
-                          onChange={(e) => handleChange(e, index, ansIndex)}
+                          checked={
+                            answers[index].optionValue === opt ? true : false
+                          }
+                          onChange={(e) => handleChange(e, index, opt)}
                           name="gilad"
                         />
                       }
@@ -118,7 +132,9 @@ const SingleForm = () => {
               </FormControl>
             ))}
           </Box>
-          <Button variant="contained">Pošalji</Button>
+          <Button onClick={handleSubmit} variant="contained">
+            Pošalji
+          </Button>
         </Container>
       </main>
     </ThemeProvider>

@@ -1,0 +1,9 @@
+.card {
+  border-radius: 0.75em;
+  border: 1px solid var(--color-grey-30);
+  background: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1.5em;
+}

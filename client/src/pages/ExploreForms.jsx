@@ -97,6 +97,12 @@ const ExploreForms = () => {
                         <Button size="small">Results</Button>
                       </RouterLink>
                     )}
+
+                    {user?._id === card.createdBy && (
+                      <RouterLink to={`/form/edit/${card._id}`}>
+                        <Button size="small">Edit</Button>
+                      </RouterLink>
+                    )}
                   </CardActions>
                 </Card>
               </Grid>

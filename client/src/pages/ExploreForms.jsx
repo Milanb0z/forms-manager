@@ -17,6 +17,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link as RouterLink } from "react-router-dom";
 import { UserContext } from "../context/user.context";
+import Header from "../components/Header";
 
 const defaultTheme = createTheme();
 
@@ -34,13 +35,7 @@ const ExploreForms = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Form Manager
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header>Form Manager</Header>
       <main>
         <Box
           sx={{

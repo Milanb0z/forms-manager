@@ -13,6 +13,7 @@ import { Box, Button } from "@mui/material";
 
 import useInput from "../hooks/useInput";
 import NewQuestionForm from "../components/NewQuestionForm";
+import Header from "../components/Header";
 
 const defaultTheme = createTheme();
 
@@ -64,13 +65,7 @@ const NewForm = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Nova Forma
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header>Nova Forma</Header>
       <main>
         <Box
           sx={{

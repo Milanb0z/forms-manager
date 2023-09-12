@@ -1,0 +1,15 @@
+.content {
+  padding: 1.5em 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.row {
+  display: flex;
+  gap: 1em;
+
+  & > * {
+    max-width: 20em;
+  }
+}

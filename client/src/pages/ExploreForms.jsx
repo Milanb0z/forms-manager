@@ -1,25 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "../axios.default";
 
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-
-import { Link as RouterLink } from "react-router-dom";
 import { UserContext } from "../context/user.context";
-import Header from "../components/Header";
 import PageWrapper from "../hoc/PageWrapper";
+
+import useInput from "../hooks/useInput";
+
+import classes from "./ExploreForms.module.scss";
+import { Card } from "@ui";
+import { Link } from "react-router-dom";
 
 const ExploreForms = () => {
   const [user] = useContext(UserContext);
-
+  const [search, setSearch] = useInput("");
   const [forms, setForms] = useState([]);
+
+  const searchForm = () => {
+    return forms.filter((form) => form.name.toLowerCase().includes(search));
+  };
 
   useEffect(() => {
     axios.get("/form").then((res) => {
@@ -28,88 +26,20 @@ const ExploreForms = () => {
   }, []);
 
   return (
-    <PageWrapper>
-      <Header>Form Manager</Header>
-      <main>
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Available Forms
-            </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              Check out our latest forms
-            </Typography>
-            <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-            >
-              {user && (
-                <RouterLink to="/form/new">
-                  <Button variant="contained">Nova Forma</Button>
-                </RouterLink>
-              )}
-            </Stack>
-          </Container>
-        </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {forms.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {card.name}
-                    </Typography>
-                    <Typography>{card.description}</Typography>
-                  </CardContent>
-                  <CardActions>
-                    <RouterLink to={`/form/${card._id}`}>
-                      <Button size="small">Visit</Button>
-                    </RouterLink>
-                    {user?._id === card.createdBy && (
-                      <RouterLink to={`/results/${card._id}`}>
-                        <Button size="small">Results</Button>
-                      </RouterLink>
-                    )}
-
-                    {user?._id === card.createdBy && (
-                      <RouterLink to={`/form/edit/${card._id}`}>
-                        <Button size="small">Edit</Button>
-                      </RouterLink>
-                    )}
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </main>
+    <PageWrapper title="Explore Forms">
+      <div className={classes.content}>
+        <h4>Open Forms</h4>
+        <div className={classes.row}>
+          {forms.map((form) => (
+            <Link key={form._id} to={`/form/${form._id}`}>
+              <Card>
+                <h2>{form.name}</h2>
+                <p>{form.description}</p>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </div>
     </PageWrapper>
   );
 };

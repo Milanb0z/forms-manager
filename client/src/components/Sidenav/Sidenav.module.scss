@@ -1,0 +1,9 @@
+.nav {
+  padding: 1.5em;
+  border-right: 1px solid var(--color-grey-30);
+}
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}

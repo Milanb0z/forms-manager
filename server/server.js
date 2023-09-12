@@ -17,6 +17,7 @@ app.use(cookieParser());
 //Router
 app.use("/api/user", require("./router/userRouter"));
 app.use("/api/form", require("./router/formRouter"));
+app.use("/api/response", require("./router/responseRouter"));
 
 app.get("/", (req, res) => {
   res.send("Online");

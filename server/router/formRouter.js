@@ -55,6 +55,30 @@ router.get("/:formId", async (req, res) => {
   }
 });
 
+//Update Form
+router.put("/:formId", auth, async (req, res) => {
+  try {
+    const { formId } = req.params;
+    const { name, description } = req.body;
+
+    console.log([name, description]);
+
+    const updateFrom = await Form.findByIdAndUpdate(
+      formId,
+      {
+        name,
+        description,
+      },
+      { new: true }
+    );
+
+    res.send(updateFrom);
+  } catch (error) {
+    console.log({ error });
+    res.status(error).send({ error });
+  }
+});
+
 // Delete Form
 router.delete("/:formId", async (req, res) => {
   try {

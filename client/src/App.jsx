@@ -1,12 +1,10 @@
-import Button from "@mui/material/Button";
-
 // Pages
 import ExploreForms from "./pages/ExploreForms.jsx";
 import SingleForm from "./pages/SingleForm.jsx";
 import NewForm from "./pages/NewForm.jsx";
 import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
-import { UserContext, UserProvider } from "./context/user.context";
+import { UserContext } from "./context/user.context";
 import FormResults from "./pages/FormResults";
 import ProtectedRoute from "./hoc/ProtectedRoute";
 
@@ -14,6 +12,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useContext, useEffect } from "react";
 
 import axios from "./axios.default.js";
+import EditForm from "./pages/EditForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/form/:formId",
     element: <SingleForm />,
+  },
+  {
+    path: "/form/edit/:formId",
+    element: <EditForm />,
   },
   {
     path: "/results/:formId",

@@ -10,7 +10,7 @@ var responseSchema = new mongoose.Schema(
     response: [
       {
         questionId: String,
-        optionId: String,
+        optionValue: String,
       },
     ],
   },

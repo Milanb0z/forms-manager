@@ -41,7 +41,9 @@ router.get("/", async (req, res) => {
 router.get("/:formId", async (req, res) => {
   try {
     const { formId } = req.params;
-    const fetchedForm = await Form.findById(formId);
+    const fetchedForm = await Form.findById(formId)
+      .populate("createdBy")
+      .select("-createdBy.password");
 
     if (!fetchedForm) {
       return res.status(404).send({ error: "From Not Found" });

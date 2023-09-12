@@ -14,12 +14,15 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import axios from "../axios.default";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { UserContext } from "../context/user.context";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 const Login = () => {
+  const [, setUser] = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -31,6 +34,7 @@ const Login = () => {
     };
     axios.post("/user/login", submitData).then((res) => {
       localStorage.setItem("token", res.data.token);
+      setUser(res.data.user);
       navigate("/form");
     });
   };

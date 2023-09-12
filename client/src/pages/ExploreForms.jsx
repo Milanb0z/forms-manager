@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "../axios.default";
 
 import AppBar from "@mui/material/AppBar";
@@ -16,10 +16,14 @@ import Container from "@mui/material/Container";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link as RouterLink } from "react-router-dom";
+import { UserContext } from "../context/user.context";
 
 const defaultTheme = createTheme();
 
 const ExploreForms = () => {
+  const [user] = useContext(UserContext);
+  console.log(user._id);
+
   const [forms, setForms] = useState([]);
 
   useEffect(() => {
@@ -71,9 +75,11 @@ const ExploreForms = () => {
               spacing={2}
               justifyContent="center"
             >
-              <RouterLink to="/form/new">
-                <Button variant="contained">Nova Forma</Button>
-              </RouterLink>
+              {user && (
+                <RouterLink to="/form/new">
+                  <Button variant="contained">Nova Forma</Button>
+                </RouterLink>
+              )}
             </Stack>
           </Container>
         </Box>
@@ -97,8 +103,13 @@ const ExploreForms = () => {
                   </CardContent>
                   <CardActions>
                     <RouterLink to={`/form/${card._id}`}>
-                      <Button size="small">View</Button>
+                      <Button size="small">Visit</Button>
                     </RouterLink>
+                    {user._id === card.createdBy && (
+                      <RouterLink to={`/form/${card._id}`}>
+                        <Button size="small">Results</Button>
+                      </RouterLink>
+                    )}
                   </CardActions>
                 </Card>
               </Grid>

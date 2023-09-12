@@ -1,19 +1,26 @@
 import React from "react";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import classes from "./PageWrapper.module.scss";
 
-import CssBaseline from "@mui/material/CssBaseline";
-import { ToastContainer } from "react-toast";
-
-const defaultTheme = createTheme();
+import Logo from "@assets/logo.svg";
+import Sidenav from "@components/Sidenav/Sidenav";
 
 const PageWrapper = ({ children }) => {
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <CssBaseline />
-      {children}
-      <ToastContainer />
-    </ThemeProvider>
+    <section className={classes.wrapper}>
+      <header className={classes.header}>
+        <div className={classes.logo}>
+          <img src={Logo} alt="Logo" />
+        </div>
+        <div className={classes.header_content}>
+          <h3>Dashboard</h3>
+        </div>
+      </header>
+      <main className={classes.main}>
+        <Sidenav />
+        <div className={classes.content}></div>
+      </main>
+    </section>
   );
 };
 

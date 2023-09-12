@@ -103,7 +103,7 @@ const ExploreForms = () => {
                     <RouterLink to={`/form/${card._id}`}>
                       <Button size="small">Visit</Button>
                     </RouterLink>
-                    {user._id === card.createdBy && (
+                    {user?._id === card.createdBy && (
                       <RouterLink to={`/results/${card._id}`}>
                         <Button size="small">Results</Button>
                       </RouterLink>

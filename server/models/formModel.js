@@ -6,11 +6,7 @@ const questionSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
-  options: [
-    {
-      optionText: { type: String, trim: true, required: true },
-    },
-  ],
+  options: [String],
 });
 
 const formSchema = new mongoose.Schema(

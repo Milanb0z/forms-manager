@@ -5,6 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 
 import Typography from "@mui/material/Typography";
 import { UserContext } from "../context/user.context";
+import { Link } from "react-router-dom";
 
 const Header = ({ children }) => {
   const [user] = useContext(UserContext);
@@ -14,6 +15,7 @@ const Header = ({ children }) => {
         <Typography variant="h6" color="inherit" noWrap>
           {children}
         </Typography>
+        {!user && <Link to="/login">Login</Link>}
 
         {user && (
           <Typography variant="h6" color="inherit">

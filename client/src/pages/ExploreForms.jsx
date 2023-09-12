@@ -7,7 +7,7 @@ import PageWrapper from "../hoc/PageWrapper";
 import useInput from "../hooks/useInput";
 
 import classes from "./ExploreForms.module.scss";
-import { Card } from "@ui";
+import { Card, Input } from "@ui";
 import { Link } from "react-router-dom";
 
 const ExploreForms = () => {
@@ -28,9 +28,10 @@ const ExploreForms = () => {
   return (
     <PageWrapper title="Explore Forms">
       <div className={classes.content}>
+        <Input placeholder="Search Froms" value={search} onChange={setSearch} />
         <h4>Open Forms</h4>
         <div className={classes.row}>
-          {forms.map((form) => (
+          {searchForm().map((form) => (
             <Link key={form._id} to={`/form/${form._id}`}>
               <Card>
                 <h2>{form.name}</h2>

@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import PageWrapper from "../hoc/PageWrapper";
 import Header from "../components/Header";
 import axios from "../axios.default";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { Box, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { toast } from "react-toast";
 
 const EditForm = () => {
+  const navigate = useNavigate();
+
   const { formId } = useParams();
   const [form, setForm] = useState(null);
 
@@ -21,8 +24,9 @@ const EditForm = () => {
     const { name, description } = form;
     axios
       .put(`/form/${formId}`, { name, description }, { headers: { token } })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        navigate("/form");
+        toast.success("Form Saved");
       })
       .catch((err) => {
         console.error(err);

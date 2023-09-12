@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import axios from "../axios.default";
 import PageWrapper from "../hoc/PageWrapper";
@@ -8,11 +8,13 @@ import Header from "../components/Header";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { Button } from "@mui/material";
 
 const FormResults = () => {
   const { formId } = useParams();
   const [answers, setAnswers] = useState([]);
   const [form, setForm] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`/response/${formId}`).then((res) => {
@@ -22,6 +24,12 @@ const FormResults = () => {
       setForm(res.data);
     });
   }, [formId]);
+
+  const onFormDelete = () => {
+    axios.delete(`/form/${formId}`).then((res) => {
+      navigate("/form");
+    });
+  };
 
   if (!form || !answers) {
     return <p>Loadind</p>;
@@ -67,6 +75,7 @@ const FormResults = () => {
               ))}
             </Container>
           </Container>
+          <Button onClick={onFormDelete}>Delete fROM</Button>
         </Box>
       </main>
     </PageWrapper>

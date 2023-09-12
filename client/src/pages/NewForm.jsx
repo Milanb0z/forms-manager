@@ -38,7 +38,7 @@ const NewForm = () => {
 
   const onOptionTextChange = ({ target }, questionId, optionId) => {
     let prevQuestion = [...questions];
-    prevQuestion[questionId].options[optionId].optionText = target.value;
+    prevQuestion[questionId].options[optionId] = target.value;
     setQuestions([...prevQuestion]);
   };
 

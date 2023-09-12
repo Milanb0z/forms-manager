@@ -1,11 +1,9 @@
 import React from "react";
 
-import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -19,6 +17,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Checkbox from "@mui/material/Checkbox";
 
 import axios from "../axios.default";
+import Header from "../components/Header";
 
 const defaultTheme = createTheme();
 
@@ -59,13 +58,7 @@ const SingleForm = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            {form.name}
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header>{form.name}</Header>
       <main>
         <Container sx={{ py: 2 }} maxWidth="md">
           {/* Hero unit */}

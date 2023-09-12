@@ -3,6 +3,8 @@ const router = require("express").Router();
 const { User } = require("../models/userModel");
 const generateToken = require("../utils/generateToken");
 
+const auth = require("../middleware/auth");
+
 //Create User
 router.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
@@ -19,6 +21,15 @@ router.post("/signup", async (req, res) => {
     let token = generateToken(res, savedUser._id);
 
     res.send({ user: savedUser, token });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error });
+  }
+});
+
+router.get("/profile", auth, async (req, res) => {
+  try {
+    res.send({ user: req.user });
   } catch (error) {
     console.log(error);
     res.status(500).send({ error });

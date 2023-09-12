@@ -1,11 +1,6 @@
 import { useState } from "react";
 
-import AppBar from "@mui/material/AppBar";
-import CssBaseline from "@mui/material/CssBaseline";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import axios from "../axios.default";
 
@@ -14,8 +9,7 @@ import { Box, Button } from "@mui/material";
 import useInput from "../hooks/useInput";
 import NewQuestionForm from "../components/NewQuestionForm";
 import Header from "../components/Header";
-
-const defaultTheme = createTheme();
+import PageWrapper from "../hoc/PageWrapper";
 
 const NewForm = () => {
   const [heading, setHeading] = useInput("");
@@ -33,7 +27,6 @@ const NewForm = () => {
   const addAnswer = (questionId) => {
     let prevQuestions = [...questions];
     prevQuestions[questionId].options.push({ optionText: "" });
-    console.log(prevQuestions[questionId]);
     setQuestions([...prevQuestions]);
   };
 
@@ -63,8 +56,7 @@ const NewForm = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <CssBaseline />
+    <PageWrapper>
       <Header>Nova Forma</Header>
       <main>
         <Box
@@ -107,8 +99,9 @@ const NewForm = () => {
               />
             ))}
             <Button variant="contained" onClick={addNewQuestion}>
-              Add New
+              Add Question
             </Button>
+            <br />
 
             <Button variant="contained" onClick={onFormSubmit}>
               Submit Form
@@ -116,7 +109,7 @@ const NewForm = () => {
           </div>
         </Box>
       </main>
-    </ThemeProvider>
+    </PageWrapper>
   );
 };
 

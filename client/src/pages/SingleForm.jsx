@@ -29,8 +29,8 @@ const SingleForm = () => {
 
   useEffect(() => {
     axios.get(`/form/${formId}`).then((res) => {
-      console.log(res.data);
       setForm(res.data);
+      console.log(res.data);
       let answers = res.data.questions.map(() => null);
       setAnswers(answers);
     });
@@ -51,7 +51,7 @@ const SingleForm = () => {
       <AppBar position="relative">
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Form Manager
+            {form.name}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -110,7 +110,7 @@ const SingleForm = () => {
                           name="gilad"
                         />
                       }
-                      label={opt.optionText}
+                      label={opt}
                     />
                   ))}
                 </FormGroup>
@@ -118,6 +118,7 @@ const SingleForm = () => {
               </FormControl>
             ))}
           </Box>
+          <Button variant="contained">Pošalji</Button>
         </Container>
       </main>
     </ThemeProvider>

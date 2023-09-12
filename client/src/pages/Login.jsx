@@ -13,12 +13,15 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import axios from "../axios.default";
+import { useNavigate } from "react-router";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -27,8 +30,8 @@ const Login = () => {
       password: data.get("password"),
     };
     axios.post("/user/login", submitData).then((res) => {
-      console.log(res.data);
       localStorage.setItem("token", res.data.token);
+      navigate("/form");
     });
   };
 

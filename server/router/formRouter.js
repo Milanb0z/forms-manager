@@ -27,7 +27,6 @@ router.post("/new", auth, async (req, res) => {
 // Get All Forms
 router.get("/", async (req, res) => {
   try {
-    console.log(req.user);
     const forms = await Form.find();
 
     res.send(forms);

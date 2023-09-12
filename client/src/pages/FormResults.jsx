@@ -12,11 +12,10 @@ import Container from "@mui/material/Container";
 const FormResults = () => {
   const { formId } = useParams();
   const [answers, setAnswers] = useState([]);
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState(null);
 
   useEffect(() => {
     axios.get(`/response/${formId}`).then((res) => {
-      console.log(res.data);
       setAnswers(res.data.data);
     });
     axios.get(`/form/${formId}`).then((res) => {
@@ -24,10 +23,9 @@ const FormResults = () => {
     });
   }, [formId]);
 
-  if (!answers) {
-    return <p>loading</p>;
+  if (!form || !answers) {
+    return <p>Loadind</p>;
   }
-
   return (
     <PageWrapper>
       <Header>Odgovori</Header>
@@ -39,7 +37,7 @@ const FormResults = () => {
             pb: 6,
           }}
         >
-          <Container maxWidth="sm">
+          <Container maxWidth="lg">
             <Typography
               component="h1"
               variant="h2"
@@ -57,16 +55,17 @@ const FormResults = () => {
             >
               Odgovori na formu
             </Typography>
-            {answers.map((ans, index) => {
-              return (
-                <div key={index}>
-                  <h2>{new Date(ans.createdAt).toDateString()}</h2>
-                  {ans.response.map((option) => (
-                    <p>{option.optionValue}</p>
+
+            <Container>
+              {form.questions.map((item, index) => (
+                <Container key={`qei-${index}`}>
+                  <h2>{item.questionText}</h2>
+                  {answers.map((ansSet) => (
+                    <p key={ansSet._id}>{ansSet.response[index].optionValue}</p>
                   ))}
-                </div>
-              );
-            })}
+                </Container>
+              ))}
+            </Container>
           </Container>
         </Box>
       </main>

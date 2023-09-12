@@ -31,7 +31,6 @@ const SingleForm = () => {
   useEffect(() => {
     axios.get(`/form/${formId}`).then((res) => {
       setForm(res.data);
-      console.log(res.data);
       let answers = res.data.questions.map((question) => ({
         questionId: question._id,
         optionValue: null,

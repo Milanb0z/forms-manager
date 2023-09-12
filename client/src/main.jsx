@@ -12,6 +12,7 @@ import NewForm from "./pages/NewForm.jsx";
 import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import { UserProvider } from "./context/user.context";
+import FormResults from "./pages/FormResults";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/form/:formId",
     element: <SingleForm />,
+  },
+  {
+    path: "/results/:formId",
+    element: <FormResults />,
   },
   {
     path: "/form/new",

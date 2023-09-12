@@ -22,13 +22,11 @@ const defaultTheme = createTheme();
 
 const ExploreForms = () => {
   const [user] = useContext(UserContext);
-  console.log(user._id);
 
   const [forms, setForms] = useState([]);
 
   useEffect(() => {
     axios.get("/form").then((res) => {
-      console.log(res.data);
       setForms(res.data);
     });
   }, []);
@@ -106,7 +104,7 @@ const ExploreForms = () => {
                       <Button size="small">Visit</Button>
                     </RouterLink>
                     {user._id === card.createdBy && (
-                      <RouterLink to={`/form/${card._id}`}>
+                      <RouterLink to={`/results/${card._id}`}>
                         <Button size="small">Results</Button>
                       </RouterLink>
                     )}
@@ -117,21 +115,6 @@ const ExploreForms = () => {
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
-      <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Something here to give the footer a purpose!
-        </Typography>
-      </Box>
-      {/* End footer */}
     </ThemeProvider>
   );
 };

@@ -1,0 +1,52 @@
+:root {
+  --color-black: #000;
+  --color-navy: #092c4c;
+  --color-blue: #514ef3;
+  --color-green: #2dc8a8;
+  --color-yellow: #ffc357;
+  --color-pink: #fe8084;
+
+  --color-grey-90: #526477;
+  --color-grey-70: #7e92a2;
+  --color-grey-50: #d6e1e6;
+  --color-grey-30: #eaeef4;
+  --color-grey-10: #f6fafd;
+  --color-white: #fff;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Inter", sans-serif;
+}
+
+h1 {
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.75em;
+}
+h3 {
+  font-size: 1.5em;
+}
+h4 {
+  font-size: 1.25em;
+}
+h5 {
+  font-size: 1.125em;
+}
+p {
+  font-size: 1em;
+}
+span {
+  font-size: 0.875em;
+}

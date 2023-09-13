@@ -3,7 +3,11 @@ import { useNavigate, useParams } from "react-router";
 
 import PageWrapper from "@hoc/PageWrapper";
 
+import classes from "./SingleForm.module.scss";
+
 import axios from "../axios.default";
+import Question from "@components/Question/Question";
+import { Button } from "@ui";
 
 const SingleForm = () => {
   const { formId } = useParams();
@@ -15,6 +19,7 @@ const SingleForm = () => {
     axios
       .get(`/form/${formId}`)
       .then((res) => {
+        console.log(res.data);
         setForm(res.data);
         let answers = res.data.questions.map((question) => ({
           questionId: question._id,
@@ -44,7 +49,29 @@ const SingleForm = () => {
   if (!form) {
     return <p>loading</p>;
   }
-  return <PageWrapper title={form.name}></PageWrapper>;
+  return (
+    <PageWrapper title={form.name}>
+      <div className={classes.form}>
+        <div className={classes.form_header}>
+          <h1>{form.name}</h1>
+          <p>{form.description}</p>
+        </div>
+        <div className={classes.form_questions}>
+          {form.questions.map((question) => (
+            <Question
+              key={question._id}
+              questionText={question.questionText}
+              options={question.options}
+            />
+          ))}
+        </div>
+        <div className={classes.form_actions}>
+          <Button>Submit Form</Button>
+          <Button>Other Action</Button>
+        </div>
+      </div>
+    </PageWrapper>
+  );
 };
 
 export default SingleForm;

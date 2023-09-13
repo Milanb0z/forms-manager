@@ -1,21 +1,15 @@
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
+import { useContext } from "react";
+import { useNavigate } from "react-router";
 
 import axios from "../axios.default";
-import { useNavigate } from "react-router";
-import { useContext } from "react";
+
 import { UserContext } from "../context/user.context";
 
+import classes from "./Login.module.scss";
+
 import { toast } from "react-toast";
-import PageWrapper from "../hoc/PageWrapper";
+import { Button, Card, Input } from "@ui";
+import useInput from "@hooks/useInput";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -23,18 +17,15 @@ const Login = () => {
   const [, setUser] = useContext(UserContext);
   const navigate = useNavigate();
 
+  const [email, setEmail] = useInput("");
+  const [password, setPassword] = useInput("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const submitData = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
     axios
-      .post("/user/login", submitData)
+      .post("/user/login", { email, password })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        toast.success("Logged In Successfully");
         setUser(res.data.user);
         navigate("/form");
       })
@@ -44,64 +35,28 @@ const Login = () => {
   };
 
   return (
-    <PageWrapper>
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Log in
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
+    <section className={classes.login}>
+      <Card className={classes.modal}>
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit} className={classes.form}>
+          <Input
+            label="Email"
+            placeholder="email"
+            type="email"
+            value={email}
+            onChange={setEmail}
           />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
+          <Input
             label="Password"
+            placeholder="password"
             type="password"
-            id="password"
-            autoComplete="current-password"
+            value={password}
+            onChange={setPassword}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Log In
-          </Button>
-          <Grid container>
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
-      </Box>
-    </PageWrapper>
+          <Button type="submit">Login</Button>
+        </form>
+      </Card>
+    </section>
   );
 };
 

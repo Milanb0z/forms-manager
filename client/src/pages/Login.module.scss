@@ -1,0 +1,16 @@
+.login {
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+.modal {
+  text-align: center;
+}
+
+.form {
+  width: 30em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}

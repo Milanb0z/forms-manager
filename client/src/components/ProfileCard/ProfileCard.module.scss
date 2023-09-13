@@ -1,0 +1,15 @@
+.profile {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+
+  &_img {
+    height: 2.75em;
+    width: 2.75em;
+    border-radius: 50%;
+  }
+  &_details {
+    display: flex;
+    flex-direction: column;
+  }
+}

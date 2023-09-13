@@ -8,6 +8,7 @@ import classes from "./SingleForm.module.scss";
 import axios from "../axios.default";
 import Question from "@components/Question/Question";
 import { Button } from "@ui";
+import ProfileCard from "@components/ProfileCard/ProfileCard";
 
 const SingleForm = () => {
   const { formId } = useParams();
@@ -56,6 +57,10 @@ const SingleForm = () => {
           <h1>{form.name}</h1>
           <p>{form.description}</p>
         </div>
+        <ProfileCard
+          username={form.createdBy.username}
+          email={form.createdBy.email}
+        />
         <div className={classes.form_questions}>
           {form.questions.map((question) => (
             <Question

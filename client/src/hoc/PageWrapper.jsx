@@ -3,7 +3,10 @@ import React from "react";
 import classes from "./PageWrapper.module.scss";
 
 import Logo from "@assets/logo.svg";
+import Add from "@assets/add.svg";
+
 import Sidenav from "@components/Sidenav/Sidenav";
+import { Button } from "@ui";
 
 const PageWrapper = ({ children, title }) => {
   return (
@@ -14,6 +17,9 @@ const PageWrapper = ({ children, title }) => {
         </div>
         <div className={classes.header_content}>
           <h3>{title || "Dashboard"}</h3>
+          <div className={classes.actions}>
+            <Button iconUrl={Add}>Add Form</Button>
+          </div>
         </div>
       </header>
       <main className={classes.main}>

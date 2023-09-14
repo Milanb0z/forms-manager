@@ -1,0 +1,17 @@
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.answer_row {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+.answers {
+  margin-left: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+}

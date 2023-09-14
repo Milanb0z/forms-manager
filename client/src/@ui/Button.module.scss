@@ -1,6 +1,7 @@
 .btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75em;
   font-size: 1em;
   padding: 1em;
@@ -9,4 +10,9 @@
   color: var(--color-white);
   border: none;
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
 }

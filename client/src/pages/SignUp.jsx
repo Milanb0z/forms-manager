@@ -1,120 +1,67 @@
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useContext } from "react";
+import { useNavigate } from "react-router";
 
 import axios from "../axios.default";
-import { useNavigate } from "react-router";
+
+import { UserContext } from "../context/user.context";
+
+import classes from "./Login.module.scss";
+
+import { toast } from "react-toast";
+import { Button, Card, Input } from "@ui";
+import useInput from "@hooks/useInput";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
-const defaultTheme = createTheme();
-
-const SignUp = () => {
+const Login = () => {
+  const [, setUser] = useContext(UserContext);
   const navigate = useNavigate();
+
+  const [email, setEmail] = useInput("");
+  const [password, setPassword] = useInput("");
+  const [username, setUsername] = useInput("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    const submitData = {
-      email: data.get("email"),
-      username: data.get("username"),
-      password: data.get("password"),
-    };
-
-    axios.post("/user/signup", submitData).then((res) => {
-      localStorage.setItem("token", res.data.token);
-      navigate("/form");
-    });
+    axios
+      .post("/user/signup", { email, password, username })
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        setUser(res.data.user);
+        navigate("/form");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.error);
+      });
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign Up
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  {"Already have an account? Log In"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+    <section className={classes.login}>
+      <Card className={classes.modal}>
+        <h2>SignUp</h2>
+        <form onSubmit={handleSubmit} className={classes.form}>
+          <Input label="Username" value={username} onChange={setUsername} />
+          <Input
+            label="Email"
+            placeholder="example@email.com"
+            type="email"
+            value={email}
+            onChange={setEmail}
+          />
+
+          <Input
+            label="Password"
+            type="password"
+            value={password}
+            onChange={setPassword}
+          />
+          <Button disabled={!email && !password && !username} type="submit">
+            SignUp
+          </Button>
+        </form>
+      </Card>
+    </section>
   );
 };
 
-export default SignUp;
+export default Login;

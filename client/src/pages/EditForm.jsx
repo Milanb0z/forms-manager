@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
-import PageWrapper from "../hoc/PageWrapper";
-import Header from "../components/Header";
+import { useParams } from "react-router";
+
+import { Button, Input } from "@ui";
+
+import useInput from "@hooks/useInput";
+import PageWrapper from "@hoc/PageWrapper";
+
 import axios from "../axios.default";
-import { useParams, useNavigate } from "react-router";
-import { Box, Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import { toast } from "react-toast";
+
+import classes from "./NewForm.module.scss";
 
 const EditForm = () => {
-  const navigate = useNavigate();
-
   const { formId } = useParams();
+
+  const [heading, setHeading] = useInput("");
+  const [description, setDescription] = useInput("");
+
   const [form, setForm] = useState(null);
 
   useEffect(() => {
@@ -18,69 +23,43 @@ const EditForm = () => {
       setForm(res.data);
     });
   }, [formId]);
-
   const onFormSubmit = (e) => {
     let token = localStorage.getItem("token");
     const { name, description } = form;
     axios
       .put(`/form/${formId}`, { name, description }, { headers: { token } })
-      .then(() => {
-        navigate("/form");
-        toast.success("Form Saved");
+      .then((res) => {
+        console.log(res);
       })
       .catch((err) => {
         console.error(err);
       });
   };
 
-  const onChangeHandler = ({ target: { name, value } }) => {
-    setForm((prevFrom) => ({ ...prevFrom, [name]: value }));
-  };
-
-  if (!form) {
-    return <p>loading</p>;
-  }
-
   return (
-    <PageWrapper>
-      <Header>Edit Form</Header>
-      <main>
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-            px: 4,
-          }}
-        >
-          <div>
-            <TextField
-              margin="normal"
-              id="outlined-basic"
-              value={form.name}
-              onChange={onChangeHandler}
-              name="name"
-              label="name"
-              variant="outlined"
+    <PageWrapper title="Edit Form">
+      <div className={classes.content}>
+        <div className={classes.form}>
+          <div className={classes.form_main}>
+            <Input
+              label="Title"
+              value={heading}
+              onChange={setHeading}
+              placeholder="Title"
             />
-          </div>
-          <div>
-            <TextField
-              margin="normal"
-              id="outlined-basic"
-              name="description"
-              value={form.description}
-              onChange={onChangeHandler}
+            <Input
               label="Description"
-              variant="outlined"
+              value={description}
+              onChange={setDescription}
+              placeholder="Description"
             />
           </div>
 
-          <Button variant="contained" onClick={onFormSubmit}>
-            Submit Edit
-          </Button>
-        </Box>
-      </main>
+          <div className={classes.form_actions}>
+            <Button onClick={onFormSubmit}>Save Form</Button>
+          </div>
+        </div>
+      </div>
     </PageWrapper>
   );
 };

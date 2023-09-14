@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import classes from "./PageWrapper.module.scss";
 
@@ -7,19 +7,36 @@ import Add from "@assets/add.svg";
 
 import Sidenav from "@components/Sidenav/Sidenav";
 import { Button } from "@ui";
+import { Link } from "react-router-dom";
+import { UserContext } from "@context/user.context";
+import ProfileCard from "@components/ProfileCard/ProfileCard";
 
 const PageWrapper = ({ children, title }) => {
+  const [user] = useContext(UserContext);
   return (
     <section className={classes.wrapper}>
       <header className={classes.header}>
         <div className={classes.logo}>
-          <img src={Logo} alt="Logo" />
+          <Link to="/form">
+            <img src={Logo} alt="Logo" />
+          </Link>
         </div>
         <div className={classes.header_content}>
           <h3>{title || "Dashboard"}</h3>
-          <div className={classes.actions}>
-            <Button iconUrl={Add}>Add Form</Button>
-          </div>
+          {user ? (
+            <div className={classes.actions}>
+              <Link to="/form/new">
+                <Button iconUrl={Add}>New Form</Button>
+              </Link>
+              <ProfileCard username={user.username} email={user.email} />
+            </div>
+          ) : (
+            <div className={classes.actions}>
+              <Link to="/login">
+                <Button>Login</Button>
+              </Link>
+            </div>
+          )}
         </div>
       </header>
       <main className={classes.main}>

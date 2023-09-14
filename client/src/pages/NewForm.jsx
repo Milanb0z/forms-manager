@@ -1,15 +1,14 @@
 import { useState } from "react";
 
-import TextField from "@mui/material/TextField";
-
 import axios from "../axios.default";
 
-import { Box, Button } from "@mui/material";
+import { Button, Input } from "@ui";
 
-import useInput from "../hooks/useInput";
-import NewQuestionForm from "../components/NewQuestionForm";
-import Header from "../components/Header";
-import PageWrapper from "../hoc/PageWrapper";
+import useInput from "@hooks/useInput";
+import PageWrapper from "@hoc/PageWrapper";
+import NewQuestionForm from "@components/NewQuestionForm/NewQuestionForm";
+
+import classes from "./NewForm.module.scss";
 
 const NewForm = () => {
   const [heading, setHeading] = useInput("");
@@ -20,13 +19,13 @@ const NewForm = () => {
   const addNewQuestion = () => {
     setQuestions((prevQuestion) => [
       ...prevQuestion,
-      { questionText: "", options: [] },
+      { questionText: "", options: [""] },
     ]);
   };
 
   const addAnswer = (questionId) => {
     let prevQuestions = [...questions];
-    prevQuestions[questionId].options.push({ optionText: "" });
+    prevQuestions[questionId].options.push("");
     setQuestions([...prevQuestions]);
   };
 
@@ -42,7 +41,7 @@ const NewForm = () => {
     setQuestions([...prevQuestion]);
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = () => {
     let formSubmitData = { name: heading, description, questions };
     let token = localStorage.getItem("token");
     axios
@@ -56,38 +55,22 @@ const NewForm = () => {
   };
 
   return (
-    <PageWrapper>
-      <Header>Nova Forma</Header>
-      <main>
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-            px: 4,
-          }}
-        >
-          <div>
-            <TextField
-              margin="normal"
-              id="outlined-basic"
+    <PageWrapper title="Create Form">
+      <div className={classes.content}>
+        <div className={classes.form}>
+          <div className={classes.form_main}>
+            <Input
+              label="Title"
               value={heading}
               onChange={setHeading}
-              label="Title"
-              variant="outlined"
+              placeholder="Title"
             />
-          </div>
-          <div>
-            <TextField
-              margin="normal"
-              id="outlined-basic"
+            <Input
+              label="Description"
               value={description}
               onChange={setDescription}
-              label="Description"
-              variant="outlined"
+              placeholder="Description"
             />
-          </div>
-          <div>
             {questions.map((opt, index) => (
               <NewQuestionForm
                 key={index}
@@ -98,17 +81,14 @@ const NewForm = () => {
                 newAnswer={addAnswer}
               />
             ))}
-            <Button variant="contained" onClick={addNewQuestion}>
-              Add Question
-            </Button>
-            <br />
-
-            <Button variant="contained" onClick={onFormSubmit}>
-              Submit Form
-            </Button>
           </div>
-        </Box>
-      </main>
+
+          <div className={classes.form_actions}>
+            <Button onClick={addNewQuestion}>Add Question</Button>
+            <Button onClick={onFormSubmit}>Submit Form</Button>
+          </div>
+        </div>
+      </div>
     </PageWrapper>
   );
 };

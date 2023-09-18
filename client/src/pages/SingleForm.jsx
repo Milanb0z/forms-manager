@@ -69,8 +69,10 @@ const SingleForm = () => {
             {form.questions.map((question) => (
               <Question
                 key={question._id}
+                id={question._id}
                 questionText={question.questionText}
                 options={question.options}
+                onAnswer={handleChange}
               />
             ))}
           </div>

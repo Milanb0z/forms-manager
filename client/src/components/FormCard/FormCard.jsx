@@ -12,18 +12,18 @@ dayjs.extend(relativeTime);
 
 const FormCard = ({ name, description, id, timeCreated }) => {
   return (
-    <Link to={`/form/${id}`}>
-      <Card className={classes.card}>
-        <h2>{name}</h2>
-        <p>{description}</p>
-        <span>{dayjs().to(dayjs(timeCreated))}</span>
-        <div className={classes.actions}>
+    <Card className={classes.card}>
+      <h2>{name}</h2>
+      <p>{description}</p>
+      <span>{dayjs().to(dayjs(timeCreated))}</span>
+      <div className={classes.actions}>
+        <Link to={`/form/${id}`}>
           <Button>Visit</Button>
-          <Button>Edit</Button>
-          <Button>Delete</Button>
-        </div>
-      </Card>
-    </Link>
+        </Link>
+        <Button>Edit</Button>
+        <Button>Delete</Button>
+      </div>
+    </Card>
   );
 };
 

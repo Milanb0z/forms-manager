@@ -42,7 +42,7 @@ const ExploreForms = () => {
             {searchForm().map((form) => (
               <FormCard
                 key={form._id}
-                _id={form._id}
+                id={form._id}
                 name={form.name}
                 description={form.description}
                 timeCreated={form.createdAt}

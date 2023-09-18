@@ -13,7 +13,7 @@ const Question = ({ questionText, options, onAnswer, id }) => {
             key={opt}
             onChange={(e) => onAnswer(e, id, opt)}
             name={questionText}
-            isChecked={true}
+            isChecked={opt}
             value={opt}
           >
             {opt}

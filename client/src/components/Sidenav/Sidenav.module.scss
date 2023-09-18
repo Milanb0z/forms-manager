@@ -7,3 +7,19 @@
   flex-direction: column;
   gap: 1em;
 }
+
+.link {
+  button {
+    background-color: #c3c3c3;
+  }
+}
+
+.active {
+  button {
+    background-color: var(--color-blue);
+
+    img {
+      fill: red;
+    }
+  }
+}

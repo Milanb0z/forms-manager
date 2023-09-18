@@ -20,7 +20,7 @@ const SingleForm = () => {
   const [form, setForm] = useState(null);
   const [answers, setAnswers] = useState([]);
 
-  console.log(user);
+  console.log(answers);
 
   useEffect(() => {
     axios
@@ -37,11 +37,13 @@ const SingleForm = () => {
       .catch(() => {
         navigate("/form");
       });
-  }, [formId]);
+  }, [formId, navigate]);
 
   const handleChange = (e, questionIndex, val) => {
     let newAnswers = [...answers];
+
     newAnswers[questionIndex].optionValue = val;
+    console.log(newAnswers);
     setAnswers(newAnswers);
   };
 
@@ -66,10 +68,11 @@ const SingleForm = () => {
             email={form.createdBy.email}
           />
           <div className={classes.form_questions}>
-            {form.questions.map((question) => (
+            {form.questions.map((question, index) => (
               <Question
                 key={question._id}
-                id={question._id}
+                id={index}
+                submitedAnswer={answers[index].optionValue}
                 questionText={question.questionText}
                 options={question.options}
                 onAnswer={handleChange}
@@ -77,7 +80,7 @@ const SingleForm = () => {
             ))}
           </div>
           <div className={classes.form_actions}>
-            <Button>Submit Form</Button>
+            <Button onClick={handleSubmit}>Submit Form</Button>
             {user?._id === form.createdBy._id ? (
               <Link to={`/form/edit/${formId}`}>
                 <Button>Edit Form</Button>

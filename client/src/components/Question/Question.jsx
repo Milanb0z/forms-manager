@@ -3,7 +3,7 @@ import React from "react";
 import classes from "./Question.module.scss";
 import { Radio } from "@ui";
 
-const Question = ({ questionText, options, onAnswer, id }) => {
+const Question = ({ questionText, options, submitedAnswer, onAnswer, id }) => {
   return (
     <div className={classes.question}>
       <h3>{questionText}</h3>
@@ -13,7 +13,7 @@ const Question = ({ questionText, options, onAnswer, id }) => {
             key={opt}
             onChange={(e) => onAnswer(e, id, opt)}
             name={questionText}
-            isChecked={opt}
+            checked={opt === submitedAnswer}
             value={opt}
           >
             {opt}

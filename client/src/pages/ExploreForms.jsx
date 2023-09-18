@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "../axios.default";
 
-import { UserContext } from "@context/user.context";
 import PageWrapper from "@hoc/PageWrapper";
 
 import useInput from "@hooks/useInput";
@@ -13,7 +12,6 @@ import FormCard from "@components/FormCard/FormCard";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 
 const ExploreForms = () => {
-  const [user] = useContext(UserContext);
   const [search, setSearch] = useInput("");
   const [forms, setForms] = useState(null);
 

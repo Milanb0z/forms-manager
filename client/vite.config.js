@@ -14,6 +14,7 @@ export default defineConfig({
       "@hoc": path.resolve(__dirname, "./src/hoc"),
       "@context": path.resolve(__dirname, "./src/context"),
       "@ui": path.resolve(__dirname, "./src/@ui"),
+      "@utils": path.resolve(__dirname, "./src/utils"),
     },
   },
   server: {

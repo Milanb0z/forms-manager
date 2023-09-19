@@ -9,6 +9,7 @@
         "@hooks": ["src/hooks"],
         "@hoc": ["src/hoc"],
         "@context": ["src/context"],
+        "@utils": ["src/utils"],
       }
     }
   }

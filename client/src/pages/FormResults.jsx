@@ -2,13 +2,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 
-import FormatDate from "@utils/FormatDate";
-
 import axios from "../axios.default";
 import PageWrapper from "@hoc/PageWrapper";
 
 import classes from "./FormResults.module.scss";
-import { Card } from "@ui";
+
+import ResultCard from "@components/ResultCard/ResultCard";
 
 const FormResults = () => {
   const { formId } = useParams();
@@ -34,20 +33,7 @@ const FormResults = () => {
         <div className={classes.row}>
           <h2>Results</h2>
           {results.map((result) => (
-            <Card key={result._id}>
-              <h3>{result.formId.name}</h3>
-              {result.formId.questions.map((question, index) => (
-                <div key={question._id}>
-                  <b>
-                    <p>{question.questionText}</p>
-                  </b>
-                  <p>- {result.response[index].optionValue}</p>
-                </div>
-              ))}
-              <span>
-                <b>Submited:</b> {FormatDate(result.createdAt)}
-              </span>
-            </Card>
+            <ResultCard key={result._id} result={result} />
           ))}
         </div>
       </div>

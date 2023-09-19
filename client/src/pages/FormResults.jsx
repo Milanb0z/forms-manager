@@ -1,83 +1,56 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
+
+import FormatDate from "@utils/FormatDate";
 
 import axios from "../axios.default";
-import PageWrapper from "../hoc/PageWrapper";
-import Header from "../components/Header";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Button } from "@mui/material";
+import PageWrapper from "@hoc/PageWrapper";
+
+import classes from "./FormResults.module.scss";
+import { Card } from "@ui";
 
 const FormResults = () => {
   const { formId } = useParams();
-  const [answers, setAnswers] = useState([]);
+  const [results, setresults] = useState([]);
   const [form, setForm] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`/response/${formId}`).then((res) => {
-      setAnswers(res.data.data);
+      console.log(res.data);
+      setresults(res.data);
     });
     axios.get(`/form/${formId}`).then((res) => {
       setForm(res.data);
     });
   }, [formId]);
 
-  const onFormDelete = () => {
-    axios.delete(`/form/${formId}`).then((res) => {
-      navigate("/form");
-    });
-  };
-
-  if (!form || !answers) {
+  if (!form || !results) {
     return <p>Loadind</p>;
   }
   return (
     <PageWrapper>
-      <Header>Odgovori</Header>
-      <main>
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <Container maxWidth="lg">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              {form.name}
-            </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              Odgovori na formu
-            </Typography>
-
-            <Container>
-              {form.questions.map((item, index) => (
-                <Container key={`qei-${index}`}>
-                  <h2>{item.questionText}</h2>
-                  {answers.map((ansSet) => (
-                    <p key={ansSet._id}>{ansSet.response[index].optionValue}</p>
-                  ))}
-                </Container>
+      <div className={classes.wrapper}>
+        <div className={classes.row}>
+          <h2>Results</h2>
+          {results.map((result) => (
+            <Card key={result._id}>
+              <h3>{result.formId.name}</h3>
+              {result.formId.questions.map((question, index) => (
+                <div key={question._id}>
+                  <b>
+                    <p>{question.questionText}</p>
+                  </b>
+                  <p>- {result.response[index].optionValue}</p>
+                </div>
               ))}
-            </Container>
-          </Container>
-          <Button onClick={onFormDelete}>Delete fROM</Button>
-        </Box>
-      </main>
+              <span>
+                <b>Submited:</b> {FormatDate(result.createdAt)}
+              </span>
+            </Card>
+          ))}
+        </div>
+      </div>
     </PageWrapper>
   );
 };

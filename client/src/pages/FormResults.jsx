@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 import axios from "../axios.default";
@@ -30,8 +29,8 @@ const FormResults = () => {
   return (
     <PageWrapper>
       <div className={classes.wrapper}>
+        <h2>Results</h2>
         <div className={classes.row}>
-          <h2>Results</h2>
           {results.map((result) => (
             <ResultCard key={result._id} result={result} />
           ))}

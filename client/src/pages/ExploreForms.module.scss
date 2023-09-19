@@ -2,15 +2,13 @@
   padding: 1.5em 2em;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
   flex: 1;
 }
 
 .row {
   display: flex;
+  width: 100%;
   gap: 1em;
-
-  & > * {
-    max-width: 20em;
-  }
+  overflow-x: auto;
 }

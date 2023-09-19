@@ -1,15 +1,28 @@
 import { useEffect, useState } from "react";
 import axios from "../axios.default";
+import { motion } from "framer-motion";
 
 import PageWrapper from "@hoc/PageWrapper";
+
+import { Input } from "@ui";
+import FormCard from "@components/FormCard/FormCard";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 
 import useInput from "@hooks/useInput";
 
 import classes from "./ExploreForms.module.scss";
-import { Input } from "@ui";
 
-import FormCard from "@components/FormCard/FormCard";
-import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+const listAnimation = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
 
 const ExploreForms = () => {
   const [search, setSearch] = useInput("");
@@ -28,16 +41,17 @@ const ExploreForms = () => {
 
   return (
     <PageWrapper title="Explore Forms">
-      {forms ? (
-        <div className={classes.content}>
-          <Input
-            placeholder="Search Froms"
-            value={search}
-            onChange={setSearch}
-          />
-          <h4>Open Forms</h4>
-          <div className={classes.row}>
-            {searchForm().map((form) => (
+      <div className={classes.content}>
+        <Input placeholder="Search Froms" value={search} onChange={setSearch} />
+        <h2>Open Forms</h2>
+        <motion.div
+          variants={listAnimation}
+          initial="hidden"
+          animate="visible"
+          className={classes.row}
+        >
+          {forms ? (
+            searchForm().map((form) => (
               <FormCard
                 key={form._id}
                 id={form._id}
@@ -45,12 +59,12 @@ const ExploreForms = () => {
                 description={form.description}
                 timeCreated={form.createdAt}
               />
-            ))}
-          </div>
-        </div>
-      ) : (
-        <LoadingSpinner />
-      )}
+            ))
+          ) : (
+            <LoadingSpinner />
+          )}
+        </motion.div>
+      </div>
     </PageWrapper>
   );
 };

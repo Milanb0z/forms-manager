@@ -1,3 +1,13 @@
 .wrapper {
   padding: 1.5em 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  gap: 1em;
+  overflow-x: auto;
 }

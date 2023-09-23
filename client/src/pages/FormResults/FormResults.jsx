@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import axios from "../axios.default";
+import axios from "../../axios.default";
 import PageWrapper from "@hoc/PageWrapper";
 
 import classes from "./FormResults.module.scss";

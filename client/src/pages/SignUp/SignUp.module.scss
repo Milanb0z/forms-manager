@@ -1,0 +1,17 @@
+.login {
+  height: 100vh;
+  display: grid;
+  place-content: center;
+  background-color: rgba(246, 250, 253, 0.9);
+}
+
+.modal {
+  text-align: center;
+}
+
+.form {
+  width: 30em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}

@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
-import axios from "../axios.default";
+import axios from "../../axios.default";
 
-import { UserContext } from "../context/user.context";
+import { UserContext } from "../../context/user.context";
 
 import classes from "./Login.module.scss";
 
-import { toast } from "react-toast";
 import { Button, Card, Input } from "@ui";
 import useInput from "@hooks/useInput";
 
@@ -19,14 +19,14 @@ const Login = () => {
 
   const [email, setEmail] = useInput("");
   const [password, setPassword] = useInput("");
-  const [username, setUsername] = useInput("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("/user/signup", { email, password, username })
+      .post("/user/login", { email, password })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+        toast.done("Logged In Succesfully");
         setUser(res.data.user);
         navigate("/form");
       })
@@ -38,26 +38,23 @@ const Login = () => {
   return (
     <section className={classes.login}>
       <Card className={classes.modal}>
-        <h2>SignUp</h2>
+        <h2>Login</h2>
         <form onSubmit={handleSubmit} className={classes.form}>
-          <Input label="Username" value={username} onChange={setUsername} />
           <Input
             label="Email"
-            placeholder="example@email.com"
+            placeholder="email"
             type="email"
             value={email}
             onChange={setEmail}
           />
-
           <Input
             label="Password"
+            placeholder="password"
             type="password"
             value={password}
             onChange={setPassword}
           />
-          <Button disabled={!email && !password && !username} type="submit">
-            SignUp
-          </Button>
+          <Button type="submit">Login</Button>
         </form>
       </Card>
     </section>

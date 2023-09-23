@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import axios from "../axios.default";
+import axios from "../../axios.default";
 
 import { Button, Input } from "@ui";
 

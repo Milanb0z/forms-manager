@@ -5,7 +5,7 @@ import PageWrapper from "@hoc/PageWrapper";
 
 import classes from "./SingleForm.module.scss";
 
-import axios from "../axios.default";
+import axios from "../../axios.default";
 import Question from "@components/Question/Question";
 import { Button } from "@ui";
 import ProfileCard from "@components/ProfileCard/ProfileCard";

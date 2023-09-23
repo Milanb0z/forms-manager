@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "../axios.default";
+import axios from "../../axios.default";
 import { motion } from "framer-motion";
 
 import PageWrapper from "@hoc/PageWrapper";
@@ -26,7 +26,6 @@ const listAnimation = {
 const ExploreForms = () => {
   const [search, setSearch] = useInput("");
   const [forms, setForms] = useState(null);
-
   const searchForm = () => {
     return forms.filter((form) => form.name.toLowerCase().includes(search));
   };

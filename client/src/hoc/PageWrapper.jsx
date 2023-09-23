@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import classes from "./PageWrapper.module.scss";
 
@@ -10,6 +10,9 @@ import { Button } from "@ui";
 import { Link } from "react-router-dom";
 import { UserContext } from "@context/user.context";
 import ProfileCard from "@components/ProfileCard/ProfileCard";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PageWrapper = ({ children, title }) => {
   const [user] = useContext(UserContext);
@@ -42,6 +45,8 @@ const PageWrapper = ({ children, title }) => {
       <main className={classes.main}>
         <Sidenav />
         <div className={classes.content}>{children}</div>
+
+        <ToastContainer position="bottom-right" />
       </main>
     </section>
   );

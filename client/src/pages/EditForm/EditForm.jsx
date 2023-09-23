@@ -6,7 +6,7 @@ import { Button, Input } from "@ui";
 import useInput from "@hooks/useInput";
 import PageWrapper from "@hoc/PageWrapper";
 
-import axios from "../axios.default";
+import axios from "../../axios.default";
 
 import classes from "./NewForm.module.scss";
 

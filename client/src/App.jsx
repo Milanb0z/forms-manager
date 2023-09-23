@@ -50,9 +50,8 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-
   {
-    path: "/form/me",
+    path: "/me",
     element: (
       <ProtectedRoute>
         <Profile />

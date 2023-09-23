@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-import { toast } from "react-toast";
+import { toast } from "react-toastify";
 
 import axios from "../../axios.default";
 
@@ -10,8 +10,6 @@ import classes from "./SignUp.module.scss";
 
 import { Button, Card, Input } from "@ui";
 import useInput from "@hooks/useInput";
-
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const Login = () => {
   const [, setUser] = useContext(UserContext);

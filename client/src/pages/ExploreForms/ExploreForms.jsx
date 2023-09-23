@@ -11,6 +11,7 @@ import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import useInput from "@hooks/useInput";
 
 import classes from "./ExploreForms.module.scss";
+import { toast } from "react-toastify";
 
 const listAnimation = {
   hidden: { opacity: 1 },
@@ -31,10 +32,15 @@ const ExploreForms = () => {
   };
 
   useEffect(() => {
-    axios.get("/form").then((res) => {
-      setForms(res.data);
-      console.log(res.data);
-    });
+    toast
+      .promise(axios.get("/form"), {
+        pending: "Fetching Forms",
+        success: "Fetched Succesfully 👌",
+        error: "Error 🤯",
+      })
+      .then((res) => {
+        setForms(res.data);
+      });
   }, []);
 
   return (
@@ -48,19 +54,17 @@ const ExploreForms = () => {
           animate="visible"
           className={classes.row}
         >
-          {forms ? (
-            searchForm().map((form) => (
-              <FormCard
-                key={form._id}
-                id={form._id}
-                name={form.name}
-                description={form.description}
-                timeCreated={form.createdAt}
-              />
-            ))
-          ) : (
-            <LoadingSpinner />
-          )}
+          {forms
+            ? searchForm().map((form) => (
+                <FormCard
+                  key={form._id}
+                  id={form._id}
+                  name={form.name}
+                  description={form.description}
+                  timeCreated={form.createdAt}
+                />
+              ))
+            : null}
         </motion.div>
       </div>
     </PageWrapper>

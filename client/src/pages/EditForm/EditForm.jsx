@@ -8,7 +8,7 @@ import PageWrapper from "@hoc/PageWrapper";
 
 import axios from "../../axios.default";
 
-import classes from "./NewForm.module.scss";
+import classes from "./EditForm.module.scss";
 
 const EditForm = () => {
   const { formId } = useParams();

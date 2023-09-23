@@ -9,6 +9,7 @@ import PageWrapper from "@hoc/PageWrapper";
 import NewQuestionForm from "@components/NewQuestionForm/NewQuestionForm";
 
 import classes from "./NewForm.module.scss";
+import { toast } from "react-toastify";
 
 const NewForm = () => {
   const [heading, setHeading] = useInput("");
@@ -86,6 +87,13 @@ const NewForm = () => {
           <div className={classes.form_actions}>
             <Button onClick={addNewQuestion}>Add Question</Button>
             <Button onClick={onFormSubmit}>Submit Form</Button>
+            <Button
+              onClick={() => {
+                toast("sd");
+              }}
+            >
+              Notify
+            </Button>
           </div>
         </div>
       </div>

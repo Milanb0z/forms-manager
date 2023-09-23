@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import PageWrapper from "@hoc/PageWrapper";
 
@@ -9,9 +11,7 @@ import axios from "../../axios.default";
 import Question from "@components/Question/Question";
 import { Button } from "@ui";
 import ProfileCard from "@components/ProfileCard/ProfileCard";
-import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import { UserContext } from "@context/user.context";
-import { Link } from "react-router-dom";
 
 const SingleForm = () => {
   const [user] = useContext(UserContext);
@@ -20,13 +20,14 @@ const SingleForm = () => {
   const [form, setForm] = useState(null);
   const [answers, setAnswers] = useState([]);
 
-  console.log(answers);
-
   useEffect(() => {
-    axios
-      .get(`/form/${formId}`)
+    toast
+      .promise(axios.get(`/form/${formId}`), {
+        pending: "Fetching Forms",
+        success: "Fetched Succesfully 👌",
+        error: "Error 🤯",
+      })
       .then((res) => {
-        console.log(res.data);
         setForm(res.data);
         let answers = res.data.questions.map((question) => ({
           questionId: question._id,
@@ -35,7 +36,7 @@ const SingleForm = () => {
         setAnswers(answers);
       })
       .catch(() => {
-        navigate("/form");
+        toast.error("Something Went Wrong");
       });
   }, [formId, navigate]);
 
@@ -43,7 +44,6 @@ const SingleForm = () => {
     let newAnswers = [...answers];
 
     newAnswers[questionIndex].optionValue = val;
-    console.log(newAnswers);
     setAnswers(newAnswers);
   };
 
@@ -88,9 +88,7 @@ const SingleForm = () => {
             ) : null}
           </div>
         </div>
-      ) : (
-        <LoadingSpinner />
-      )}
+      ) : null}
     </PageWrapper>
   );
 };

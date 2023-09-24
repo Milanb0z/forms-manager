@@ -1,0 +1,23 @@
+.content {
+  padding: 1.5em 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  flex: 1;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1em;
+}
+
+@media screen and (max-width: 35em) {
+  .row {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-self: stretch;
+    overflow: auto;
+  }
+}

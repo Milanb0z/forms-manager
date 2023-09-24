@@ -1,18 +1,24 @@
-// Pages
-import ExploreForms from "./pages/ExploreForms.jsx";
-import SingleForm from "./pages/SingleForm.jsx";
-import NewForm from "./pages/NewForm.jsx";
-import Login from "./pages/Login.jsx";
-import SignUp from "./pages/SignUp.jsx";
-import { UserContext } from "./context/user.context";
-import FormResults from "./pages/FormResults";
-import ProtectedRoute from "./hoc/ProtectedRoute";
-
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useContext, useEffect } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+//Context
+import { UserContext } from "@context/user.context";
+
+// Pages
+import {
+  EditForm,
+  ExploreForms,
+  FormResults,
+  Login,
+  NewForm,
+  SignUp,
+  SingleForm,
+} from "@pages";
+
+import ProtectedRoute from "@hoc/ProtectedRoute";
 
 import axios from "./axios.default.js";
-import EditForm from "./pages/EditForm.jsx";
+import Profile from "./pages/Profile/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +47,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <NewForm />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/me",
+    element: (
+      <ProtectedRoute>
+        <Profile />
       </ProtectedRoute>
     ),
   },

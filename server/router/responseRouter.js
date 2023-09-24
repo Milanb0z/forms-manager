@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+const { Form } = require("../models/formModel");
 const { Response } = require("../models/responseModel");
 
 router.post("/:formId", async (req, res) => {
@@ -22,9 +23,9 @@ router.get("/:formId", async (req, res) => {
   try {
     const { formId } = req.params;
 
-    const allResponses = await Response.find({ formId });
+    const response = await Response.find({ formId }).populate("formId");
 
-    res.send({ data: allResponses });
+    res.send(response);
   } catch (error) {
     console.log({ error });
     res.status(error).send({ error });
@@ -33,7 +34,7 @@ router.get("/:formId", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const allResponses = await Response.find();
+    const allResponses = await Response.find().populate("formId");
 
     if (!allResponses) {
       return res.status(404).send({ error: "No Response Found" });

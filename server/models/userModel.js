@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
     minLength: 6,
     maxLength: 100,
   },
+  createdForms: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Form",
+  },
 });
 
 userSchema.methods.isValidPassword = async function (password) {

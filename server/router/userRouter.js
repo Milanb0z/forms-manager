@@ -36,6 +36,23 @@ router.get("/profile", auth, async (req, res) => {
   }
 });
 
+router.patch("/", auth, async (req, res) => {
+  try {
+    const user = req.user;
+    const { username, email } = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(user._id, {
+      username,
+      email,
+    });
+
+    res.send(updatedUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error });
+  }
+});
+
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {

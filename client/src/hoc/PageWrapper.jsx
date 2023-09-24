@@ -1,17 +1,34 @@
-import React from "react";
+import { useState } from "react";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import classes from "./PageWrapper.module.scss";
 
-import CssBaseline from "@mui/material/CssBaseline";
+import Sidenav from "@components/Sidenav/Sidenav";
+import Header from "@components/Header/Header";
 
-const defaultTheme = createTheme();
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const PageWrapper = ({ children }) => {
+const PageWrapper = ({ children, title }) => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
+    <section className={classes.wrapper}>
+      {isOpen ? (
+        <div onClick={toggleNav} className={classes.backdrop}></div>
+      ) : null}
+
+      <Header isActive={isOpen} title={title} onNavToggle={toggleNav} />
+      <main className={classes.main}>
+        <Sidenav isOpen={isOpen} />
+        <div className={classes.content}>{children}</div>
+
+        <ToastContainer position="bottom-right" />
+      </main>
+    </section>
   );
 };
 

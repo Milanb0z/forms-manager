@@ -1,0 +1,13 @@
+.question {
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.options {
+  margin-left: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}

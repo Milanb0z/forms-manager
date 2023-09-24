@@ -6,16 +6,21 @@ const { Form } = require("../models/formModel");
 // Create Form
 router.post("/new", auth, async (req, res) => {
   try {
+    const user = req.user;
     const { name, description, questions } = req.body;
 
     const newForm = new Form({
       name,
       description,
-      createdBy: req.user._id,
+      createdBy: user._id,
       questions,
     });
 
     const savedForm = await newForm.save();
+
+    user.createdForms.push(savedForm._id);
+
+    await user.save();
 
     res.send(savedForm);
   } catch (error) {

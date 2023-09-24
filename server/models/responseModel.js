@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var responseSchema = new mongoose.Schema(
+const responseSchema = new mongoose.Schema(
   {
     formId: {
       type: mongoose.Schema.Types.ObjectId,

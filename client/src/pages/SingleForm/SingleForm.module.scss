@@ -1,0 +1,25 @@
+.form {
+  padding: 1.5em 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  height: 100%;
+
+  &_questions {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  &_actions {
+    display: flex;
+    gap: 1em;
+  }
+
+  h1,
+  p {
+    text-transform: capitalize;
+  }
+}

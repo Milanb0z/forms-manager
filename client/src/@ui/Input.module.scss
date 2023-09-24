@@ -1,0 +1,22 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+.label {
+  align-self: start;
+  color: var(--primary-navy);
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 1em;
+}
+.field {
+  font-weight: 400;
+  font-size: 1em;
+  font-family: Inter;
+  color: var(--grey-grey-70);
+  padding: 0.625em 1.25em;
+  border-radius: 0.5em;
+  border: 1px solid #eaeef4;
+  background: var(--grey-grey-10);
+}

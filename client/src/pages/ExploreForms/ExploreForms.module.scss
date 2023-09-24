@@ -8,7 +8,16 @@
 
 .row {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   gap: 1em;
-  overflow-x: auto;
+}
+
+@media screen and (max-width: 35em) {
+  .row {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-self: stretch;
+    overflow: auto;
+  }
 }

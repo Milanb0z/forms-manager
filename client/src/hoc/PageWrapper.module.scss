@@ -5,35 +5,13 @@
   flex-direction: column;
 }
 
-.header {
-  display: flex;
-  border-bottom: 1px solid var(--color-grey-30);
-  align-items: center;
-
-  &_content {
-    padding: 1.5em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex: 1;
-  }
+.backdrop {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.actions {
-  display: flex;
-  gap: 2em;
-}
-
-.logo {
-  padding: 1.5em;
-  border-right: 1px solid var(--color-grey-30);
-  display: grid;
-  align-self: stretch;
-  img {
-    width: 50px;
-    height: auto;
-  }
-}
 .main {
   display: flex;
   flex: 1;
@@ -43,4 +21,10 @@
 .content {
   flex: 1;
   display: flex;
+}
+
+@media screen and (max-width: 45em) {
+  .backdrop {
+    display: block;
+  }
 }

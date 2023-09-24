@@ -11,9 +11,9 @@ const STATIC_LINKS = [
   { id: "sd13", iconLink: Profile, url: "/me" },
 ];
 
-const Sidenav = () => {
+const Sidenav = ({ isOpen }) => {
   return (
-    <nav className={classes.nav}>
+    <nav className={`${classes.nav} ${isOpen ? classes.nav_open : ""}`}>
       <div className={classes.links}>
         {STATIC_LINKS.map((link) => (
           <NavLink

@@ -23,3 +23,24 @@
     }
   }
 }
+
+.backdrop {
+  display: none;
+}
+
+@media screen and (max-width: 45em) {
+  .nav {
+    position: absolute;
+    left: 0;
+    transform: translateX(-100%);
+    background-color: var(--color-grey-10);
+    height: 100%;
+    transition: transform 0.3s;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav_open {
+    transform: translateX(0%);
+  }
+}

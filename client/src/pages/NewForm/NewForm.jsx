@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 import axios from "../../axios.default";
 
@@ -9,7 +10,6 @@ import PageWrapper from "@hoc/PageWrapper";
 import NewQuestionForm from "@components/NewQuestionForm/NewQuestionForm";
 
 import classes from "./NewForm.module.scss";
-import { toast } from "react-toastify";
 
 const NewForm = () => {
   const [heading, setHeading] = useInput("");

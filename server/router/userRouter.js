@@ -75,4 +75,21 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const foundUser = await User.findById(userId).populate("createdForms");
+
+    if (!foundUser) {
+      return res.status(404).send({ error: "User not found" });
+    }
+
+    res.send(foundUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error });
+  }
+});
+
 module.exports = router;

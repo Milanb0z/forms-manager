@@ -63,7 +63,7 @@ const SingleForm = () => {
             <h1>{form.name}</h1>
             <p>{form.description}</p>
           </div>
-          <Link to={`/user/${form.createdBy._id}`}>
+          <Link to={`/user/${form.createdBy.username}`}>
             <ProfileCard
               username={form.createdBy.username}
               email={form.createdBy.email}

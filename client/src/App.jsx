@@ -60,7 +60,7 @@ const router = createBrowserRouter([
     element: <FormResults />,
   },
   {
-    path: "/user/:userId",
+    path: "/user/:username",
     element: <UserDetails />,
   },
   {

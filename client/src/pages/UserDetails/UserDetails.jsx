@@ -11,12 +11,12 @@ import classes from "./UserDetails.module.scss";
 import ProfileSection from "@components/ProfileSection/ProfileSection";
 
 const UserDetails = () => {
-  const { userId } = useParams();
+  const { username } = useParams();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     toast
-      .promise(axios.get(`/user/${userId}`), {
+      .promise(axios.get(`/user/${username}`), {
         pending: "Fetching Forms",
         success: "Fetched Succesfully 👌",
         error: "Error 🤯",
@@ -28,7 +28,7 @@ const UserDetails = () => {
       .catch((err) => {
         toast.error(err.response.data.error);
       });
-  }, [userId]);
+  }, [username]);
 
   return (
     <PageWrapper>

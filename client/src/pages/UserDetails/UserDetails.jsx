@@ -1,0 +1,50 @@
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useParams } from "react-router";
+
+import axios from "../../axios.default";
+
+import PageWrapper from "@hoc/PageWrapper";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+
+import classes from "./UserDetails.module.scss";
+import ProfileSection from "@components/ProfileSection/ProfileSection";
+
+const UserDetails = () => {
+  const { userId } = useParams();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    toast
+      .promise(axios.get(`/user/${userId}`), {
+        pending: "Fetching Forms",
+        success: "Fetched Succesfully 👌",
+        error: "Error 🤯",
+      })
+      .then((res) => {
+        console.log(res);
+        setUser(res.data);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.error);
+      });
+  }, [userId]);
+
+  return (
+    <PageWrapper>
+      <div className={classes.content}>
+        {user ? (
+          <ProfileSection
+            username={user.username}
+            email={user.email}
+            createdForms={user.createdForms}
+          />
+        ) : (
+          <LoadingSpinner />
+        )}
+      </div>
+    </PageWrapper>
+  );
+};
+
+export default UserDetails;

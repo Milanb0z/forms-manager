@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "baseUrl": ".",
+      "baseUrl": "src",
       "paths": {
         "@ui": ["src/@ui"],
         "@components": ["src/components"],

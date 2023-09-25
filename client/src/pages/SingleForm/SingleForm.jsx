@@ -63,10 +63,12 @@ const SingleForm = () => {
             <h1>{form.name}</h1>
             <p>{form.description}</p>
           </div>
-          <ProfileCard
-            username={form.createdBy.username}
-            email={form.createdBy.email}
-          />
+          <Link to={`/user/${form.createdBy.username}`}>
+            <ProfileCard
+              username={form.createdBy.username}
+              email={form.createdBy.email}
+            />
+          </Link>
           <div className={classes.form_questions}>
             {form.questions.map((question, index) => (
               <Question

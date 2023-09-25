@@ -13,6 +13,7 @@ import {
   NewForm,
   SignUp,
   SingleForm,
+  UserDetails,
 } from "@pages";
 
 import ProtectedRoute from "@hoc/ProtectedRoute";
@@ -39,10 +40,6 @@ const router = createBrowserRouter([
     element: <EditForm />,
   },
   {
-    path: "/results/:formId",
-    element: <FormResults />,
-  },
-  {
     path: "/form/new",
     element: (
       <ProtectedRoute>
@@ -57,6 +54,14 @@ const router = createBrowserRouter([
         <Profile />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: "/results/:formId",
+    element: <FormResults />,
+  },
+  {
+    path: "/user/:username",
+    element: <UserDetails />,
   },
   {
     path: "/login",

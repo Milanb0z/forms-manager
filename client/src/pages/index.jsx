@@ -5,8 +5,10 @@ import Login from "@pages/Login/Login.jsx";
 import SignUp from "@pages/SignUp/SignUp.jsx";
 import EditForm from "@pages/EditForm/EditForm.jsx";
 import FormResults from "@pages/FormResults/FormResults.jsx";
+import UserDetails from "@pages/UserDetails/UserDetails";
 
 export {
+  UserDetails,
   ExploreForms,
   SingleForm,
   NewForm,

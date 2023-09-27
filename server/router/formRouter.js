@@ -7,11 +7,12 @@ const { Form } = require("../models/formModel");
 router.post("/new", auth, async (req, res) => {
   try {
     const user = req.user;
-    const { name, description, questions } = req.body;
+    const { name, description, customLink, questions } = req.body;
 
     const newForm = new Form({
       name,
       description,
+      customLink,
       createdBy: user._id,
       questions,
     });
@@ -42,6 +43,25 @@ router.get("/", async (req, res) => {
 });
 
 // Get Forms By ID
+router.get("/id/:formId", async (req, res) => {
+  try {
+    const { formId } = req.params;
+    const fetchedForm = await Form.findOne({ customLink: formId })
+      .populate("createdBy")
+      .select("-createdBy.password");
+
+    if (!fetchedForm) {
+      return res.status(404).send({ error: "From Not Found" });
+    }
+
+    res.send(fetchedForm);
+  } catch (error) {
+    console.log({ error });
+    res.status(error).send({ error });
+  }
+});
+
+// Get Forms By ID
 router.get("/:formId", async (req, res) => {
   try {
     const { formId } = req.params;
@@ -64,15 +84,14 @@ router.get("/:formId", async (req, res) => {
 router.put("/:formId", auth, async (req, res) => {
   try {
     const { formId } = req.params;
-    const { name, description } = req.body;
-
-    console.log([name, description]);
+    const { name, description, customLink } = req.body;
 
     const updateFrom = await Form.findByIdAndUpdate(
       formId,
       {
         name,
         description,
+        customLink,
       },
       { new: true }
     );

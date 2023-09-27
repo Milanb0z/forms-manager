@@ -15,6 +15,7 @@ const EditForm = () => {
 
   const [heading, setHeading] = useInput("");
   const [description, setDescription] = useInput("");
+  const [customLink, setCustomLink] = useInput("");
 
   const [form, setForm] = useState(null);
 
@@ -23,11 +24,16 @@ const EditForm = () => {
       setForm(res.data);
     });
   }, [formId]);
+
   const onFormSubmit = (e) => {
     let token = localStorage.getItem("token");
     const { name, description } = form;
     axios
-      .put(`/form/${formId}`, { name, description }, { headers: { token } })
+      .put(
+        `/form/${formId}`,
+        { name, description, customLink },
+        { headers: { token } }
+      )
       .then((res) => {
         console.log(res);
       })
@@ -52,6 +58,13 @@ const EditForm = () => {
               value={description}
               onChange={setDescription}
               placeholder="Description"
+            />
+
+            <Input
+              label="Custom Link"
+              value={customLink}
+              onChange={setCustomLink}
+              placeholder="Custom Link"
             />
           </div>
 

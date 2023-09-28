@@ -14,22 +14,33 @@ import {
   SignUp,
   SingleForm,
   UserDetails,
+  DragNDropForm,
 } from "@pages";
 
 import ProtectedRoute from "@hoc/ProtectedRoute";
 
 import axios from "./axios.default.js";
 import Profile from "./pages/Profile/Profile.jsx";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <h2>Hellow</h2>,
+    element: (
+      <DndProvider backend={HTML5Backend}>
+        <DragNDropForm />
+      </DndProvider>
+    ),
   },
   {
     path: "/form",
     element: <ExploreForms />,
     index: true,
+  },
+  {
+    path: "/form/id/:formId",
+    element: <SingleForm byId />,
   },
   {
     path: "/form/:formId",

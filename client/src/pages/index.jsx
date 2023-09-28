@@ -6,6 +6,7 @@ import SignUp from "@pages/SignUp/SignUp.jsx";
 import EditForm from "@pages/EditForm/EditForm.jsx";
 import FormResults from "@pages/FormResults/FormResults.jsx";
 import UserDetails from "@pages/UserDetails/UserDetails";
+import DragNDropForm from "@pages/DragNDropForm/DragNDropForm";
 
 export {
   UserDetails,
@@ -16,4 +17,5 @@ export {
   FormResults,
   Login,
   SignUp,
+  DragNDropForm,
 };

@@ -1,0 +1,12 @@
+.card {
+  background-color: var(--color-grey-50);
+  color: var(--color-pink);
+  border-radius: 0.4em;
+  padding: 1em;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.drag {
+  opacity: 0.4;
+}

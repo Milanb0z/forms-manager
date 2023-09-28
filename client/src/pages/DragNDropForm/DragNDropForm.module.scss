@@ -17,12 +17,5 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1em;
-
-    &_item {
-      background-color: var(--color-grey-50);
-      color: var(--color-pink);
-      border-radius: 0.4em;
-      padding: 1em;
-    }
   }
 }

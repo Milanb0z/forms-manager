@@ -1,0 +1,16 @@
+.zone {
+  background-color: var(--color-grey-10);
+  text-align: center;
+  padding: 2em 1em;
+  border-radius: 0.5em;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5em;
+  display: grid;
+  place-content: center;
+  background-color: #d6e1e6;
+}

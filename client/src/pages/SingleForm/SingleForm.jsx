@@ -13,7 +13,7 @@ import { Button } from "@ui";
 import ProfileCard from "@components/ProfileCard/ProfileCard";
 import { UserContext } from "@context/user.context";
 
-const SingleForm = () => {
+const SingleForm = ({ byId = false }) => {
   const [user] = useContext(UserContext);
   const { formId } = useParams();
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const SingleForm = () => {
 
   useEffect(() => {
     toast
-      .promise(axios.get(`/form/${formId}`), {
+      .promise(axios.get(`/form/${byId ? "/id" : ""}${formId}`), {
         pending: "Fetching Forms",
         success: "Fetched Succesfully 👌",
         error: "Error 🤯",

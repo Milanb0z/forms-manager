@@ -1,0 +1,20 @@
+.selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  &_item {
+    align-self: stretch;
+    display: flex;
+    gap: 1em;
+  }
+
+  &_btn {
+    padding: 0.5em 1.2em;
+    background-color: var(--color-pink);
+    font-weight: bold;
+    color: var(--color-white);
+    border-radius: 1em;
+    border: none;
+    cursor: pointer;
+  }
+}

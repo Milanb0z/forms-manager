@@ -11,6 +11,9 @@ const questionSchema = new mongoose.Schema({
 
 const formSchema = new mongoose.Schema(
   {
+    customId: {
+      type: String,
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

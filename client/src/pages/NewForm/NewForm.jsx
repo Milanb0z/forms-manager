@@ -14,6 +14,7 @@ import classes from "./NewForm.module.scss";
 const NewForm = () => {
   const [heading, setHeading] = useInput("");
   const [description, setDescription] = useInput("");
+  const [customLink, setCustomLink] = useInput("");
 
   const [questions, setQuestions] = useState([]);
 
@@ -43,7 +44,7 @@ const NewForm = () => {
   };
 
   const onFormSubmit = () => {
-    let formSubmitData = { name: heading, description, questions };
+    let formSubmitData = { name: heading, description, customLink, questions };
     let token = localStorage.getItem("token");
     axios
       .post("/form/new", formSubmitData, { headers: { token } })
@@ -71,6 +72,12 @@ const NewForm = () => {
               value={description}
               onChange={setDescription}
               placeholder="Description"
+            />
+            <Input
+              label="Custom Link"
+              value={customLink}
+              onChange={setCustomLink}
+              placeholder="Custom Link"
             />
             {questions.map((opt, index) => (
               <NewQuestionForm

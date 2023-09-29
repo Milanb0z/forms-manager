@@ -1,0 +1,21 @@
+.content {
+  padding: 1.5em 2em;
+  flex: 1;
+  gap: 2em;
+  display: flex;
+
+  & > * {
+    flex: 1;
+  }
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  &_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+  }
+}

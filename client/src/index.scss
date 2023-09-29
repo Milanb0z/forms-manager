@@ -56,3 +56,43 @@ p {
 span {
   font-size: 0.875em;
 }
+
+//Custom ScrollBar
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-grey-50);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-blue);
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-blue);
+}
+
+//Dark Theme
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-black: #fff;
+    --color-navy: #092c4c;
+    --color-blue: #514ef3;
+    --color-green: #2dc8a8;
+    --color-yellow: #ffc357;
+    --color-pink: #fe8084;
+
+    --color-grey-90: #dcdcdc;
+    --color-grey-70: #3e3d3d;
+    --color-grey-50: #2b2b2b;
+    --color-grey-30: #202020;
+    --color-grey-10: #161717;
+    --color-white: #000;
+  }
+}

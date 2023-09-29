@@ -16,7 +16,7 @@
 
 .active {
   button {
-    background-color: var(--color-blue);
+    background-color: var(--color-blue) !important;
 
     img {
       fill: red;
@@ -26,6 +26,14 @@
 
 .backdrop {
   display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .link {
+    button {
+      background-color: var(--color-grey-30);
+    }
+  }
 }
 
 @media screen and (max-width: 45em) {

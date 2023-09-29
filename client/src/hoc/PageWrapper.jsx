@@ -26,7 +26,7 @@ const PageWrapper = ({ children, title }) => {
         <Sidenav isOpen={isOpen} />
         <div className={classes.content}>{children}</div>
 
-        <ToastContainer position="bottom-right" />
+        <ToastContainer theme="dark" position="bottom-right" />
       </main>
     </section>
   );

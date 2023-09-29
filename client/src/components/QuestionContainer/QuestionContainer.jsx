@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { useDrop } from "react-dnd";
+
+import { Card } from "@ui";
+import DroppedQuestion from "@components/DroppedQuestion/DroppedQuestion";
 
 import classes from "./QuestionContainer.module.scss";
-
-//Container
-import { useDrop } from "react-dnd";
-import { Card } from "@ui";
 
 const QuestionContainer = ({ questions, onDropHandler }) => {
   const [{ isActive }, drop] = useDrop(() => ({
@@ -26,9 +26,11 @@ const QuestionContainer = ({ questions, onDropHandler }) => {
         ) : null}
 
         {questions.map((question, index) => (
-          <Card key={index}>
-            <h2>{question.type}</h2>
-          </Card>
+          <DroppedQuestion
+            title={question.title}
+            type={question.type}
+            key={index}
+          />
         ))}
       </div>
     </div>

@@ -1,7 +1,8 @@
 .selector {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 1em;
+
   &_item {
     align-self: stretch;
     display: flex;
@@ -12,7 +13,7 @@
     padding: 0.5em 1.2em;
     background-color: var(--color-pink);
     font-weight: bold;
-    color: var(--color-white);
+    color: #fff;
     border-radius: 1em;
     border: none;
     cursor: pointer;

@@ -16,19 +16,21 @@ const ChoiceSelector = () => {
     setValues(prevVals);
   };
   const onChoiceDelete = (index) => {
-    console.log(index);
-    setValues((prevVals) => {
-      prevVals.splice(index, 1);
-      return prevVals;
-    });
+    const prevVals = [...values];
+    prevVals.splice(index, 1);
+    setValues(prevVals);
   };
 
   return (
     <div className={classes.selector}>
       {values.length > 0 ? (
-        values.map((value, index) => (
-          <div key={`${value}_${index}`} className={classes.selector_item}>
-            <Input onChange={onChoiceEdit.bind(this, index)} value={value} />
+        values.map((singleVal, index) => (
+          <div key={index} className={classes.selector_item}>
+            <Input
+              placeholder="Enter Option Text"
+              onChange={onChoiceEdit.bind(this, index)}
+              value={singleVal}
+            />
             <button
               onClick={() => onChoiceDelete(index)}
               className={classes.selector_btn}

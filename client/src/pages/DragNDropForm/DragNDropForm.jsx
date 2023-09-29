@@ -5,6 +5,13 @@ import PageWrapper from "@hoc/PageWrapper";
 import DraggableQuestion from "@components/DraggableQuestion/DraggableQuestion";
 import QuestionContainer from "@components/QuestionContainer/QuestionContainer";
 
+//Icons
+import FileUploadIcon from "@assets/file-upload-icon.svg";
+import ParagraphIcon from "@assets/paragraph-question-icon.svg";
+import SingleIcon from "@assets/single-question-icon.svg";
+import TextIcon from "@assets/text-question-icon.svg";
+import MultipleIcon from "@assets/multiple-question-icon.svg";
+
 const QUESTION_TYPES = {
   MULTIPLE: "MULTIPLE",
   RADIO: "RADIO",
@@ -15,6 +22,7 @@ const QUESTION_TYPES = {
 
 const questionTypes = [
   {
+    icon: MultipleIcon,
     label: "Multiple Choice Type",
     data: {
       title: "",
@@ -24,6 +32,7 @@ const questionTypes = [
   },
 
   {
+    icon: SingleIcon,
     label: "Single Choice Type",
     data: {
       title: "",
@@ -33,6 +42,7 @@ const questionTypes = [
   },
 
   {
+    icon: TextIcon,
     label: "Short Text Answer",
     data: {
       title: "",
@@ -42,6 +52,7 @@ const questionTypes = [
   },
 
   {
+    icon: ParagraphIcon,
     label: "Paragraph Text Answer",
     data: {
       title: "",
@@ -51,6 +62,7 @@ const questionTypes = [
   },
 
   {
+    icon: FileUploadIcon,
     label: "Upload FIle Answer",
     data: {
       title: "",
@@ -78,8 +90,9 @@ const DragNDropForm = () => {
         <div className={classes.items}>
           <h2>Questions </h2>
           <div className={classes.items_grid}>
-            {questionTypes.map(({ data, label }) => (
+            {questionTypes.map(({ data, label, icon }) => (
               <DraggableQuestion
+                imgUrl={icon}
                 onClickHandler={onDropHandler}
                 data={data}
                 label={label}

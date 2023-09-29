@@ -3,7 +3,7 @@ import { useDrag } from "react-dnd";
 
 import classes from "./DraggableQuestion.module.scss";
 
-const DraggableQuestion = ({ label, data, onClickHandler }) => {
+const DraggableQuestion = ({ label, data, onClickHandler, imgUrl }) => {
   const [{ isDragged }, dragRef] = useDrag(
     () => ({
       type: "BOX",
@@ -21,6 +21,7 @@ const DraggableQuestion = ({ label, data, onClickHandler }) => {
       ref={dragRef}
       className={`${classes.card} ${isDragged ? classes.drag : ""}`}
     >
+      <img src={imgUrl} alt={`${data.type} Question`} />
       <h4>{label}</h4>
     </div>
   );

@@ -1,13 +1,36 @@
 const mongoose = require("mongoose");
 
+const QUESTION_TEXT_TYPE = ["SHORT", "PARAGRAPH"];
+const QUESTION_OPTION_TYPE = ["MULTIPLE", "RADIO"];
+const QUESTION_UPLOAD_TYPE = ["UPLOAD"];
+
 const questionSchema = new mongoose.Schema({
-  questionText: {
+  title: {
     type: String,
     trim: true,
     required: true,
   },
-  options: [String],
+  type: {
+    type: String,
+    enum: [...QUESTION_OPTION_TYPE, ...QUESTION_OPTION_TYPE],
+    required: true,
+  },
+  answer: {
+    type: String,
+    required: isValid(QUESTION_TEXT_TYPE),
+  },
+  options: {
+    type: [String],
+    required: isValid(QUESTION_OPTION_TYPE),
+  },
 });
+
+function isValid(allowedTypes) {
+  if (allowedTypes.indexOf(this.type) > -1) {
+    return true;
+  }
+  return false;
+}
 
 const formSchema = new mongoose.Schema(
   {

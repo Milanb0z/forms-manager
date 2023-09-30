@@ -75,6 +75,18 @@ const questionTypes = [
 const DragNDropForm = () => {
   const [questions, setQuestions] = useState([]);
 
+  const onQuestionDelete = (index) => {
+    const newQuestions = [...questions];
+    newQuestions.splice(index, 1);
+    setQuestions(newQuestions);
+  };
+
+  const onTitleEdit = ({ target: { value }, index }) => {
+    const newQuestions = [...questions];
+    newQuestions[index].title = value;
+    setQuestions(newQuestions);
+  };
+
   const onDropHandler = (question) => {
     console.log(question);
     setQuestions((prevQuestions) => [...prevQuestions, question]);
@@ -86,6 +98,8 @@ const DragNDropForm = () => {
         <QuestionContainer
           questions={questions}
           onDropHandler={onDropHandler}
+          onDelete={onQuestionDelete}
+          onEdit={onTitleEdit}
         />
         <div className={classes.items}>
           <h2>Questions </h2>

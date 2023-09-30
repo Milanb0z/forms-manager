@@ -6,7 +6,7 @@ import DroppedQuestion from "@components/DroppedQuestion/DroppedQuestion";
 
 import classes from "./QuestionContainer.module.scss";
 
-const QuestionContainer = ({ questions, onDropHandler }) => {
+const QuestionContainer = ({ questions, onDropHandler, onDelete, onEdit }) => {
   const [{ isActive }, drop] = useDrop(() => ({
     accept: "BOX",
     drop: onDropHandler,
@@ -27,9 +27,12 @@ const QuestionContainer = ({ questions, onDropHandler }) => {
 
         {questions.map((question, index) => (
           <DroppedQuestion
+            id={index}
             title={question.title}
             type={question.type}
+            onEdit={onEdit}
             key={index}
+            onDelete={() => onDelete(index)}
           />
         ))}
       </div>

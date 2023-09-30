@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Card, Input, TextArea, FileDropzone } from "@ui";
+import { Input, Button, TextArea, FileDropzone } from "@ui";
 
 import classes from "./DroppedQuestion.module.scss";
 
@@ -14,7 +14,7 @@ const QUESTION_TYPES = {
   PARAGRAPH: "PARAGRAPH",
 };
 
-const DroppedQuestion = ({ title, type }) => {
+const DroppedQuestion = ({ id, title, type, onEdit, onDelete }) => {
   let content = null;
 
   switch (type) {
@@ -39,13 +39,20 @@ const DroppedQuestion = ({ title, type }) => {
       break;
   }
   return (
-    <Card>
-      <p>
-        Type: <span>{type}</span>
-      </p>
-      <Input placeholder="Enter Question Title" value={title} />
+    <div className={classes.card}>
+      <div className={classes.card_header}>
+        <p>
+          Type: <span>{type}</span>
+        </p>
+        <Button onClick={onDelete}>X</Button>
+      </div>
+      <Input
+        onChange={(e) => onEdit(e, id)}
+        value={title}
+        placeholder="Enter Question Title"
+      />
       {content}
-    </Card>
+    </div>
   );
 };
 

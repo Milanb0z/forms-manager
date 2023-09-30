@@ -1,0 +1,14 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  border-radius: 0.5em;
+  background-color: var(--color-grey-10);
+
+  &_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

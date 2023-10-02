@@ -14,41 +14,61 @@ const QUESTION_TYPES = {
   PARAGRAPH: "PARAGRAPH",
 };
 
-const DroppedQuestion = ({ id, title, type, onEdit, onDelete }) => {
+const DroppedQuestion = ({
+  id,
+  question,
+  onEdit,
+  onDelete,
+  onNewChoice,
+  onChoiceEdit,
+  onChoiceDelete,
+}) => {
   let content = null;
 
-  switch (type) {
+  switch (question.type) {
     case QUESTION_TYPES.MULTIPLE:
-      content = <ChoiceSelector />;
+      content = (
+        <ChoiceSelector
+          options={question.options}
+          id={id}
+          onNewChoice={onNewChoice}
+          onChoiceEdit={onChoiceEdit}
+          onChoiceDelete={onChoiceDelete}
+        />
+      );
       break;
     case QUESTION_TYPES.PARAGRAPH:
       content = <TextArea placeholder="Answer" disabled />;
       break;
     case QUESTION_TYPES.RADIO:
-      content = <ChoiceSelector />;
+      content = (
+        <ChoiceSelector
+          id={id}
+          options={question.options}
+          onNewChoice={onNewChoice}
+          onChoiceEdit={onChoiceEdit}
+          onChoiceDelete={onChoiceDelete}
+        />
+      );
       break;
-
     case QUESTION_TYPES.SHORT:
       content = <Input placeholder="Answer" disabled />;
       break;
     case QUESTION_TYPES.UPLOAD:
       content = <FileDropzone />;
       break;
-
-    default:
-      break;
   }
   return (
     <div className={classes.card}>
       <div className={classes.card_header}>
         <p>
-          Type: <span>{type}</span>
+          Type: <span>{question.type}</span>
         </p>
         <Button onClick={onDelete}>X</Button>
       </div>
       <Input
         onChange={(e) => onEdit(e, id)}
-        value={title}
+        value={question.title}
         placeholder="Enter Question Title"
       />
       {content}

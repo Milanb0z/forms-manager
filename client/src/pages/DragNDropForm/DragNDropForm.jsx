@@ -81,7 +81,8 @@ const DragNDropForm = () => {
     setQuestions(newQuestions);
   };
 
-  const onTitleEdit = ({ target: { value }, index }) => {
+  const onTitleEdit = ({ target: { value } }, index) => {
+    console.log({ value, index });
     const newQuestions = [...questions];
     newQuestions[index].title = value;
     setQuestions(newQuestions);
@@ -92,6 +93,25 @@ const DragNDropForm = () => {
     setQuestions((prevQuestions) => [...prevQuestions, question]);
   };
 
+  // Choice CRUD
+  const onNewChoice = (index) => {
+    const newQuestions = [...questions];
+    newQuestions[index].options.push("");
+    setQuestions(newQuestions);
+  };
+
+  const onChoiceEdit = (questionIndex, optionIndex, { target: { value } }) => {
+    const newQuestions = [...questions];
+    newQuestions[questionIndex].options[optionIndex] = value;
+    setQuestions(newQuestions);
+  };
+
+  const onChoiceDelete = (questionIndex, optionIndex) => {
+    const newQuestions = [...questions];
+    newQuestions[questionIndex].options.splice(optionIndex, 1);
+    setQuestions(newQuestions);
+  };
+
   return (
     <PageWrapper>
       <div className={classes.content}>
@@ -100,6 +120,9 @@ const DragNDropForm = () => {
           onDropHandler={onDropHandler}
           onDelete={onQuestionDelete}
           onEdit={onTitleEdit}
+          onNewChoice={onNewChoice}
+          onChoiceEdit={onChoiceEdit}
+          onChoiceDelete={onChoiceDelete}
         />
         <div className={classes.items}>
           <h2>Questions </h2>

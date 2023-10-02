@@ -6,7 +6,15 @@ import DroppedQuestion from "@components/DroppedQuestion/DroppedQuestion";
 
 import classes from "./QuestionContainer.module.scss";
 
-const QuestionContainer = ({ questions, onDropHandler, onDelete, onEdit }) => {
+const QuestionContainer = ({
+  questions,
+  onDropHandler,
+  onDelete,
+  onEdit,
+  onNewChoice,
+  onChoiceEdit,
+  onChoiceDelete,
+}) => {
   const [{ isActive }, drop] = useDrop(() => ({
     accept: "BOX",
     drop: onDropHandler,
@@ -14,6 +22,8 @@ const QuestionContainer = ({ questions, onDropHandler, onDelete, onEdit }) => {
       isActive: monitor.canDrop() && monitor.isOver(),
     }),
   }));
+
+  console.log(questions);
 
   return (
     <div ref={drop} data-testid="dustbin" className={classes.form}>
@@ -28,11 +38,13 @@ const QuestionContainer = ({ questions, onDropHandler, onDelete, onEdit }) => {
         {questions.map((question, index) => (
           <DroppedQuestion
             id={index}
-            title={question.title}
-            type={question.type}
+            question={question}
             onEdit={onEdit}
             key={index}
             onDelete={() => onDelete(index)}
+            onNewChoice={() => onNewChoice(index)}
+            onChoiceEdit={onChoiceEdit}
+            onChoiceDelete={onChoiceDelete}
           />
         ))}
       </div>

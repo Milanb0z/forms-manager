@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import axios from "../../axios.default";
+
 import classes from "./DragNDropForm.module.scss";
 import PageWrapper from "@hoc/PageWrapper";
 
@@ -11,6 +14,8 @@ import ParagraphIcon from "@assets/paragraph-question-icon.svg";
 import SingleIcon from "@assets/single-question-icon.svg";
 import TextIcon from "@assets/text-question-icon.svg";
 import MultipleIcon from "@assets/multiple-question-icon.svg";
+import useInput from "@hooks/useInput";
+import { Input } from "@ui";
 
 const QUESTION_TYPES = {
   MULTIPLE: "MULTIPLE",
@@ -74,6 +79,9 @@ const questionTypes = [
 
 const DragNDropForm = () => {
   const [questions, setQuestions] = useState([]);
+  const [heading, setHeading] = useInput("");
+  const [description, setDescription] = useInput("");
+  const [customLink, setCustomLink] = useInput("");
 
   const onQuestionDelete = (index) => {
     const newQuestions = [...questions];
@@ -111,6 +119,18 @@ const DragNDropForm = () => {
     newQuestions[questionIndex].options.splice(optionIndex, 1);
     setQuestions(newQuestions);
   };
+  const onFormSubmit = () => {
+    let formSubmitData = { name: heading, description, customLink, questions };
+    let token = localStorage.getItem("token");
+    axios
+      .post("/form/new", formSubmitData, { headers: { token } })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
     <PageWrapper>
@@ -123,8 +143,28 @@ const DragNDropForm = () => {
           onNewChoice={onNewChoice}
           onChoiceEdit={onChoiceEdit}
           onChoiceDelete={onChoiceDelete}
+          onSubmit={onFormSubmit}
         />
         <div className={classes.items}>
+          <h2>Main Data</h2>
+          <Input
+            label="Title"
+            value={heading}
+            onChange={setHeading}
+            placeholder="Title"
+          />
+          <Input
+            label="Description"
+            value={description}
+            onChange={setDescription}
+            placeholder="Description"
+          />
+          <Input
+            label="Custom Link"
+            value={customLink}
+            onChange={setCustomLink}
+            placeholder="Custom Link"
+          />
           <h2>Questions </h2>
           <div className={classes.items_grid}>
             {questionTypes.map(({ data, label, icon }) => (

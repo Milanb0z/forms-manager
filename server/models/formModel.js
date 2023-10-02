@@ -12,7 +12,7 @@ const questionSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: [...QUESTION_OPTION_TYPE, ...QUESTION_OPTION_TYPE],
+    enum: [...QUESTION_OPTION_TYPE, ...QUESTION_TEXT_TYPE],
     required: true,
   },
   answer: {

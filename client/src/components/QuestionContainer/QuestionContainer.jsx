@@ -1,12 +1,12 @@
-import { useState } from "react";
 import { useDrop } from "react-dnd";
 
-import { Card } from "@ui";
 import DroppedQuestion from "@components/DroppedQuestion/DroppedQuestion";
 
 import classes from "./QuestionContainer.module.scss";
+import { Button } from "@ui";
+import { memo } from "react";
 
-const QuestionContainer = ({
+const QuestionContainer = memo(function QuestionContainer({
   questions,
   onDropHandler,
   onDelete,
@@ -14,7 +14,8 @@ const QuestionContainer = ({
   onNewChoice,
   onChoiceEdit,
   onChoiceDelete,
-}) => {
+  onSubmit,
+}) {
   const [{ isActive }, drop] = useDrop(() => ({
     accept: "BOX",
     drop: onDropHandler,
@@ -48,8 +49,11 @@ const QuestionContainer = ({
           />
         ))}
       </div>
+      <Button disabled={questions.length < 1} onClick={onSubmit}>
+        Submit
+      </Button>
     </div>
   );
-};
+});
 
 export default QuestionContainer;

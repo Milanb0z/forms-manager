@@ -6,6 +6,7 @@ import ProfileCard from "@components/ProfileCard/ProfileCard";
 import { Button } from "@ui";
 
 import Add from "@assets/add.svg";
+import Profile from "@assets/profile.svg";
 
 import classes from "./Header.module.scss";
 import { UserContext } from "@context/user.context";
@@ -30,6 +31,10 @@ const Header = ({ title }) => {
           <div className={classes.actions}>
             <Link to="/form/new">
               <Button outline iconUrl={Add} />
+            </Link>
+
+            <Link to="/form/new">
+              <Button outline iconUrl={Profile} />
             </Link>
             <ProfileCard username={user.username} email={user.email} />
           </div>

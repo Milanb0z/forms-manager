@@ -1,17 +1,48 @@
 .login {
   height: 100vh;
+  display: flex;
+  background-color: var(--color-black-01);
+  overflow: hidden;
+
+  & > * {
+    flex: 1;
+  }
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  backdrop-filter: blur(3px);
+  place-content: center;
+}
+
+.right {
   display: grid;
   place-content: center;
-  background-color: rgba(246, 250, 253, 0.9);
+}
+
+.side {
+  background-color: var(--color-black-02);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal {
   text-align: center;
+  position: relative;
 }
 
 .form {
   width: 30em;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
+
+  p {
+    align-self: flex-start;
+  }
 }

@@ -88,6 +88,7 @@ const App = () => {
   const [, setUser] = useContext(UserContext);
   useEffect(() => {
     let token = localStorage.getItem("token");
+    console.log(token);
 
     axios.get("/user/profile", { headers: { token } }).then((res) => {
       setUser(res.data.user);

@@ -32,7 +32,7 @@ const Sidenav = () => {
           <NavLink
             end
             className={({ isActive }) =>
-              isActive ? `${classes.active} ${classes.link}` : classes.link
+              isActive ? `${classes.link} ${classes.active}` : classes.link
             }
             key={link.id}
             to={link.url}

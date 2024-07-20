@@ -38,7 +38,7 @@ const SingleForm = ({ byId = false }) => {
       .catch(() => {
         toast.error("Something Went Wrong");
       });
-  }, [formId, navigate]);
+  }, [formId, navigate, byId]);
 
   const handleChange = (e, questionIndex, val) => {
     let newAnswers = [...answers];

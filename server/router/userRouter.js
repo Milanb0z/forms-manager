@@ -27,6 +27,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+//Get Profile
 router.get("/profile", auth, async (req, res) => {
   try {
     res.send({ user: req.user });

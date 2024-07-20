@@ -17,6 +17,9 @@
   }
 }
 
+.active {
+  background-color: var(--color-green) !important;
+}
 .toggle {
   width: 2em;
   height: 2em;

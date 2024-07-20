@@ -16,6 +16,11 @@
   place-content: center;
 }
 
+.right {
+  display: grid;
+  place-content: center;
+}
+
 .side {
   background-color: var(--color-black-02);
   display: flex;
@@ -29,11 +34,6 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-}
-
-.right {
-  display: grid;
-  place-content: center;
 }
 
 .form {

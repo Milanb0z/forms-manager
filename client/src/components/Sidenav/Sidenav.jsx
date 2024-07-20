@@ -1,5 +1,5 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Button } from "@ui";
 
 import GridIcon from "@assets/grid.svg";
 import Profile from "@assets/profile.svg";
@@ -7,13 +7,26 @@ import Profile from "@assets/profile.svg";
 import classes from "./Sidenav.module.scss";
 
 const STATIC_LINKS = [
-  { id: "sd12", iconLink: GridIcon, url: "/form" },
+  { id: "sd12", iconLink: GridIcon, url: "/" },
   { id: "sd13", iconLink: Profile, url: "/me" },
 ];
 
-const Sidenav = ({ isOpen }) => {
+const Sidenav = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleState = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
     <nav className={`${classes.nav} ${isOpen ? classes.nav_open : ""}`}>
+      <div className={classes.logo}>
+        <img src="/logo.svg" alt="" />
+      </div>
+
+      <div onClick={toggleState} className={classes.toggle}>
+        <img src="/arrow-right.svg" alt="open" />
+      </div>
       <div className={classes.links}>
         {STATIC_LINKS.map((link) => (
           <NavLink
@@ -24,7 +37,7 @@ const Sidenav = ({ isOpen }) => {
             key={link.id}
             to={link.url}
           >
-            <Button iconUrl={link.iconLink} />
+            <img src={link.iconLink} alt="" />
           </NavLink>
         ))}
       </div>

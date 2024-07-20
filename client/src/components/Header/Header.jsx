@@ -5,40 +5,38 @@ import ProfileCard from "@components/ProfileCard/ProfileCard";
 
 import { Button } from "@ui";
 
-import Logo from "@assets/logo.svg";
 import Add from "@assets/add.svg";
 
 import classes from "./Header.module.scss";
 import { UserContext } from "@context/user.context";
-import HamburgerIcon from "@components/HamburgerIcon/HamburgerIcon";
 
-const Header = ({ title, onNavToggle, isActive }) => {
+const Header = ({ title }) => {
   const [user] = useContext(UserContext);
 
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>
-        <Link to="/form">
-          <img src={Logo} alt="Logo" />
-        </Link>
-      </div>
-      <div className={classes.header_content}>
-        <div className={classes.mobile}>
-          <HamburgerIcon onClickHandler={onNavToggle} isActive={isActive} />
+      <div className={classes.header_text}>
+        <div className={classes.header_depth}>
+          <p>dashboard</p>
+          <p>/</p>
+          <p>
+            <span>monitoring</span>
+          </p>
         </div>
-
-        <h3>{title || "Dashboard"}</h3>
+        <h2>Welcome to Dashboard</h2>
+      </div>
+      <div className={classes.header_actions}>
         {user ? (
           <div className={classes.actions}>
             <Link to="/form/new">
-              <Button iconUrl={Add}>New Form</Button>
+              <Button outline iconUrl={Add} />
             </Link>
             <ProfileCard username={user.username} email={user.email} />
           </div>
         ) : (
           <div className={classes.actions}>
             <Link to="/login">
-              <Button>Login</Button>
+              <Button outline>Login</Button>
             </Link>
           </div>
         )}

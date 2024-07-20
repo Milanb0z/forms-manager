@@ -12,13 +12,14 @@
 }
 .field {
   font-weight: 400;
-  font-size: 1em;
-  font-family: Inter;
-  color: var(--grey-grey-70);
-  padding: 0.625em 1.25em;
+  font-size: 1.2em;
+  font-family: inherit;
+  text-transform: capitalize;
+  color: var(--color-grey);
+  padding: 1em 1.25em;
   border-radius: 0.5em;
-  border: 1px solid var(--color-grey-70);
-  background: var(--grey-grey-10);
+  border: 2px solid var(--color-black-03);
+  background: var(--color-black-01);
 
   &:disabled {
     opacity: 0.7;

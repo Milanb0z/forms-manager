@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import classes from "./PageWrapper.module.scss";
 
 import Sidenav from "@components/Sidenav/Sidenav";
@@ -8,27 +6,17 @@ import Header from "@components/Header/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const PageWrapper = ({ children, title }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleNav = () => {
-    setIsOpen((prevState) => !prevState);
-  };
-
+const PageWrapper = ({ children }) => {
   return (
-    <section className={classes.wrapper}>
-      {isOpen ? (
-        <div onClick={toggleNav} className={classes.backdrop}></div>
-      ) : null}
+    <main className={classes.main}>
+      <Sidenav />
+      <div className={classes.content}>
+        <Header />
+        {children}
+      </div>
 
-      <Header isActive={isOpen} title={title} onNavToggle={toggleNav} />
-      <main className={classes.main}>
-        <Sidenav isOpen={isOpen} />
-        <div className={classes.content}>{children}</div>
-
-        <ToastContainer theme="dark" position="bottom-right" />
-      </main>
-    </section>
+      <ToastContainer theme="dark" position="bottom-right" />
+    </main>
   );
 };
 

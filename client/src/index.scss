@@ -1,16 +1,14 @@
 :root {
-  --color-black: #000;
-  --color-navy: #092c4c;
-  --color-blue: #514ef3;
-  --color-green: #2dc8a8;
-  --color-yellow: #ffc357;
-  --color-pink: #fe8084;
+  --color-black-01: #171717;
+  --color-black-02: #1e1e1e;
+  --color-black-03: #343434;
 
-  --color-grey-90: #526477;
-  --color-grey-70: #7e92a2;
-  --color-grey-50: #d6e1e6;
-  --color-grey-30: #eaeef4;
-  --color-grey-10: #f6fafd;
+  --color-green: #b8fd8e;
+  --color-blue: #8efdfd;
+  --color-yellow: #fbfd8e;
+
+  --color-black: #000;
+  --color-grey: #757575;
   --color-white: #fff;
 }
 
@@ -27,7 +25,8 @@ html {
 body {
   font-size: 1.6em;
   font-family: "Inter", sans-serif;
-  color: var(--color-grey-90);
+  color: var(--color-white);
+  background-color: var(--color-black-01);
 }
 
 a {
@@ -35,14 +34,21 @@ a {
   color: inherit;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-white);
+}
+
 h1 {
-  font-size: 2em;
+  font-size: 2.25em;
 }
 h2 {
-  font-size: 1.75em;
+  font-size: 1.5em;
 }
 h3 {
-  font-size: 1.5em;
+  font-size: 1.125em;
 }
 h4 {
   font-size: 1.25em;
@@ -52,9 +58,11 @@ h5 {
 }
 p {
   font-size: 1em;
-}
-span {
-  font-size: 0.875em;
+  color: var(--color-grey);
+
+  span {
+    color: var(--color-green);
+  }
 }
 
 //Custom ScrollBar
@@ -76,23 +84,4 @@ span {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-blue);
-}
-
-//Dark Theme
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-black: #fff;
-    --color-navy: #092c4c;
-    --color-blue: #514ef3;
-    --color-green: #2dc8a8;
-    --color-yellow: #ffc357;
-    --color-pink: #fe8084;
-
-    --color-grey-90: #dcdcdc;
-    --color-grey-70: #3e3d3d;
-    --color-grey-50: #2b2b2b;
-    --color-grey-30: #202020;
-    --color-grey-10: #161717;
-    --color-white: #000;
-  }
 }

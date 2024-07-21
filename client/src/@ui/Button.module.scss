@@ -12,6 +12,11 @@
   cursor: pointer;
   transition: all 0.3s ease;
 
+  img {
+    width: 1em;
+    height: auto;
+  }
+
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;

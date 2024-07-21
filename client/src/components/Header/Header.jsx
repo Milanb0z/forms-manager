@@ -11,7 +11,7 @@ import Profile from "@assets/profile.svg";
 import classes from "./Header.module.scss";
 import { UserContext } from "@context/user.context";
 
-const Header = ({ title }) => {
+const Header = ({ title, link }) => {
   const [user] = useContext(UserContext);
 
   return (
@@ -21,10 +21,10 @@ const Header = ({ title }) => {
           <p>dashboard</p>
           <p>/</p>
           <p>
-            <span>monitoring</span>
+            <span>{link || "monitoring"}</span>
           </p>
         </div>
-        <h2>Welcome to Dashboard</h2>
+        <h2>{title || "Welcome to Dashboard"}</h2>
       </div>
       <div className={classes.header_actions}>
         {user ? (

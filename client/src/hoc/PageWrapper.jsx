@@ -6,12 +6,12 @@ import Header from "@components/Header/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const PageWrapper = ({ children }) => {
+const PageWrapper = ({ children, title, link }) => {
   return (
     <main className={classes.main}>
       <Sidenav />
       <div className={classes.content}>
-        <Header />
+        <Header title={title} link={link} />
         {children}
       </div>
 

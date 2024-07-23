@@ -4,18 +4,18 @@
   gap: 1em;
 
   &_item {
-    align-self: stretch;
+    margin-left: 2em;
     display: flex;
     gap: 1em;
-  }
 
-  &_btn {
-    padding: 0.5em 1.2em;
-    background-color: var(--color-pink);
-    font-weight: bold;
-    color: #fff;
-    border-radius: 1em;
-    border: none;
-    cursor: pointer;
+    input {
+      font-size: 1em;
+      height: 3em;
+      padding: 1em;
+    }
+
+    button {
+      height: 3em;
+    }
   }
 }

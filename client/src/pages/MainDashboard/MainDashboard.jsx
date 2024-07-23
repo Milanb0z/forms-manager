@@ -11,7 +11,14 @@ const SurveysCard = ({ forms }) => {
       <h5>Created Surveys</h5>
 
       {forms?.length > 0 ? (
-        <h2>OFmrs</h2>
+        <div className={classes.list}>
+          {forms.map((form) => (
+            <div key={form._id} className={classes.list_item}>
+              <h4>{form.name}</h4>
+              <span>{form.isOpen ? "Active" : "Closed"}</span>
+            </div>
+          ))}
+        </div>
       ) : (
         <div className={classes.noForm}>
           <p>No Forms found</p>
@@ -35,7 +42,7 @@ const MainDashboard = () => {
       </Card>
       <Card />
       <Card />
-      <SurveysCard />
+      <SurveysCard forms={user.createdForms} />
     </div>
   );
 };

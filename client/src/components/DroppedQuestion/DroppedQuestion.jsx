@@ -25,6 +25,8 @@ const DroppedQuestion = ({
 }) => {
   let content = null;
 
+  console.log(question);
+
   switch (question.type) {
     case QUESTION_TYPES.MULTIPLE:
       content = (
@@ -64,7 +66,7 @@ const DroppedQuestion = ({
         <p>
           Type: <span>{question.type}</span>
         </p>
-        <Button onClick={onDelete}>X</Button>
+        <Button iconUrl="/exit.svg" onClick={onDelete} />
       </div>
       <Input
         onChange={(e) => onEdit(e, id)}

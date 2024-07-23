@@ -1,4 +1,4 @@
-.main {
+.wrapper {
   width: 100vw;
   height: 100vh;
   background-color: var(--color-black-01);
@@ -10,5 +10,11 @@
   display: flex;
   gap: 2em;
   padding: 2em;
+  overflow: hidden;
   flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  display: flex;
 }

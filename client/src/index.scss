@@ -13,6 +13,13 @@
 
   --toastify-color-success: var(--color-green);
   --toastify-color-dark: var(--color-black-03);
+
+  --toastify-color-light: #fff;
+  --toastify-color-dark: #343434;
+  --toastify-color-info: #8efdfd;
+  --toastify-color-success: #b8fd8e;
+  --toastify-color-warning: #fbfdfb;
+  --toastify-color-error: #ff642c;
 }
 
 * {
@@ -75,16 +82,16 @@ p {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--color-grey-50);
+  background: var(--color-black-03);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--color-blue);
+  background: var(--color-green);
   border-radius: 4px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-blue);
+  background: var(--color-green);
 }

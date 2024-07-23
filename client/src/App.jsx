@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //Context
@@ -22,6 +22,7 @@ import ProtectedRoute from "@hoc/ProtectedRoute";
 import axios from "./axios.default.js";
 import Profile from "./pages/Profile/Profile.jsx";
 import PageWrapper from "@hoc/PageWrapper.jsx";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner.jsx";
 
 const router = createBrowserRouter([
   {
@@ -86,14 +87,20 @@ const router = createBrowserRouter([
 
 const App = () => {
   const [, setUser] = useContext(UserContext);
-  useEffect(() => {
-    let token = localStorage.getItem("token");
-    console.log(token);
+  const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    setIsLoading(true);
+    let token = localStorage.getItem("token");
     axios.get("/user/profile", { headers: { token } }).then((res) => {
       setUser(res.data.user);
     });
+    setIsLoading(false);
   }, []);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return <RouterProvider router={router} />;
 };

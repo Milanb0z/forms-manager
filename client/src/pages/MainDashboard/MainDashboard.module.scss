@@ -1,8 +1,7 @@
 .grid {
-  padding: 2em;
-  padding-top: 1em;
   gap: 1em;
   flex: 1;
+  overflow: hidden;
 
   display: grid;
 
@@ -39,4 +38,21 @@
   gap: 1em;
   align-items: center;
   justify-content: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  overflow: auto;
+
+  &_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: var(--color-black-03);
+    border-radius: 0.5em;
+    margin-right: 0.5em;
+  }
 }

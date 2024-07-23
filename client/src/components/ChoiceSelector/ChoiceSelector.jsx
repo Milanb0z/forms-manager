@@ -19,12 +19,10 @@ const ChoiceSelector = ({
               onChange={(e) => onChoiceEdit(id, index, e)}
               value={singleVal}
             />
-            <button
-              onClick={() => onChoiceDelete(id, index)}
-              className={classes.selector_btn}
-            >
-              X
-            </button>
+            <Button
+              iconUrl="/exit.svg"
+              onClick={onChoiceDelete.bind(this, id, index)}
+            />
           </div>
         ))
       ) : (

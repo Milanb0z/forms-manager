@@ -34,7 +34,7 @@ function isValid(allowedTypes) {
 
 const formSchema = new mongoose.Schema(
   {
-    customId: {
+    customLink: {
       type: String,
     },
     createdBy: {

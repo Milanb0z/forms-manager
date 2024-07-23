@@ -1,25 +1,117 @@
-.form {
-  padding: 1.5em 2em;
+.wrapper {
   display: flex;
   flex-direction: column;
-  gap: 2em;
-  height: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 100svh;
+}
 
-  &_questions {
+.content {
+  flex: 1;
+  display: grid;
+  place-content: center;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  z-index: 1000;
+  background-color: #3434346e;
+}
+
+.actions {
+  background-color: var(--color-black-02);
+  backdrop-filter: blur(100px);
+  padding: 2em;
+  display: flex;
+  gap: 2em;
+  align-items: cntetr;
+  justify-content: center;
+}
+
+.indicatior {
+  background-color: var(--color-black-01);
+  text-align: center;
+  padding: 1em;
+}
+
+.info {
+  position: absolute;
+  background-color: var(--color-black-03);
+  padding: 2em;
+  z-index: 100;
+  width: 100%;
+  height: 85%;
+  bottom: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+  border-radius: 1em 1em 0 0;
+
+  &_header {
+    align-self: flex-end;
+  }
+
+  &_text {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 2em;
-    flex: 1;
-    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+    max-width: 50em;
   }
+}
 
-  &_actions {
-    display: flex;
-    gap: 1em;
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0.5em;
+
+  align-items: center;
+  &_text {
+    max-width: 25ch;
+    text-align: center;
   }
+}
 
-  h1,
-  p {
-    text-transform: capitalize;
+.answers {
+  align-self: stretch;
+  &_text {
+    text-align: center;
+    padding: 0.5em;
+    transition: background 0.2s ease;
+    border-radius: 0.5em;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-black-02);
+    }
+  }
+}
+
+.indicatior {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+
+  &_line {
+    max-width: 30em;
+    width: 90%;
+    height: 0.5em;
+    background-color: var(--color-black-03);
+
+    &_fill {
+      width: 0%;
+      height: 100%;
+      transform-origin: left;
+      background-color: var(--color-green);
+    }
   }
 }

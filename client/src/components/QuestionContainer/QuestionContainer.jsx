@@ -24,11 +24,9 @@ const QuestionContainer = memo(function QuestionContainer({
     }),
   }));
 
-  console.log(questions);
-
   return (
     <div ref={drop} data-testid="dustbin" className={classes.form}>
-      <h2>Form</h2>
+      <h5>Form</h5>
       <div className={classes.form_main}>
         {isActive ? (
           <div className={classes.overlay}>

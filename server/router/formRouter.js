@@ -46,6 +46,8 @@ router.get("/", async (req, res) => {
 router.get("/id/:formId", async (req, res) => {
   try {
     const { formId } = req.params;
+
+    console.log(formId);
     const fetchedForm = await Form.findOne({ customLink: formId })
       .populate("createdBy")
       .select("-createdBy.password");
@@ -54,6 +56,7 @@ router.get("/id/:formId", async (req, res) => {
       return res.status(404).send({ error: "From Not Found" });
     }
 
+    console.log(fetchedForm);
     res.send(fetchedForm);
   } catch (error) {
     console.log({ error });
@@ -72,6 +75,8 @@ router.get("/:formId", async (req, res) => {
     if (!fetchedForm) {
       return res.status(404).send({ error: "From Not Found" });
     }
+
+    console.log(fetchedForm);
 
     res.send(fetchedForm);
   } catch (error) {

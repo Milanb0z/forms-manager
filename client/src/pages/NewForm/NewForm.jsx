@@ -1,48 +1,126 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 import axios from "../../axios.default";
 
-import { Button, Input } from "@ui";
+import { Input } from "@ui";
 
 import useInput from "@hooks/useInput";
 import PageWrapper from "@hoc/PageWrapper";
-import NewQuestionForm from "@components/NewQuestionForm/NewQuestionForm";
 
 import classes from "./NewForm.module.scss";
+import { TextArea } from "@ui";
+
+import FileUploadIcon from "@assets/file-upload-icon.svg";
+import ParagraphIcon from "@assets/paragraph-question-icon.svg";
+import SingleIcon from "@assets/single-question-icon.svg";
+import TextIcon from "@assets/text-question-icon.svg";
+import MultipleIcon from "@assets/multiple-question-icon.svg";
+import DraggableQuestion from "@components/DraggableQuestion/DraggableQuestion";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import QuestionContainer from "@components/QuestionContainer/QuestionContainer";
+
+const QUESTION_TYPES = {
+  MULTIPLE: "MULTIPLE",
+  RADIO: "RADIO",
+  UPLOAD: "UPLOAD",
+  SHORT: "SHORT",
+  PARAGRAPH: "PARAGRAPH",
+};
+
+const questionTypes = [
+  {
+    icon: MultipleIcon,
+    label: "Multiple Choice Type",
+    data: {
+      title: "",
+      options: [],
+      type: QUESTION_TYPES.MULTIPLE,
+    },
+  },
+
+  {
+    icon: SingleIcon,
+    label: "Single Choice Type",
+    data: {
+      title: "",
+      options: [],
+      type: QUESTION_TYPES.RADIO,
+    },
+  },
+
+  {
+    icon: TextIcon,
+    label: "Short Text Answer",
+    data: {
+      title: "",
+      answer: "",
+      type: QUESTION_TYPES.SHORT,
+    },
+  },
+
+  {
+    icon: ParagraphIcon,
+    label: "Paragraph Text Answer",
+    data: {
+      title: "",
+      answer: "",
+      type: QUESTION_TYPES.PARAGRAPH,
+    },
+  },
+
+  {
+    icon: FileUploadIcon,
+    label: "Upload FIle Answer",
+    data: {
+      title: "",
+      answer: "",
+      type: QUESTION_TYPES.UPLOAD,
+    },
+  },
+];
 
 const NewForm = () => {
+  const [questions, setQuestions] = useState(null);
   const [heading, setHeading] = useInput("");
   const [description, setDescription] = useInput("");
   const [customLink, setCustomLink] = useInput("");
 
-  const [questions, setQuestions] = useState([]);
-
-  const addNewQuestion = () => {
-    setQuestions((prevQuestion) => [
-      ...prevQuestion,
-      { questionText: "", options: [""] },
-    ]);
+  const onQuestionDelete = (index) => {
+    const newQuestions = [...questions];
+    newQuestions.splice(index, 1);
+    setQuestions(newQuestions);
   };
 
-  const addAnswer = (questionId) => {
-    let prevQuestions = [...questions];
-    prevQuestions[questionId].options.push("");
-    setQuestions([...prevQuestions]);
+  const onTitleEdit = ({ target: { value } }, index) => {
+    const newQuestions = [...questions];
+    newQuestions[index].title = value;
+    setQuestions(newQuestions);
   };
 
-  const onQuestionTitleChange = ({ target }, index) => {
-    let prevQuestion = [...questions];
-    prevQuestion[index].questionText = target.value;
-    setQuestions([...prevQuestion]);
+  const onDropHandler = (question) => {
+    const newQuestion = JSON.parse(JSON.stringify(question));
+    setQuestions((prevQuestions) => [...prevQuestions, { ...newQuestion }]);
   };
 
-  const onOptionTextChange = ({ target }, questionId, optionId) => {
-    let prevQuestion = [...questions];
-    prevQuestion[questionId].options[optionId] = target.value;
-    setQuestions([...prevQuestion]);
+  // Choice CRUD
+  const onNewChoice = (index) => {
+    const newQuestions = [...questions];
+    newQuestions[index].options.push("");
+    setQuestions(newQuestions);
   };
 
+  const onChoiceEdit = (questionIndex, optionIndex, { target: { value } }) => {
+    const newQuestions = [...questions];
+    newQuestions[questionIndex].options[optionIndex] = value;
+    setQuestions(newQuestions);
+  };
+
+  const onChoiceDelete = (questionIndex, optionIndex) => {
+    const newQuestions = [...questions];
+    newQuestions[questionIndex].options.splice(optionIndex, 1);
+    setQuestions(newQuestions);
+  };
   const onFormSubmit = () => {
     let formSubmitData = { name: heading, description, customLink, questions };
     let token = localStorage.getItem("token");
@@ -57,10 +135,20 @@ const NewForm = () => {
   };
 
   return (
-    <PageWrapper title="Create Form">
-      <div className={classes.content}>
-        <div className={classes.form}>
-          <div className={classes.form_main}>
+    <PageWrapper title="Create New Form" link="Form">
+      <DndProvider backend={HTML5Backend}>
+        <div className={classes.wrapper}>
+          <QuestionContainer
+            questions={questions}
+            onDropHandler={onDropHandler}
+            onDelete={onQuestionDelete}
+            onEdit={onTitleEdit}
+            onNewChoice={onNewChoice}
+            onChoiceEdit={onChoiceEdit}
+            onChoiceDelete={onChoiceDelete}
+            onSubmit={onFormSubmit}
+          />
+          <div className={classes.info}>
             <Input
               label="Title"
               value={heading}
@@ -68,42 +156,33 @@ const NewForm = () => {
               placeholder="Title"
             />
             <Input
-              label="Description"
-              value={description}
-              onChange={setDescription}
-              placeholder="Description"
-            />
-            <Input
               label="Custom Link"
               value={customLink}
               onChange={setCustomLink}
               placeholder="Custom Link"
             />
-            {questions.map((opt, index) => (
-              <NewQuestionForm
-                key={index}
-                option={opt}
-                index={index}
-                onTitleEdit={onQuestionTitleChange}
-                onOptionEdit={onOptionTextChange}
-                newAnswer={addAnswer}
-              />
-            ))}
-          </div>
+            <TextArea
+              label="Description"
+              value={description}
+              onChange={setDescription}
+              placeholder="Description"
+            />
 
-          <div className={classes.form_actions}>
-            <Button onClick={addNewQuestion}>Add Question</Button>
-            <Button onClick={onFormSubmit}>Submit Form</Button>
-            <Button
-              onClick={() => {
-                toast("sd");
-              }}
-            >
-              Notify
-            </Button>
+            <h3>Question Types</h3>
+            <div className={classes.question}>
+              {questionTypes.map(({ data, label, icon }) => (
+                <DraggableQuestion
+                  imgUrl={icon}
+                  onClickHandler={onDropHandler}
+                  data={data}
+                  label={label}
+                  key={label}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </DndProvider>
     </PageWrapper>
   );
 };

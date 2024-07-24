@@ -7,6 +7,7 @@ import { Button } from "@ui";
 import axios from "../../axios.default";
 
 import classes from "./SingleForm.module.scss";
+import getAnsSchema from "@utils/getAnsSchema";
 
 const questionVars = {
   initial: {
@@ -50,11 +51,7 @@ const SingleForm = ({ byId = false }) => {
       .then((res) => {
         console.log(res.data);
         setForm(res.data);
-        let answers = res.data.questions.map((question) => ({
-          questionId: question._id,
-          optionValue: null,
-        }));
-        setAnswers(answers);
+        setAnswers(getAnsSchema(res.data.questions));
         setIsLoading(false);
       })
       .catch(() => {
@@ -62,6 +59,31 @@ const SingleForm = ({ byId = false }) => {
       });
   }, [formId, byId]);
 
+  // Ans Stuff
+
+  const onTypingHandler = (queIndex, { target: { value } }) => {
+    let newAns = [...answers];
+    newAns[queIndex].data = value;
+    setAnswers(newAns);
+  };
+
+  const onChoiceSelected = (queIndex, value, radio = false) => {
+    let newAns = [...answers];
+
+    const index = newAns[queIndex].data.indexOf(value);
+    if (index) {
+      newAns[queIndex].data.splice(index, 1);
+    } else {
+      if (radio) {
+        newAns[queIndex].data = [value];
+      } else {
+        newAns[queIndex].data.push(value);
+      }
+    }
+    setAnswers(newAns);
+  };
+
+  // Toolbar Stuff
   const onNextQuestion = () => {
     setIndex((p) => p + 1);
   };

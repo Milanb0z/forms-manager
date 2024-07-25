@@ -33,7 +33,6 @@ const QuestionContainer = memo(function QuestionContainer({
             <h2>Drop Question</h2>
           </div>
         ) : null}
-
         {questions.map((question, index) => (
           <DroppedQuestion
             id={index}

@@ -6,8 +6,9 @@ import Header from "@components/Header/Header";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Outlet } from "react-router";
 
-const PageWrapper = ({ children, title, link }) => {
+const PageWrapper = ({ title, link }) => {
   return (
     <main className={classes.wrapper}>
       <Sidenav />
@@ -20,7 +21,7 @@ const PageWrapper = ({ children, title, link }) => {
           transition={{ ease: cubicBezier(0.25, 0.23, 0.29, 1) }}
           className={classes.main}
         >
-          {children}
+          <Outlet />
         </motion.div>
       </div>
 

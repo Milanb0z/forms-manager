@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 
 import axios from "../../axios.default";
 
-import PageWrapper from "@hoc/PageWrapper";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 
 import classes from "./UserDetails.module.scss";
@@ -31,19 +30,17 @@ const UserDetails = () => {
   }, [username]);
 
   return (
-    <PageWrapper>
-      <div className={classes.content}>
-        {user ? (
-          <ProfileSection
-            username={user.username}
-            email={user.email}
-            createdForms={user.createdForms}
-          />
-        ) : (
-          <LoadingSpinner />
-        )}
-      </div>
-    </PageWrapper>
+    <div className={classes.content}>
+      {user ? (
+        <ProfileSection
+          username={user.username}
+          email={user.email}
+          createdForms={user.createdForms}
+        />
+      ) : (
+        <LoadingSpinner />
+      )}
+    </div>
   );
 };
 

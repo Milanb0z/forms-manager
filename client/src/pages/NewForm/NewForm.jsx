@@ -81,7 +81,7 @@ const questionTypes = [
 ];
 
 const NewForm = () => {
-  const [questions, setQuestions] = useState(null);
+  const [questions, setQuestions] = useState([]);
   const [heading, setHeading] = useInput("");
   const [description, setDescription] = useInput("");
   const [customLink, setCustomLink] = useInput("");
@@ -135,55 +135,53 @@ const NewForm = () => {
   };
 
   return (
-    <PageWrapper title="Create New Form" link="Form">
-      <DndProvider backend={HTML5Backend}>
-        <div className={classes.wrapper}>
-          <QuestionContainer
-            questions={questions}
-            onDropHandler={onDropHandler}
-            onDelete={onQuestionDelete}
-            onEdit={onTitleEdit}
-            onNewChoice={onNewChoice}
-            onChoiceEdit={onChoiceEdit}
-            onChoiceDelete={onChoiceDelete}
-            onSubmit={onFormSubmit}
+    <DndProvider backend={HTML5Backend}>
+      <div className={classes.wrapper}>
+        <QuestionContainer
+          questions={questions}
+          onDropHandler={onDropHandler}
+          onDelete={onQuestionDelete}
+          onEdit={onTitleEdit}
+          onNewChoice={onNewChoice}
+          onChoiceEdit={onChoiceEdit}
+          onChoiceDelete={onChoiceDelete}
+          onSubmit={onFormSubmit}
+        />
+        <div className={classes.info}>
+          <Input
+            label="Title"
+            value={heading}
+            onChange={setHeading}
+            placeholder="Title"
           />
-          <div className={classes.info}>
-            <Input
-              label="Title"
-              value={heading}
-              onChange={setHeading}
-              placeholder="Title"
-            />
-            <Input
-              label="Custom Link"
-              value={customLink}
-              onChange={setCustomLink}
-              placeholder="Custom Link"
-            />
-            <TextArea
-              label="Description"
-              value={description}
-              onChange={setDescription}
-              placeholder="Description"
-            />
+          <Input
+            label="Custom Link"
+            value={customLink}
+            onChange={setCustomLink}
+            placeholder="Custom Link"
+          />
+          <TextArea
+            label="Description"
+            value={description}
+            onChange={setDescription}
+            placeholder="Description"
+          />
 
-            <h3>Question Types</h3>
-            <div className={classes.question}>
-              {questionTypes.map(({ data, label, icon }) => (
-                <DraggableQuestion
-                  imgUrl={icon}
-                  onClickHandler={onDropHandler}
-                  data={data}
-                  label={label}
-                  key={label}
-                />
-              ))}
-            </div>
+          <h3>Question Types</h3>
+          <div className={classes.question}>
+            {questionTypes.map(({ data, label, icon }) => (
+              <DraggableQuestion
+                imgUrl={icon}
+                onClickHandler={onDropHandler}
+                data={data}
+                label={label}
+                key={label}
+              />
+            ))}
           </div>
         </div>
-      </DndProvider>
-    </PageWrapper>
+      </div>
+    </DndProvider>
   );
 };
 

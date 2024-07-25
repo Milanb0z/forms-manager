@@ -7,8 +7,8 @@ import Profile from "@assets/profile.svg";
 import classes from "./Sidenav.module.scss";
 
 const STATIC_LINKS = [
-  { id: "sd12", iconLink: GridIcon, url: "/" },
-  { id: "sd13", iconLink: Profile, url: "/me" },
+  { id: "sd12", iconLink: GridIcon, url: "/dashboard/" },
+  { id: "sd13", iconLink: Profile, url: "/dashboard/me" },
 ];
 
 const Sidenav = () => {

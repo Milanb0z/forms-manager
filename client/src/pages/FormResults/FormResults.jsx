@@ -29,24 +29,22 @@ const FormResults = () => {
     return <LoadingSpinner />;
   }
   return (
-    <PageWrapper>
-      <div className={classes.wrapper}>
-        <h2>Results</h2>
-        <div className={classes.row}>
-          {form.questions.map((que) => (
-            <div key={que._id} className={classes.question}>
-              <h5>{que.title}</h5>
-              {que.options.map((ans) => (
-                <p key={ans}>{ans}</p>
-              ))}
-            </div>
-          ))}
-          {results.map((result) => (
-            <ResultCard key={result._id} result={result} />
-          ))}
-        </div>
+    <div className={classes.wrapper}>
+      <h2>Results</h2>
+      <div className={classes.row}>
+        {form.questions.map((que) => (
+          <div key={que._id} className={classes.question}>
+            <h5>{que.title}</h5>
+            {que.options.map((ans) => (
+              <p key={ans}>{ans}</p>
+            ))}
+          </div>
+        ))}
+        {results.map((result) => (
+          <ResultCard key={result._id} result={result} />
+        ))}
       </div>
-    </PageWrapper>
+    </div>
   );
 };
 export default FormResults;

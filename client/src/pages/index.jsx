@@ -8,6 +8,7 @@ import FormResults from "@pages/FormResults/FormResults.jsx";
 import UserDetails from "@pages/UserDetails/UserDetails";
 import DragNDropForm from "@pages/DragNDropForm/DragNDropForm";
 import MainDashboard from "./MainDashboard/MainDashboard";
+import Landing from "./Landing/Landing";
 
 export {
   UserDetails,
@@ -20,4 +21,5 @@ export {
   SignUp,
   DragNDropForm,
   MainDashboard,
+  Landing,
 };

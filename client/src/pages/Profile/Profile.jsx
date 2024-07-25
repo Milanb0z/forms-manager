@@ -1,10 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
-import useInput from "@hooks/useInput";
 import { Button, Input } from "@ui";
 import { UserContext } from "@context/user.context";
-
-import PageWrapper from "@hoc/PageWrapper";
 
 import classes from "./Profile.module.scss";
 import { toast } from "react-toastify";
@@ -43,35 +40,33 @@ const Profile = () => {
   };
 
   return (
-    <PageWrapper title="Profile Settings">
-      <form onSubmit={onSubmitHandler}>
-        <div className={classes.content}>
-          <Input
-            onChange={onChangeHandler}
-            value={userData.username}
-            name="username"
-            label="Username"
-          />
-          <Input
-            onChange={onChangeHandler}
-            value={userData.email}
-            type="email"
-            name="email"
-            label="Email"
-          />
-          <Input
-            onChange={onChangeHandler}
-            value={userData.password}
-            name="password"
-            type="password"
-            label="Password"
-          />
-          <div className={classes.actions}>
-            <Button type="submit">Update</Button>
-          </div>
+    <form onSubmit={onSubmitHandler}>
+      <div className={classes.content}>
+        <Input
+          onChange={onChangeHandler}
+          value={userData.username}
+          name="username"
+          label="Username"
+        />
+        <Input
+          onChange={onChangeHandler}
+          value={userData.email}
+          type="email"
+          name="email"
+          label="Email"
+        />
+        <Input
+          onChange={onChangeHandler}
+          value={userData.password}
+          name="password"
+          type="password"
+          label="Password"
+        />
+        <div className={classes.actions}>
+          <Button type="submit">Update</Button>
         </div>
-      </form>
-    </PageWrapper>
+      </div>
+    </form>
   );
 };
 

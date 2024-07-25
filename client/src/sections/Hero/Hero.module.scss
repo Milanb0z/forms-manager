@@ -1,0 +1,117 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  background-color: #0b0d1c;
+  z-index: 0;
+
+  &::after,
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    filter: blur(117px);
+    opacity: 0.4;
+    z-index: -1;
+  }
+
+  &::before {
+    width: 30em;
+    height: 20em;
+    background-color: var(--color-green);
+    bottom: -20%;
+    left: 20%;
+  }
+
+  &::after {
+    width: 30em;
+    height: 10em;
+    background-color: var(--color-yellow);
+    top: -20%;
+    left: 40%;
+  }
+}
+.content {
+  max-width: 90em;
+  height: 100svh;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  gap: 2em;
+  align-items: center;
+
+  & > * {
+    flex: 1;
+  }
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+
+  h1 {
+    font-size: 4em;
+  }
+
+  p {
+    max-width: 50ch;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 1em;
+  margin: 1em 0;
+}
+
+.reviews {
+  display: flex;
+  gap: 1em;
+
+  &_stars {
+    display: flex;
+    gap: 1px;
+  }
+}
+
+.row {
+  display: flex;
+  gap: 0.4em;
+  align-items: baseline;
+}
+
+.profiles {
+  display: flex;
+  &_icon {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    background-color: var(--color-black-03);
+    display: grid;
+    place-content: center;
+    outline: 2px solid white;
+
+    &:not(&:last-child) {
+      margin-right: -1em;
+    }
+  }
+}
+
+.screen {
+  position: relative;
+
+  img {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    translate: 0 -50%;
+    border-radius: 1.1em;
+  }
+}

@@ -44,30 +44,28 @@ const ExploreForms = () => {
   }, []);
 
   return (
-    <PageWrapper title="Explore Forms">
-      <div className={classes.content}>
-        <Input placeholder="Search Froms" value={search} onChange={setSearch} />
-        <h2>Open Forms</h2>
-        <motion.div
-          variants={listAnimation}
-          initial="hidden"
-          animate="visible"
-          className={classes.row}
-        >
-          {forms
-            ? searchForm().map((form) => (
-                <FormCard
-                  key={form._id}
-                  id={form._id}
-                  name={form.name}
-                  description={form.description}
-                  timeCreated={form.createdAt}
-                />
-              ))
-            : null}
-        </motion.div>
-      </div>
-    </PageWrapper>
+    <div className={classes.content}>
+      <Input placeholder="Search Froms" value={search} onChange={setSearch} />
+      <h2>Open Forms</h2>
+      <motion.div
+        variants={listAnimation}
+        initial="hidden"
+        animate="visible"
+        className={classes.row}
+      >
+        {forms
+          ? searchForm().map((form) => (
+              <FormCard
+                key={form._id}
+                id={form._id}
+                name={form.name}
+                description={form.description}
+                timeCreated={form.createdAt}
+              />
+            ))
+          : null}
+      </motion.div>
+    </div>
   );
 };
 

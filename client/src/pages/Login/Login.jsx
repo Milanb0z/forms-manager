@@ -40,7 +40,7 @@ const Login = () => {
         toast.done("Logged In Succesfully");
         setIsLoading(false);
         setUser(res.data.user);
-        navigate("/form");
+        navigate("/dashboard");
       })
       .catch((err) => {
         setIsLoading(false);

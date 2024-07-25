@@ -15,6 +15,7 @@ import {
   SingleForm,
   UserDetails,
   MainDashboard,
+  Landing,
 } from "@pages";
 
 import ProtectedRoute from "@hoc/ProtectedRoute";
@@ -27,17 +28,7 @@ import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <ProtectedRoute>
-        <PageWrapper>
-          <MainDashboard />
-        </PageWrapper>
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/form",
-    element: <ExploreForms />,
+    element: <Landing />,
   },
   {
     path: "/form/id/:formId",
@@ -48,40 +39,51 @@ const router = createBrowserRouter([
     element: <SingleForm />,
   },
   {
-    path: "/form/edit/:formId",
-    element: <EditForm />,
-  },
-  {
-    path: "/form/new",
-    element: (
-      <ProtectedRoute>
-        <NewForm />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/me",
-    element: (
-      <ProtectedRoute>
-        <Profile />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/results/:formId",
-    element: <FormResults />,
-  },
-  {
-    path: "/user/:username",
-    element: <UserDetails />,
-  },
-  {
     path: "/login",
     element: <Login />,
   },
   {
     path: "/signup",
     element: <SignUp />,
+  },
+
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute>
+        <PageWrapper />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "",
+        element: <MainDashboard />,
+      },
+      {
+        path: "form",
+        element: <ExploreForms />,
+      },
+      {
+        path: "form/edit/:formId",
+        element: <EditForm />,
+      },
+      {
+        path: "results/:formId",
+        element: <FormResults />,
+      },
+      {
+        path: "user/:username",
+        element: <UserDetails />,
+      },
+      {
+        path: "form/new",
+        element: <NewForm />,
+      },
+      {
+        path: "me",
+        element: <Profile />,
+      },
+    ],
   },
 ]);
 

@@ -38,7 +38,7 @@ const Login = () => {
         localStorage.setItem("token", res.data.token);
         setUser(res.data.user);
         setIsLoading(false);
-        navigate("/form");
+        navigate("/dashboard");
       })
       .catch((err) => {
         setIsLoading(false);

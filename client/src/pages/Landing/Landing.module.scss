@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 4em;
+  gap: 5em;
   background-color: #fff;
 
   section {
@@ -9,4 +9,12 @@
     width: 100%;
     margin: 0 auto;
   }
+}
+
+.line {
+  max-width: 90em;
+  width: 100%;
+  margin: 0 auto;
+  height: 0.2em;
+  background-color: #f6f6f9;
 }

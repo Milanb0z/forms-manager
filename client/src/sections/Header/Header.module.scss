@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  gap: 2em;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.logo {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+
+  &_item {
+    padding: 0.5em 1em;
+  }
+}

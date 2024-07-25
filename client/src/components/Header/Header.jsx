@@ -29,11 +29,11 @@ const Header = ({ title, link }) => {
       <div className={classes.header_actions}>
         {user ? (
           <div className={classes.actions}>
-            <Link to="/form/new">
+            <Link to="/dashboard/form/new">
               <Button outline iconUrl={Add} />
             </Link>
 
-            <Link to="/form/new">
+            <Link to="/dashboard/form/new">
               <Button outline iconUrl={Profile} />
             </Link>
             <ProfileCard username={user.username} email={user.email} />

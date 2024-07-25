@@ -15,6 +15,7 @@ export default defineConfig({
       "@context": path.resolve(__dirname, "./src/context"),
       "@ui": path.resolve(__dirname, "./src/@ui"),
       "@utils": path.resolve(__dirname, "./src/utils"),
+      "@sections": path.resolve(__dirname, "./src/sections"),
     },
   },
   server: {

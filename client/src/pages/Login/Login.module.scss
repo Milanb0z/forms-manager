@@ -19,21 +19,14 @@
 .right {
   display: grid;
   place-content: center;
-}
-
-.side {
-  background-color: var(--color-black-02);
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  align-items: center;
-  justify-content: center;
+  flex: 1;
 }
 
 .modal {
   text-align: center;
   position: relative;
   overflow: hidden;
+  margin: 2em;
 }
 
 .form {

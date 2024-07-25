@@ -1,0 +1,35 @@
+.side {
+  flex: 1;
+  background-color: var(--color-black-02);
+  padding: 2em;
+  display: grid;
+  place-items: center;
+
+  &_item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  &_content {
+    width: 100%;
+    max-width: 35em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
+
+  &_heading {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    h1 {
+      font-size: 3.2em;
+    }
+
+    img {
+      height: 100%;
+    }
+  }
+}

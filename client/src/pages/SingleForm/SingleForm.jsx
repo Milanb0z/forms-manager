@@ -166,9 +166,10 @@ const SingleForm = ({ byId = false }) => {
   };
 
   const submitForm = () => {
-    console.log("Submit");
-
-    console.log(answers);
+    const submitData = { response: answers };
+    axios.post(`/response/${form._id}`, submitData).then((res) => {
+      console.log(res);
+    });
   };
 
   const toggleInfo = () => {

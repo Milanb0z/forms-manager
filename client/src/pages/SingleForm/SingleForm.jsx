@@ -8,6 +8,9 @@ import axios from "../../axios.default";
 
 import classes from "./SingleForm.module.scss";
 import getAnsSchema from "@utils/getAnsSchema";
+import QUESTION_TYPES from "@utils/questionTypes";
+import { Input } from "@ui";
+import { TextArea } from "@ui";
 
 const questionVars = {
   initial: {
@@ -35,6 +38,72 @@ const answerVars = {
   },
 };
 
+const SingleAnswer = ({
+  options,
+  type,
+  answer,
+  onTypingHandler,
+  onChoiceSelect,
+  index,
+}) => {
+  let content = null;
+
+  switch (type) {
+    case QUESTION_TYPES.MULTIPLE:
+      content = options.map((ans) => (
+        <p
+          className={
+            answer.find((opt) => opt === ans) ? classes.answers_checked : ""
+          }
+          key={ans}
+          onClick={onChoiceSelect.bind(this, index, ans, false)}
+        >
+          {ans}
+        </p>
+      ));
+      break;
+
+    case QUESTION_TYPES.RADIO:
+      content = options.map((ans, i) => (
+        <p
+          key={ans}
+          className={
+            answer.find((opt) => opt === ans) ? classes.answers_checked : ""
+          }
+          onClick={onChoiceSelect.bind(this, index, ans, true)}
+        >
+          {ans}
+        </p>
+      ));
+      break;
+
+    case QUESTION_TYPES.SHORT:
+      content = (
+        <Input
+          placeholder="Enter Your Answer Here"
+          value={answer}
+          onChange={(e) => onTypingHandler(index, e)}
+        />
+      );
+      break;
+    case QUESTION_TYPES.PARAGRAPH:
+      content = (
+        <TextArea
+          placeholder="Enter Your Answer Here"
+          value={answer}
+          onChange={(e) => onTypingHandler(index, e)}
+        />
+      );
+      break;
+
+    default:
+      content = "";
+      break;
+  }
+
+  return <div className={classes.answers}>{content}</div>;
+};
+
 const SingleForm = ({ byId = false }) => {
   const { formId } = useParams();
   const [index, setIndex] = useState(0);
@@ -44,12 +113,10 @@ const SingleForm = ({ byId = false }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log("Runn");
     setIsLoading(true);
     axios
       .get(`/form/${byId ? "id/" : ""}${formId}`)
       .then((res) => {
-        console.log(res.data);
         setForm(res.data);
         setAnswers(getAnsSchema(res.data.questions));
         setIsLoading(false);
@@ -64,19 +131,25 @@ const SingleForm = ({ byId = false }) => {
   const onTypingHandler = (queIndex, { target: { value } }) => {
     let newAns = [...answers];
     newAns[queIndex].data = value;
+    console.log(value);
+    console.log(queIndex);
     setAnswers(newAns);
   };
 
-  const onChoiceSelected = (queIndex, value, radio = false) => {
+  const onChoiceSelected = (queIndex, value, radio) => {
     let newAns = [...answers];
 
     const index = newAns[queIndex].data.indexOf(value);
-    if (index) {
+    console.log(index);
+    if (index >= 0) {
       newAns[queIndex].data.splice(index, 1);
     } else {
+      console.log("else");
+      console.log(radio);
       if (radio) {
         newAns[queIndex].data = [value];
       } else {
+        console.log("Pushing");
         newAns[queIndex].data.push(value);
       }
     }
@@ -94,6 +167,8 @@ const SingleForm = ({ byId = false }) => {
 
   const submitForm = () => {
     console.log("Submit");
+
+    console.log(answers);
   };
 
   const toggleInfo = () => {
@@ -101,7 +176,6 @@ const SingleForm = ({ byId = false }) => {
   };
 
   if (form.questions) {
-    console.log(form);
     return (
       <div className={classes.wrapper}>
         <motion.div
@@ -137,15 +211,14 @@ const SingleForm = ({ byId = false }) => {
                   {form.questions[index].title}
                 </h2>
                 <div className={classes.answers}>
-                  {form.questions[index].options.map((ans, index) => (
-                    <motion.p
-                      variants={answerVars}
-                      key={index}
-                      className={classes.answers_text}
-                    >
-                      {ans}
-                    </motion.p>
-                  ))}
+                  <SingleAnswer
+                    index={index}
+                    answer={answers[index].data}
+                    onChoiceSelect={onChoiceSelected}
+                    onTypingHandler={onTypingHandler}
+                    type={form.questions[index].type}
+                    options={form.questions[index].options}
+                  />
                 </div>
               </motion.div>
             </AnimatePresence>

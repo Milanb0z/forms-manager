@@ -15,9 +15,8 @@ const TextArea = ({ name, value, label, ...inputProps }) => {
         {...inputProps}
         rows="4"
         cols="50"
-      >
-        {value}
-      </textarea>
+        value={value}
+      ></textarea>
     </div>
   );
 };

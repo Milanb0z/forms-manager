@@ -1,10 +1,4 @@
-const QUESTION_TYPES = {
-  MULTIPLE: "MULTIPLE",
-  RADIO: "RADIO",
-  UPLOAD: "UPLOAD",
-  SHORT: "SHORT",
-  PARAGRAPH: "PARAGRAPH",
-};
+import QUESTION_TYPES from "./questionTypes";
 
 const getAnsSchema = (questions) => {
   console.log([...questions]);

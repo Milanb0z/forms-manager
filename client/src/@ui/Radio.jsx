@@ -6,7 +6,7 @@ const Radio = ({ children, ...radioProps }) => {
   return (
     <label className={classes.radio}>
       {children}
-      <input {...radioProps} type="radio" />
+      <input {...radioProps} type={radioProps.type || "radio"} />
       <span className={classes.checkmark}></span>
     </label>
   );

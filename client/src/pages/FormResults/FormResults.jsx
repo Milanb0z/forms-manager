@@ -29,11 +29,15 @@ const FormResults = () => {
   return (
     <div className={classes.wrapper}>
       <h2>Results</h2>
-      <div className={classes.row}>
-        {results.map((result) => (
-          <ResultCard key={result._id} form={form} result={result} />
-        ))}
-      </div>
+      {results.length > 0 ? (
+        <div className={classes.row}>
+          {results.map((result) => (
+            <ResultCard key={result._id} form={form} result={result} />
+          ))}
+        </div>
+      ) : (
+        <p>No Responses</p>
+      )}
     </div>
   );
 };

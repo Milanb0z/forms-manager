@@ -40,8 +40,8 @@ const Profile = () => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
-      <div className={classes.content}>
+    <form className={classes.content} onSubmit={onSubmitHandler}>
+      <div className={classes.content_main}>
         <Input
           onChange={onChangeHandler}
           value={userData.username}

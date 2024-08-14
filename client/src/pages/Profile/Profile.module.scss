@@ -1,5 +1,19 @@
 .content {
+  flex: 1;
   display: flex;
   flex-direction: column;
+
   gap: 1em;
+
+  &_main {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    flex: 1;
+  }
+}
+
+.actions {
+  margin-top: auto;
+  align-self: flex-end;
 }

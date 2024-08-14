@@ -23,8 +23,6 @@ const FormResults = () => {
     });
   }, [formId]);
 
-  console.log(form);
-
   if (!form || !results) {
     return <LoadingSpinner />;
   }
@@ -32,16 +30,8 @@ const FormResults = () => {
     <div className={classes.wrapper}>
       <h2>Results</h2>
       <div className={classes.row}>
-        {form.questions.map((que) => (
-          <div key={que._id} className={classes.question}>
-            <h5>{que.title}</h5>
-            {que.options.map((ans) => (
-              <p key={ans}>{ans}</p>
-            ))}
-          </div>
-        ))}
         {results.map((result) => (
-          <ResultCard key={result._id} result={result} />
+          <ResultCard key={result._id} form={form} result={result} />
         ))}
       </div>
     </div>

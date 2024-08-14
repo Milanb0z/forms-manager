@@ -131,8 +131,7 @@ const SingleForm = ({ byId = false }) => {
   const onTypingHandler = (queIndex, { target: { value } }) => {
     let newAns = [...answers];
     newAns[queIndex].data = value;
-    console.log(value);
-    console.log(queIndex);
+    console.log(newAns);
     setAnswers(newAns);
   };
 
@@ -140,16 +139,12 @@ const SingleForm = ({ byId = false }) => {
     let newAns = [...answers];
 
     const index = newAns[queIndex].data.indexOf(value);
-    console.log(index);
     if (index >= 0) {
       newAns[queIndex].data.splice(index, 1);
     } else {
-      console.log("else");
-      console.log(radio);
       if (radio) {
         newAns[queIndex].data = [value];
       } else {
-        console.log("Pushing");
         newAns[queIndex].data.push(value);
       }
     }
@@ -166,6 +161,7 @@ const SingleForm = ({ byId = false }) => {
   };
 
   const submitForm = () => {
+    console.log(answers);
     const submitData = { response: answers };
     axios.post(`/response/${form._id}`, submitData).then((res) => {
       console.log(res);

@@ -56,7 +56,6 @@ router.get("/id/:formId", async (req, res) => {
       return res.status(404).send({ error: "From Not Found" });
     }
 
-    console.log(fetchedForm);
     res.send(fetchedForm);
   } catch (error) {
     console.log({ error });
@@ -76,8 +75,6 @@ router.get("/:formId", async (req, res) => {
       return res.status(404).send({ error: "From Not Found" });
     }
 
-    console.log(fetchedForm);
-
     res.send(fetchedForm);
   } catch (error) {
     console.log({ error });
@@ -89,7 +86,9 @@ router.get("/:formId", async (req, res) => {
 router.put("/:formId", auth, async (req, res) => {
   try {
     const { formId } = req.params;
-    const { name, description, customLink } = req.body;
+    const { name, description, customLink, isOpen } = req.body;
+
+    console.log(isOpen);
 
     const updateFrom = await Form.findByIdAndUpdate(
       formId,
@@ -97,9 +96,12 @@ router.put("/:formId", auth, async (req, res) => {
         name,
         description,
         customLink,
+        isOpen,
       },
       { new: true }
     );
+
+    console.log(updateFrom);
 
     res.send(updateFrom);
   } catch (error) {

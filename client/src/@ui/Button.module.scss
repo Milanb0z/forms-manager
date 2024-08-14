@@ -23,6 +23,11 @@
   }
 }
 
+.danger {
+  background-color: var(--color-red);
+  color: #fff;
+}
+
 .outline {
   background-color: var(--color-black-01);
   border: 2px solid var(--color-black-03);

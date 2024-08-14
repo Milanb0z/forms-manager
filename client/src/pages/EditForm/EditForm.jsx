@@ -1,21 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import { Button, Input } from "@ui";
-
-import useInput from "@hooks/useInput";
-import PageWrapper from "@hoc/PageWrapper";
+import { Button, Input, Radio } from "@ui";
 
 import axios from "../../axios.default";
 
 import classes from "./EditForm.module.scss";
+import { Link } from "react-router-dom";
 
 const EditForm = () => {
   const { formId } = useParams();
-
-  const [heading, setHeading] = useInput("");
-  const [description, setDescription] = useInput("");
-  const [customLink, setCustomLink] = useInput("");
 
   const [form, setForm] = useState(null);
 
@@ -25,13 +19,29 @@ const EditForm = () => {
     });
   }, [formId]);
 
+  const onChangeHandler = (e) => {
+    const { value, name } = e.target;
+
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  };
+
+  const onCheckHandler = () => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      isOpen: !prevForm.isOpen,
+    }));
+  };
+
   const onFormSubmit = (e) => {
     let token = localStorage.getItem("token");
-    const { name, description } = form;
+    const { name, description, customLink, isOpen } = form;
     axios
       .put(
         `/form/${formId}`,
-        { name, description, customLink },
+        { name, description, customLink, isOpen },
         { headers: { token } }
       )
       .then((res) => {
@@ -41,40 +51,45 @@ const EditForm = () => {
         console.error(err);
       });
   };
-
-  return (
-    <PageWrapper title="Edit Form">
+  if (form)
+    return (
       <div className={classes.content}>
-        <div className={classes.form}>
-          <div className={classes.form_main}>
-            <Input
-              label="Title"
-              value={heading}
-              onChange={setHeading}
-              placeholder="Title"
-            />
-            <Input
-              label="Description"
-              value={description}
-              onChange={setDescription}
-              placeholder="Description"
-            />
+        <div className={classes.content_main}>
+          <Input
+            label="Title"
+            name="name"
+            value={form.name}
+            onChange={onChangeHandler}
+            placeholder="Title"
+          />
+          <Input
+            name="description"
+            label="Description"
+            value={form.description}
+            onChange={onChangeHandler}
+            placeholder="Description"
+          />
 
-            <Input
-              label="Custom Link"
-              value={customLink}
-              onChange={setCustomLink}
-              placeholder="Custom Link"
-            />
-          </div>
-
-          <div className={classes.form_actions}>
-            <Button onClick={onFormSubmit}>Save Form</Button>
-          </div>
+          <Input
+            name="customLink"
+            label="Custom Link"
+            value={form.customLink}
+            onChange={onChangeHandler}
+            placeholder="Custom Link"
+          />
+          <Radio onClick={onCheckHandler} checked={form.isOpen}>
+            Is Active
+          </Radio>
+        </div>
+        <div className={classes.actions}>
+          <Link to={`/dashboard/results/${formId}`}>
+            <Button outline>Results</Button>
+          </Link>
+          <Button danger>Reject Changes</Button>
+          <Button onChange={onFormSubmit}>Save Changes</Button>
         </div>
       </div>
-    </PageWrapper>
-  );
+    );
 };
 
 export default EditForm;

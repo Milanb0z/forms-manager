@@ -13,8 +13,16 @@
 
 .line {
   max-width: 90em;
-  width: 100%;
+  width: calc(100% - 4em);
   margin: 0 auto;
   height: 0.2em;
   background-color: #f6f6f9;
+}
+
+@media screen and (max-width: 90em) {
+  .wrapper {
+    section {
+      padding: 0 2em;
+    }
+  }
 }

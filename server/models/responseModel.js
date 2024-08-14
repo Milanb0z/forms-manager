@@ -11,6 +11,7 @@ const responseSchema = new mongoose.Schema(
       {
         questionId: String,
         optionValue: String,
+        data: [mongoose.Schema.Types.Mixed],
       },
     ],
   },

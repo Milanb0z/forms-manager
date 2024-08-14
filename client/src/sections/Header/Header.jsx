@@ -2,9 +2,10 @@ import React from "react";
 
 import classes from "./Header.module.scss";
 import { Button } from "@ui";
+import { Link } from "react-router-dom";
 
 const LINKS = [
-  { title: "Home", href: "/" },
+  { title: "Home", href: "/login" },
   { title: "About", href: "/about" },
   { title: "Author", href: "/author" },
   { title: "Home", href: "/" },
@@ -24,7 +25,9 @@ const Header = () => {
             {item.title}
           </li>
         ))}
-        <Button>Login</Button>
+        <Link to="/login">
+          <Button>Login</Button>
+        </Link>
       </ul>
     </header>
   );

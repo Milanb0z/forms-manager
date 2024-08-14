@@ -12,6 +12,8 @@ router.post("/:formId", async (req, res) => {
 
     await newResponse.save();
 
+    console.log(newResponse);
+
     res.send(newResponse);
   } catch (error) {
     console.log({ error });
@@ -34,7 +36,7 @@ router.get("/:formId", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const allResponses = await Response.find().populate("formId");
+    const allResponses = await Response.find();
 
     if (!allResponses) {
       return res.status(404).send({ error: "No Response Found" });

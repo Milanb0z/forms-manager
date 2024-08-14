@@ -1,8 +1,6 @@
 .grid {
   gap: 1em;
   flex: 1;
-  overflow: hidden;
-
   display: grid;
 
   grid-template-columns: repeat(5, 1fr);

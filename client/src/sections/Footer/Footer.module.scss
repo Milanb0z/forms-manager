@@ -1,0 +1,37 @@
+.wrapper {
+  padding: 5em 0;
+  background-color: #0b0d1c;
+}
+
+.footer {
+  display: flex;
+  gap: 2em;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  p {
+    max-width: 35ch;
+    color: #f6f6f6;
+  }
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  li:first-child {
+    font-weight: bold;
+    font-size: 1.125em;
+  }
+}

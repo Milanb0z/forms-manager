@@ -36,6 +36,7 @@ const formSchema = new mongoose.Schema(
   {
     customLink: {
       type: String,
+      default: "",
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,

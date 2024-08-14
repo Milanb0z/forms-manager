@@ -4,17 +4,19 @@ import { Card } from "@ui";
 
 import classes from "./ResultCard.module.scss";
 
-const ResultCard = ({ result }) => {
+const ResultCard = ({ result, form }) => {
+  console.log(result);
+  console.log(form);
   return (
     <Card className={classes.card}>
       <h3>{result.formId.name}</h3>
       <div className={classes.list}>
-        {result.formId.questions.map((question, index) => (
+        {result.response.map((question, index) => (
           <div key={question._id}>
             <b>
-              <p>{question.questionText}</p>
+              <p>{form.questions[index].title}</p>
             </b>
-            <p>- {result.response[index].optionValue}</p>
+            <p>- {question.data.join(", ")}</p>
           </div>
         ))}
       </div>

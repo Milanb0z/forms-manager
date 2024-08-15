@@ -100,3 +100,9 @@ p {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-green);
 }
+
+@media screen and (max-width: 50em) {
+  body {
+    font-size: 1.2rem;
+  }
+}

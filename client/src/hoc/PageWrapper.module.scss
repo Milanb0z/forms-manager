@@ -19,3 +19,20 @@
   display: flex;
   overflow: hidden;
 }
+
+@media screen and (max-width: 65em) {
+  .content {
+    overflow: auto;
+  }
+}
+
+@media screen and (max-width: 35em) {
+  .wrapper {
+    flex-direction: column-reverse;
+  }
+
+  .content {
+    gap: 1em;
+    padding: 2em 1em;
+  }
+}

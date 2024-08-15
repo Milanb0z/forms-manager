@@ -54,3 +54,10 @@
     margin-right: 0.5em;
   }
 }
+
+@media screen and (max-width: 65em) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+  }
+}

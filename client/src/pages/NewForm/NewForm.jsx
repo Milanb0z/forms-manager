@@ -5,7 +5,6 @@ import axios from "../../axios.default";
 import { Input } from "@ui";
 
 import useInput from "@hooks/useInput";
-import PageWrapper from "@hoc/PageWrapper";
 
 import classes from "./NewForm.module.scss";
 import { TextArea } from "@ui";

@@ -18,17 +18,10 @@
 }
 
 .right {
-  display: grid;
-  place-content: center;
-}
-
-.side {
-  background-color: var(--color-black-02);
   display: flex;
-  flex-direction: column;
-  gap: 1em;
   align-items: center;
   justify-content: center;
+  padding: 2em;
 }
 
 .modal {
@@ -44,5 +37,14 @@
 
   p {
     align-self: flex-start;
+  }
+}
+
+@media screen and (max-width: 35em) {
+  .modal {
+    width: 100%;
+  }
+  .form {
+    width: auto;
   }
 }

@@ -52,56 +52,53 @@ const Login = () => {
     <section className={classes.login}>
       <InfoSide />
 
-      <div className={classes.right}>
-        <ToastContainer theme="dark" position="bottom-center" />
-
-        <motion.div
-          variants={modelVariants}
-          initial="initial"
-          animate="animate"
-        >
-          <Card className={classes.modal}>
-            <AnimatePresence>
-              {isLoading && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className={classes.loading}
-                >
-                  <LoadingSpinner />
-                </motion.div>
-              )}
-            </AnimatePresence>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit} className={classes.form}>
-              <Input
-                label="Email"
-                placeholder="email"
-                type="email"
-                value={email}
-                onChange={setEmail}
-              />
-              <Input
-                label="Password"
-                placeholder="password"
-                type="password"
-                value={password}
-                onChange={setPassword}
-              />
-              <p>
-                Don't have account?{" "}
-                <Link to="/signup">
-                  <span>SignUp Here</span>
-                </Link>
-              </p>
-              <Button disabled={!email || !password} type="submit">
-                Login
-              </Button>
-            </form>
-          </Card>
-        </motion.div>
-      </div>
+      <motion.div
+        variants={modelVariants}
+        initial="initial"
+        animate="animate"
+        className={classes.right}
+      >
+        <Card className={classes.modal}>
+          <AnimatePresence>
+            {isLoading && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className={classes.loading}
+              >
+                <LoadingSpinner />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <h2>Login</h2>
+          <form onSubmit={handleSubmit} className={classes.form}>
+            <Input
+              label="Email"
+              placeholder="email"
+              type="email"
+              value={email}
+              onChange={setEmail}
+            />
+            <Input
+              label="Password"
+              placeholder="password"
+              type="password"
+              value={password}
+              onChange={setPassword}
+            />
+            <p>
+              Don't have account?{" "}
+              <Link to="/signup">
+                <span>SignUp Here</span>
+              </Link>
+            </p>
+            <Button disabled={!email || !password} type="submit">
+              Login
+            </Button>
+          </form>
+        </Card>
+      </motion.div>
     </section>
   );
 };

@@ -54,3 +54,24 @@
     height: 1.125em;
   }
 }
+
+@media screen and (max-width: 35em) {
+  .nav {
+    flex-direction: row;
+    justify-content: center;
+    padding: 1em;
+  }
+
+  .toggle {
+    display: none;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .links {
+    align-items: center;
+    flex-direction: row;
+  }
+}

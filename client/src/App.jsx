@@ -16,6 +16,7 @@ import {
   UserDetails,
   MainDashboard,
   Landing,
+  NotFoundPage,
 } from "@pages";
 
 import ProtectedRoute from "@hoc/ProtectedRoute";
@@ -30,14 +31,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Landing />,
   },
-  {
-    path: "/form/id/:formId",
-    element: <SingleForm byId />,
-  },
-  {
-    path: "/form/:formId",
-    element: <SingleForm />,
-  },
+
   {
     path: "/login",
     element: <Login />,
@@ -45,6 +39,15 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+
+  {
+    path: "/form/id/:formId",
+    element: <SingleForm byId />,
+  },
+  {
+    path: "/form/:formId",
+    element: <SingleForm />,
   },
 
   {
@@ -64,6 +67,10 @@ const router = createBrowserRouter([
         element: <ExploreForms />,
       },
       {
+        path: "form/new",
+        element: <NewForm />,
+      },
+      {
         path: "form/edit/:formId",
         element: <EditForm />,
       },
@@ -75,15 +82,17 @@ const router = createBrowserRouter([
         path: "user/:username",
         element: <UserDetails />,
       },
-      {
-        path: "form/new",
-        element: <NewForm />,
-      },
+
       {
         path: "me",
         element: <Profile />,
       },
     ],
+  },
+
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 

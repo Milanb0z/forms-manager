@@ -9,6 +9,7 @@ import UserDetails from "@pages/UserDetails/UserDetails";
 import DragNDropForm from "@pages/DragNDropForm/DragNDropForm";
 import MainDashboard from "./MainDashboard/MainDashboard";
 import Landing from "./Landing/Landing";
+import NotFoundPage from "./404Page/404Page";
 
 export {
   UserDetails,
@@ -22,4 +23,5 @@ export {
   DragNDropForm,
   MainDashboard,
   Landing,
+  NotFoundPage,
 };

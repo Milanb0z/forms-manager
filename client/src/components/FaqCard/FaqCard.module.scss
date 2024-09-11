@@ -1,0 +1,41 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow: hidden;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--color-black-03);
+  }
+
+  p {
+    color: var(--color-black-01);
+    max-width: 100ch;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 2em;
+
+  h4 {
+    font-size: 1.75em;
+    color: var(--color-black-02);
+  }
+}
+
+.btn {
+  width: 3em;
+  height: 3em;
+  display: grid;
+  place-content: center;
+}
+
+.answer {
+  padding: 1em 2em;
+  text-align: left;
+}

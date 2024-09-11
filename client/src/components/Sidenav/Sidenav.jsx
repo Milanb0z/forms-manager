@@ -9,6 +9,7 @@ import classes from "./Sidenav.module.scss";
 const STATIC_LINKS = [
   { id: "sd12", iconLink: GridIcon, url: "/dashboard/" },
   { id: "sd13", iconLink: Profile, url: "/dashboard/me" },
+  { id: "sd13", iconLink: Profile, url: "/dashboard/invite" },
 ];
 
 const Sidenav = () => {

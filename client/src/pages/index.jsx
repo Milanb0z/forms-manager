@@ -10,8 +10,10 @@ import DragNDropForm from "@pages/DragNDropForm/DragNDropForm";
 import MainDashboard from "./MainDashboard/MainDashboard";
 import Landing from "./Landing/Landing";
 import NotFoundPage from "./404Page/404Page";
+import Invite from "./Invite/Invite";
 
 export {
+  Invite,
   UserDetails,
   ExploreForms,
   SingleForm,

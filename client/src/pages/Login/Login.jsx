@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { toast, ToastContainer } from "react-toastify";
-
+import { useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import axios from "../../axios.default";
@@ -12,7 +11,6 @@ import classes from "./Login.module.scss";
 
 import { Button, Card, Input } from "@ui";
 import useInput from "@hooks/useInput";
-import { Link } from "react-router-dom";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import InfoSide from "@components/InfoSide/InfoSide";
 
@@ -37,14 +35,12 @@ const Login = () => {
       .post("/user/login", { email, password })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        toast.done("Logged In Succesfully");
         setIsLoading(false);
         setUser(res.data.user);
         navigate("/dashboard");
       })
       .catch((err) => {
         setIsLoading(false);
-        toast.error(err.response.data.error);
       });
   };
 

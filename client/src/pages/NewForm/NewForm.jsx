@@ -18,6 +18,7 @@ import DraggableQuestion from "@components/DraggableQuestion/DraggableQuestion";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import QuestionContainer from "@components/QuestionContainer/QuestionContainer";
+import { Button } from "@ui";
 
 const QUESTION_TYPES = {
   MULTIPLE: "MULTIPLE",
@@ -84,11 +85,16 @@ const NewForm = () => {
   const [heading, setHeading] = useInput("");
   const [description, setDescription] = useInput("");
   const [customLink, setCustomLink] = useInput("");
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const onQuestionDelete = (index) => {
     const newQuestions = [...questions];
     newQuestions.splice(index, 1);
     setQuestions(newQuestions);
+  };
+
+  const toggleDrawer = () => {
+    setOpenDrawer((p) => !p);
   };
 
   const onTitleEdit = ({ target: { value } }, index) => {
@@ -120,7 +126,8 @@ const NewForm = () => {
     newQuestions[questionIndex].options.splice(optionIndex, 1);
     setQuestions(newQuestions);
   };
-  const onFormSubmit = () => {
+  const onFormSubmit = (e) => {
+    e.preventDefault();
     let formSubmitData = { name: heading, description, customLink, questions };
     let token = localStorage.getItem("token");
     axios
@@ -146,7 +153,15 @@ const NewForm = () => {
           onChoiceDelete={onChoiceDelete}
           onSubmit={onFormSubmit}
         />
-        <div className={classes.info}>
+        <div className={classes.mobile}>
+          <Button onClick={toggleDrawer}>Add Question</Button>
+        </div>
+        <div
+          className={`${classes.info} ${openDrawer ? classes.info_open : ""}`}
+        >
+          <div className={classes.mobile}>
+            <Button onClick={toggleDrawer}>Open</Button>
+          </div>
           <Input
             label="Title"
             value={heading}

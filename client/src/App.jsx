@@ -6,6 +6,7 @@ import { UserContext } from "@context/user.context";
 
 // Pages
 import {
+  Invite,
   EditForm,
   ExploreForms,
   FormResults,
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <MainDashboard />,
+      },
+      {
+        path: "invite",
+        element: <Invite />,
       },
       {
         path: "form",

@@ -31,7 +31,10 @@ router.post("/signup", async (req, res) => {
 router.get("/profile", auth, async (req, res) => {
   try {
     const user = req.user.populate("createdForms");
-    res.send({ user });
+
+    let token = generateToken(res, user._id);
+
+    res.send({ user, token });
   } catch (error) {
     console.log(error);
     res.status(500).send({ error });

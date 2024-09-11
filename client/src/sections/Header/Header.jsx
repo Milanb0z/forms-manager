@@ -8,7 +8,7 @@ const LINKS = [
   { title: "Home", href: "/login" },
   { title: "About", href: "/about" },
   { title: "Author", href: "/author" },
-  { title: "Home", href: "/" },
+  { title: "Home", href: "/dashboard" },
 ];
 
 const Header = () => {
@@ -21,9 +21,9 @@ const Header = () => {
 
       <ul className={classes.links}>
         {LINKS.map((item) => (
-          <li key={item.title} className={classes.links_item}>
-            {item.title}
-          </li>
+          <Link key={item.title} to={item.href}>
+            <li className={classes.links_item}>{item.title}</li>
+          </Link>
         ))}
         <Link to="/login">
           <Button>Login</Button>

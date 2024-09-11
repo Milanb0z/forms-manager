@@ -7,6 +7,9 @@ import AuthorSection from "@sections/Author/Author";
 import AboutSection from "@sections/About/About";
 
 import Footer from "@sections/Footer/Footer";
+import Reviews from "@sections/Reviews/Reviews";
+import FAQSection from "@sections/FAQ/FAQ";
+import Promo from "@sections/Promo/Promo";
 
 const Landing = () => {
   return (
@@ -17,7 +20,9 @@ const Landing = () => {
       <AboutSection />
       <AuthorSection />
       <div className={classes.line}></div>
-
+      <Reviews />
+      <FAQSection />
+      <Promo />
       <Footer />
     </div>
   );

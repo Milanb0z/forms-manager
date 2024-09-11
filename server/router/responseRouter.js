@@ -1,6 +1,5 @@
 const router = require("express").Router();
 
-const { Form } = require("../models/formModel");
 const { Response } = require("../models/responseModel");
 
 router.post("/:formId", async (req, res) => {

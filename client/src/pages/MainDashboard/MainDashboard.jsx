@@ -1,13 +1,24 @@
-import React, { useContext } from "react";
-import classes from "./MainDashboard.module.scss";
-import { Card } from "@ui";
-import { UserContext } from "@context/user.context";
-import { Button } from "@ui";
+import { useContext, PureComponent } from "react";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+
+import {
+  BarChart,
+  Bar,
+  Rectangle,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+
+import { Card, Button } from "@ui";
+import { UserContext } from "@context/user.context";
+
+import classes from "./MainDashboard.module.scss";
 
 const SurveysCard = ({ forms }) => {
-  console.log(forms);
   return (
     <Card>
       <h5>Created Surveys</h5>
@@ -26,7 +37,7 @@ const SurveysCard = ({ forms }) => {
       ) : (
         <div className={classes.noForm}>
           <p>No Forms found</p>
-          <Link to="/form/new">
+          <Link to="/dashboard/form/new">
             <Button>Create Form</Button>
           </Link>
         </div>
@@ -34,6 +45,51 @@ const SurveysCard = ({ forms }) => {
     </Card>
   );
 };
+
+const data = [
+  {
+    name: "1.2",
+    uv: 4,
+    pv: 2,
+    amt: 1,
+  },
+  {
+    name: "1.2",
+    uv: 3,
+    pv: 1,
+    amt: 2,
+  },
+  {
+    name: "1.2",
+    uv: 2,
+    pv: 2,
+    amt: 4,
+  },
+  {
+    name: "1.2",
+    uv: 2,
+    pv: 3,
+    amt: 2,
+  },
+  {
+    name: "1.2",
+    uv: 1,
+    pv: 2,
+    amt: 1,
+  },
+  {
+    name: "1.2",
+    uv: 2,
+    pv: 3,
+    amt: 5,
+  },
+  {
+    name: "1.2",
+    uv: 2,
+    pv: 4,
+    amt: 4,
+  },
+];
 
 const ResultsCard = ({ forms }) => {
   return (
@@ -54,11 +110,45 @@ const ResultsCard = ({ forms }) => {
       ) : (
         <div className={classes.noForm}>
           <p>No Forms found</p>
-          <Link to="/form/new">
+          <Link to="/dashboard/form/new">
             <Button>Create Form</Button>
           </Link>
         </div>
       )}
+    </Card>
+  );
+};
+
+const SolvedChart = () => {
+  return (
+    <Card className={classes.charts}>
+      <h3>Forms Activitiy</h3>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={data}>
+          <CartesianGrid strokeDasharray="5 5 2" />
+
+          <Tooltip
+            labelClassName={classes.label}
+            wrapperClassName={classes.tooltip}
+          />
+          <Legend />
+          <Bar
+            dataKey="amt"
+            fill="#8884d8"
+            activeBar={<Rectangle fill="pink" stroke="blue" />}
+          />
+          <Bar
+            dataKey="pv"
+            fill="#8884d8"
+            activeBar={<Rectangle fill="pink" stroke="blue" />}
+          />
+          <Bar
+            dataKey="uv"
+            fill="#82ca9d"
+            activeBar={<Rectangle fill="gold" stroke="purple" />}
+          />
+        </BarChart>
+      </ResponsiveContainer>
     </Card>
   );
 };
@@ -68,9 +158,7 @@ const MainDashboard = () => {
 
   return (
     <div className={classes.grid}>
-      <Card>
-        <h5>Lorem ipsum dolor sit.</h5>
-      </Card>
+      <SolvedChart />
       <ResultsCard />
       <Card />
       <SurveysCard forms={user.createdForms} />

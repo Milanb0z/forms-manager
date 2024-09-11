@@ -20,6 +20,10 @@
   gap: 1em;
 }
 
+.mobile {
+  display: none;
+}
+
 .question {
   flex: 1;
   display: grid;
@@ -35,4 +39,30 @@
 }
 
 @media screen and (max-width: 75em) {
+  .mobile {
+    display: block;
+    flex: unset;
+  }
+  .wrapper {
+    flex-direction: column;
+    overflow: hidden;
+
+    position: relative;
+  }
+
+  .info {
+    &_open {
+      translate: 0 0%;
+    }
+
+    translate: 0 100%;
+    transition: translate 0.3s ease;
+    position: absolute;
+    background-color: var(--color-black-03);
+    border-radius: 1em 1em 0 0;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    padding: 4em 2em;
+  }
 }

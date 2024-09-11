@@ -1,0 +1,57 @@
+.reviews {
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+}
+
+.heading {
+  display: flex;
+  gap: 1em;
+  align-items: flex-end;
+  h2 {
+    font-size: 3.5em;
+    color: var(--color-black-01);
+  }
+}
+
+.row {
+  display: flex;
+  gap: 3.5em;
+}
+
+.card {
+  &:first-child {
+    background-color: #b3fc6a;
+  }
+  border-radius: 1em;
+  border: 2px solid;
+  background-color: #f6f6f9;
+  color: var(--color-black-01);
+  padding: 2.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+
+  h3 {
+    color: inherit;
+    font-size: 1.75em;
+  }
+
+  p {
+    color: inherit;
+  }
+
+  hr {
+    border: 1px solid var(--color-black-01);
+  }
+}
+
+.rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    font-size: 1.25em;
+  }
+}

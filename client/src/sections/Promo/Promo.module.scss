@@ -1,0 +1,16 @@
+.promo {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  align-items: center;
+
+  h2 {
+    color: var(--color-black-01);
+    font-size: 3.75em;
+  }
+
+  p {
+    max-width: 60ch;
+    text-align: center;
+  }
+}

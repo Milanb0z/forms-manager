@@ -6,6 +6,36 @@ const { Invite } = require("../models/inviteModel");
 
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
+router.get("/solve/:inviteId", async (req, res) => {
+  try {
+    const { inviteId } = req.params;
+
+    const fetchedInvite = await Invite.findById(inviteId);
+
+    if (fetchedInvite) {
+      return res.status(404).send({ error: "Invite Not Found" });
+    }
+
+    if (fetchedInvite.isSolved) {
+      return res.status(401).send({ error: "Invite Already Solved" });
+    }
+
+    const fetchedForm = await Form.findById(fetchedInvite.formId)
+      .populate("createdBy")
+      .populate("invites")
+      .select("-createdBy.password");
+
+    if (!fetchedForm) {
+      return res.status(404).send({ error: "From Not Found" });
+    }
+
+    res.send(fetchedForm);
+  } catch (error) {
+    console.log({ error });
+    res.status(error).send({ error });
+  }
+});
+
 router.get("/:formId", async (req, res) => {
   try {
     const { formId } = req.params;

@@ -26,7 +26,7 @@ const SurveysCard = ({ forms }) => {
       {forms?.length > 0 ? (
         <div className={classes.list}>
           {forms.map((form) => (
-            <Link key={form._id} to={`/dashboard/form/edit/${form._id}`}>
+            <Link key={form._id} to={`/dashboard/invite/${form._id}`}>
               <div className={classes.list_item}>
                 <h4>{form.name}</h4>
                 <span>{form.isOpen ? "Active" : "Closed"}</span>

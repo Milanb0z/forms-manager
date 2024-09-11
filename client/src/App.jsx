@@ -68,6 +68,10 @@ const router = createBrowserRouter([
         element: <Invite />,
       },
       {
+        path: "invite/:formId",
+        element: <Invite />,
+      },
+      {
         path: "form",
         element: <ExploreForms />,
       },

@@ -27,17 +27,6 @@ const questionVars = {
   },
 };
 
-const answerVars = {
-  initial: {
-    x: 20,
-    opacity: 0,
-  },
-  animate: {
-    x: 0,
-    opacity: 1,
-  },
-};
-
 const SingleAnswer = ({
   options,
   type,

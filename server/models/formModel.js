@@ -49,7 +49,6 @@ const formSchema = new mongoose.Schema(
     name: {
       type: String,
       trim: true,
-      required: true,
     },
     description: {
       type: String,
@@ -57,6 +56,12 @@ const formSchema = new mongoose.Schema(
       maxLength: 300,
     },
     questions: [questionSchema],
+    invites: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Invite",
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -10,7 +10,8 @@
         "@hoc": ["src/hoc"],
         "@context": ["src/context"],
         "@utils": ["src/utils"],
-        "@sections":["src/sections"]
+        "@sections":["src/sections"],
+        "@store":["src/store"]
       }
     }
   }

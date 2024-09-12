@@ -5,14 +5,13 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import axios from "../../axios.default";
 
-import { UserContext } from "../../context/user.context";
-
 import classes from "./Login.module.scss";
 
 import { Button, Card, Input } from "@ui";
 import useInput from "@hooks/useInput";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import InfoSide from "@components/InfoSide/InfoSide";
+import { useLoginMutation } from "@store/authSlice";
 
 const modelVariants = {
   initial: { x: 50, opacity: 0 },
@@ -20,27 +19,23 @@ const modelVariants = {
 };
 
 const Login = () => {
-  const [, setUser] = useContext(UserContext);
-  const [isLoading, setIsLoading] = useState(false);
-
   const navigate = useNavigate();
+  const [loginUser, { isLoading }] = useLoginMutation();
 
   const [email, setEmail] = useInput("");
   const [password, setPassword] = useInput("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsLoading(true);
-    axios
-      .post("/user/login", { email, password })
+
+    loginUser({ email, password })
+      .unwrap()
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        setIsLoading(false);
-        setUser(res.data.user);
+        console.log(res);
         navigate("/dashboard");
       })
       .catch((err) => {
-        setIsLoading(false);
+        console.log(err);
       });
   };
 

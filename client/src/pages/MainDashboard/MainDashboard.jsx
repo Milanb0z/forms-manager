@@ -1,12 +1,9 @@
-import { useContext, PureComponent } from "react";
 import { Link } from "react-router-dom";
 
 import {
   BarChart,
   Bar,
   Rectangle,
-  XAxis,
-  YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
@@ -14,9 +11,9 @@ import {
 } from "recharts";
 
 import { Card, Button } from "@ui";
-import { UserContext } from "@context/user.context";
 
 import classes from "./MainDashboard.module.scss";
+import { useGetProfileQuery } from "@store/authSlice";
 
 const SurveysCard = ({ forms }) => {
   return (
@@ -154,7 +151,7 @@ const SolvedChart = () => {
 };
 
 const MainDashboard = () => {
-  const [user] = useContext(UserContext);
+  const { data: user } = useGetProfileQuery();
 
   return (
     <div className={classes.grid}>

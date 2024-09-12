@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import ProfileCard from "@components/ProfileCard/ProfileCard";
@@ -9,10 +8,11 @@ import Add from "@assets/add.svg";
 import Profile from "@assets/profile.svg";
 
 import classes from "./Header.module.scss";
-import { UserContext } from "@context/user.context";
+
+import { useGetProfileQuery } from "@store/authSlice";
 
 const Header = ({ title, link }) => {
-  const [user] = useContext(UserContext);
+  const { data: user } = useGetProfileQuery();
 
   return (
     <header className={classes.header}>

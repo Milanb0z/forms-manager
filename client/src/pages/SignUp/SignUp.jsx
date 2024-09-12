@@ -4,16 +4,13 @@ import { toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
-import axios from "../../axios.default";
-
-import { UserContext } from "@context/user.context";
-
 import classes from "./SignUp.module.scss";
 
 import { Button, Card, Input } from "@ui";
 import useInput from "@hooks/useInput";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import InfoSide from "@components/InfoSide/InfoSide";
+import { useSignUpMutation } from "@store/authSlice";
 
 const modelVariants = {
   initial: { x: 50, opacity: 0 },
@@ -21,9 +18,8 @@ const modelVariants = {
 };
 
 const Login = () => {
-  const [, setUser] = useContext(UserContext);
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [signUpUser, { isLoading }] = useSignUpMutation();
 
   const [email, setEmail] = useInput("");
   const [password, setPassword] = useInput("");
@@ -31,18 +27,14 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsLoading(true);
-    axios
-      .post("/user/signup", { email, password, username })
+    signUpUser({ email, password, username })
+      .unwrap()
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        setUser(res.data.user);
-        setIsLoading(false);
+        console.log(res);
         navigate("/dashboard");
       })
       .catch((err) => {
-        setIsLoading(false);
-        toast.error(err.response.data.error);
+        console.log(err);
       });
   };
 

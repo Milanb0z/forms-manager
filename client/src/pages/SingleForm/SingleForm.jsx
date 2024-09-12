@@ -11,6 +11,7 @@ import getAnsSchema from "@utils/getAnsSchema";
 import QUESTION_TYPES from "@utils/questionTypes";
 import { Input } from "@ui";
 import { TextArea } from "@ui";
+import { toast } from "react-toastify";
 
 const questionVars = {
   initial: {
@@ -93,8 +94,8 @@ const SingleAnswer = ({
   return <div className={classes.answers}>{content}</div>;
 };
 
-const SingleForm = ({ byId = false }) => {
-  const { formId } = useParams();
+const SingleForm = ({ byId, inviteMode }) => {
+  const { formId, inviteId } = useParams();
   const [index, setIndex] = useState(0);
   const [form, setForm] = useState([]);
   const [answers, setAnswers] = useState([]);
@@ -103,9 +104,13 @@ const SingleForm = ({ byId = false }) => {
 
   useEffect(() => {
     setIsLoading(true);
+    const urlStir = inviteMode
+      ? `/invite/solve/${inviteId}`
+      : `/form/${byId ? "id/" : ""}${formId}`;
     axios
-      .get(`/form/${byId ? "id/" : ""}${formId}`)
+      .get(urlStir)
       .then((res) => {
+        console.log(res.data);
         setForm(res.data);
         setAnswers(getAnsSchema(res.data.questions));
         setIsLoading(false);
@@ -152,16 +157,25 @@ const SingleForm = ({ byId = false }) => {
   const submitForm = () => {
     console.log(answers);
     const submitData = { response: answers };
-    axios.post(`/response/${form._id}`, submitData).then((res) => {
-      console.log(res);
-    });
+    const submitUrl = inviteMode
+      ? `/invite/end/${inviteId}`
+      : `/response/${form._id}`;
+    axios
+      .post(submitUrl, submitData)
+      .then((res) => {
+        console.log(res);
+        toast("Submited Succesfully");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.error);
+      });
   };
 
   const toggleInfo = () => {
     setInfoOpen((p) => !p);
   };
 
-  if (form.questions) {
+  if (form.questions?.length > 0) {
     return (
       <div className={classes.wrapper}>
         <motion.div
@@ -237,6 +251,8 @@ const SingleForm = ({ byId = false }) => {
         </div>
       </div>
     );
+  } else {
+    return <h2>No </h2>;
   }
 };
 

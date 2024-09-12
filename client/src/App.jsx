@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //Context
 import { UserContext } from "@context/user.context";
+import { ToastContainer } from "react-toastify";
 
 // Pages
 import {
@@ -41,7 +42,6 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignUp />,
   },
-
   {
     path: "/form/id/:formId",
     element: <SingleForm byId />,
@@ -49,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/form/:formId",
     element: <SingleForm />,
+  },
+  {
+    path: "/invite/:inviteId",
+    element: <SingleForm inviteMode />,
   },
 
   {
@@ -62,10 +66,6 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <MainDashboard />,
-      },
-      {
-        path: "invite",
-        element: <Invite />,
       },
       {
         path: "invite/:formId",
@@ -122,7 +122,12 @@ const App = () => {
     return <LoadingSpinner />;
   }
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer theme="dark" position="bottom-right" />
+    </>
+  );
 };
 
 export default App;

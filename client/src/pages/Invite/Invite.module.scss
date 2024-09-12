@@ -6,15 +6,32 @@
 }
 
 .table {
+  align-self: flex-start;
   th {
     background-color: var(--color-black-02);
     padding: 1em;
     color: var(--color-yellow);
   }
 
-  td {
+  tr {
     background-color: var(--color-black-02);
+    transition: all 0.2s ease;
+    &:hover {
+      background-color: var(--color-black-03);
+    }
+  }
 
+  td {
     padding: 1em;
   }
+
+  &_action {
+    display: flex;
+    gap: 1em;
+  }
+}
+
+.row {
+  display: flex;
+  gap: 1em;
 }

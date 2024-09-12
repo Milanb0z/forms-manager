@@ -10,6 +10,10 @@ const inviteSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Form",
     },
+    response: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Response",
+    },
     email: {
       type: String,
       required: true,

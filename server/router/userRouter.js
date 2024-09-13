@@ -30,6 +30,7 @@ router.post("/signup", async (req, res) => {
 //Get Profile
 router.get("/profile", auth, async (req, res) => {
   try {
+    console.log(req.user);
     console.log("hi");
     const user = await req.user.populate("createdForms");
 
@@ -51,7 +52,7 @@ router.patch("/", auth, async (req, res) => {
       username,
       email,
     });
-
+    console.log(updatedUser);
     res.send(updatedUser);
   } catch (error) {
     console.log(error);

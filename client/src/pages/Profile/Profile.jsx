@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button, Input } from "@ui";
-import { UserContext } from "@context/user.context";
 
 import classes from "./Profile.module.scss";
 import { toast } from "react-toastify";
 
-import axios from "../../axios.default";
+import { useGetProfileQuery, useUpdateUserMutation } from "@store/authSlice";
 
 const Profile = () => {
-  const [user, setUser] = useContext(UserContext);
+  const { data: user } = useGetProfileQuery();
+  const [updateUser] = useUpdateUserMutation();
   const [userData, setUserData] = useState({
     username: "",
     password: "",
@@ -27,16 +27,11 @@ const Profile = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    let token = localStorage.getItem("token");
-    toast
-      .promise(axios.patch("/user/", userData, { headers: { token } }), {
-        pending: "Updating User",
-        success: "User Updated",
-        error: "Error 🤯",
-      })
-      .then((res) => {
-        setUser(res.data);
-      });
+    toast.promise(updateUser(userData).unwrap(), {
+      pending: "Updating User",
+      success: "User Updated",
+      error: "Error 🤯",
+    });
   };
 
   return (

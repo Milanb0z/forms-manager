@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import axios from "../../axios.default";
-
 import { Input } from "@ui";
 
 import useInput from "@hooks/useInput";
@@ -19,6 +17,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import QuestionContainer from "@components/QuestionContainer/QuestionContainer";
 import { Button } from "@ui";
+import { useCreateFormMutation } from "@store/formSlice";
 
 const QUESTION_TYPES = {
   MULTIPLE: "MULTIPLE",
@@ -87,6 +86,8 @@ const NewForm = () => {
   const [customLink, setCustomLink] = useInput("");
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  const [createForm] = useCreateFormMutation();
+
   const onQuestionDelete = (index) => {
     const newQuestions = [...questions];
     newQuestions.splice(index, 1);
@@ -129,15 +130,8 @@ const NewForm = () => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     let formSubmitData = { name: heading, description, customLink, questions };
-    let token = localStorage.getItem("token");
-    axios
-      .post("/form/new", formSubmitData, { headers: { token } })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+
+    createForm(formSubmitData).unwrap();
   };
 
   return (

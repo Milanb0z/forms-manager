@@ -1,62 +1,32 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import axios from "../../axios.default";
 
 import classes from "./Invite.module.scss";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import FromatedDate from "@utils/formatDate";
 import { Button } from "@ui";
-import { toast } from "react-toastify";
+
 import { Input } from "@ui";
 import useInput from "@hooks/useInput";
+import {
+  useDeleteInviteMutation,
+  useFetchFormQuery,
+  useResendInviteMutation,
+  useAddInviteMutation,
+} from "@store/inviteSlice";
 
 const Invite = () => {
   const { formId } = useParams();
-  const [isLoading, setIsLoading] = useState(false);
-  const [form, setForm] = useState(null);
+
   const [email, setEmail] = useInput("");
-
-  useEffect(() => {
-    if (!formId) return;
-    setIsLoading(true);
-    axios.get(`/invite/${formId}`).then((res) => {
-      setForm(res.data);
-    });
-    setIsLoading(false);
-  }, [formId]);
-
-  const onDeleteInvite = (id) => {
-    axios
-      .delete(`/invite/${id}`)
-      .then(() => {
-        toast.warn("Invite Deleted Succesfully");
-      })
-      .catch((err) => {
-        toast.error(err.response.data.error);
-      });
-  };
-
-  const onInviteResend = (id) => {
-    axios
-      .get(`/invite/resend/${id}`)
-      .then(() => {
-        toast("Invite Sent Succesfully");
-      })
-      .catch((err) => {
-        toast.error(err.response.data.error);
-      });
-  };
+  const [deleteInvite, { isLoading }] = useDeleteInviteMutation();
+  const { data: form } = useFetchFormQuery(formId);
+  const [resendInvite] = useResendInviteMutation();
+  const [newInvite] = useAddInviteMutation();
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`/invite/${formId}`, { invites: [email] })
-      .then(() => {
-        toast("Invite Sent Succesfully");
-      })
-      .catch((err) => {
-        toast.error(err.response.data.error);
-      });
+    const body = { invites: [email] };
+    newInvite({ formId, body });
   };
 
   if (isLoading || !form) {
@@ -119,14 +89,14 @@ const Invite = () => {
                 </td>
 
                 <td className={classes.table_action}>
-                  <Button onClick={onInviteResend.bind(this, item._id)}>
+                  <Button onClick={resendInvite.bind(this, item._id)}>
                     Resend Mail
                   </Button>
-                  <Button onClick={onDeleteInvite.bind(this, item._id)} danger>
+                  <Button onClick={deleteInvite.bind(this, item._id)} danger>
                     Delete Invite
                   </Button>
                 </td>
-                <td>{item.response}</td>
+                <td>{item.response || "No"}</td>
               </tr>
             ))}
           </tbody>

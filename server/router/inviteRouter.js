@@ -146,6 +146,8 @@ router.post("/:formId", async (req, res) => {
     const { formId } = req.params;
     const { invites } = req.body;
 
+    console.log(invites);
+
     const inviteData = invites.map((email) => ({ formId, email }));
 
     const fetchedForm = await Form.findById(formId);

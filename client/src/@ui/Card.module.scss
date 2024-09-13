@@ -5,4 +5,15 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
+  position: relative;
+  overflow: hidden;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  backdrop-filter: blur(3px);
+  place-content: center;
+  z-index: 100;
 }

@@ -88,7 +88,9 @@ router.get("/:formId", async (req, res) => {
       return res.status(404).send({ error: "From Not Found" });
     }
 
-    res.send(fetchedForm);
+    const response = await Response.find({ formId });
+
+    res.send({ form: fetchedForm, response });
   } catch (error) {
     console.log({ error });
     res.status(error).send({ error });

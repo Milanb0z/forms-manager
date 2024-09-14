@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Button } from "@ui";
+import FromatedDate from "@utils/formatDate";
 
 import classes from "./InviteTable.module.scss";
 
@@ -10,11 +11,16 @@ import {
 
 const InviteTable = ({ invites }) => {
   const [deleteInvite, { isLoading }] = useDeleteInviteMutation();
-  const [resendInvite] = useResendInviteMutation();
+  const [resendInvite, { isLoading: isResendLoading }] =
+    useResendInviteMutation();
 
   return (
-    <Card>
-      <h2>Invites</h2>
+    <Card className={classes.card} isLoading={isLoading || isResendLoading}>
+      <div className={classes.header}>
+        <h2>Invites</h2>
+        <Button outline iconUrl="/star.svg" />
+      </div>
+
       <table className={classes.table}>
         <thead>
           <tr>
@@ -41,11 +47,9 @@ const InviteTable = ({ invites }) => {
               </td>
 
               <td className={classes.table_action}>
-                <Button onClick={resendInvite.bind(this, item._id)}>
-                  Resend Mail
-                </Button>
+                <Button onClick={resendInvite.bind(this, item._id)}>R</Button>
                 <Button onClick={deleteInvite.bind(this, item._id)} danger>
-                  Delete Invite
+                  D
                 </Button>
               </td>
               <td>{item.response || "No"}</td>

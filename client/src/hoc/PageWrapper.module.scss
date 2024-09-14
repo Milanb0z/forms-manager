@@ -3,6 +3,7 @@
   height: 100vh;
   background-color: var(--color-black-01);
   display: flex;
+  overflow: hidden;
 }
 
 .content {
@@ -10,14 +11,13 @@
   display: flex;
   gap: 2em;
   padding: 2em;
-  overflow: hidden;
+  overflow: auto;
   flex-direction: column;
 }
 
 .main {
   flex: 1;
   display: flex;
-  overflow: hidden;
 }
 
 @media screen and (max-width: 65em) {

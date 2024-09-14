@@ -1,24 +1,24 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 import classes from "./PieChart.module.scss";
 
 const CustomPieChart = ({ data }) => {
-  console.log(data);
   return (
-    <ResponsiveContainer>
-      <PieChart className={classes.pie} width={205} height={205}>
+    <ResponsiveContainer aspect={1} className={classes.container}>
+      <PieChart className={classes.pie}>
         <Pie
+          className={classes.item}
           data={data}
-          innerRadius={50}
-          outerRadius={100}
-          fill="#8884d8"
+          innerRadius="40%"
           dataKey="value"
-          startAngle={180}
-          endAngle={0}
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color} />
+            <Cell
+              className={classes.cell}
+              key={`cell-${index}`}
+              fill={entry.color}
+            />
           ))}
         </Pie>
       </PieChart>

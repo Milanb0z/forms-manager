@@ -66,13 +66,13 @@ const itemVars = {
 
 const Invite = () => {
   const { formId } = useParams();
-  const { data, error } = useFetchFormQuery(formId);
+  const { data, error, isLoading: isFetching } = useFetchFormQuery(formId);
 
   const [deleteForm, { isLoading }] = useDeleteFormMutation();
 
   console.log(error);
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <motion.div
         animate="animate"

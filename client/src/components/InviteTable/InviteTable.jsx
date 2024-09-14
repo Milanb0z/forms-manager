@@ -1,8 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import { Card, Button } from "@ui";
 import FromatedDate from "@utils/formatDate";
 
 import classes from "./InviteTable.module.scss";
+
+import Modal from "../Modal/Modal";
 
 import {
   useDeleteInviteMutation,
@@ -10,6 +12,7 @@ import {
 } from "@store/inviteSlice";
 
 const InviteTable = ({ invites }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [deleteInvite, { isLoading }] = useDeleteInviteMutation();
   const [resendInvite, { isLoading: isResendLoading }] =
     useResendInviteMutation();
@@ -21,42 +24,53 @@ const InviteTable = ({ invites }) => {
         <Button outline iconUrl="/star.svg" />
       </div>
 
-      <table className={classes.table}>
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Created At</th>
-            <th>Is Solved</th>
-            <th>Actions</th>
-            <th>Answers</th>
-          </tr>
-        </thead>
-        <tbody>
-          {invites.map((item) => (
-            <tr key={item._id}>
-              <td>{item.email}</td>
-              <td>{FromatedDate(item.createdAt)}</td>
-              <td
-                style={{
-                  color: item.isSolved
-                    ? "var(--color-green)"
-                    : "var(--color-red)",
-                }}
-              >
-                {item.isSolved ? "Yes" : "No"}
-              </td>
+      <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+        This is Modal Content!
+      </Modal>
 
-              <td className={classes.table_action}>
-                <Button onClick={resendInvite.bind(this, item._id)}>R</Button>
-                <Button onClick={deleteInvite.bind(this, item._id)} danger>
-                  D
-                </Button>
-              </td>
-              <td>{item.response || "No"}</td>
+      {invites.length == 0 ? (
+        <div className={classes.content}>
+          <p>No Invites</p>
+          <Button onClick={() => setIsOpen(true)}>Send Invite</Button>
+        </div>
+      ) : (
+        <table className={classes.table}>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Created At</th>
+              <th>Is Solved</th>
+              <th>Actions</th>
+              <th>Answers</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {invites.map((item) => (
+              <tr key={item._id}>
+                <td>{item.email}</td>
+                <td>{FromatedDate(item.createdAt)}</td>
+                <td
+                  style={{
+                    color: item.isSolved
+                      ? "var(--color-green)"
+                      : "var(--color-red)",
+                  }}
+                >
+                  {item.isSolved ? "Yes" : "No"}
+                </td>
+
+                <td className={classes.table_action}>
+                  <Button onClick={resendInvite.bind(this, item._id)}>R</Button>
+                  <Button onClick={deleteInvite.bind(this, item._id)} danger>
+                    D
+                  </Button>
+                </td>
+                <td>{item.response || "No"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </Card>
   );
 };

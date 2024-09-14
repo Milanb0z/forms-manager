@@ -1,0 +1,36 @@
+.wrapper {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  inset: 0;
+}
+
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
+  position: absolute;
+  inset: 0;
+}
+
+.modal {
+  z-index: 50;
+  border-radius: 0.5em;
+  width: 100%;
+  background-color: var(--color-black-02);
+  max-width: 50em;
+  min-height: 40em;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  &_heading {
+    padding: 1em;
+    background-color: var(--color-black-03);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2em;
+  }
+  &_content {
+    padding: 1em;
+  }
+}

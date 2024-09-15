@@ -3,6 +3,7 @@
   place-items: center;
   position: absolute;
   inset: 0;
+  padding: 2em;
 }
 
 .backdrop {
@@ -32,5 +33,7 @@
   }
   &_content {
     padding: 1em;
+    display: flex;
+    flex: 1;
   }
 }

@@ -10,6 +10,7 @@ import {
   useDeleteInviteMutation,
   useResendInviteMutation,
 } from "@store/inviteSlice";
+import InviteModal from "./InviteModal";
 
 const InviteTable = ({ invites }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,15 +18,23 @@ const InviteTable = ({ invites }) => {
   const [resendInvite, { isLoading: isResendLoading }] =
     useResendInviteMutation();
 
+  const onCloseModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <Card className={classes.card} isLoading={isLoading || isResendLoading}>
       <div className={classes.header}>
         <h2>Invites</h2>
-        <Button outline iconUrl="/star.svg" />
+        <Button onClick={() => setIsOpen(true)} outline iconUrl="/star.svg" />
       </div>
 
-      <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-        This is Modal Content!
+      <Modal
+        title="Send Invite"
+        handleClose={() => setIsOpen(false)}
+        isOpen={isOpen}
+      >
+        <InviteModal closeModal={onCloseModal} />
       </Modal>
 
       {invites.length == 0 ? (

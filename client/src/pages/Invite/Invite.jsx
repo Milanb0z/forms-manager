@@ -70,8 +70,6 @@ const Invite = () => {
 
   const [deleteForm, { isLoading }] = useDeleteFormMutation();
 
-  console.log(error);
-
   if (isLoading || isFetching) {
     return (
       <motion.div

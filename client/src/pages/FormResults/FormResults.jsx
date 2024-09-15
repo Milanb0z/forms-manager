@@ -1,43 +1,40 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-
-import axios from "../../axios.default";
-import PageWrapper from "@hoc/PageWrapper";
 
 import classes from "./FormResults.module.scss";
 
-import ResultCard from "@components/ResultCard/ResultCard";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+import { useGetResultQuery } from "@store/resultSlice";
+import FromatedDate from "@utils/formatDate";
 
 const FormResults = () => {
   const { formId } = useParams();
-  const [results, setresults] = useState([]);
-  const [form, setForm] = useState(null);
+  const { data, isLoading } = useGetResultQuery(formId);
 
-  useEffect(() => {
-    axios.get(`/response/${formId}`).then((res) => {
-      setresults(res.data);
-    });
-    axios.get(`/form/${formId}`).then((res) => {
-      setForm(res.data);
-    });
-  }, [formId]);
+  const findQuestion = (id) => {
+    const { title } = data.formId.questions.find((que) => que._id === id);
+    return title;
+  };
 
-  if (!form || !results) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
   return (
     <div className={classes.wrapper}>
-      <h2>Results</h2>
-      {results.length > 0 ? (
-        <div className={classes.row}>
-          {results.map((result) => (
-            <ResultCard key={result._id} form={form} result={result} />
-          ))}
-        </div>
-      ) : (
-        <p>No Responses</p>
-      )}
+      <h1>{data.formId.name}</h1>
+      <p>{data.formId.description}</p>
+      <p>
+        Submited:
+        <span> {FromatedDate(data.createdAt)}</span>
+      </p>
+      <h2>Results:</h2>
+      <div className={classes.answers}>
+        {data.response.map((ans) => (
+          <div className={classes.answers_item} key={ans._id}>
+            <h4> {findQuestion(ans.questionId)}</h4>
+            <span>- {ans.data.join(",")}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

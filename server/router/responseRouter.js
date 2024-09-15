@@ -24,8 +24,8 @@ router.get("/:formId", async (req, res) => {
   try {
     const { formId } = req.params;
 
-    const response = await Response.find({ formId }).populate("formId");
-
+    const response = await Response.findById(formId).populate("formId");
+    console.log(response);
     res.send(response);
   } catch (error) {
     console.log({ error });

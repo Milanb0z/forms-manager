@@ -1,13 +1,29 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 2em;
+  flex: 1;
+  gap: 1em;
+
+  span {
+    color: var(--color-green);
+  }
 }
 
-.row {
+.answers {
   display: flex;
-  width: 100%;
+  flex-direction: column;
   gap: 1em;
-  overflow-x: auto;
-  overflow-y: hidden;
+  max-width: 35em;
+  width: 100%;
+
+  &_item {
+    padding: 1em;
+    border-radius: 1em;
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+
+    background-color: var(--color-black-03);
+  }
 }

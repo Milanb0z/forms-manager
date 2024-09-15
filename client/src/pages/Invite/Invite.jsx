@@ -24,10 +24,12 @@ const ResponsesCard = ({ response }) => {
       ) : (
         <div className={classes.column}>
           {response.map((item) => (
-            <div key={item._id} className={classes.column_item}>
-              <p>Submited: </p>
-              <span> {FromatedDate(item.createdAt)}</span>
-            </div>
+            <Link key={item._id} to={`/dashboard/results/${item._id}`}>
+              <div className={classes.column_item}>
+                <p>Submited: </p>
+                <span> {FromatedDate(item.createdAt)}</span>
+              </div>
+            </Link>
           ))}
         </div>
       )}

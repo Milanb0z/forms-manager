@@ -1,4 +1,30 @@
 .content {
-  padding: 1.5em 2em;
   flex: 1;
+  display: flex;
+
+  gap: 2em;
+
+  & > * {
+    flex: 1;
+  }
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  &_empty {
+    flex: 1;
+    display: grid;
+    place-content: center;
+    background-color: var(--color-black-02);
+    border-radius: 0.5em;
+  }
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }

@@ -33,7 +33,7 @@ const Header = ({ title, link }) => {
               <Button outline iconUrl={Add} />
             </Link>
 
-            <Link to="/dashboard/form/new">
+            <Link to="/dashboard/me">
               <Button outline iconUrl={Profile} />
             </Link>
             <ProfileCard username={user.username} email={user.email} />

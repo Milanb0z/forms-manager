@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const QUESTION_TEXT_TYPE = ["SHORT", "PARAGRAPH"];
 const QUESTION_OPTION_TYPE = ["MULTIPLE", "RADIO"];
-const QUESTION_UPLOAD_TYPE = ["UPLOAD"];
 
 const questionSchema = new mongoose.Schema({
   title: {

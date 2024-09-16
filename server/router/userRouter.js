@@ -88,6 +88,8 @@ router.get("/:username", async (req, res) => {
 
     const foundUser = await User.findOne({ username }).populate("createdForms");
 
+    console.log(foundUser);
+
     if (!foundUser) {
       return res.status(404).send({ error: "User not found" });
     }

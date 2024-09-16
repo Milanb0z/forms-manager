@@ -1,48 +1,38 @@
 import { apiSlice } from "./apiSlice";
 
+const setCookie = ({ token, user }) => {
+  if (token) {
+    localStorage.setItem("token", token);
+  }
+  return user;
+};
+
 const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProfile: builder.query({
       query: () => "/user/profile",
       providesTags: ["auth"],
-      transformResponse: ({ user, token }) => {
-        if (token) {
-          localStorage.setItem("token", token);
-        }
-        return user;
-      },
+      transformResponse: setCookie,
+    }),
+    getUserByUsername: builder.query({
+      query: (username) => `/user/${username}`,
     }),
     login: builder.mutation({
       query: (body) => ({ url: "/user/login", body, method: "POST" }),
       providesTags: ["auth"],
-      transformResponse: ({ token, user }) => {
-        if (token) {
-          localStorage.setItem("token", token);
-        }
-        return user;
-      },
+      transformResponse: setCookie,
     }),
     signUp: builder.mutation({
       query: (body) => ({ url: "/user/signup", body, method: "POST" }),
       providesTags: ["auth"],
-      transformResponse: ({ token, user }) => {
-        if (token) {
-          localStorage.setItem("token", token);
-        }
-        return user;
-      },
+      transformResponse: setCookie,
     }),
     updateUser: builder.mutation({
       query: (body) => {
         return { url: "/user/", body, method: "PATCH" };
       },
       invalidatesTags: ["auth"],
-      transformResponse: ({ token, user }) => {
-        if (token) {
-          localStorage.setItem("token", token);
-        }
-        return user;
-      },
+      transformResponse: setCookie,
     }),
   }),
 });
@@ -54,4 +44,5 @@ export const {
   useLoginMutation,
   useSignUpMutation,
   useUpdateUserMutation,
+  useGetUserByUsernameQuery,
 } = extendedApiSlice;

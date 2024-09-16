@@ -1,12 +1,11 @@
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
+import { useGetProfileQuery, useUpdateUserMutation } from "@store/authSlice";
 import { Button, Input } from "@ui";
 
 import classes from "./Profile.module.scss";
-import { toast } from "react-toastify";
-
-import { useGetProfileQuery, useUpdateUserMutation } from "@store/authSlice";
-import { useNavigate } from "react-router";
 
 const Profile = () => {
   const navigate = useNavigate();

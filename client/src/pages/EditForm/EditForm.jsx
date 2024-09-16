@@ -1,23 +1,26 @@
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import { Button, Input, Radio } from "@ui";
 
-import axios from "../../axios.default";
-
 import classes from "./EditForm.module.scss";
-import { Link } from "react-router-dom";
+import { useEditFormMutation, useGetFormByIdQuery } from "@store/formSlice";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 
 const EditForm = () => {
+  const navigate = useNavigate();
   const { formId } = useParams();
+  const { data, isLoading } = useGetFormByIdQuery(formId);
+  const [updateForm, { isLoading: isEditLoading }] = useEditFormMutation();
 
   const [form, setForm] = useState(null);
 
   useEffect(() => {
-    axios.get(`/form/${formId}`).then((res) => {
-      setForm(res.data);
-    });
-  }, [formId]);
+    console.log(data);
+    setForm(data);
+  }, [data]);
 
   const onChangeHandler = (e) => {
     const { value, name } = e.target;
@@ -29,28 +32,25 @@ const EditForm = () => {
   };
 
   const onCheckHandler = () => {
-    setForm((prevForm) => ({
-      ...prevForm,
-      isOpen: !prevForm.isOpen,
-    }));
+    setForm((p) => ({ ...p, isOpen: !p.isOpen }));
   };
 
-  const onFormSubmit = (e) => {
-    let token = localStorage.getItem("token");
-    const { name, description, customLink, isOpen } = form;
-    axios
-      .put(
-        `/form/${formId}`,
-        { name, description, customLink, isOpen },
-        { headers: { token } }
-      )
-      .then((res) => {
-        console.log(res);
+  const onFormSubmit = () => {
+    updateForm({ formId, body: form })
+      .unwrap()
+      .then(() => {
+        toast("Form Updated Successfully");
+        navigate("/dashboard");
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
+        toast.error("Error");
       });
   };
+
+  if (isLoading || isEditLoading) {
+    return <LoadingSpinner />;
+  }
+
   if (form)
     return (
       <div className={classes.content}>
@@ -86,7 +86,7 @@ const EditForm = () => {
             <Button outline>Results</Button>
           </Link>
           <Button danger>Reject Changes</Button>
-          <Button onChange={onFormSubmit}>Save Changes</Button>
+          <Button onClick={onFormSubmit}>Save Changes</Button>
         </div>
       </div>
     );

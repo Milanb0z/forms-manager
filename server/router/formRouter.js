@@ -88,8 +88,6 @@ router.put("/:formId", auth, async (req, res) => {
     const { formId } = req.params;
     const { name, description, customLink, isOpen } = req.body;
 
-    console.log(isOpen);
-
     const updateFrom = await Form.findByIdAndUpdate(
       formId,
       {
@@ -100,8 +98,6 @@ router.put("/:formId", auth, async (req, res) => {
       },
       { new: true }
     );
-
-    console.log(updateFrom);
 
     res.send(updateFrom);
   } catch (error) {

@@ -5,20 +5,24 @@ const extendedApiSlice = apiSlice.injectEndpoints({
     getForm: builder.query({
       query: () => "/form",
       providesTags: ["form"],
-      transformResponse: (res) => {
-        console.log(res);
-        return res;
-      },
+    }),
+
+    getFormById: builder.query({
+      query: (id) => `/form/${id}`,
+      providesTags: ["form"],
     }),
     createForm: builder.mutation({
       query: (body) => ({ url: "/form/new", body, method: "POST" }),
       invalidatesTags: ["form"],
-      transformResponse: (res) => {
-        console.log(res);
-        return res;
-      },
     }),
-
+    editForm: builder.mutation({
+      query: ({ formId, body }) => ({
+        url: `/form/${formId}`,
+        body,
+        method: "PUT",
+      }),
+      invalidatesTags: ["form"],
+    }),
     deleteForm: builder.mutation({
       query: (id) => ({ url: `/form/${id}`, method: "DELETE" }),
       invalidatesTags: ["form", "auth"],
@@ -28,5 +32,10 @@ const extendedApiSlice = apiSlice.injectEndpoints({
 
 export default extendedApiSlice;
 
-export const { useGetFormQuery, useCreateFormMutation, useDeleteFormMutation } =
-  extendedApiSlice;
+export const {
+  useGetFormQuery,
+  useCreateFormMutation,
+  useDeleteFormMutation,
+  useEditFormMutation,
+  useGetFormByIdQuery,
+} = extendedApiSlice;

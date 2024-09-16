@@ -1,18 +1,19 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 
 import classes from "./Invite.module.scss";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 
 import { useFetchFormQuery } from "@store/inviteSlice";
-import { useDeleteFormMutation } from "@store/formSlice";
-import { Card } from "@ui";
+import { Card, Button } from "@ui";
 
 import InviteTable from "@components/InviteTable/InviteTable";
 import FromatedDate from "@utils/formatDate";
-import { Button } from "@ui";
-import { toast } from "react-toastify";
+
+import Modal from "@components/Modal/Modal";
+import DeleteModal from "@components/InviteTable/DeleteModal";
 
 const ResponsesCard = ({ response }) => {
   return (
@@ -68,25 +69,11 @@ const itemVars = {
 };
 
 const Invite = () => {
-  const navigate = useNavigate();
   const { formId } = useParams();
+  const [isDelete, setIsDelete] = useState(false);
   const { data, error, isLoading: isFetching } = useFetchFormQuery(formId);
 
-  const [deleteForm, { isLoading }] = useDeleteFormMutation();
-
-  const onDeleteForm = () => {
-    deleteForm(formId)
-      .unwrap()
-      .then(() => {
-        toast("Form Deleted Successfully");
-        navigate("/dashboard");
-      })
-      .catch(() => {
-        toast.error("Form Not Deleted");
-      });
-  };
-
-  if (isLoading || isFetching) {
+  if (isFetching) {
     return (
       <motion.div
         animate="animate"
@@ -116,12 +103,24 @@ const Invite = () => {
   if (data) {
     return (
       <div className={classes.grid}>
+        {isDelete && (
+          <Modal
+            title="Form Will Delete"
+            handleClose={() => setIsDelete(false)}
+            isOpen={isDelete}
+          >
+            <DeleteModal
+              handleClose={() => setIsDelete(false)}
+              deleteKey={data.form.name}
+            />
+          </Modal>
+        )}
         <InviteTable invites={data.form.invites} />
         <ResponsesCard response={data.response} />
         <CompleteCard invites={data.form.invites} />
         <CompleteCard invites={data.form.invites} />
         <Card>
-          <Button onClick={onDeleteForm} danger>
+          <Button onClick={() => setIsDelete(true)} danger>
             DeleteForm
           </Button>
           <Link to={`/dashboard/form/edit/${formId}`}>
@@ -134,79 +133,3 @@ const Invite = () => {
 };
 
 export default Invite;
-
-/**
- * 
- * 
- *   <div className={classes.content}>
-      <h2>Form Data</h2>
-      <p>
-        Form Name: <span>{form?.name}</span>
-      </p>
-
-      <p>
-        Desctiption: <span>{form?.description}</span>
-      </p>
-
-      <p>
-        Status:{" "}
-        <span
-          style={{
-            color: form?.isOpen ? "var(--color-green)" : "var(--color-red)",
-          }}
-        >
-          {form?.isOpen ? "Active" : "inActive"}
-        </span>
-      </p>
-
-      <h2>Invites</h2>
-      {form.invites.length == 0 ? (
-        <p>No Invites Sent</p>
-      ) : (
-        <table className={classes.table}>
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Created At</th>
-              <th>Is Solved</th>
-              <th>Actions</th>
-              <th>Answers</th>
-            </tr>
-          </thead>
-          <tbody>
-            {form?.invites.map((item) => (
-              <tr key={item._id}>
-                <td>{item.email}</td>
-                <td>{FromatedDate(item.createdAt)}</td>
-                <td
-                  style={{
-                    color: item.isSolved
-                      ? "var(--color-green)"
-                      : "var(--color-red)",
-                  }}
-                >
-                  {item.isSolved ? "Yes" : "No"}
-                </td>
-
-                <td className={classes.table_action}>
-                  <Button onClick={resendInvite.bind(this, item._id)}>
-                    Resend Mail
-                  </Button>
-                  <Button onClick={deleteInvite.bind(this, item._id)} danger>
-                    Delete Invite
-                  </Button>
-                </td>
-                <td>{item.response || "No"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-
-      <h3>Drop CSV file Send Invites</h3>
-      <form onSubmit={onFormSubmit} className={classes.row}>
-        <Input value={email} onChange={setEmail} placeholder="Email" />
-        <Button>Submit</Button>
-      </form>
-    </div>
- */

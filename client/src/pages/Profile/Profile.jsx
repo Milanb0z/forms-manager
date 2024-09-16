@@ -6,8 +6,10 @@ import classes from "./Profile.module.scss";
 import { toast } from "react-toastify";
 
 import { useGetProfileQuery, useUpdateUserMutation } from "@store/authSlice";
+import { useNavigate } from "react-router";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const { data: user } = useGetProfileQuery();
   const [updateUser] = useUpdateUserMutation();
   const [userData, setUserData] = useState({
@@ -27,11 +29,15 @@ const Profile = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    toast.promise(updateUser(userData).unwrap(), {
-      pending: "Updating User",
-      success: "User Updated",
-      error: "Error 🤯",
-    });
+    toast
+      .promise(updateUser(userData).unwrap(), {
+        pending: "Updating User",
+        success: "User Updated",
+        error: "Error 🤯",
+      })
+      .then(() => {
+        navigate("/dashboard");
+      });
   };
 
   return (

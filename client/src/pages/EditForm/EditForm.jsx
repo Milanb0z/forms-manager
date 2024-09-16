@@ -18,7 +18,6 @@ const EditForm = () => {
   const [form, setForm] = useState(null);
 
   useEffect(() => {
-    console.log(data);
     setForm(data);
   }, [data]);
 

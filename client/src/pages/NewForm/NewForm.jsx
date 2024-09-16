@@ -18,6 +18,8 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import QuestionContainer from "@components/QuestionContainer/QuestionContainer";
 import { Button } from "@ui";
 import { useCreateFormMutation } from "@store/formSlice";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const QUESTION_TYPES = {
   MULTIPLE: "MULTIPLE",
@@ -80,6 +82,7 @@ const questionTypes = [
 ];
 
 const NewForm = () => {
+  const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [heading, setHeading] = useInput("");
   const [description, setDescription] = useInput("");
@@ -131,7 +134,15 @@ const NewForm = () => {
     e.preventDefault();
     let formSubmitData = { name: heading, description, customLink, questions };
 
-    createForm(formSubmitData).unwrap();
+    createForm(formSubmitData)
+      .unwrap()
+      .then(() => {
+        toast("Form Created");
+        navigate("/dashboard");
+      })
+      .catch(() => {
+        toast.error("Error Occured");
+      });
   };
 
   return (

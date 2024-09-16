@@ -41,7 +41,7 @@ const Modal = ({ children, title, isOpen, handleClose }) => {
           </div>
           <div className={classes.modal_content}>{children}</div>
         </motion.div>
-        <div className={classes.backdrop}></div>
+        <div onClick={handleClose} className={classes.backdrop}></div>
       </div>
     </ModalWrapper>
   );

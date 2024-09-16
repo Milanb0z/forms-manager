@@ -25,8 +25,8 @@ const Header = () => {
             <li className={classes.links_item}>{item.title}</li>
           </Link>
         ))}
-        <Link to="/login">
-          <Button>Login</Button>
+        <Link to="/dashboard">
+          <Button>Go to Dashboard</Button>
         </Link>
       </ul>
     </header>

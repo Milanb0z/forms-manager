@@ -7,7 +7,14 @@ const ProtectedRoute = ({ children }) => {
   const { data: user, isLoading } = useGetProfileQuery();
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return (
+      <div
+        style={{ height: "100svh", display: "grid", placeContent: "center" }}
+      >
+        {" "}
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   if (!user) {

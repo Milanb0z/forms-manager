@@ -1,5 +1,6 @@
-import { useParams } from "react-router";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 
 import classes from "./Invite.module.scss";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
@@ -11,7 +12,7 @@ import { Card } from "@ui";
 import InviteTable from "@components/InviteTable/InviteTable";
 import FromatedDate from "@utils/formatDate";
 import { Button } from "@ui";
-import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ResponsesCard = ({ response }) => {
   return (
@@ -67,10 +68,23 @@ const itemVars = {
 };
 
 const Invite = () => {
+  const navigate = useNavigate();
   const { formId } = useParams();
   const { data, error, isLoading: isFetching } = useFetchFormQuery(formId);
 
   const [deleteForm, { isLoading }] = useDeleteFormMutation();
+
+  const onDeleteForm = () => {
+    deleteForm(formId)
+      .unwrap()
+      .then(() => {
+        toast("Form Deleted Successfully");
+        navigate("/dashboard");
+      })
+      .catch(() => {
+        toast.error("Form Not Deleted");
+      });
+  };
 
   if (isLoading || isFetching) {
     return (
@@ -107,7 +121,7 @@ const Invite = () => {
         <CompleteCard invites={data.form.invites} />
         <CompleteCard invites={data.form.invites} />
         <Card>
-          <Button onClick={deleteForm.bind(this, formId)} danger>
+          <Button onClick={onDeleteForm} danger>
             DeleteForm
           </Button>
           <Link to={`/dashboard/form/edit/${formId}`}>

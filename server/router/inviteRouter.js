@@ -122,8 +122,13 @@ router.get("/resend/:inviteId", async (req, res) => {
       to: fetchedInvite.email, // Change to your recipient
       from: "bozic411@gmail.com", // Change to your verified sender
       subject: fetchedForm.name,
-      text: fetchedForm.description,
-      html: "<strong>and easy to do anywhere, even with Node.js</strong>",
+      templateId: "d-12e9467c03b44f3eac6493d7655cbf68",
+      dynamicTemplateData: {
+        username: fetchedForm.createdBy.username,
+        solveLink: `http://localhost:3000/invite/${inviteId}`,
+        description: fetchedForm.description,
+        title: fetchedForm.title,
+      },
     };
 
     sgMail
@@ -165,9 +170,15 @@ router.post("/:formId", async (req, res) => {
         to: invite.email, // Change to your recipient
         from: "bozic411@gmail.com", // Change to your verified sender
         subject: fetchedForm.name,
-        text: fetchedForm.description,
-        html: `<strong>http://localhost:3000/invite/${invite._id}</strong>`,
+        templateId: "d-12e9467c03b44f3eac6493d7655cbf68",
+        dynamicTemplateData: {
+          username: fetchedForm.createdBy.username,
+          solveLink: `http://localhost:3000/invite/${invite._id}`,
+          description: fetchedForm.description,
+          title: fetchedForm.title,
+        },
       };
+
       sgMail
         .send(messageMail)
         .then(() => {

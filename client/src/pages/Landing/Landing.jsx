@@ -10,16 +10,14 @@ import Footer from "@sections/Footer/Footer";
 import Reviews from "@sections/Reviews/Reviews";
 import FAQSection from "@sections/FAQ/FAQ";
 import Promo from "@sections/Promo/Promo";
+import FeaturesSection from "@sections/Features/Features";
 
 const Landing = () => {
   return (
     <div className={classes.wrapper}>
       <HeroSection />
-      <Clients />
-      <div className={classes.line}></div>
-      <AboutSection />
-      <AuthorSection />
-      <div className={classes.line}></div>
+      <FeaturesSection />
+
       <Reviews />
       <FAQSection />
       <Promo />

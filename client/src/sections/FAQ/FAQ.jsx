@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import { Button } from "@ui";
-
 import FAQCard from "@components/FaqCard/FaqCard";
 
 import classes from "./FAQ.module.scss";
@@ -38,7 +36,16 @@ const FAQSection = () => {
 
   return (
     <section className={classes.faq}>
-      <h2>Need Help? We've Got Answers</h2>
+      <div className={classes.header}>
+        <span>Featues</span>
+        <h2>Designed to Make Form Building Effortless</h2>
+        <p>
+          Our app provides powerful tools like drag-and-drop form creation,
+          custom URLs, and easy tracking features. Whether you're inviting users
+          or analyzing results, we’ve got everything you need to simplify the
+          process
+        </p>
+      </div>
       <div className={classes.questions}>
         {videoSectionOptions.map((que, index) => (
           <FAQCard

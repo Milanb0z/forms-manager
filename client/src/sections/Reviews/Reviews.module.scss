@@ -1,57 +1,110 @@
 .reviews {
   display: flex;
-  flex-direction: column;
-  gap: 4em;
-}
+  gap: 2em;
+  align-items: center;
 
-.heading {
-  display: flex;
-  gap: 1em;
-  align-items: flex-end;
+  h1,
   h2 {
-    font-size: 3.5em;
-    color: var(--color-black-01);
+    color: var(--color-black);
+  }
+
+  & > * {
+    flex: 1;
+    gap: 2em;
   }
 }
 
-.row {
-  display: flex;
-  gap: 3.5em;
-}
-
-.card {
-  &:first-child {
-    background-color: #b3fc6a;
-  }
-  border-radius: 1em;
-  border: 2px solid;
-  background-color: #f6f6f9;
-  color: var(--color-black-01);
-  padding: 2.5em;
+.text {
   display: flex;
   flex-direction: column;
   gap: 2em;
+  align-items: flex-start;
+}
 
-  h3 {
-    color: inherit;
-    font-size: 1.75em;
+.icon {
+  background-color: red;
+  width: 3em;
+  height: 3em;
+}
+
+.cards {
+  display: flex;
+  gap: 2em;
+}
+
+//Scroll Suff
+
+.wrapper {
+  display: flex;
+  max-height: 80svh;
+  width: 100%;
+
+  &:hover {
+    .marquee_group {
+      animation-play-state: paused;
+    }
   }
 
-  p {
-    color: inherit;
-  }
-
-  hr {
-    border: 1px solid var(--color-black-01);
+  &:nth-child(odd) {
+    .marquee_group {
+      animation-direction: reverse;
+    }
   }
 }
 
-.rating {
+.card {
+  padding: 2em;
+  background: #f0eff4;
+  border-radius: 1em;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1em;
   align-items: center;
+  text-align: center;
 
-  p {
-    font-size: 1.25em;
+  h3 {
+    color: var(--color-black-02);
+  }
+
+  &_img {
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+}
+
+.marquee {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  gap: 2em;
+  mask-image: linear-gradient(
+    to top,
+    hsl(0 0% 0% / 0),
+    hsl(0 0% 0% / 1) 10%,
+    hsl(0 0% 0% / 1) 90%,
+    hsl(0 0% 0% / 0)
+  );
+}
+
+.marquee_group {
+  flex-direction: column;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  gap: 2em;
+  min-width: 100%;
+  animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - 2em));
   }
 }

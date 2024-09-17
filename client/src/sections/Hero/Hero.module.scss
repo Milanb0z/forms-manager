@@ -1,34 +1,6 @@
 .hero {
-  position: relative;
+  background-color: var(--color-black-01);
   overflow: hidden;
-  background-color: #0b0d1c;
-  z-index: 0;
-
-  &::after,
-  &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    filter: blur(117px);
-    opacity: 0.4;
-    z-index: -1;
-  }
-
-  &::before {
-    width: 30em;
-    height: 20em;
-    background-color: var(--color-green);
-    bottom: -20%;
-    left: 20%;
-  }
-
-  &::after {
-    width: 30em;
-    height: 10em;
-    background-color: var(--color-yellow);
-    top: -20%;
-    left: 40%;
-  }
 }
 .content {
   max-width: 90em;

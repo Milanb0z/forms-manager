@@ -80,6 +80,19 @@ p {
   }
 }
 
+// Slection Color
+
+::-moz-selection {
+  /* Code for Firefox */
+  color: var(--color-black-02);
+  background: var(--color-yellow);
+}
+
+::selection {
+  color: var(--color-black-02);
+  background: var(--color-yellow);
+}
+
 //Custom ScrollBar
 ::-webkit-scrollbar {
   width: 10px;
@@ -92,13 +105,13 @@ p {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--color-green);
+  background: var(--color-yellow);
   border-radius: 4px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-green);
+  background: var(--color-yellow);
 }
 
 @media screen and (max-width: 50em) {

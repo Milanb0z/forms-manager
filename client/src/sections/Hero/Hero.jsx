@@ -1,8 +1,7 @@
-import React from "react";
+import { Button } from "@ui";
+import Header from "@sections/Header/Header";
 
 import classes from "./Hero.module.scss";
-import Header from "@sections/Header/Header";
-import { Button } from "@ui";
 
 const HeroSection = () => {
   return (

@@ -4,20 +4,30 @@
   align-items: center;
   justify-content: space-between;
   padding: 1em;
+  position: relative;
 }
 
 .logo {
   display: flex;
   gap: 1em;
   align-items: center;
+  flex: 1;
 }
 
 .links {
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1em;
 
   &_item {
     padding: 0.5em 1em;
   }
+}
+
+.actions {
+  display: grid;
+  place-content: end;
+  flex: 1;
 }

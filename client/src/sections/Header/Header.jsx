@@ -25,10 +25,13 @@ const Header = () => {
             <li className={classes.links_item}>{item.title}</li>
           </Link>
         ))}
+      </ul>
+
+      <div className={classes.actions}>
         <Link to="/dashboard">
           <Button>Go to Dashboard</Button>
         </Link>
-      </ul>
+      </div>
     </header>
   );
 };

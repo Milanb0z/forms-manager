@@ -4,15 +4,21 @@ import { Button } from "@ui";
 
 const Promo = () => {
   return (
-    <div className={classes.promo}>
-      <h2>Ready to jump in?</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, alias. Esse
-        inventore cupiditate natus quae quam. Optio ab nostrum necessitatibus
-        totam consequatur ea, quod praesentium hic sunt, enim aut repellat.
-      </p>
-      <Button>Get Started For Free</Button>
-    </div>
+    <section className={classes.promo}>
+      <div className={classes.text}>
+        <div className={classes.icon}></div>
+        <h1>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ad
+          quae deserunt cupiditate mollitia culpa amet laborum omnis, labore
+          aspernatur.
+        </p>
+        <Button>Get Started</Button>
+      </div>
+      <div className={classes.img}>
+        <img src="/dash.jpg" alt="" />
+      </div>
+    </section>
   );
 };
 

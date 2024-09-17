@@ -1,16 +1,51 @@
 .promo {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    rgba(32, 59, 199, 0.1) 0deg,
+    rgba(168, 32, 214, 0.1) 60.00000178813934deg,
+    rgba(229, 36, 154, 0.1) 120.00000357627869deg,
+    rgba(227, 128, 37, 0.1) 180deg,
+    rgba(229, 36, 154, 0.1) 240.00000715255737deg,
+    rgba(168, 32, 214, 0.1) 299.9999928474426deg,
+    rgba(32, 59, 199, 0.1) 360deg
+  );
+  padding: 2em;
+  min-height: 50svh;
+  display: flex;
+  overflow: hidden;
+  border-radius: 1em;
+  gap: 2em;
+
+  h1 {
+    color: var(--color-black-02);
+  }
+
+  & > * {
+    flex: 1;
+    margin: 4em 0;
+  }
+}
+
+.text {
   display: flex;
   flex-direction: column;
   gap: 2em;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
+}
 
-  h2 {
-    color: var(--color-black-01);
-    font-size: 3.75em;
-  }
+.icon {
+  width: 3em;
+  height: 3em;
+  background-color: red;
+}
 
-  p {
-    max-width: 60ch;
-    text-align: center;
+.img {
+  position: relative;
+
+  img {
+    position: absolute;
+    width: 150%;
+    border-radius: 1em;
   }
 }

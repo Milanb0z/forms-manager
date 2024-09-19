@@ -28,12 +28,8 @@ const Profile = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    toast
-      .promise(updateUser(userData).unwrap(), {
-        pending: "Updating User",
-        success: "User Updated",
-        error: "Error 🤯",
-      })
+    updateUser(userData)
+      .unwrap()
       .then(() => {
         navigate("/dashboard");
       });

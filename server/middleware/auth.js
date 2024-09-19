@@ -6,14 +6,10 @@ const auth = async (req, res, next) => {
 
   token = req.headers["token"];
 
-  console.log(token);
-
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
       req.user = await User.findById(decoded.userId).select("-password");
-      console.log(req.user);
       next();
     } catch (error) {
       console.error(error);

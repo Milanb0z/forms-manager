@@ -32,7 +32,7 @@ const Login = () => {
       .unwrap()
       .then((res) => {
         console.log(res);
-        navigate("/dashboard");
+        navigate("/dashboard/");
       })
       .catch((err) => {
         console.log(err);

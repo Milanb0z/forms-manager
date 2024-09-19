@@ -1,20 +1,31 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 5em;
   background-color: var(--color-white);
+  overflow: hidden;
+  gap: 10em;
+
+  button {
+    min-width: 10em;
+  }
 
   section {
     max-width: 90em;
     width: 100%;
     margin: 0 auto;
   }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-black-03);
+  }
 }
 
-@media screen and (max-width: 90em) {
-  .wrapper {
-    section {
-      padding: 0 2em;
-    }
-  }
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10em;
+  padding: 0 2em;
 }

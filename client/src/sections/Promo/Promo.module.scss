@@ -16,28 +16,22 @@
   border-radius: 1em;
   gap: 2em;
 
-  h1 {
-    color: var(--color-black-02);
-  }
-
   & > * {
     flex: 1;
-    margin: 4em 0;
   }
 }
 
 .text {
   display: flex;
-  flex-direction: column;
-  gap: 2em;
   align-items: flex-start;
   justify-content: center;
+  flex-direction: column;
+  gap: 2em;
 }
 
 .icon {
   width: 3em;
   height: 3em;
-  background-color: red;
 }
 
 .img {
@@ -47,5 +41,35 @@
     position: absolute;
     width: 150%;
     border-radius: 1em;
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .promo {
+    display: flex;
+    flex-direction: column;
+    padding: 3em 3em 0;
+
+    & > * {
+      flex: 1;
+    }
+  }
+
+  .text {
+    justify-content: flex-start;
+    text-align: center;
+    align-items: center;
+  }
+
+  .img {
+    align-self: center;
+    max-width: 40em;
+    flex: 1;
+
+    img {
+      position: relative;
+      width: 100%;
+      translate: 0 2em;
+    }
   }
 }

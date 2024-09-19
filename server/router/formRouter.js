@@ -7,6 +7,7 @@ const { Form } = require("../models/formModel");
 router.post("/new", auth, async (req, res) => {
   try {
     const user = req.user;
+    console.log({ user });
     const { name, description, customLink, questions } = req.body;
 
     const newForm = new Form({

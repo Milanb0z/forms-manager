@@ -45,7 +45,12 @@ const FeaturesSection = () => {
       <div className={classes.grid}>
         {features.map((feature, index) => (
           <div key={index} className={classes.card}>
-            <div className={classes.card_img}></div>
+            <img
+              src="/favorites.svg"
+              alt="favorits"
+              className={classes.card_img}
+            />
+
             <div className={classes.card_text}>
               <h3>{feature.header}</h3>
               <p>{feature.body}</p>

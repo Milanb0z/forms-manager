@@ -2,17 +2,13 @@ import classes from "./HamburgerIcon.module.scss";
 
 const HamburgerIcon = ({ isActive, onClickHandler }) => {
   return (
-    <button
-      aria-label="Toggle Menu"
+    <div
       onClick={onClickHandler}
-      className={classes.btn}
+      className={`${classes.btn} ${isActive ? classes.active : ""}`}
     >
-      <div className={`${classes.wrapper} ${isActive && classes.active} `}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </button>
+      <span></span>
+      <span></span>
+    </div>
   );
 };
 

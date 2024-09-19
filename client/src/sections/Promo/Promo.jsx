@@ -4,9 +4,10 @@ import { Button } from "@ui";
 
 const Promo = () => {
   return (
-    <section className={classes.promo}>
+    <div className={classes.promo}>
       <div className={classes.text}>
-        <div className={classes.icon}></div>
+        <img src="/logo.svg" alt="" className={classes.icon} />
+
         <h1>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ad
@@ -18,7 +19,7 @@ const Promo = () => {
       <div className={classes.img}>
         <img src="/dash.jpg" alt="" />
       </div>
-    </section>
+    </div>
   );
 };
 

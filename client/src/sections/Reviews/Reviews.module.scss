@@ -2,9 +2,7 @@
   display: flex;
   gap: 2em;
   align-items: center;
-
-  h1,
-  h2 {
+  overflow: hidden h1, h2 {
     color: var(--color-black);
   }
 
@@ -62,6 +60,10 @@
   align-items: center;
   text-align: center;
 
+  p {
+    max-width: 20ch;
+  }
+
   h3 {
     color: var(--color-black-02);
   }
@@ -106,5 +108,48 @@
   }
   to {
     transform: translateY(calc(-100% - 2em));
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .reviews {
+    flex-direction: column;
+    gap: 5em;
+  }
+
+  .text {
+    justify-content: flex-start;
+    text-align: center;
+    align-items: center;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  .marquee {
+    flex-direction: row;
+    mask-image: linear-gradient(
+      to left,
+      hsl(0 0% 0% / 0),
+      hsl(0 0% 0% / 1) 10%,
+      hsl(0 0% 0% / 1) 90%,
+      hsl(0 0% 0% / 0)
+    );
+    max-width: 100%;
+    width: 50em;
+
+    &_group {
+      flex-direction: row;
+    }
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - 2em));
+    }
   }
 }

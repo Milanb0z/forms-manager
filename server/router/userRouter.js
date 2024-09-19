@@ -30,8 +30,6 @@ router.post("/signup", async (req, res) => {
 //Get Profile
 router.get("/profile", auth, async (req, res) => {
   try {
-    console.log(req.user);
-    console.log("hi");
     const user = await req.user.populate("createdForms");
 
     let token = generateToken(res, user._id);

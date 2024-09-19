@@ -1,25 +1,17 @@
 import { useState } from "react";
-
-import { Input } from "@ui";
-
-import useInput from "@hooks/useInput";
-
-import classes from "./NewForm.module.scss";
-import { TextArea } from "@ui";
-
-import FileUploadIcon from "@assets/file-upload-icon.svg";
-import ParagraphIcon from "@assets/paragraph-question-icon.svg";
-import SingleIcon from "@assets/single-question-icon.svg";
-import TextIcon from "@assets/text-question-icon.svg";
-import MultipleIcon from "@assets/multiple-question-icon.svg";
-import DraggableQuestion from "@components/DraggableQuestion/DraggableQuestion";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import QuestionContainer from "@components/QuestionContainer/QuestionContainer";
-import { Button } from "@ui";
-import { useCreateFormMutation } from "@store/formSlice";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
+import useInput from "@hooks/useInput";
+import { TextArea, Input, Button } from "@ui";
+
+import classes from "./NewForm.module.scss";
+
+import DraggableQuestion from "@components/DraggableQuestion/DraggableQuestion";
+import QuestionContainer from "@components/QuestionContainer/QuestionContainer";
+import { useCreateFormMutation } from "@store/formSlice";
 
 const QUESTION_TYPES = {
   MULTIPLE: "MULTIPLE",
@@ -31,7 +23,6 @@ const QUESTION_TYPES = {
 
 const questionTypes = [
   {
-    icon: MultipleIcon,
     label: "Multiple Choice Type",
     data: {
       title: "",
@@ -41,7 +32,6 @@ const questionTypes = [
   },
 
   {
-    icon: SingleIcon,
     label: "Single Choice Type",
     data: {
       title: "",
@@ -51,7 +41,6 @@ const questionTypes = [
   },
 
   {
-    icon: TextIcon,
     label: "Short Text Answer",
     data: {
       title: "",
@@ -61,7 +50,6 @@ const questionTypes = [
   },
 
   {
-    icon: ParagraphIcon,
     label: "Paragraph Text Answer",
     data: {
       title: "",
@@ -71,7 +59,6 @@ const questionTypes = [
   },
 
   {
-    icon: FileUploadIcon,
     label: "Upload FIle Answer",
     data: {
       title: "",
@@ -133,6 +120,8 @@ const NewForm = () => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     let formSubmitData = { name: heading, description, customLink, questions };
+
+    console.log(formSubmitData);
 
     createForm(formSubmitData)
       .unwrap()

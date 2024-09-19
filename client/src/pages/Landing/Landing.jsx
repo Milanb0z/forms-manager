@@ -3,8 +3,6 @@ import classes from "./Landing.module.scss";
 
 import HeroSection from "@sections/Hero/Hero";
 import Clients from "@sections/clients/Clients";
-import AuthorSection from "@sections/Author/Author";
-import AboutSection from "@sections/About/About";
 
 import Footer from "@sections/Footer/Footer";
 import Reviews from "@sections/Reviews/Reviews";
@@ -16,11 +14,13 @@ const Landing = () => {
   return (
     <div className={classes.wrapper}>
       <HeroSection />
-      <FeaturesSection />
+      <div className={classes.content}>
+        <FeaturesSection />
 
-      <Reviews />
-      <FAQSection />
-      <Promo />
+        <Reviews />
+        <FAQSection />
+        <Promo />
+      </div>
       <Footer />
     </div>
   );

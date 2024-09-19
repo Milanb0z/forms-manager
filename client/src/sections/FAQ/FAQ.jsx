@@ -4,25 +4,33 @@ import FAQCard from "@components/FaqCard/FaqCard";
 
 import classes from "./FAQ.module.scss";
 
-const videoSectionOptions = [
+const faqs = [
   {
-    header: "Our Video Showcase",
-    body: "Explore our collection of high-quality videos, crafted with precision and creativity. Each project highlights our commitment to excellence and our ability to bring unique visions to life. See the impact of our work.",
+    question: "How do I create a form using the drag-and-drop builder?",
+    answer:
+      "Simply select the fields you need and drag them into place. It's quick, easy, and requires no coding.",
   },
   {
-    header: "Featured Projects",
-    body: "Dive into our portfolio of videos showcasing a variety of styles and formats. From corporate films to creative storytelling, our projects demonstrate our versatility and dedication to delivering outstanding results.",
+    question: "Can I customize the URL for my forms?",
+    answer:
+      "Yes, you can create custom URLs to make your forms more personal and easier to share.",
   },
   {
-    header: "Our Work in Action",
-    body: "Watch our videos to see how we transform ideas into engaging visual stories. Each video reflects our expertise and passion for producing compelling content that resonates with audiences.",
+    question: "How do I invite users to fill out my form?",
+    answer:
+      "You can send personalized email invitations directly from the app with just a few clicks.",
   },
   {
-    header: "Video Portfolio",
-    body: "Browse through our video portfolio to witness the diverse range of projects we've completed. Our work speaks for itself, illustrating our skill in creating impactful and memorable videos for various clients.",
+    question: "Can I track which users have completed the form?",
+    answer:
+      "Yes, you can track all respondents and see who has completed the form through the dashboard.",
+  },
+  {
+    question: "Will I receive notifications when someone submits a form?",
+    answer:
+      "Absolutely! You'll receive real-time notifications as soon as someone completes your form.",
   },
 ];
-
 const FAQSection = () => {
   const [activeIndex, setActiveIndex] = useState(false);
 
@@ -47,11 +55,11 @@ const FAQSection = () => {
         </p>
       </div>
       <div className={classes.questions}>
-        {videoSectionOptions.map((que, index) => (
+        {faqs.map((que, index) => (
           <FAQCard
             key={index}
-            heading={que.header}
-            body={que.body}
+            heading={que.question}
+            body={que.answer}
             isActive={activeIndex === index}
             onClickHandler={onOpenQuestion.bind(this, index)}
           />

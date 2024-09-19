@@ -1,71 +1,46 @@
 .btn {
-  width: 4em;
-  height: 4em;
-  padding: 1.4em 1em;
-  overflow: hidden;
-  border-radius: 1em;
-  display: none;
-  z-index: 20000000;
-  background-color: transparent;
-  border: none;
-}
-
-.wrapper {
+  width: 5em;
+  height: 5em;
+  background-color: var(--color-black-03);
+  border-radius: 50%;
   position: relative;
-  height: 100%;
-  width: 100%;
-
-  transition: all 0.3s;
+  cursor: pointer;
 
   span {
-    display: block;
-    width: 80%;
-    height: 2px;
-    background-color: var(--color-blue);
     position: absolute;
-    transform: translate(0%, -50%);
-    left: 0%;
-    transition: all 0.3s;
+    width: 50%;
+    height: 2px;
+    background-color: #fff;
+    translate: -50% -50%;
+    left: 50%;
+    transition: all 0.3s cubic-bezier(0.12, 0.83, 0.63, 0.95);
 
     &:nth-child(1) {
-      top: 0%;
-      width: 70%;
+      top: 60%;
     }
+
     &:nth-child(2) {
-      top: 50%;
-      width: 50%;
-    }
-    &:nth-child(3) {
-      top: 100%;
-      width: 100%;
+      top: 40%;
     }
   }
 }
 
 .active {
-  transform: rotate(-180deg);
   span {
-    left: 10%;
-
     &:nth-child(1) {
       top: 50%;
-      transform: rotate(-45deg);
-      width: 100%;
+      rotate: -45deg;
     }
-    &:nth-child(2) {
-      display: none;
-    }
-    &:nth-child(3) {
-      top: 50%;
 
-      transform: rotate(45deg);
-      width: 100%;
+    &:nth-child(2) {
+      top: 50%;
+      rotate: 45deg;
     }
   }
 }
 
-@media screen and (max-width: 45em) {
+@media screen and (min-width: 50em) {
   .btn {
-    display: block;
+    display: none;
   }
 }

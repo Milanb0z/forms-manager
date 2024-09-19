@@ -14,7 +14,7 @@
 .main {
   flex: 1;
   display: flex;
-
+  padding: 2em;
   gap: 2em;
   align-items: center;
 
@@ -30,6 +30,11 @@
 
   h1 {
     font-size: 4em;
+    color: var(--color-white);
+  }
+
+  h2 {
+    color: var(--color-white);
   }
 
   p {
@@ -41,10 +46,6 @@
   display: flex;
   gap: 1em;
   margin: 1em 0;
-
-  button {
-    min-width: 10em;
-  }
 }
 
 .reviews {
@@ -89,5 +90,28 @@
     top: 50%;
     translate: 0 -50%;
     border-radius: 1.1em;
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .main {
+    flex-direction: column;
+    justify-content: center;
+    padding: 2em;
+  }
+
+  .left {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex: 0;
+  }
+
+  .screen {
+    flex: 0;
+    img {
+      position: relative;
+      width: 100%;
+    }
   }
 }

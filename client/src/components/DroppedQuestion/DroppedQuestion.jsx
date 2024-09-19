@@ -25,8 +25,6 @@ const DroppedQuestion = ({
 }) => {
   let content = null;
 
-  console.log(question);
-
   switch (question.type) {
     case QUESTION_TYPES.MULTIPLE:
       content = (

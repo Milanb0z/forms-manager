@@ -1,5 +1,5 @@
 .wrapper {
-  padding: 5em 0;
+  padding: 5em 2em;
   background-color: var(--color-black-03);
 }
 
@@ -33,5 +33,26 @@
   li:first-child {
     font-weight: bold;
     font-size: 1.125em;
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .footer {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .left {
+    align-items: center;
+    text-align: center;
+    flex: 80%;
+  }
+
+  .links {
+    text-align: center;
+
+    li {
+      font-size: 1.2em;
+    }
   }
 }

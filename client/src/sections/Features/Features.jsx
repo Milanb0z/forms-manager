@@ -43,6 +43,11 @@ const FeaturesSection = () => {
         </p>
       </div>
       <div className={classes.grid}>
+        <div className={classes.grid_glow}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
         {features.map((feature, index) => (
           <div key={index} className={classes.card}>
             <img

@@ -9,6 +9,7 @@ import Reviews from "@sections/Reviews/Reviews";
 import FAQSection from "@sections/FAQ/FAQ";
 import Promo from "@sections/Promo/Promo";
 import FeaturesSection from "@sections/Features/Features";
+import Steps from "@sections/Steps/Steps";
 
 const Landing = () => {
   return (
@@ -16,7 +17,7 @@ const Landing = () => {
       <HeroSection />
       <div className={classes.content}>
         <FeaturesSection />
-
+        <Steps />
         <Reviews />
         <FAQSection />
         <Promo />

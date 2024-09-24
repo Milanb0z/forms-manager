@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-white);
+  background-color: var(--color-black-02);
   overflow: hidden;
   gap: 10em;
 
@@ -19,7 +19,11 @@
   h2,
   h3,
   h4 {
-    color: var(--color-black-03);
+    color: var(--color-green);
+  }
+
+  p {
+    color: var(--color-white);
   }
 }
 

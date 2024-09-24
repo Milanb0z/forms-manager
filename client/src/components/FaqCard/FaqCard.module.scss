@@ -6,7 +6,7 @@
   overflow: hidden;
 
   cursor: pointer;
-  background: #f0eff4;
+  background: var(--color-black-03);
 
   p {
     max-width: 100ch;
@@ -21,7 +21,7 @@
 
   h4 {
     font-size: 1.75em;
-    color: var(--color-black-02);
+    color: var(--color-white);
   }
 }
 

@@ -52,7 +52,7 @@
 
 .card {
   padding: 2em;
-  background: #f0eff4;
+  background-color: var(--color-black-03);
   border-radius: 1em;
   display: flex;
   flex-direction: column;
@@ -62,10 +62,6 @@
 
   p {
     max-width: 20ch;
-  }
-
-  h3 {
-    color: var(--color-black-02);
   }
 
   &_img {
@@ -84,11 +80,12 @@
   user-select: none;
   gap: 2em;
   mask-image: linear-gradient(
-    to top,
-    hsl(0 0% 0% / 0),
-    hsl(0 0% 0% / 1) 10%,
-    hsl(0 0% 0% / 1) 90%,
-    hsl(0 0% 0% / 0)
+    180deg,
+    rgba(217, 217, 217, 0) 0%,
+    #d9d9d9 25%,
+    #d9d9d9 50%,
+    #d9d9d9 75%,
+    rgba(217, 217, 217, 0) 100%
   );
 }
 

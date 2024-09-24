@@ -54,7 +54,7 @@ const Header = () => {
     <motion.div
       animate="animate"
       initial="initial"
-      transition={{ staggerChildren: 0.1, delayChildren: 1.5 }}
+      transition={{ staggerChildren: 0.1 }}
       style={{
         background,
       }}
@@ -75,9 +75,9 @@ const Header = () => {
             </a>
           ))}
         </motion.ul>
-        <div className={classes.actions}>
+        <motion.div variants={revealVar} className={classes.actions}>
           <Button>Dashboard</Button>
-        </div>
+        </motion.div>
         <HamburgerIcon onClickHandler={toggleNav} isActive={isOpen} />
         <SideDrawer isOpen={isOpen} onClick={toggleNav} />
       </header>

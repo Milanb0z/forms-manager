@@ -10,11 +10,11 @@ const HeroSection = () => {
         <Header />
         <div className={classes.main}>
           <div className={classes.left}>
-            <h1>Boost productivity with our powerful BlazeX solution.</h1>
+            <h1>Unlock the Power of Efficient Service Tracking</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam,
-              aliquid animi aut eum perspiciatis voluptatum laudantium odio
-              aspernatur voluptas dolorem!
+              Easily build forms with our drag-and-drop builder. Whether it's
+              surveys, feedback forms, or event registrations, you can design,
+              share, and analyze responses in no time.
             </p>
 
             <div className={classes.actions}>
@@ -31,7 +31,7 @@ const HeroSection = () => {
               </div>
               <div className={classes.reviews_text}>
                 <div className={classes.row}>
-                  <h2>4.8</h2>
+                  <span>4.8</span>
                   <div className={classes.reviews_stars}>
                     <img src="/star.svg" alt="star" />
                     <img src="/star.svg" alt="star" />

@@ -91,11 +91,11 @@ const Reviews = () => {
     <section className={classes.reviews}>
       <div className={classes.text}>
         <div className={classes.icon}></div>
-        <h1>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h1>
+        <h1>Loved by Teams and Individuals Alike</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ad
-          quae deserunt cupiditate mollitia culpa amet laborum omnis, labore
-          aspernatur.
+          See what our users are saying. From freelancers to businesses, people
+          are using our platform to build forms and streamline their data
+          collection.
         </p>
         <Button>Get Started</Button>
       </div>

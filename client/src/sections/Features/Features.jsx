@@ -34,12 +34,12 @@ const FeaturesSection = () => {
     <section className={classes.features}>
       <div className={classes.header}>
         <span>Featues</span>
-        <h2>Designed to Make Form Building Effortless</h2>
+        <h2>Powerful Features, Simple to Use</h2>
         <p>
-          Our app provides powerful tools like drag-and-drop form creation,
-          custom URLs, and easy tracking features. Whether you're inviting users
-          or analyzing results, we’ve got everything you need to simplify the
-          process
+          Our intuitive drag-and-drop interface lets you create forms with
+          multiple question types, customizable designs, and seamless data
+          collection. Get insights fast with real-time response tracking and
+          analytics.
         </p>
       </div>
       <div className={classes.grid}>

@@ -46,12 +46,10 @@ const FAQSection = () => {
     <section className={classes.faq}>
       <div className={classes.header}>
         <span>Featues</span>
-        <h2>Designed to Make Form Building Effortless</h2>
+        <h2>Got Questions? We’ve Got Answers!</h2>
         <p>
-          Our app provides powerful tools like drag-and-drop form creation,
-          custom URLs, and easy tracking features. Whether you're inviting users
-          or analyzing results, we’ve got everything you need to simplify the
-          process
+          Check out our FAQ for answers to the most common questions about form
+          creation, customization, and managing submissions.
         </p>
       </div>
       <div className={classes.questions}>

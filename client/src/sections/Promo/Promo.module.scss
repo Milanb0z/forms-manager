@@ -1,15 +1,6 @@
 .promo {
-  background: conic-gradient(
-    from 180deg at 50% 50%,
-    rgba(32, 59, 199, 0.1) 0deg,
-    rgba(168, 32, 214, 0.1) 60.00000178813934deg,
-    rgba(229, 36, 154, 0.1) 120.00000357627869deg,
-    rgba(227, 128, 37, 0.1) 180deg,
-    rgba(229, 36, 154, 0.1) 240.00000715255737deg,
-    rgba(168, 32, 214, 0.1) 299.9999928474426deg,
-    rgba(32, 59, 199, 0.1) 360deg
-  );
-  padding: 2em;
+  background: var(--color-black-03);
+  padding: 7em 7.5em;
   max-width: 90em;
   margin: 0 auto;
   width: 100%;

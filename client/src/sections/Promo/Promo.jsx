@@ -8,11 +8,10 @@ const Promo = () => {
       <div className={classes.text}>
         <img src="/logo.svg" alt="" className={classes.icon} />
 
-        <h1>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h1>
+        <h1>Ready to Build Your First Form?</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ad
-          quae deserunt cupiditate mollitia culpa amet laborum omnis, labore
-          aspernatur.
+          Sign up now and experience the easiest way to create and manage forms.
+          It’s fast, intuitive, and powerful—start building today!
         </p>
         <Button>Get Started</Button>
       </div>

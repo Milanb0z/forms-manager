@@ -5,9 +5,14 @@
   gap: 5em;
 
   span {
-    color: var(--color-green);
+    background-color: var(--color-black-02);
+    color: var(--color-white);
+    border: 2px solid var(--color-green);
+    font-weight: bold;
+    border-radius: 5em;
+    padding: 0.75em 1em;
+    min-width: 10em;
   }
-
   h2 {
     font-size: 2.5em;
   }

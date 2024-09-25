@@ -2,6 +2,7 @@
   display: flex;
   gap: 2em;
   align-items: center;
+  overflow: hidden;
   overflow: hidden h1, h2 {
     color: var(--color-black);
   }
@@ -20,9 +21,7 @@
 }
 
 .icon {
-  background-color: red;
   width: 3em;
-  height: 3em;
 }
 
 .cards {
@@ -60,8 +59,12 @@
   align-items: center;
   text-align: center;
 
+  h5 {
+    color: var(--color-green);
+  }
+
   p {
-    max-width: 20ch;
+    max-width: 25ch;
   }
 
   &_img {

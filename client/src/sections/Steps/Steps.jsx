@@ -5,7 +5,7 @@ const STEPS = [1, 2, 3, 4];
 
 const Steps = () => {
   return (
-    <section className={classes.steps}>
+    <section id="steps" className={classes.steps}>
       <div className={classes.row}>
         {STEPS.map((i) => (
           <div className={classes.step} key={i}>

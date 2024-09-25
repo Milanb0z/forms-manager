@@ -1,6 +1,7 @@
 .steps {
   display: flex;
   flex-direction: column;
+
   gap: 5em;
 
   span {
@@ -67,6 +68,23 @@
           rgba(178, 40, 201, 0) 100%
         );
       }
+    }
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .step {
+    text-align: center;
+    flex-direction: column;
+    &:nth-child(even) {
+      flex-direction: column;
+    }
+
+    &_text {
+      gap: 2em;
+    }
+
+    &_img {
     }
   }
 }

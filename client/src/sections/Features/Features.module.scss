@@ -6,10 +6,6 @@
   span {
     color: var(--color-green);
   }
-
-  h2 {
-    font-size: 2.5em;
-  }
 }
 
 .header {
@@ -21,6 +17,16 @@
 
   p {
     max-width: 75ch;
+  }
+
+  span {
+    background-color: var(--color-black-02);
+    color: var(--color-white);
+    border: 2px solid var(--color-green);
+    font-weight: bold;
+    border-radius: 5em;
+    padding: 0.75em 1em;
+    min-width: 10em;
   }
 }
 
@@ -48,34 +54,38 @@
 
     div {
       filter: blur(5em);
-      border-radius: 50em;
+      border-radius: 50%;
+      aspect-ratio: 1 / 1;
+      position: relative;
 
       &:nth-child(1) {
-        flex: 1;
-        aspect-ratio: 1 / 1;
+        width: 20%;
         background: radial-gradient(
           50% 50% at 50% 50%,
-          #b228c9 100%,
+          #fbfd8e 100%,
           rgba(178, 40, 201, 0) 100%
         );
       }
 
       &:nth-child(2) {
-        flex: 4;
-        aspect-ratio: 1 / 1;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        height: 200%;
+        translate: -50% -50%;
+
         background: radial-gradient(
           50% 50% at 50% 50%,
-          #e38025 0%,
+          #b8fd8e 0%,
           rgba(229, 68, 114, 0) 100%
         );
       }
 
       &:nth-child(3) {
-        flex: 3;
-        aspect-ratio: 1 / 1;
+        width: 25%;
         background: radial-gradient(
           50% 50% at 50% 50%,
-          #e54472 0%,
+          #8efdfd 0%,
           rgba(229, 68, 114, 0) 100%
         );
       }
@@ -84,17 +94,12 @@
 }
 
 .card {
-  background-color: var(--color-black-03);
-
+  background-color: var(--color-black-02);
   border-radius: 1em;
   padding: 2em;
   display: flex;
 
   gap: 1.5em;
-
-  h3 {
-    color: var(--color-green);
-  }
 
   &_img {
     width: 3em;
@@ -105,9 +110,20 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
+  }
+}
+@media screen and (max-width: 50em) {
+  .grid_glow {
+    height: 100%;
+    flex-direction: column;
+    rotate: 45deg;
+    div {
+      width: 3em;
 
-    h3 {
-      font-size: 1.375em;
+      &:nth-child(2) {
+        width: 50%;
+        height: auto;
+      }
     }
   }
 }

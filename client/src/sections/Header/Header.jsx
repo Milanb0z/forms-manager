@@ -10,12 +10,11 @@ import SideDrawer from "@components/SideDrawer/SideDrawer";
 import { Button } from "@ui";
 
 const LINKS = [
-  { text: "početna", src: "/#" },
-  { text: "Proizvodi", src: "/#products" },
-  { text: "Benefiti", src: "/#benefits" },
-  { text: "Galerija", src: "/#gallery" },
+  { text: "Home", src: "/#" },
+  { text: "Features", src: "/#features" },
+  { text: "steps", src: "/#steps" },
+  { text: "reviews", src: "/#reviews" },
   { text: "FAQ", src: "/#faq" },
-  { text: "kontakt", src: "/#contact" },
 ];
 
 const revealVar = {
@@ -38,7 +37,7 @@ const Header = () => {
   const background = useTransform(
     scrollY,
     [50, 500],
-    ["rgba(52, 52, 52, 0)", "rgba(52, 52, 52, 1)"]
+    ["rgba(30,30,30, 0)", "rgba(30,30,30, 1)"]
   );
 
   const toggleNav = () => {
@@ -65,6 +64,7 @@ const Header = () => {
       <header className={classes.header}>
         <motion.div variants={revealVar} className={classes.logo}>
           <Link href="/">
+            <img src="/logo.svg" alt="" className={classes.icon} />
             <h4>formr</h4>
           </Link>
         </motion.div>
@@ -76,7 +76,9 @@ const Header = () => {
           ))}
         </motion.ul>
         <motion.div variants={revealVar} className={classes.actions}>
-          <Button>Dashboard</Button>
+          <Link to="/dashboard">
+            <Button>Dashboard</Button>
+          </Link>
         </motion.div>
         <HamburgerIcon onClickHandler={toggleNav} isActive={isOpen} />
         <SideDrawer isOpen={isOpen} onClick={toggleNav} />

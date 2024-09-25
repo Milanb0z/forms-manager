@@ -57,7 +57,7 @@ const ClientCard = ({ title, body }) => {
   return (
     <div className={classes.card}>
       <div className={classes.card_img}></div>
-      <h3>{title}</h3>
+      <h5>{title}</h5>
       <p>{body}</p>
     </div>
   );
@@ -88,10 +88,11 @@ const InfiniteLine = ({ words }) => {
 
 const Reviews = () => {
   return (
-    <section className={classes.reviews}>
+    <section id="reviews" className={classes.reviews}>
       <div className={classes.text}>
-        <div className={classes.icon}></div>
-        <h1>Loved by Teams and Individuals Alike</h1>
+        <img src="/logo.svg" alt="" className={classes.icon} />
+
+        <h2>Loved by Teams and Individuals Alike</h2>
         <p>
           See what our users are saying. From freelancers to businesses, people
           are using our platform to build forms and streamline their data

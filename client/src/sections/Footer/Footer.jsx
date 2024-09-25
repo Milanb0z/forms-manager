@@ -1,16 +1,27 @@
 import React from "react";
 import classes from "./Footer.module.scss";
 
-const LINKS = [1, 2, 3, 4, 5];
+const LINKS = [
+  { text: "Home", src: "/#" },
+  { text: "Features", src: "/#features" },
+  { text: "steps", src: "/#steps" },
+  { text: "reviews", src: "/#reviews" },
+  { text: "FAQ", src: "/#faq" },
+];
 
 const Footer = () => {
   return (
     <footer className={classes.wrapper}>
       <div className={classes.footer}>
-        <h3>LOGO</h3>
+        <div className={classes.logo}>
+          <img src="/logo.svg" alt="" className={classes.icon} />
+          <h4>formr</h4>
+        </div>
         <ul className={classes.links}>
-          {LINKS.map((i) => (
-            <li className={classes.links_item}>{i}</li>
+          {LINKS.map((link) => (
+            <a key={link.text} href={link.src}>
+              <li className={classes.links_item}> {link.text}</li>
+            </a>
           ))}
         </ul>
       </div>

@@ -2,6 +2,13 @@
   background-color: var(--color-black-01);
 }
 
+.logo {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  text-transform: capitalize;
+}
+
 .footer {
   max-width: 94em;
   width: 100%;
@@ -15,10 +22,19 @@
 
 .links {
   display: flex;
+  justify-content: center;
   gap: 1em;
+
   &_item {
-    background-color: red;
-    padding: 0.5em 1em;
+    border-radius: 0.25em;
+    padding: 1em;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
   }
 }
 

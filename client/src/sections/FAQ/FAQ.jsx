@@ -43,13 +43,15 @@ const FAQSection = () => {
   };
 
   return (
-    <section className={classes.faq}>
+    <section id="faq" className={classes.faq}>
       <div className={classes.header}>
         <span>Featues</span>
         <h2>Got Questions? We’ve Got Answers!</h2>
         <p>
-          Check out our FAQ for answers to the most common questions about form
-          creation, customization, and managing submissions.
+          Find answers to common questions about building forms, customizing
+          layouts, managing submissions, and more. Our FAQ section is designed
+          to help you get the most out of our drag-and-drop form builder with
+          ease and efficiency.
         </p>
       </div>
       <div className={classes.questions}>

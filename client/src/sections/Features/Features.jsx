@@ -31,7 +31,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className={classes.features}>
+    <section id="features" className={classes.features}>
       <div className={classes.header}>
         <span>Featues</span>
         <h2>Powerful Features, Simple to Use</h2>
@@ -57,7 +57,7 @@ const FeaturesSection = () => {
             />
 
             <div className={classes.card_text}>
-              <h3>{feature.header}</h3>
+              <h5>{feature.header}</h5>
               <p>{feature.body}</p>
             </div>
           </div>

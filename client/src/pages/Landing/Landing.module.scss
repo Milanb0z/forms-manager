@@ -19,7 +19,7 @@
   h2,
   h3,
   h4 {
-    color: var(--color-green);
+    color: var(--color-white);
   }
 
   p {
@@ -31,7 +31,6 @@
   }
   h2 {
     font-size: 3em;
-    background-color: red;
   }
   h3 {
     font-size: 2.5em;
@@ -39,10 +38,10 @@
   h4 {
     font-size: 2em;
   }
-  h4 {
+  h5 {
     font-size: 1.5em;
   }
-  h4 {
+  h6 {
     font-size: 1.375em;
   }
 }

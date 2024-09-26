@@ -5,14 +5,35 @@
   gap: 0.75em;
   font-size: 1em;
   padding: 1em;
-  border-radius: 1em;
-  background-color: var(--color-blue);
-  color: var(--color-white);
+  border-radius: 0.5em;
+  background-color: var(--color-green);
+  color: var(--color-black);
   border: none;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  img {
+    width: 1em;
+    height: auto;
+  }
 
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+  }
+}
+
+.danger {
+  background-color: var(--color-red);
+  color: #fff;
+}
+
+.outline {
+  background-color: var(--color-black-01);
+  border: 2px solid var(--color-black-03);
+  color: #fff;
+
+  &:hover {
+    background-color: var(--color-black-02);
   }
 }

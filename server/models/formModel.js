@@ -1,18 +1,41 @@
 const mongoose = require("mongoose");
 
+const QUESTION_TEXT_TYPE = ["SHORT", "PARAGRAPH"];
+const QUESTION_OPTION_TYPE = ["MULTIPLE", "RADIO"];
+
 const questionSchema = new mongoose.Schema({
-  questionText: {
+  title: {
     type: String,
     trim: true,
     required: true,
   },
-  options: [String],
+  type: {
+    type: String,
+    enum: [...QUESTION_OPTION_TYPE, ...QUESTION_TEXT_TYPE],
+    required: true,
+  },
+  answer: {
+    type: String,
+    required: isValid(QUESTION_TEXT_TYPE),
+  },
+  options: {
+    type: [String],
+    required: isValid(QUESTION_OPTION_TYPE),
+  },
 });
+
+function isValid(allowedTypes) {
+  if (allowedTypes.indexOf(this.type) > -1) {
+    return true;
+  }
+  return false;
+}
 
 const formSchema = new mongoose.Schema(
   {
-    customId: {
+    customLink: {
       type: String,
+      default: "",
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
@@ -25,7 +48,6 @@ const formSchema = new mongoose.Schema(
     name: {
       type: String,
       trim: true,
-      required: true,
     },
     description: {
       type: String,
@@ -33,6 +55,12 @@ const formSchema = new mongoose.Schema(
       maxLength: 300,
     },
     questions: [questionSchema],
+    invites: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Invite",
+      },
+    ],
   },
   { timestamps: true }
 );

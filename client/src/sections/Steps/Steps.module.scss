@@ -1,0 +1,90 @@
+.steps {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5em;
+
+  span {
+    color: var(--color-green);
+  }
+
+  h2 {
+    font-size: 2.5em;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 5em;
+}
+
+.step {
+  display: flex;
+  gap: 5em;
+  height: 50svh;
+
+  &:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+  & > * {
+    flex: 1;
+  }
+  &_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+  }
+  &_img {
+    position: relative;
+  }
+
+  &_light {
+    div {
+      filter: blur(5em);
+      position: absolute;
+      &:nth-child(1) {
+        bottom: 10%;
+        left: 10%;
+        width: 40%;
+        aspect-ratio: 4 / 3;
+
+        background: radial-gradient(
+          50% 50% at 50% 50%,
+          var(--color-blue) 0%,
+          rgba(178, 40, 201, 0) 100%
+        );
+      }
+      &:nth-child(2) {
+        width: 50%;
+        aspect-ratio: 4 / 3;
+        right: 10%;
+        top: 10%;
+
+        background: radial-gradient(
+          50% 50% at 50% 50%,
+          var(--color-yellow) 0%,
+          rgba(178, 40, 201, 0) 100%
+        );
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .step {
+    text-align: center;
+    flex-direction: column;
+    &:nth-child(even) {
+      flex-direction: column;
+    }
+
+    &_text {
+      gap: 2em;
+    }
+
+    &_img {
+    }
+  }
+}

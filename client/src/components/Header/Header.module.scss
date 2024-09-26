@@ -1,29 +1,30 @@
 .header {
   display: flex;
-  border-bottom: 1px solid var(--color-grey-30);
+  justify-content: space-between;
   align-items: center;
 
-  &_content {
-    padding: 1.5em;
+  &_actions {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex: 1;
+    gap: 2em;
   }
-}
 
-.mobile {
-  display: none;
-}
+  &_text {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
 
-.logo {
-  padding: 1.5em;
-  border-right: 1px solid var(--color-grey-30);
-  display: grid;
-  align-self: stretch;
-  img {
-    width: 50px;
-    height: auto;
+  &_depth {
+    display: flex;
+    gap: 0.75em;
+
+    p {
+      text-transform: uppercase;
+
+      span {
+        color: var(--color-green);
+      }
+    }
   }
 }
 
@@ -32,11 +33,8 @@
   gap: 2em;
 }
 
-@media screen and (max-width: 45em) {
-  .mobile {
-    display: block;
-  }
-  .logo {
+@media screen and (max-width: 65em) {
+  .actions {
     display: none;
   }
 }

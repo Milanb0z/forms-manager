@@ -1,0 +1,155 @@
+.reviews {
+  display: flex;
+  gap: 2em;
+  align-items: center;
+  overflow: hidden;
+  overflow: hidden h1, h2 {
+    color: var(--color-black);
+  }
+
+  & > * {
+    flex: 1;
+    gap: 2em;
+  }
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: flex-start;
+}
+
+.icon {
+  width: 3em;
+}
+
+.cards {
+  display: flex;
+  gap: 2em;
+}
+
+//Scroll Suff
+
+.wrapper {
+  display: flex;
+  max-height: 80svh;
+  width: 100%;
+
+  &:hover {
+    .marquee_group {
+      animation-play-state: paused;
+    }
+  }
+
+  &:nth-child(odd) {
+    .marquee_group {
+      animation-direction: reverse;
+    }
+  }
+}
+
+.card {
+  padding: 2em;
+  background-color: var(--color-black-03);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  text-align: center;
+
+  h5 {
+    color: var(--color-green);
+  }
+
+  p {
+    max-width: 25ch;
+  }
+
+  &_img {
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+}
+
+.marquee {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  gap: 2em;
+  mask-image: linear-gradient(
+    180deg,
+    rgba(217, 217, 217, 0) 0%,
+    #d9d9d9 25%,
+    #d9d9d9 50%,
+    #d9d9d9 75%,
+    rgba(217, 217, 217, 0) 100%
+  );
+}
+
+.marquee_group {
+  flex-direction: column;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  gap: 2em;
+  min-width: 100%;
+  animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - 2em));
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .reviews {
+    flex-direction: column;
+    gap: 5em;
+  }
+
+  .text {
+    justify-content: flex-start;
+    text-align: center;
+    align-items: center;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  .marquee {
+    flex-direction: row;
+    mask-image: linear-gradient(
+      to left,
+      hsl(0 0% 0% / 0),
+      hsl(0 0% 0% / 1) 10%,
+      hsl(0 0% 0% / 1) 90%,
+      hsl(0 0% 0% / 0)
+    );
+    max-width: 100%;
+    width: 50em;
+
+    &_group {
+      flex-direction: row;
+    }
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - 2em));
+    }
+  }
+}

@@ -1,11 +1,12 @@
-import { useContext, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //Context
-import { UserContext } from "@context/user.context";
+
+import { ToastContainer } from "react-toastify";
 
 // Pages
 import {
+  Invite,
   EditForm,
   ExploreForms,
   FormResults,
@@ -14,29 +15,29 @@ import {
   SignUp,
   SingleForm,
   UserDetails,
-  DragNDropForm,
+  MainDashboard,
+  Landing,
+  NotFoundPage,
 } from "@pages";
 
 import ProtectedRoute from "@hoc/ProtectedRoute";
 
-import axios from "./axios.default.js";
 import Profile from "./pages/Profile/Profile.jsx";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import PageWrapper from "@hoc/PageWrapper.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <DndProvider backend={HTML5Backend}>
-        <DragNDropForm />
-      </DndProvider>
-    ),
+    element: <Landing />,
+  },
+
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
-    path: "/form",
-    element: <ExploreForms />,
-    index: true,
+    path: "/signup",
+    element: <SignUp />,
   },
   {
     path: "/form/id/:formId",
@@ -47,54 +48,67 @@ const router = createBrowserRouter([
     element: <SingleForm />,
   },
   {
-    path: "/form/edit/:formId",
-    element: <EditForm />,
+    path: "/invite/:inviteId",
+    element: <SingleForm inviteMode />,
   },
+
   {
-    path: "/form/new",
+    path: "/dashboard",
     element: (
       <ProtectedRoute>
-        <NewForm />
+        <PageWrapper />
       </ProtectedRoute>
     ),
+    children: [
+      {
+        path: "",
+        element: <MainDashboard />,
+      },
+      {
+        path: "invite/:formId",
+        element: <Invite />,
+      },
+      {
+        path: "form",
+        element: <ExploreForms />,
+      },
+      {
+        path: "form/new",
+        element: <NewForm />,
+      },
+      {
+        path: "form/edit/:formId",
+        element: <EditForm />,
+      },
+      {
+        path: "results/:formId",
+        element: <FormResults />,
+      },
+      {
+        path: "user/:username",
+        element: <UserDetails />,
+      },
+
+      {
+        path: "me",
+        element: <Profile />,
+      },
+    ],
   },
+
   {
-    path: "/me",
-    element: (
-      <ProtectedRoute>
-        <Profile />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/results/:formId",
-    element: <FormResults />,
-  },
-  {
-    path: "/user/:username",
-    element: <UserDetails />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
 const App = () => {
-  const [, setUser] = useContext(UserContext);
-  useEffect(() => {
-    let token = localStorage.getItem("token");
-
-    axios.get("/user/profile", { headers: { token } }).then((res) => {
-      setUser(res.data.user);
-    });
-  }, []);
-
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer theme="dark" position="bottom-right" />
+    </>
+  );
 };
 
 export default App;

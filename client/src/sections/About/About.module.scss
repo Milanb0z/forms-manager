@@ -1,0 +1,29 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+
+  h2 {
+    font-size: 3em;
+    max-width: 26ch;
+    color: var(--color-black-03);
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 2em;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 30em 20em;
+}
+
+.card {
+  background-color: #f6f6f9;
+  border-radius: 0.5em;
+  padding: 1em;
+  color: red;
+
+  &:nth-child(3) {
+    grid-column: span 2;
+  }
+}

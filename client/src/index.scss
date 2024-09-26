@@ -1,17 +1,26 @@
 :root {
-  --color-black: #000;
-  --color-navy: #092c4c;
-  --color-blue: #514ef3;
-  --color-green: #2dc8a8;
-  --color-yellow: #ffc357;
-  --color-pink: #fe8084;
+  --color-black-01: #171717;
+  --color-black-02: #1e1e1e;
+  --color-black-03: #343434;
 
-  --color-grey-90: #526477;
-  --color-grey-70: #7e92a2;
-  --color-grey-50: #d6e1e6;
-  --color-grey-30: #eaeef4;
-  --color-grey-10: #f6fafd;
+  --color-green: #b8fd8e;
+  --color-blue: #8efdfd;
+  --color-yellow: #fbfd8e;
+  --color-red: #ff6551;
+
+  --color-black: #000;
+  --color-grey: #757575;
   --color-white: #fff;
+
+  --toastify-color-success: var(--color-green);
+  --toastify-color-dark: var(--color-black-03);
+
+  --toastify-color-light: #fff;
+  --toastify-color-dark: #343434;
+  --toastify-color-info: #8efdfd;
+  --toastify-color-success: #b8fd8e;
+  --toastify-color-warning: #fbfdfb;
+  --toastify-color-error: #ff642c;
 }
 
 * {
@@ -22,12 +31,15 @@
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
+  scroll-padding: 10em;
 }
 
 body {
   font-size: 1.6em;
   font-family: "Inter", sans-serif;
-  color: var(--color-grey-90);
+  color: var(--color-white);
+  background-color: var(--color-black-01);
 }
 
 a {
@@ -35,14 +47,25 @@ a {
   color: inherit;
 }
 
+ul {
+  list-style-type: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-white);
+}
+
 h1 {
-  font-size: 2em;
+  font-size: 2.25em;
 }
 h2 {
-  font-size: 1.75em;
+  font-size: 1.5em;
 }
 h3 {
-  font-size: 1.5em;
+  font-size: 1.125em;
 }
 h4 {
   font-size: 1.25em;
@@ -52,7 +75,53 @@ h5 {
 }
 p {
   font-size: 1em;
+  color: var(--color-grey);
+
+  span {
+    color: var(--color-green);
+  }
 }
-span {
-  font-size: 0.875em;
+
+// Slection Color
+
+::-moz-selection {
+  /* Code for Firefox */
+  color: var(--color-black-02);
+  background: var(--color-yellow);
+}
+
+::selection {
+  color: var(--color-black-02);
+  background: var(--color-yellow);
+}
+
+//Custom ScrollBar
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-black-03);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-yellow);
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-yellow);
+}
+
+@media screen and (max-width: 50em) {
+  body {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 1.2em;
+  }
 }

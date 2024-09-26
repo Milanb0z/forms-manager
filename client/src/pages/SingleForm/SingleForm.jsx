@@ -1,98 +1,259 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useParams } from "react-router";
 
-import PageWrapper from "@hoc/PageWrapper";
-
-import classes from "./SingleForm.module.scss";
+import { Button } from "@ui";
 
 import axios from "../../axios.default";
-import Question from "@components/Question/Question";
-import { Button } from "@ui";
-import ProfileCard from "@components/ProfileCard/ProfileCard";
-import { UserContext } from "@context/user.context";
 
-const SingleForm = ({ byId = false }) => {
-  const [user] = useContext(UserContext);
-  const { formId } = useParams();
-  const navigate = useNavigate();
-  const [form, setForm] = useState(null);
+import classes from "./SingleForm.module.scss";
+import getAnsSchema from "@utils/getAnsSchema";
+import QUESTION_TYPES from "@utils/questionTypes";
+import { Input } from "@ui";
+import { TextArea } from "@ui";
+import { toast } from "react-toastify";
+
+const questionVars = {
+  initial: {
+    y: 20,
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+  },
+  exit: {
+    y: -20,
+    opacity: 0,
+  },
+};
+
+const SingleAnswer = ({
+  options,
+  type,
+  answer,
+  onTypingHandler,
+  onChoiceSelect,
+  index,
+}) => {
+  let content = null;
+
+  switch (type) {
+    case QUESTION_TYPES.MULTIPLE:
+      content = options.map((ans) => (
+        <p
+          className={
+            answer.find((opt) => opt === ans) ? classes.answers_checked : ""
+          }
+          key={ans}
+          onClick={onChoiceSelect.bind(this, index, ans, false)}
+        >
+          {ans}
+        </p>
+      ));
+      break;
+
+    case QUESTION_TYPES.RADIO:
+      content = options.map((ans, i) => (
+        <p
+          key={ans}
+          className={
+            answer.find((opt) => opt === ans) ? classes.answers_checked : ""
+          }
+          onClick={onChoiceSelect.bind(this, index, ans, true)}
+        >
+          {ans}
+        </p>
+      ));
+      break;
+
+    case QUESTION_TYPES.SHORT:
+      content = (
+        <Input
+          placeholder="Enter Your Answer Here"
+          value={answer}
+          onChange={(e) => onTypingHandler(index, e)}
+        />
+      );
+      break;
+    case QUESTION_TYPES.PARAGRAPH:
+      content = (
+        <TextArea
+          placeholder="Enter Your Answer Here"
+          value={answer}
+          onChange={(e) => onTypingHandler(index, e)}
+        />
+      );
+      break;
+
+    default:
+      content = "";
+      break;
+  }
+
+  return <div className={classes.answers}>{content}</div>;
+};
+
+const SingleForm = ({ byId, inviteMode }) => {
+  const { formId, inviteId } = useParams();
+  const [index, setIndex] = useState(0);
+  const [form, setForm] = useState([]);
   const [answers, setAnswers] = useState([]);
+  const [infoOpen, setInfoOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    toast
-      .promise(axios.get(`/form/${byId ? "/id" : ""}${formId}`), {
-        pending: "Fetching Forms",
-        success: "Fetched Succesfully 👌",
-        error: "Error 🤯",
-      })
+    setIsLoading(true);
+    const urlStir = inviteMode
+      ? `/invite/solve/${inviteId}`
+      : `/form/${byId ? "id/" : ""}${formId}`;
+    axios
+      .get(urlStir)
       .then((res) => {
+        console.log(res.data);
         setForm(res.data);
-        let answers = res.data.questions.map((question) => ({
-          questionId: question._id,
-          optionValue: null,
-        }));
-        setAnswers(answers);
+        setAnswers(getAnsSchema(res.data.questions));
+        setIsLoading(false);
       })
       .catch(() => {
-        toast.error("Something Went Wrong");
+        setIsLoading(false);
       });
-  }, [formId, navigate]);
+  }, [formId, byId]);
 
-  const handleChange = (e, questionIndex, val) => {
-    let newAnswers = [...answers];
+  // Ans Stuff
 
-    newAnswers[questionIndex].optionValue = val;
-    setAnswers(newAnswers);
+  const onTypingHandler = (queIndex, { target: { value } }) => {
+    let newAns = [...answers];
+    newAns[queIndex].data = value;
+    console.log(newAns);
+    setAnswers(newAns);
   };
 
-  const handleSubmit = () => {
+  const onChoiceSelected = (queIndex, value, radio) => {
+    let newAns = [...answers];
+
+    const index = newAns[queIndex].data.indexOf(value);
+    if (index >= 0) {
+      newAns[queIndex].data.splice(index, 1);
+    } else {
+      if (radio) {
+        newAns[queIndex].data = [value];
+      } else {
+        newAns[queIndex].data.push(value);
+      }
+    }
+    setAnswers(newAns);
+  };
+
+  // Toolbar Stuff
+  const onNextQuestion = () => {
+    setIndex((p) => p + 1);
+  };
+
+  const onPrevQuestion = () => {
+    setIndex((p) => p - 1);
+  };
+
+  const submitForm = () => {
+    console.log(answers);
     const submitData = { response: answers };
-    axios.post(`/response/${formId}`, submitData).then((res) => {
-      console.log(res);
-      navigate("/form");
-    });
+    const submitUrl = inviteMode
+      ? `/invite/end/${inviteId}`
+      : `/response/${form._id}`;
+    axios
+      .post(submitUrl, submitData)
+      .then((res) => {
+        console.log(res);
+        toast("Submited Succesfully");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.error);
+      });
   };
 
-  return (
-    <PageWrapper>
-      {form ? (
-        <div className={classes.form}>
-          <div className={classes.form_header}>
+  const toggleInfo = () => {
+    setInfoOpen((p) => !p);
+  };
+
+  if (form.questions?.length > 0) {
+    return (
+      <div className={classes.wrapper}>
+        <motion.div
+          initial={{ y: "100%" }}
+          animate={{ y: infoOpen ? 0 : "100%" }}
+          transition={{ ease: "easeInOut" }}
+          className={classes.info}
+        >
+          <div className={classes.info_header}>
+            <Button onClick={toggleInfo} iconUrl="/exit.svg" />
+          </div>
+          <div className={classes.info_text}>
             <h1>{form.name}</h1>
             <p>{form.description}</p>
+            <p>
+              Created By: <span>{form.createdBy.username}</span>{" "}
+            </p>
           </div>
-          <Link to={`/user/${form.createdBy.username}`}>
-            <ProfileCard
-              username={form.createdBy.username}
-              email={form.createdBy.email}
-            />
-          </Link>
-          <div className={classes.form_questions}>
-            {form.questions.map((question, index) => (
-              <Question
-                key={question._id}
-                id={index}
-                submitedAnswer={answers[index].optionValue}
-                questionText={question.questionText}
-                options={question.options}
-                onAnswer={handleChange}
-              />
-            ))}
-          </div>
-          <div className={classes.form_actions}>
-            <Button onClick={handleSubmit}>Submit Form</Button>
-            {user?._id === form.createdBy._id ? (
-              <Link to={`/form/edit/${formId}`}>
-                <Button>Edit Form</Button>
-              </Link>
-            ) : null}
+        </motion.div>
+        <div className={classes.content}>
+          <div className={classes.question}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                variants={questionVars}
+                transition={{ staggerChildren: 0.15 }}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                key={index}
+                className={classes.question}
+              >
+                <h2 className={classes.question_text}>
+                  {form.questions[index].title}
+                </h2>
+                <div className={classes.answers}>
+                  <SingleAnswer
+                    index={index}
+                    answer={answers[index].data}
+                    onChoiceSelect={onChoiceSelected}
+                    onTypingHandler={onTypingHandler}
+                    type={form.questions[index].type}
+                    options={form.questions[index].options}
+                  />
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
-      ) : null}
-    </PageWrapper>
-  );
+        <div className={classes.indicatior}>
+          <p>
+            {index + 1} of {form.questions.length}
+          </p>
+          <div className={classes.indicatior_line}>
+            <motion.div
+              animate={{
+                width: (100 / form.questions.length) * (index + 1) + "%",
+              }}
+              className={classes.indicatior_line_fill}
+            ></motion.div>
+          </div>
+        </div>
+        <div className={classes.actions}>
+          <Button disabled={index == 0} onClick={onPrevQuestion}>
+            Prev Question
+          </Button>
+
+          {index + 1 === form.questions.length ? (
+            <Button onClick={submitForm}>Submit Form</Button>
+          ) : (
+            <Button onClick={onNextQuestion}>Next Question</Button>
+          )}
+          <Button iconUrl="/options.svg" onClick={toggleInfo} />
+        </div>
+      </div>
+    );
+  } else {
+    return <h2>No </h2>;
+  }
 };
 
 export default SingleForm;

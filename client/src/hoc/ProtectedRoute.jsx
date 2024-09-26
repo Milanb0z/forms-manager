@@ -1,14 +1,27 @@
-import { useContext } from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
-import { UserContext } from "../context/user.context";
+import { Navigate } from "react-router-dom";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+
+import { useGetProfileQuery } from "@store/authSlice";
 
 const ProtectedRoute = ({ children }) => {
-  const [user] = useContext(UserContext);
-  if (!user) {
-    return <Navigate to="/login" replace />;
+  const { data: user, isLoading } = useGetProfileQuery();
+
+  if (isLoading) {
+    return (
+      <div
+        style={{ height: "100svh", display: "grid", placeContent: "center" }}
+      >
+        {" "}
+        <LoadingSpinner />
+      </div>
+    );
   }
 
-  return children;
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  } else {
+    return children;
+  }
 };
 
 export default ProtectedRoute;

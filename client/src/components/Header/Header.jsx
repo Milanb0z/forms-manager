@@ -1,44 +1,46 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import ProfileCard from "@components/ProfileCard/ProfileCard";
 
 import { Button } from "@ui";
 
-import Logo from "@assets/logo.svg";
-import Add from "@assets/add.svg";
+import Profile from "@assets/profile.svg";
 
 import classes from "./Header.module.scss";
-import { UserContext } from "@context/user.context";
-import HamburgerIcon from "@components/HamburgerIcon/HamburgerIcon";
 
-const Header = ({ title, onNavToggle, isActive }) => {
-  const [user] = useContext(UserContext);
+import { useGetProfileQuery } from "@store/authSlice";
+
+const Header = ({ title, link }) => {
+  const { data: user } = useGetProfileQuery();
 
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>
-        <Link to="/form">
-          <img src={Logo} alt="Logo" />
-        </Link>
-      </div>
-      <div className={classes.header_content}>
-        <div className={classes.mobile}>
-          <HamburgerIcon onClickHandler={onNavToggle} isActive={isActive} />
+      <div className={classes.header_text}>
+        <div className={classes.header_depth}>
+          <p>dashboard</p>
+          <p>/</p>
+          <p>
+            <span>{link || "monitoring"}</span>
+          </p>
         </div>
-
-        <h3>{title || "Dashboard"}</h3>
+        <h2>{title || "Welcome to Dashboard"}</h2>
+      </div>
+      <div className={classes.header_actions}>
         {user ? (
           <div className={classes.actions}>
-            <Link to="/form/new">
-              <Button iconUrl={Add}>New Form</Button>
+            <Link to="/dashboard/form/new">
+              <Button outline iconUrl="/add.svg" />
+            </Link>
+
+            <Link to="/dashboard/me">
+              <Button outline iconUrl={Profile} />
             </Link>
             <ProfileCard username={user.username} email={user.email} />
           </div>
         ) : (
           <div className={classes.actions}>
             <Link to="/login">
-              <Button>Login</Button>
+              <Button outline>Login</Button>
             </Link>
           </div>
         )}

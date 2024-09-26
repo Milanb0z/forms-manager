@@ -1,34 +1,32 @@
-import { useState } from "react";
-
 import classes from "./PageWrapper.module.scss";
+import { cubicBezier, motion } from "framer-motion";
 
 import Sidenav from "@components/Sidenav/Sidenav";
 import Header from "@components/Header/Header";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Outlet } from "react-router";
 
-const PageWrapper = ({ children, title }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleNav = () => {
-    setIsOpen((prevState) => !prevState);
-  };
-
+const PageWrapper = ({ title, link }) => {
   return (
-    <section className={classes.wrapper}>
-      {isOpen ? (
-        <div onClick={toggleNav} className={classes.backdrop}></div>
-      ) : null}
+    <main className={classes.wrapper}>
+      <Sidenav />
+      <div className={classes.content}>
+        <Header title={title} link={link} />
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -100, opacity: 0 }}
+          transition={{ ease: cubicBezier(0.25, 0.23, 0.29, 1) }}
+          className={classes.main}
+        >
+          <Outlet />
+        </motion.div>
+      </div>
 
-      <Header isActive={isOpen} title={title} onNavToggle={toggleNav} />
-      <main className={classes.main}>
-        <Sidenav isOpen={isOpen} />
-        <div className={classes.content}>{children}</div>
-
-        <ToastContainer position="bottom-right" />
-      </main>
-    </section>
+      <ToastContainer theme="dark" position="bottom-right" />
+    </main>
   );
 };
 

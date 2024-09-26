@@ -27,9 +27,14 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+//Get Profile
 router.get("/profile", auth, async (req, res) => {
   try {
-    res.send({ user: req.user });
+    const user = await req.user.populate("createdForms");
+
+    let token = generateToken(res, user._id);
+
+    res.send({ user, token });
   } catch (error) {
     console.log(error);
     res.status(500).send({ error });
@@ -45,7 +50,7 @@ router.patch("/", auth, async (req, res) => {
       username,
       email,
     });
-
+    console.log(updatedUser);
     res.send(updatedUser);
   } catch (error) {
     console.log(error);
@@ -56,7 +61,7 @@ router.patch("/", auth, async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
-    const foundUser = await User.findOne({ email });
+    const foundUser = await User.findOne({ email }).populate("createdForms");
     if (!foundUser) {
       return res.status(404).send({ error: "User not Found" });
     }
@@ -80,6 +85,8 @@ router.get("/:username", async (req, res) => {
     const { username } = req.params;
 
     const foundUser = await User.findOne({ username }).populate("createdForms");
+
+    console.log(foundUser);
 
     if (!foundUser) {
       return res.status(404).send({ error: "User not found" });

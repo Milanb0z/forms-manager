@@ -1,0 +1,54 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-black-02);
+  overflow: hidden;
+  gap: 10em;
+
+  button {
+    min-width: 10em;
+  }
+
+  section {
+    max-width: 90em;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-white);
+  }
+
+  p {
+    color: var(--color-white);
+  }
+
+  h1 {
+    font-size: 4.5em;
+  }
+  h2 {
+    font-size: 3em;
+  }
+  h3 {
+    font-size: 2.5em;
+  }
+  h4 {
+    font-size: 2em;
+  }
+  h5 {
+    font-size: 1.5em;
+  }
+  h6 {
+    font-size: 1.375em;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10em;
+  padding: 0 2em;
+}

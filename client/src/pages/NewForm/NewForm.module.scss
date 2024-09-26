@@ -1,31 +1,68 @@
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  height: 100%;
+.wrapper {
   flex: 1;
+  display: flex;
+  gap: 2em;
+  overflow: hidden;
+
+  & > * {
+    flex: 1;
+  }
 }
 
-.form {
+.board {
+  background-color: var(--color-black-02);
+  border-radius: 0.5em;
+}
+
+.info {
   display: flex;
   flex-direction: column;
+  gap: 1em;
+}
 
+.mobile {
+  display: none;
+}
+
+.question {
   flex: 1;
-  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
 
-  &_main {
-    padding: 1.5em 2em;
-    display: flex;
+  &_type {
+    text-align: center;
+    padding: 1em;
+    background-color: var(--color-black-02);
+    border-radius: 0.5em;
+  }
+}
+
+@media screen and (max-width: 75em) {
+  .mobile {
+    display: block;
+    flex: unset;
+  }
+  .wrapper {
     flex-direction: column;
-    gap: 2em;
-    flex: 1;
-    overflow: auto;
+    overflow: hidden;
+
+    position: relative;
   }
 
-  &_actions {
-    display: flex;
-    gap: 1em;
-    padding: 2em;
-    border-top: 1px solid var(--color-grey-30);
+  .info {
+    &_open {
+      translate: 0 0%;
+    }
+
+    translate: 0 100%;
+    transition: translate 0.3s ease;
+    position: absolute;
+    background-color: var(--color-black-03);
+    border-radius: 1em 1em 0 0;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    padding: 4em 2em;
   }
 }

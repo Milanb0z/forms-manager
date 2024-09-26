@@ -1,0 +1,43 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 1em;
+  overflow: hidden;
+
+  cursor: pointer;
+  background: var(--color-black-03);
+
+  p {
+    max-width: 100ch;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5em;
+  gap: 2em;
+
+  h5 {
+    color: var(--color-yellow);
+  }
+
+  img {
+    height: 2em;
+  }
+}
+
+.btn {
+  width: 3em;
+  height: 3em;
+  display: grid;
+  place-content: center;
+}
+
+.answer {
+  padding: 0 1.5em 1.5em;
+
+  text-align: left;
+}

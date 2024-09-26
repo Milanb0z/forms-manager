@@ -7,6 +7,7 @@ const { Form } = require("../models/formModel");
 router.post("/new", auth, async (req, res) => {
   try {
     const user = req.user;
+    console.log({ user });
     const { name, description, customLink, questions } = req.body;
 
     const newForm = new Form({
@@ -46,6 +47,8 @@ router.get("/", async (req, res) => {
 router.get("/id/:formId", async (req, res) => {
   try {
     const { formId } = req.params;
+
+    console.log(formId);
     const fetchedForm = await Form.findOne({ customLink: formId })
       .populate("createdBy")
       .select("-createdBy.password");
@@ -61,7 +64,7 @@ router.get("/id/:formId", async (req, res) => {
   }
 });
 
-// Get Forms By ID
+// Get Forms By _id
 router.get("/:formId", async (req, res) => {
   try {
     const { formId } = req.params;
@@ -84,7 +87,7 @@ router.get("/:formId", async (req, res) => {
 router.put("/:formId", auth, async (req, res) => {
   try {
     const { formId } = req.params;
-    const { name, description, customLink } = req.body;
+    const { name, description, customLink, isOpen } = req.body;
 
     const updateFrom = await Form.findByIdAndUpdate(
       formId,
@@ -92,6 +95,7 @@ router.put("/:formId", auth, async (req, res) => {
         name,
         description,
         customLink,
+        isOpen,
       },
       { new: true }
     );

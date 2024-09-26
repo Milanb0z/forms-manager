@@ -1,0 +1,49 @@
+.card {
+  grid-column: span 4;
+  grid-row: span 3;
+}
+.table {
+  border: 2px solid var(--color-black-03);
+  border-radius: 0.5em;
+
+  th {
+    background-color: var(--color-black-01);
+    color: var(--color-green);
+    padding: 1em;
+    border-radius: 0.25em;
+  }
+  td {
+    background-color: var(--color-black-03);
+    padding: 1em;
+    border-radius: 0.25em;
+  }
+
+  &_action {
+    display: flex;
+    gap: 1em;
+  }
+}
+
+.content {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  gap: 1em;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+@media screen and (max-width: 50em) {
+  .card {
+    grid-column: span 2;
+  }
+}

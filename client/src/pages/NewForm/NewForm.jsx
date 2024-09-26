@@ -1,110 +1,195 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-
-import axios from "../../axios.default";
-
-import { Button, Input } from "@ui";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import useInput from "@hooks/useInput";
-import PageWrapper from "@hoc/PageWrapper";
-import NewQuestionForm from "@components/NewQuestionForm/NewQuestionForm";
+import { TextArea, Input, Button } from "@ui";
 
 import classes from "./NewForm.module.scss";
 
+import DraggableQuestion from "@components/DraggableQuestion/DraggableQuestion";
+import QuestionContainer from "@components/QuestionContainer/QuestionContainer";
+import { useCreateFormMutation } from "@store/formSlice";
+
+const QUESTION_TYPES = {
+  MULTIPLE: "MULTIPLE",
+  RADIO: "RADIO",
+  UPLOAD: "UPLOAD",
+  SHORT: "SHORT",
+  PARAGRAPH: "PARAGRAPH",
+};
+
+const questionTypes = [
+  {
+    label: "Multiple Choice Type",
+    data: {
+      title: "",
+      options: [],
+      type: QUESTION_TYPES.MULTIPLE,
+    },
+  },
+
+  {
+    label: "Single Choice Type",
+    data: {
+      title: "",
+      options: [],
+      type: QUESTION_TYPES.RADIO,
+    },
+  },
+
+  {
+    label: "Short Text Answer",
+    data: {
+      title: "",
+      answer: "",
+      type: QUESTION_TYPES.SHORT,
+    },
+  },
+
+  {
+    label: "Paragraph Text Answer",
+    data: {
+      title: "",
+      answer: "",
+      type: QUESTION_TYPES.PARAGRAPH,
+    },
+  },
+
+  {
+    label: "Upload FIle Answer",
+    data: {
+      title: "",
+      answer: "",
+      type: QUESTION_TYPES.UPLOAD,
+    },
+  },
+];
+
 const NewForm = () => {
+  const navigate = useNavigate();
+  const [questions, setQuestions] = useState([]);
   const [heading, setHeading] = useInput("");
   const [description, setDescription] = useInput("");
   const [customLink, setCustomLink] = useInput("");
+  const [openDrawer, setOpenDrawer] = useState(false);
 
-  const [questions, setQuestions] = useState([]);
+  const [createForm] = useCreateFormMutation();
 
-  const addNewQuestion = () => {
-    setQuestions((prevQuestion) => [
-      ...prevQuestion,
-      { questionText: "", options: [""] },
-    ]);
+  const onQuestionDelete = (index) => {
+    const newQuestions = [...questions];
+    newQuestions.splice(index, 1);
+    setQuestions(newQuestions);
   };
 
-  const addAnswer = (questionId) => {
-    let prevQuestions = [...questions];
-    prevQuestions[questionId].options.push("");
-    setQuestions([...prevQuestions]);
+  const toggleDrawer = () => {
+    setOpenDrawer((p) => !p);
   };
 
-  const onQuestionTitleChange = ({ target }, index) => {
-    let prevQuestion = [...questions];
-    prevQuestion[index].questionText = target.value;
-    setQuestions([...prevQuestion]);
+  const onTitleEdit = ({ target: { value } }, index) => {
+    const newQuestions = [...questions];
+    newQuestions[index].title = value;
+    setQuestions(newQuestions);
   };
 
-  const onOptionTextChange = ({ target }, questionId, optionId) => {
-    let prevQuestion = [...questions];
-    prevQuestion[questionId].options[optionId] = target.value;
-    setQuestions([...prevQuestion]);
+  const onDropHandler = (question) => {
+    const newQuestion = JSON.parse(JSON.stringify(question));
+    setQuestions((prevQuestions) => [...prevQuestions, { ...newQuestion }]);
   };
 
-  const onFormSubmit = () => {
+  // Choice CRUD
+  const onNewChoice = (index) => {
+    const newQuestions = [...questions];
+    newQuestions[index].options.push("");
+    setQuestions(newQuestions);
+  };
+
+  const onChoiceEdit = (questionIndex, optionIndex, { target: { value } }) => {
+    const newQuestions = [...questions];
+    newQuestions[questionIndex].options[optionIndex] = value;
+    setQuestions(newQuestions);
+  };
+
+  const onChoiceDelete = (questionIndex, optionIndex) => {
+    const newQuestions = [...questions];
+    newQuestions[questionIndex].options.splice(optionIndex, 1);
+    setQuestions(newQuestions);
+  };
+  const onFormSubmit = (e) => {
+    e.preventDefault();
     let formSubmitData = { name: heading, description, customLink, questions };
-    let token = localStorage.getItem("token");
-    axios
-      .post("/form/new", formSubmitData, { headers: { token } })
-      .then((res) => {
-        console.log(res);
+
+    console.log(formSubmitData);
+
+    createForm(formSubmitData)
+      .unwrap()
+      .then(() => {
+        toast("Form Created");
+        navigate("/dashboard");
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
+        toast.error("Error Occured");
       });
   };
 
   return (
-    <PageWrapper title="Create Form">
-      <div className={classes.content}>
-        <div className={classes.form}>
-          <div className={classes.form_main}>
-            <Input
-              label="Title"
-              value={heading}
-              onChange={setHeading}
-              placeholder="Title"
-            />
-            <Input
-              label="Description"
-              value={description}
-              onChange={setDescription}
-              placeholder="Description"
-            />
-            <Input
-              label="Custom Link"
-              value={customLink}
-              onChange={setCustomLink}
-              placeholder="Custom Link"
-            />
-            {questions.map((opt, index) => (
-              <NewQuestionForm
-                key={index}
-                option={opt}
-                index={index}
-                onTitleEdit={onQuestionTitleChange}
-                onOptionEdit={onOptionTextChange}
-                newAnswer={addAnswer}
+    <DndProvider backend={HTML5Backend}>
+      <div className={classes.wrapper}>
+        <QuestionContainer
+          questions={questions}
+          onDropHandler={onDropHandler}
+          onDelete={onQuestionDelete}
+          onEdit={onTitleEdit}
+          onNewChoice={onNewChoice}
+          onChoiceEdit={onChoiceEdit}
+          onChoiceDelete={onChoiceDelete}
+          onSubmit={onFormSubmit}
+        />
+        <div className={classes.mobile}>
+          <Button onClick={toggleDrawer}>Add Question</Button>
+        </div>
+        <div
+          className={`${classes.info} ${openDrawer ? classes.info_open : ""}`}
+        >
+          <div className={classes.mobile}>
+            <Button onClick={toggleDrawer}>Open</Button>
+          </div>
+          <Input
+            label="Title"
+            value={heading}
+            onChange={setHeading}
+            placeholder="Title"
+          />
+          <Input
+            label="Custom Link"
+            value={customLink}
+            onChange={setCustomLink}
+            placeholder="Custom Link"
+          />
+          <TextArea
+            label="Description"
+            value={description}
+            onChange={setDescription}
+            placeholder="Description"
+          />
+
+          <h3>Question Types</h3>
+          <div className={classes.question}>
+            {questionTypes.map(({ data, label, icon }) => (
+              <DraggableQuestion
+                imgUrl={icon}
+                onClickHandler={onDropHandler}
+                data={data}
+                label={label}
+                key={label}
               />
             ))}
           </div>
-
-          <div className={classes.form_actions}>
-            <Button onClick={addNewQuestion}>Add Question</Button>
-            <Button onClick={onFormSubmit}>Submit Form</Button>
-            <Button
-              onClick={() => {
-                toast("sd");
-              }}
-            >
-              Notify
-            </Button>
-          </div>
         </div>
       </div>
-    </PageWrapper>
+    </DndProvider>
   );
 };
 

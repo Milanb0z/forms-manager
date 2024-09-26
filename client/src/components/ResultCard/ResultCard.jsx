@@ -1,4 +1,4 @@
-import FormatDate from "../../utils/formatDate";
+import FormatDate from "@utils/Fom";
 
 import { Card } from "@ui";
 

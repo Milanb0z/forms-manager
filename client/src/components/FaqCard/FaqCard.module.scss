@@ -18,10 +18,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5em;
+  gap: 2em;
 
-  h4 {
-    font-size: 1.75em;
+  h5 {
     color: var(--color-yellow);
+  }
+
+  img {
+    height: 2em;
   }
 }
 

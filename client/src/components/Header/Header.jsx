@@ -4,7 +4,6 @@ import ProfileCard from "@components/ProfileCard/ProfileCard";
 
 import { Button } from "@ui";
 
-import Add from "@assets/add.svg";
 import Profile from "@assets/profile.svg";
 
 import classes from "./Header.module.scss";
@@ -30,7 +29,7 @@ const Header = ({ title, link }) => {
         {user ? (
           <div className={classes.actions}>
             <Link to="/dashboard/form/new">
-              <Button outline iconUrl={Add} />
+              <Button outline iconUrl="/add.svg" />
             </Link>
 
             <Link to="/dashboard/me">

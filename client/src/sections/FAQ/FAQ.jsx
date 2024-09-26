@@ -45,7 +45,7 @@ const FAQSection = () => {
   return (
     <section id="faq" className={classes.faq}>
       <div className={classes.header}>
-        <span>Featues</span>
+        <span>FAQ</span>
         <h2>Got Questions? We’ve Got Answers!</h2>
         <p>
           Find answers to common questions about building forms, customizing

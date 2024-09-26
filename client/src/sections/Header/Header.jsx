@@ -36,7 +36,7 @@ const Header = () => {
   const { scrollY } = useScroll();
   const background = useTransform(
     scrollY,
-    [50, 500],
+    [0, 500],
     ["rgba(30,30,30, 0)", "rgba(30,30,30, 1)"]
   );
 
@@ -63,10 +63,10 @@ const Header = () => {
     >
       <header className={classes.header}>
         <motion.div variants={revealVar} className={classes.logo}>
-          <Link href="/">
+          <a href="/#  ">
             <img src="/logo.svg" alt="" className={classes.icon} />
             <h4>formr</h4>
-          </Link>
+          </a>
         </motion.div>
         <motion.ul variants={revealVar} className={classes.links}>
           {LINKS.map((link) => (

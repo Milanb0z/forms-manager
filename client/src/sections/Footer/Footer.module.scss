@@ -43,3 +43,13 @@
   padding: 2em;
   text-align: center;
 }
+
+@media screen and (max-width: 50em) {
+  .footer {
+    flex-direction: column;
+  }
+
+  .links {
+    flex-wrap: wrap;
+  }
+}

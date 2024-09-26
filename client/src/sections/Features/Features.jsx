@@ -4,26 +4,32 @@ import classes from "./Features.module.scss";
 
 const features = [
   {
+    iconUrl: "/drag.svg",
     header: "Drag-and-Drop Form Builder",
     body: "Easily create forms by dragging and dropping fields. No coding required—just a seamless, intuitive experience.",
   },
   {
+    iconUrl: "/custom_url.svg",
     header: "Custom URLs for Forms",
     body: "Give your forms a personal touch with custom URLs. Share links that match your brand or make them memorable.",
   },
   {
+    iconUrl: "/view.svg",
     header: "Easy Results View",
     body: "Track responses with ease. View, filter, and export your form results all from one simple dashboard.",
   },
   {
+    iconUrl: "/user.svg",
     header: "Invite Users Effortlessly",
     body: "Send personalized invitations directly from your app. Get more responses with just a few clicks.",
   },
   {
+    iconUrl: "/track.svg",
     header: "Track Respondents",
     body: "Keep track of who’s responded. Monitor progress and follow up with those who haven’t completed the form yet.",
   },
   {
+    iconUrl: "/track.svg",
     header: "Real-Time Notifications",
     body: "Get notified as soon as someone submits a form. Stay updated in real-time with instant alerts.",
   },
@@ -51,7 +57,7 @@ const FeaturesSection = () => {
         {features.map((feature, index) => (
           <div key={index} className={classes.card}>
             <img
-              src="/favorites.svg"
+              src={feature.iconUrl}
               alt="favorits"
               className={classes.card_img}
             />

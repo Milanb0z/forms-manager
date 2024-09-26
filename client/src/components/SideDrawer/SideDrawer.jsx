@@ -1,20 +1,18 @@
 import React from "react";
 
-import { motion, cubicBezier } from "framer-motion";
+import { motion } from "framer-motion";
 
 import classes from "./SideDrawer.module.scss";
 import { Link } from "react-router-dom";
 import { Button } from "@ui";
 
 const LINKS = [
-  { text: "početna", src: "/#" },
-  { text: "Proizvodi", src: "/#products" },
-  { text: "Benefiti", src: "/#benefits" },
-  { text: "Galerija", src: "/#gallery" },
+  { text: "Home", src: "/#" },
+  { text: "Features", src: "/#features" },
+  { text: "steps", src: "/#steps" },
+  { text: "reviews", src: "/#reviews" },
   { text: "FAQ", src: "/#faq" },
-  { text: "kontakt", src: "/#contact" },
 ];
-
 const bottomToTop = {
   open: {
     y: 0,

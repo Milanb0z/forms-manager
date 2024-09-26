@@ -5,12 +5,12 @@ const FAQCard = ({ heading, body, isActive, onClickHandler }) => {
   return (
     <div className={classes.card}>
       <div className={classes.header} onClick={onClickHandler}>
-        <h4>{heading}</h4>
+        <h5>{heading}</h5>
         <motion.div
           animate={{ rotate: isActive ? 45 : 0 }}
           className={classes.btn}
         >
-          <img src="/icons/plus.svg" width={32} height={32} alt="" />
+          <img src="/add.svg" alt="close" />
         </motion.div>
       </div>
 

@@ -14,6 +14,8 @@ import { Card, Button } from "@ui";
 
 import classes from "./MainDashboard.module.scss";
 import { useGetProfileQuery } from "@store/authSlice";
+import { getResponsesSorted } from "@utils/getAnsSchema";
+import FromatedDate from "@utils/formatDate";
 
 const SurveysCard = ({ forms }) => {
   return (
@@ -89,17 +91,19 @@ const data = [
 ];
 
 const ResultsCard = ({ forms }) => {
+  const transformedRes = getResponsesSorted(forms);
+  console.log(transformedRes);
   return (
     <Card>
       <h5>Latest Results</h5>
 
-      {forms?.length > 0 ? (
+      {transformedRes?.length > 0 ? (
         <div className={classes.list}>
-          {forms.map((form) => (
-            <Link key={form._id} to={`/dashboard/form/edit/${form._id}`}>
+          {transformedRes.map((rsp) => (
+            <Link key={rsp._id} to={`/dashboard/form/edit/${rsp._id}`}>
               <div className={classes.list_item}>
-                <h4>{form.name}</h4>
-                <span>{form.isOpen ? "Active" : "Closed"}</span>
+                <h4>{FromatedDate(rsp.createdAt)}</h4>
+                <p>{rsp.name}</p>
               </div>
             </Link>
           ))}
@@ -153,7 +157,7 @@ const SolvedChart = () => {
 const MainDashboard = () => {
   const { data: user } = useGetProfileQuery();
 
-  console.log(user);
+  console.log(getResponsesSorted(user.createdForms));
 
   return (
     <div className={classes.grid}>

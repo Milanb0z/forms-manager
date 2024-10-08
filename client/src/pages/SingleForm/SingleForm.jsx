@@ -8,7 +8,7 @@ import { Button, Input, TextArea } from "@ui";
 import axios from "../../axios.default";
 
 import classes from "./SingleForm.module.scss";
-import getAnsSchema from "@utils/getAnsSchema";
+import { getAnsSchema } from "@utils/getAnsSchema";
 import QUESTION_TYPES from "@utils/questionTypes";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 

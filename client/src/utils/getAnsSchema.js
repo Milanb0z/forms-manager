@@ -32,4 +32,22 @@ const getAnsSchema = (questions) => {
   return questionsAns;
 };
 
-export default getAnsSchema;
+const getResponsesSorted = (forms) => {
+  let sortedList = [];
+
+  //Joining Responses
+  forms.forEach(({ responses, name }) => {
+    if (responses.length > 0) {
+      responses.forEach((r) =>
+        sortedList.push({ createdAt: r.createdAt, name })
+      );
+    }
+  });
+
+  //Sorting by date
+  sortedList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  return sortedList;
+};
+
+export { getAnsSchema, getResponsesSorted };

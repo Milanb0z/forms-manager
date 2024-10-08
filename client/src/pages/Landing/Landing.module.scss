@@ -3,7 +3,6 @@
   flex-direction: column;
   background-color: var(--color-black-02);
   overflow: hidden;
-  gap: 10em;
 
   button {
     min-width: 10em;
@@ -46,9 +45,14 @@
   }
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 10em;
-  padding: 0 2em;
+@media screen and (max-width: 75em) {
+  body {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (max-width: 50em) {
+  body {
+    font-size: 1em;
+  }
 }

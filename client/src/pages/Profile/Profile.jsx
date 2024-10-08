@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
@@ -36,7 +36,7 @@ const Profile = () => {
   };
 
   return (
-    <form className={classes.content} onSubmit={onSubmitHandler}>
+    <motion.form layout className={classes.content} onSubmit={onSubmitHandler}>
       <div className={classes.content_main}>
         <Input
           onChange={onChangeHandler}
@@ -62,7 +62,7 @@ const Profile = () => {
           <Button type="submit">Update</Button>
         </div>
       </div>
-    </form>
+    </motion.form>
   );
 };
 

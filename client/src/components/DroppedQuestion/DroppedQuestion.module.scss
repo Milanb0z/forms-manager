@@ -1,14 +1,23 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.5em;
   padding: 1em;
   border-radius: 0.5em;
-  background-color: var(--color-grey-10);
+  background-color: var(--color-black-03);
 
   &_header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    button {
+      height: 1em;
+      width: 1em;
+    }
+  }
+
+  input {
+    padding: 0.75em;
   }
 }

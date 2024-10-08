@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -12,13 +11,7 @@ const STATIC_LINKS = [
   { id: "sd13", iconLink: Profile, url: "/dashboard/me" },
 ];
 
-const Sidenav = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleState = () => {
-    setIsOpen((prev) => !prev);
-  };
-
+const Sidenav = ({ isOpen, toggleState }) => {
   return (
     <motion.nav
       layout
@@ -78,6 +71,7 @@ const Sidenav = () => {
           </NavLink>
         ))}
       </div>
+      {isOpen && <div className={classes.backdrop}></div>}
     </motion.nav>
   );
 };

@@ -153,10 +153,12 @@ const SolvedChart = () => {
 const MainDashboard = () => {
   const { data: user } = useGetProfileQuery();
 
+  console.log(user);
+
   return (
     <div className={classes.grid}>
-      <SolvedChart />
-      <ResultsCard />
+      <SolvedChart formsData={user.createdForms} />
+      <ResultsCard forms={user.createdForms} />
       <Card />
       <SurveysCard forms={user.createdForms} />
     </div>

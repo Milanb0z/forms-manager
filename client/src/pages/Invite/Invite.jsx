@@ -16,6 +16,7 @@ import Modal from "@components/Modal/Modal";
 import DeleteModal from "@components/InviteTable/DeleteModal";
 
 const ResponsesCard = ({ response }) => {
+  console.log(response);
   return (
     <Card className={classes.responses}>
       <h2>Responses:</h2>
@@ -116,7 +117,7 @@ const Invite = () => {
           </Modal>
         )}
         <InviteTable invites={data.form.invites} />
-        <ResponsesCard response={data.response} />
+        <ResponsesCard response={data.form.responses} />
         <CompleteCard invites={data.form.invites} />
         <CompleteCard invites={data.form.invites} />
         <Card>

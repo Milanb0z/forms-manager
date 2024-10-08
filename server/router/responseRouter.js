@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+const { Form } = require("../models/formModel");
 const { Response } = require("../models/responseModel");
 
 router.post("/:formId", async (req, res) => {
@@ -8,10 +9,12 @@ router.post("/:formId", async (req, res) => {
     const { response } = req.body;
 
     const newResponse = new Response({ formId, response });
+    const form = await Form.findById(formId);
 
-    await newResponse.save();
+    const savedResponse = await newResponse.save();
 
-    console.log(newResponse);
+    form.responses.push(savedResponse._id);
+    await form.save();
 
     res.send(newResponse);
   } catch (error) {

@@ -26,7 +26,7 @@ const InviteTable = ({ invites }) => {
     <Card className={classes.card} isLoading={isLoading || isResendLoading}>
       <div className={classes.header}>
         <h2>Invites</h2>
-        <Button onClick={() => setIsOpen(true)} outline iconUrl="/star.svg" />
+        <Button onClick={() => setIsOpen(true)} outline iconUrl="/add.svg" />
       </div>
 
       <Modal

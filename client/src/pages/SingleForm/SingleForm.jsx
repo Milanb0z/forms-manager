@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useParams } from "react-router";
+import { toast } from "react-toastify";
 
-import { Button } from "@ui";
+import { Button, Input, TextArea } from "@ui";
 
 import axios from "../../axios.default";
 
 import classes from "./SingleForm.module.scss";
 import getAnsSchema from "@utils/getAnsSchema";
 import QUESTION_TYPES from "@utils/questionTypes";
-import { Input } from "@ui";
-import { TextArea } from "@ui";
-import { toast } from "react-toastify";
 
 const questionVars = {
   initial: {
@@ -174,6 +172,8 @@ const SingleForm = ({ byId, inviteMode }) => {
   const toggleInfo = () => {
     setInfoOpen((p) => !p);
   };
+
+  console.log(form);
 
   if (form.questions?.length > 0) {
     return (

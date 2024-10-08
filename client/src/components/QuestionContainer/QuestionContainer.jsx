@@ -5,6 +5,7 @@ import DroppedQuestion from "@components/DroppedQuestion/DroppedQuestion";
 import classes from "./QuestionContainer.module.scss";
 import { Button } from "@ui";
 import { memo } from "react";
+import { Reorder } from "framer-motion";
 
 const QuestionContainer = memo(function QuestionContainer({
   questions,
@@ -15,6 +16,7 @@ const QuestionContainer = memo(function QuestionContainer({
   onChoiceEdit,
   onChoiceDelete,
   onSubmit,
+  setQuestions,
 }) {
   const [{ isActive }, drop] = useDrop(() => ({
     accept: "BOX",
@@ -26,11 +28,15 @@ const QuestionContainer = memo(function QuestionContainer({
 
   return (
     <div ref={drop} data-testid="dustbin" className={classes.form}>
-      <h5>Form</h5>
-      <div className={classes.form_main}>
+      <Reorder.Group
+        axis="y"
+        onReorder={setQuestions}
+        values={questions}
+        className={classes.form_main}
+      >
         {isActive ? (
           <div className={classes.overlay}>
-            <h2>Drop Question</h2>
+            <h2>Drag & Drop Question</h2>
           </div>
         ) : null}
         {questions.map((question, index) => (
@@ -38,14 +44,14 @@ const QuestionContainer = memo(function QuestionContainer({
             id={index}
             question={question}
             onEdit={onEdit}
-            key={index}
+            key={question.id}
             onDelete={() => onDelete(index)}
             onNewChoice={() => onNewChoice(index)}
             onChoiceEdit={onChoiceEdit}
             onChoiceDelete={onChoiceDelete}
           />
         ))}
-      </div>
+      </Reorder.Group>
       <Button disabled={questions.length < 1} onClick={onSubmit}>
         Submit
       </Button>

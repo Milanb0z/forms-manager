@@ -1,138 +1,122 @@
+.wrapper {
+  background-color: #f5f5f5;
+  padding: 5em 8em;
+  display: grid;
+  place-content: center;
+}
+
 .features {
   display: flex;
-  flex-direction: column;
-  gap: 5em;
-
-  span {
-    color: var(--color-green);
-  }
-}
-
-.header {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
   align-items: center;
-  gap: 1em;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4em;
 
-  p {
-    max-width: 75ch;
-  }
-
-  span {
-    background-color: var(--color-black-02);
-    color: var(--color-white);
-    border: 2px solid var(--color-green);
-    font-weight: bold;
-    border-radius: 5em;
-    padding: 0.75em 1em;
-    min-width: 10em;
+  h2 {
+    text-align: center;
+    color: var(--color-black-02);
   }
 }
-
-.grid {
-  align-self: center;
+.screen {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
-  gap: 1.5em;
   max-width: 75em;
   width: 100%;
+
+  img {
+    border-radius: 1em;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  display: flex;
+  border-radius: 0.5em;
+  padding: 1em;
+  min-width: 20em;
+  background-color: #fff;
+  gap: 2em;
+  align-items: center;
+  box-shadow: 3em 3em 3em 0px rgba(0, 0, 0, 0.1);
+
   z-index: 10;
 
-  &_glow {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  span {
+    font-size: 1em;
+    color: var(--color-black-02);
+    font-weight: bold;
+    max-width: 20ch;
+  }
 
-    left: 50%;
-    top: 50%;
-    translate: -50% -50%;
-    z-index: -1;
-    width: 100%;
+  &_icon {
+    width: 3.5em;
+    height: 3.5em;
+    background: #d8d8d8;
+    display: grid;
+    place-content: center;
+    border-radius: 0.5em;
+  }
 
-    div {
-      filter: blur(5em);
-      border-radius: 50%;
-      aspect-ratio: 1 / 1;
-      position: relative;
+  &:nth-child(5) {
+    left: 0;
+    top: 30%;
+    transform: rotate(4deg);
+    translate: -30%;
+  }
 
-      &:nth-child(1) {
-        width: 20%;
-        background: radial-gradient(
-          50% 50% at 50% 50%,
-          #fbfd8e 100%,
-          rgba(178, 40, 201, 0) 100%
-        );
-      }
+  &:nth-child(2) {
+    left: 0;
+    top: 80%;
+    translate: -30%;
+    transform: rotate(-4deg);
+  }
 
-      &:nth-child(2) {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        height: 200%;
-        translate: -50% -50%;
+  &:nth-child(3) {
+    right: 0;
+    top: 70%;
+    transform: rotate(-4deg);
+    translate: 30%;
+  }
 
-        background: radial-gradient(
-          50% 50% at 50% 50%,
-          #b8fd8e 0%,
-          rgba(229, 68, 114, 0) 100%
-        );
-      }
-
-      &:nth-child(3) {
-        width: 25%;
-        background: radial-gradient(
-          50% 50% at 50% 50%,
-          #8efdfd 0%,
-          rgba(229, 68, 114, 0) 100%
-        );
-      }
-    }
+  &:nth-child(4) {
+    right: 0;
+    transform: rotate(4deg);
+    translate: 30%;
+    top: 20%;
   }
 }
 
-.card {
-  background-color: var(--color-black-02);
-  border-radius: 1em;
-  padding: 2em;
-  display: flex;
-
-  gap: 1.5em;
-
-  &_img {
-    width: 3em;
-    height: 3em;
-  }
-
-  &_text {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
-}
 @media screen and (max-width: 50em) {
-  .grid_glow {
-    height: 100%;
-    flex-direction: column;
-    rotate: 45deg;
-    div {
-      width: 3em;
+  .wrapper {
+    padding: 2em;
+  }
 
-      &:nth-child(2) {
-        width: 50%;
-        height: auto;
-      }
+  .screen {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+
+    img {
+      grid-column: span 2;
     }
   }
-}
 
-@media screen and (max-width: 35em) {
-  .card {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: var(--color-black-03);
+  .tooltip {
+    position: relative;
+    rotate: 0 !important;
+
+    &:nth-child(2) {
+    }
+
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4),
+    &:nth-child(5) {
+      transform: rotate(0);
+      translate: 0 0;
+      left: unset;
+      top: unset;
+      right: unset;
+      bottom: unset;
+    }
   }
 }

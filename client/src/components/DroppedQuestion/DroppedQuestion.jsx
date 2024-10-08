@@ -5,6 +5,7 @@ import { Input, Button, TextArea, FileDropzone } from "@ui";
 import classes from "./DroppedQuestion.module.scss";
 
 import ChoiceSelector from "@components/ChoiceSelector/ChoiceSelector";
+import { Reorder } from "framer-motion";
 
 const QUESTION_TYPES = {
   MULTIPLE: "MULTIPLE",
@@ -37,9 +38,7 @@ const DroppedQuestion = ({
         />
       );
       break;
-    case QUESTION_TYPES.PARAGRAPH:
-      content = <TextArea placeholder="Answer" disabled />;
-      break;
+
     case QUESTION_TYPES.RADIO:
       content = (
         <ChoiceSelector
@@ -51,20 +50,22 @@ const DroppedQuestion = ({
         />
       );
       break;
+    case QUESTION_TYPES.PARAGRAPH:
     case QUESTION_TYPES.SHORT:
-      content = <Input placeholder="Answer" disabled />;
+      content = null;
       break;
     case QUESTION_TYPES.UPLOAD:
       content = <FileDropzone />;
       break;
   }
+
   return (
-    <div className={classes.card}>
+    <Reorder.Item id={question} value={question} className={classes.card}>
       <div className={classes.card_header}>
         <p>
           Type: <span>{question.type}</span>
         </p>
-        <Button iconUrl="/exit.svg" onClick={onDelete} />
+        <Button danger iconUrl="/exit_white.svg" onClick={onDelete} />
       </div>
       <Input
         onChange={(e) => onEdit(e, id)}
@@ -72,7 +73,7 @@ const DroppedQuestion = ({
         placeholder="Enter Question Title"
       />
       {content}
-    </div>
+    </Reorder.Item>
   );
 };
 

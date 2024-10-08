@@ -10,6 +10,7 @@ import axios from "../../axios.default";
 import classes from "./SingleForm.module.scss";
 import getAnsSchema from "@utils/getAnsSchema";
 import QUESTION_TYPES from "@utils/questionTypes";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 
 const questionVars = {
   initial: {
@@ -112,6 +113,7 @@ const SingleForm = ({ byId, inviteMode }) => {
         setForm(res.data);
         setAnswers(getAnsSchema(res.data.questions));
         setIsLoading(false);
+        setInfoOpen(true);
       })
       .catch(() => {
         setIsLoading(false);
@@ -173,7 +175,9 @@ const SingleForm = ({ byId, inviteMode }) => {
     setInfoOpen((p) => !p);
   };
 
-  console.log(form);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   if (form.questions?.length > 0) {
     return (
@@ -252,7 +256,7 @@ const SingleForm = ({ byId, inviteMode }) => {
       </div>
     );
   } else {
-    return <h2>No </h2>;
+    return <h2>Form Not Found</h2>;
   }
 };
 

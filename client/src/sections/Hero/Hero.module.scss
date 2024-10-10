@@ -1,4 +1,5 @@
 .hero {
+  min-height: 100svh;
 }
 
 .main {
@@ -73,5 +74,9 @@
     &::before {
       height: 3em;
     }
+  }
+
+  .hero {
+    min-height: 35svh;
   }
 }

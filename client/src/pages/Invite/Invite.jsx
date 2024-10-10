@@ -119,7 +119,6 @@ const Invite = () => {
         <InviteTable invites={data.form.invites} />
         <ResponsesCard response={data.form.responses} />
         <CompleteCard invites={data.form.invites} />
-        <CompleteCard invites={data.form.invites} />
         <Card>
           <Button onClick={() => setIsDelete(true)} danger>
             DeleteForm

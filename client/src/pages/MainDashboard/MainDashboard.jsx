@@ -14,7 +14,7 @@ import { Card, Button } from "@ui";
 
 import classes from "./MainDashboard.module.scss";
 import { useGetProfileQuery } from "@store/authSlice";
-import { getResponsesSorted } from "@utils/getAnsSchema";
+import { getResponsesSorted, getChartData } from "@utils/getAnsSchema";
 import FromatedDate from "@utils/formatDate";
 
 const SurveysCard = ({ forms }) => {
@@ -47,8 +47,9 @@ const SurveysCard = ({ forms }) => {
 
 const data = [
   {
-    name: "1.2",
-    uv: 4,
+    name: "2.3",
+    uv: 6,
+    uy: 6,
     pv: 2,
     amt: 1,
   },
@@ -158,6 +159,7 @@ const MainDashboard = () => {
   const { data: user } = useGetProfileQuery();
 
   console.log(getResponsesSorted(user.createdForms));
+  console.log(getChartData(user.createdForms));
 
   return (
     <div className={classes.grid}>

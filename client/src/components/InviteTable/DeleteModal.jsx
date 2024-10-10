@@ -36,8 +36,7 @@ const DeleteModal = ({ deleteKey, handleClose }) => {
       )}
       <div className={classes.main}>
         <p>
-          Lorem ipsum dolor sit, amet <span>{deleteKey}</span> consectetur
-          adipisicing elit.
+          To delete form type: <span>{deleteKey}</span> in input box below
         </p>
         <Input value={value} onChange={setValue} />
       </div>

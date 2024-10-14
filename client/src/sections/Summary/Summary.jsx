@@ -7,9 +7,9 @@ const Summary = () => {
     <div className={classes.summary}>
       <section className={classes.content}>
         <h2>
-          EasyHR was created to help HRD in managing work and employees in one
-          platform easily. Provide the ultimate digital engagement experience
-          from anywhere on the web.
+          Using our custom link feature makes it easier for users to find and
+          complete forms quickly, ensuring a smooth experience for everyone
+          involved in the process!
         </h2>
         <div className={classes.bottom}>
           <img

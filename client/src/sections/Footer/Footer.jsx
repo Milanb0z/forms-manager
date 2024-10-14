@@ -1,15 +1,7 @@
 import React from "react";
 import classes from "./Footer.module.scss";
 
-const LINKS = [
-  { text: "Home", src: "/#" },
-  { text: "Features", src: "/#features" },
-  { text: "steps", src: "/#steps" },
-  { text: "reviews", src: "/#reviews" },
-  { text: "FAQ", src: "/#faq" },
-];
-
-const Footer = () => {
+const Footer = ({ links }) => {
   return (
     <footer className={classes.wrapper}>
       <div className={classes.footer}>
@@ -18,7 +10,7 @@ const Footer = () => {
           <h4>formr</h4>
         </div>
         <ul className={classes.links}>
-          {LINKS.map((link) => (
+          {links.map((link) => (
             <a key={link.text} href={link.src}>
               <li className={classes.links_item}> {link.text}</li>
             </a>

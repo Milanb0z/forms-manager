@@ -1,8 +1,7 @@
+import { compileString } from "sass";
 import QUESTION_TYPES from "./questionTypes";
 
 const getAnsSchema = (questions) => {
-  console.log([...questions]);
-
   let questionsAns = questions.map((que) => {
     let data = "";
 
@@ -27,20 +26,17 @@ const getAnsSchema = (questions) => {
     };
   });
 
-  console.log(questionsAns);
-
   return questionsAns;
 };
 
 const getResponsesSorted = (forms) => {
   let sortedList = [];
-  let chartData = {};
 
   //Joining Responses
   forms.forEach(({ responses, name }) => {
     if (responses.length > 0) {
       responses.forEach((r) =>
-        sortedList.push({ createdAt: r.createdAt, name })
+        sortedList.push({ createdAt: r.createdAt, name, id: r._id })
       );
     }
   });
@@ -52,21 +48,34 @@ const getResponsesSorted = (forms) => {
 };
 
 const getChartData = (forms) => {
-  console.log("caht");
-  const sortedList = getResponsesSorted(forms);
+  let staticData = {};
+  forms.forEach(({ name }) => {
+    let newObj = { ...staticData, [name.split(" ").join("_")]: 0 };
+    staticData = { ...newObj };
+  });
 
-  const groups = sortedList.reduce((groups, response) => {
-    const date = response.createdAt.split("T")[0];
-    if (!groups[date]) {
-      groups[date] = [];
-    }
-    groups[date].push(response);
-    return groups;
-  }, {});
+  // Builded Schema
+  const chartData = [];
 
-  // Edit: to add it in the array format instead
+  for (let daysAgo = 0; daysAgo <= 6; daysAgo++) {
+    const today = new Date();
+    chartData.push({
+      name: new Date(today.setDate(today.getDate() - daysAgo)).toDateString(),
+      ...staticData,
+    });
+  }
 
-  console.log({ groups });
+  let responses = getResponsesSorted(forms);
+
+  chartData.forEach((item, index) => {
+    responses.forEach((res) => {
+      let selector = res.name.split(" ").join("_");
+      if (item.name === new Date(res.createdAt).toDateString()) {
+        chartData[index][selector] += 1;
+      }
+    });
+  });
+  return { chartData, bars: Object.keys(staticData) };
 };
 
 export { getAnsSchema, getResponsesSorted, getChartData };

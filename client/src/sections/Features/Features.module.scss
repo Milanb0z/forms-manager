@@ -14,6 +14,7 @@
 
   h2 {
     text-align: center;
+    max-width: 30ch;
     color: var(--color-black-02);
   }
 }
@@ -24,6 +25,7 @@
 
   img {
     border-radius: 1em;
+    box-shadow: 3em 3em 3em 0px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -36,7 +38,7 @@
   background-color: #fff;
   gap: 2em;
   align-items: center;
-  box-shadow: 3em 3em 3em 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 3em 0em 3em 0px rgba(0, 0, 0, 0.1);
 
   z-index: 10;
 

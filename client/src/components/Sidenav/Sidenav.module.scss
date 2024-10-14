@@ -14,8 +14,11 @@
   display: flex;
   align-items: center;
   gap: 1em;
-
   align-self: stretch;
+
+  img {
+    width: 3em;
+  }
 }
 
 .toggle {
@@ -70,6 +73,9 @@
 }
 //Activ
 .active {
+  .link_icon {
+    background-color: var(--color-red);
+  }
   span {
     color: var(--color-green);
   }
@@ -78,8 +84,15 @@
 @media screen and (max-width: 35em) {
   .nav {
     flex-direction: row;
+    width: 100% !important;
+    height: unset;
     justify-content: center;
     padding: 1em;
+    border-right: none;
+  }
+
+  .line {
+    display: none;
   }
 
   .toggle {
@@ -93,5 +106,15 @@
   .links {
     align-items: center;
     flex-direction: row;
+  }
+
+  .link_icon {
+    width: 5em;
+    height: 5em;
+
+    img {
+      width: 2em;
+      height: 2em;
+    }
   }
 }

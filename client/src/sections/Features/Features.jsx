@@ -5,22 +5,22 @@ import classes from "./Features.module.scss";
 const Tools = [
   {
     iconUrl: "/services_1.svg",
-    text: "Employee enrollment percentage clearly",
+    text: "Drag-and-Drop Interface",
   },
 
   {
     iconUrl: "/services_2.svg",
-    text: "Employee enrollment percentage clearly",
+    text: "Multiple Question Types",
   },
 
   {
     iconUrl: "/services_3.svg",
-    text: "Employee enrollment percentage clearly",
+    text: "Custom Link Sharing",
   },
 
   {
     iconUrl: "/services_4.svg",
-    text: "Employee enrollment percentage clearly",
+    text: "Real-Time Response Tracking",
   },
 ];
 
@@ -29,11 +29,15 @@ const FeaturesSection = () => {
     <div id="features" className={classes.wrapper}>
       <section className={classes.features}>
         <h2>
-          Convert insight into data that contains information about the progress
-          of your company
+          Unleash the Power of Our Form Builder’s Intuitive Features for
+          Seamless Creation!
         </h2>
         <div className={classes.screen}>
-          <img src="/screen.png" alt="screen" className={classes.screen} />
+          <img
+            src="/assets/formbuilder_screen.webp"
+            alt="screen"
+            className={classes.screen}
+          />
           {Tools.map((card, index) => (
             <div key={index} className={classes.tooltip}>
               <div className={classes.tooltip_icon}>

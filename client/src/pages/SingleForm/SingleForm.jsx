@@ -100,6 +100,7 @@ const SingleForm = ({ byId, inviteMode }) => {
   const [answers, setAnswers] = useState([]);
   const [infoOpen, setInfoOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSolved, setIsSolved] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -163,7 +164,7 @@ const SingleForm = ({ byId, inviteMode }) => {
     axios
       .post(submitUrl, submitData)
       .then((res) => {
-        console.log(res);
+        setIsSolved(true);
         toast("Submited Succesfully");
       })
       .catch((err) => {
@@ -177,6 +178,14 @@ const SingleForm = ({ byId, inviteMode }) => {
 
   if (isLoading) {
     return <LoadingSpinner />;
+  }
+
+  if (isSolved) {
+    return (
+      <div className={classes.center}>
+        <h2>Form Submitted Successfully</h2>
+      </div>
+    );
   }
 
   if (form.questions?.length > 0) {
@@ -256,7 +265,11 @@ const SingleForm = ({ byId, inviteMode }) => {
       </div>
     );
   } else {
-    return <h2>Form Not Found</h2>;
+    return (
+      <div className={classes.center}>
+        <h2>Form Not Found</h2>
+      </div>
+    );
   }
 };
 

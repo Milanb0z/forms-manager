@@ -1,7 +1,6 @@
 import { Button } from "@ui";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import Header from "@sections/Header/Header";
 
 import classes from "./Hero.module.scss";
 
@@ -26,16 +25,15 @@ const HeroSection = () => {
       className={classes.hero}
     >
       <section className={classes.content}>
-        <Header />
         <div className={classes.main}>
           <div className={classes.text}>
             <motion.h1 variants={landingVars}>
-              Improve your performance using Easy HR.
+              Create Forms Effortlessly with Formr
             </motion.h1>
             <motion.p variants={landingVars}>
-              Don't let your work be hampered by trivial matters. increase your
-              work efficiency with our platform and feel the ease in managing
-              employees
+              Effortlessly create custom forms using our drag-and-drop builder.
+              Choose from various question types, send invites with ease, and
+              track responses in real-time.
             </motion.p>
             <motion.div variants={landingVars} className={classes.row}>
               <Link to="/login">

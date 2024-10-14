@@ -38,6 +38,11 @@
   justify-content: center;
 }
 
+.legend {
+  background-color: red;
+  display: none;
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -48,14 +53,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1em;
     background-color: var(--color-black-03);
+    padding: 1em;
     border-radius: 0.5em;
     margin-right: 0.5em;
   }
+
+  &_submit {
+    padding: 1em;
+    border-radius: 0.5em;
+    background-color: var(--color-black-03);
+  }
 }
-
-
 
 @media screen and (max-width: 65em) {
   .grid {

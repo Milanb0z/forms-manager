@@ -4,23 +4,30 @@ import classes from "./Landing.module.scss";
 import HeroSection from "@sections/Hero/Hero";
 
 import Footer from "@sections/Footer/Footer";
-import Reviews from "@sections/Reviews/Reviews";
-import FAQSection from "@sections/FAQ/FAQ";
-import Promo from "@sections/Promo/Promo";
 import FeaturesSection from "@sections/Features/Features";
-import Steps from "@sections/Steps/Steps";
 import Summary from "@sections/Summary/Summary";
+import Header from "@sections/Header/Header";
+
+const LINKS = [
+  { text: "Home", src: "/#" },
+  { text: "Features", src: "/#features" },
+  { text: "steps", src: "/#steps" },
+  { text: "reviews", src: "/#reviews" },
+  { text: "FAQ", src: "/#faq" },
+];
 
 const Landing = () => {
+  console.log(import.meta.env.REACT_APP_BAKCEND_URL);
   return (
     <div className={classes.wrapper}>
       <div></div>
+      <Header links={LINKS} />
       <HeroSection />
 
       <Summary />
       <FeaturesSection />
 
-      <Footer />
+      <Footer links={LINKS} />
     </div>
   );
 };

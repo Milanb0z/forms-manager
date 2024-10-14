@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  XAxis,
 } from "recharts";
 
 import { Card, Button } from "@ui";
@@ -45,52 +46,6 @@ const SurveysCard = ({ forms }) => {
   );
 };
 
-const data = [
-  {
-    name: "2.3",
-    uv: 6,
-    uy: 6,
-    pv: 2,
-    amt: 1,
-  },
-  {
-    name: "1.2",
-    uv: 3,
-    pv: 1,
-    amt: 2,
-  },
-  {
-    name: "1.2",
-    uv: 2,
-    pv: 2,
-    amt: 4,
-  },
-  {
-    name: "1.2",
-    uv: 2,
-    pv: 3,
-    amt: 2,
-  },
-  {
-    name: "1.2",
-    uv: 1,
-    pv: 2,
-    amt: 1,
-  },
-  {
-    name: "1.2",
-    uv: 2,
-    pv: 3,
-    amt: 5,
-  },
-  {
-    name: "1.2",
-    uv: 2,
-    pv: 4,
-    amt: 4,
-  },
-];
-
 const ResultsCard = ({ forms }) => {
   const transformedRes = getResponsesSorted(forms);
   console.log(transformedRes);
@@ -101,10 +56,12 @@ const ResultsCard = ({ forms }) => {
       {transformedRes?.length > 0 ? (
         <div className={classes.list}>
           {transformedRes.map((rsp) => (
-            <Link key={rsp._id} to={`/dashboard/form/edit/${rsp._id}`}>
-              <div className={classes.list_item}>
-                <h4>{FromatedDate(rsp.createdAt)}</h4>
-                <p>{rsp.name}</p>
+            <Link key={rsp._id} to={`/dashboard/results/${rsp.id}`}>
+              <div className={classes.list_submit}>
+                <h4>{rsp.name}</h4>
+                <p>
+                  Submited: <span>{FromatedDate(rsp.createdAt)}</span>
+                </p>
               </div>
             </Link>
           ))}
@@ -121,34 +78,30 @@ const ResultsCard = ({ forms }) => {
   );
 };
 
-const SolvedChart = () => {
+const SolvedChart = ({ formsData }) => {
+  let transtformedChart = getChartData(formsData);
+  console.log(transtformedChart);
   return (
     <Card className={classes.charts}>
-      <h3>Forms Activitiy</h3>
+      <h3>Forms Activitiy (Last 7 Days)</h3>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
+        <BarChart data={transtformedChart.chartData}>
           <CartesianGrid strokeDasharray="5 5 2" />
 
-          <Tooltip
-            labelClassName={classes.label}
-            wrapperClassName={classes.tooltip}
+          <Tooltip />
+          <XAxis reversed hide dataKey="name" />
+          <Legend
+            className={classes.legend}
+            formatter={(value) => value.split("_").join(" ")}
           />
-          <Legend />
-          <Bar
-            dataKey="amt"
-            fill="#8884d8"
-            activeBar={<Rectangle fill="pink" stroke="blue" />}
-          />
-          <Bar
-            dataKey="pv"
-            fill="#8884d8"
-            activeBar={<Rectangle fill="pink" stroke="blue" />}
-          />
-          <Bar
-            dataKey="uv"
-            fill="#82ca9d"
-            activeBar={<Rectangle fill="gold" stroke="purple" />}
-          />
+          {transtformedChart.bars.map((bar) => (
+            <Bar
+              key={bar}
+              dataKey={bar}
+              fill="#8884d8"
+              activeBar={<Rectangle fill="pink" stroke="blue" />}
+            />
+          ))}
         </BarChart>
       </ResponsiveContainer>
     </Card>
@@ -157,9 +110,6 @@ const SolvedChart = () => {
 
 const MainDashboard = () => {
   const { data: user } = useGetProfileQuery();
-
-  console.log(getResponsesSorted(user.createdForms));
-  console.log(getChartData(user.createdForms));
 
   return (
     <div className={classes.grid}>

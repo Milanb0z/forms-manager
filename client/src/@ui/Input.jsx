@@ -11,6 +11,7 @@ const Input = ({ name, label, ...inputProps }) => {
         </label>
       ) : null}
       <input
+        id={name}
         type="text"
         {...inputProps}
         name={name}

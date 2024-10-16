@@ -21,7 +21,7 @@ const Sidenav = ({ isOpen, toggleState }) => {
       className={classes.nav}
     >
       <div className={classes.logo}>
-        <motion.img layout src="/logo.svg" alt="" />
+        <motion.img layout src="/icons/logo.svg" alt="" />
 
         {isOpen && (
           <motion.h2

@@ -14,10 +14,10 @@ const Summary = () => {
         <div className={classes.bottom}>
           <img
             className={classes.bottom_box}
-            src="/customlink.webp"
+            src="/assets/customlink.webp"
             alt="customlink"
           />
-          <img src="/text.svg" alt="customlink" />
+          <img src="/icons/text.svg" alt="customlink" />
         </div>
       </section>
     </div>

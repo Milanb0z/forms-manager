@@ -56,7 +56,7 @@ const Header = ({ links }) => {
       <header className={classes.header}>
         <motion.div variants={revealVar} className={classes.logo}>
           <a href="/#  ">
-            <img src="/logo.svg" alt="" className={classes.icon} />
+            <img src="/icons/logo.svg" alt="" className={classes.icon} />
             <h4>formr</h4>
           </a>
         </motion.div>

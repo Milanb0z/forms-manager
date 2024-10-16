@@ -20,10 +20,9 @@ const Submit = () => {
         <div className={classes.form}>
           <h3>Submit Your Feature Request</h3>
           <div className={classes.form_body}>
-            <div className={classes.row}>
-              <Input placeholder="Your Name" />
-              <Input placeholder="Email" />
-            </div>
+            <Input placeholder="Your Name" />
+            <Input placeholder="Email" />
+
             <TextArea
               rows="10"
               placeholder="Describe the feature you'd like to see and how it would improve your experience."

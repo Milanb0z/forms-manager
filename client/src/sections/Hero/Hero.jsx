@@ -45,7 +45,7 @@ const HeroSection = () => {
             </motion.div>
             <motion.img
               variants={landingVars}
-              src="/screen.png"
+              src="/assets/screen.png"
               alt="screen"
               className={classes.screen}
             />

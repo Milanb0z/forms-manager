@@ -4,22 +4,22 @@ import classes from "./Features.module.scss";
 
 const Tools = [
   {
-    iconUrl: "/services_1.svg",
+    iconUrl: "/icons/services_1.svg",
     text: "Drag-and-Drop Interface",
   },
 
   {
-    iconUrl: "/services_2.svg",
+    iconUrl: "/icons/services_2.svg",
     text: "Multiple Question Types",
   },
 
   {
-    iconUrl: "/services_3.svg",
+    iconUrl: "/icons/services_3.svg",
     text: "Custom Link Sharing",
   },
 
   {
-    iconUrl: "/services_4.svg",
+    iconUrl: "/icons/services_4.svg",
     text: "Real-Time Response Tracking",
   },
 ];

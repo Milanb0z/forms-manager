@@ -51,3 +51,14 @@
     flex: 1;
   }
 }
+
+@media screen and (max-width: 50em) {
+  .submit {
+    flex-direction: column;
+    gap: 5em;
+  }
+
+  .text {
+    text-align: center;
+  }
+}

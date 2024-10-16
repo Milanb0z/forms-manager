@@ -1,14 +1,10 @@
 import { Link } from "react-router-dom";
 
 import ProfileCard from "@components/ProfileCard/ProfileCard";
-
+import { useGetProfileQuery } from "@store/authSlice";
 import { Button } from "@ui";
 
-import Profile from "@assets/profile.svg";
-
 import classes from "./Header.module.scss";
-
-import { useGetProfileQuery } from "@store/authSlice";
 
 const Header = ({ title, link }) => {
   const { data: user } = useGetProfileQuery();
@@ -29,11 +25,11 @@ const Header = ({ title, link }) => {
         {user ? (
           <div className={classes.actions}>
             <Link to="/dashboard/form/new">
-              <Button outline iconUrl="/add.svg" />
+              <Button outline iconUrl="/icons/add.svg" />
             </Link>
 
             <Link to="/dashboard/me">
-              <Button outline iconUrl={Profile} />
+              <Button outline iconUrl="/icons/profile.svg" />
             </Link>
             <ProfileCard username={user.username} email={user.email} />
           </div>

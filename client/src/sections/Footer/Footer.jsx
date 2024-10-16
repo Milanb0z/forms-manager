@@ -18,7 +18,9 @@ const Footer = ({ links }) => {
         </ul>
       </div>
       <div className={classes.credits}>
-        <p>© 2024 milanb0z Agency. Copyright and All rights reserved.</p>
+        <a href="https://www.milanb0z.dev/" rel="noreferrer" target="_blank">
+          <p>© 2024 milanb0z Agency. Copyright and All rights reserved.</p>
+        </a>
       </div>
     </footer>
   );

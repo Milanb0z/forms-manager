@@ -1,14 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import GridIcon from "@assets/grid.svg";
-import Profile from "@assets/profile.svg";
-
 import classes from "./Sidenav.module.scss";
 
 const STATIC_LINKS = [
-  { id: "sd12", iconLink: GridIcon, url: "/dashboard" },
-  { id: "sd13", iconLink: Profile, url: "/dashboard/me" },
+  { id: "sd12", iconLink: "/icons/grid.svg", url: "/dashboard" },
+  { id: "sd13", iconLink: "/icons/profile.svg", url: "/dashboard/me" },
 ];
 
 const Sidenav = ({ isOpen, toggleState }) => {
@@ -38,7 +35,7 @@ const Sidenav = ({ isOpen, toggleState }) => {
       <motion.div layout onClick={toggleState} className={classes.toggle}>
         <motion.img
           style={{ rotate: isOpen ? 180 : 0 }}
-          src="/arrow-right.svg"
+          src="/icons/arrow-right.svg"
           alt="open"
         />
       </motion.div>

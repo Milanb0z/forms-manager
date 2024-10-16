@@ -80,7 +80,7 @@ const InviteModal = ({ closeModal }) => {
           outline
           disabled={!value}
           onClick={onEmailAdded}
-          iconUrl="/add.svg"
+          iconUrl="/icons/add.svg"
         />
         <Button onClick={onFormSubmit} disabled={inviteList.length == 0}>
           Send Invites

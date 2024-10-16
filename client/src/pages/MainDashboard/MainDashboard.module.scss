@@ -27,8 +27,6 @@
   }
 }
 
-.invites {
-}
 .noForm {
   border-radius: 0.5em;
 
@@ -42,7 +40,8 @@
 
 .new {
   background-color: var(--color-black-02);
-  border: 3px dashed var(--color-black-03);
+  border: 3px dashed;
+  color: var(--color-green);
   border-radius: 0.5em;
   margin-right: 0.5em;
   padding: 1em;

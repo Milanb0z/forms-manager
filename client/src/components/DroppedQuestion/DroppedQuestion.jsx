@@ -80,8 +80,10 @@ const DroppedQuestion = ({
         <div
           onPointerDown={(e) => controls.start(e)}
           className={classes.controle}
-        ></div>
-        <Button danger iconUrl="/exit_white.svg" onClick={onDelete} />
+        >
+          <img src="/icons/drag.svg" />
+        </div>
+        <Button danger iconUrl="/icons/exit_white.svg" onClick={onDelete} />
       </div>
       <Input
         onChange={(e) => onEdit(e, index)}

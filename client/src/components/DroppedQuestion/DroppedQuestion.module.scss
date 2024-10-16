@@ -1,6 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 0.5em;
   padding: 1em;
   border-radius: 0.5em;
@@ -22,7 +23,14 @@
   }
 }
 .controle {
-  background-color: red;
-  width: 2em;
-  height: 2em;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  translate: -50% 0;
+  cursor: grab;
+
+  img {
+    width: 2em;
+    pointer-events: none;
+  }
 }

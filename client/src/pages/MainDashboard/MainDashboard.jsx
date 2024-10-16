@@ -18,6 +18,7 @@ import { useGetProfileQuery } from "@store/authSlice";
 
 import { getResponsesSorted, getChartData } from "@utils/getAnsSchema";
 import FromatedDate from "@utils/formatDate";
+import CHART_COLORS from "@utils/chartColors";
 
 const SurveysCard = ({ forms }) => {
   return (
@@ -34,6 +35,9 @@ const SurveysCard = ({ forms }) => {
               </div>
             </Link>
           ))}
+          <div className={classes.new}>
+            <h4>Create New Form</h4>
+          </div>
         </div>
       ) : (
         <div className={classes.noForm}>
@@ -95,12 +99,12 @@ const SolvedChart = ({ formsData }) => {
             className={classes.legend}
             formatter={(value) => value.split("_").join(" ")}
           />
-          {transtformedChart.bars.map((bar) => (
+          {transtformedChart.bars.map((bar, index) => (
             <Bar
               key={bar}
               dataKey={bar}
-              fill="#8884d8"
-              activeBar={<Rectangle fill="pink" stroke="blue" />}
+              fill={CHART_COLORS[index % 5].stroke}
+              activeBar={<Rectangle {...CHART_COLORS[index % 5]} />}
             />
           ))}
         </BarChart>
@@ -116,7 +120,10 @@ const MainDashboard = () => {
     <div className={classes.grid}>
       <SolvedChart formsData={user.createdForms} />
       <ResultsCard forms={user.createdForms} />
-      <Card />
+      <Card className={classes.invites}>
+        <h3>Lorem, ipsum.</h3>
+      </Card>
+
       <SurveysCard forms={user.createdForms} />
     </div>
   );

@@ -7,6 +7,7 @@ import Footer from "@sections/Footer/Footer";
 import FeaturesSection from "@sections/Features/Features";
 import Summary from "@sections/Summary/Summary";
 import Header from "@sections/Header/Header";
+import Submit from "@sections/Submit/Submit";
 
 const LINKS = [
   { text: "Home", src: "/#" },
@@ -26,7 +27,7 @@ const Landing = () => {
 
       <Summary />
       <FeaturesSection />
-
+      <Submit />
       <Footer links={LINKS} />
     </div>
   );

@@ -5,7 +5,7 @@ import { Input, Button, TextArea, FileDropzone } from "@ui";
 import classes from "./DroppedQuestion.module.scss";
 
 import ChoiceSelector from "@components/ChoiceSelector/ChoiceSelector";
-import { Reorder } from "framer-motion";
+import { Reorder, useDragControls } from "framer-motion";
 
 const QUESTION_TYPES = {
   MULTIPLE: "MULTIPLE",
@@ -23,8 +23,11 @@ const DroppedQuestion = ({
   onNewChoice,
   onChoiceEdit,
   onChoiceDelete,
+  setActive,
+  index,
 }) => {
   let content = null;
+  const controls = useDragControls();
 
   switch (question.type) {
     case QUESTION_TYPES.MULTIPLE:
@@ -60,15 +63,28 @@ const DroppedQuestion = ({
   }
 
   return (
-    <Reorder.Item id={question} value={question} className={classes.card}>
+    <Reorder.Item
+      id={question.id}
+      dragListener={false}
+      dragControls={controls}
+      value={question}
+      onDragStart={() => {
+        setActive(index);
+      }}
+      className={classes.card}
+    >
       <div className={classes.card_header}>
         <p>
           Type: <span>{question.type}</span>
         </p>
+        <div
+          onPointerDown={(e) => controls.start(e)}
+          className={classes.controle}
+        ></div>
         <Button danger iconUrl="/exit_white.svg" onClick={onDelete} />
       </div>
       <Input
-        onChange={(e) => onEdit(e, id)}
+        onChange={(e) => onEdit(e, index)}
         value={question.title}
         placeholder="Enter Question Title"
       />

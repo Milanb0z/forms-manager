@@ -69,12 +69,15 @@ const InviteTable = ({ invites }) => {
                 </td>
 
                 <td className={classes.table_action}>
-                  <Button onClick={resendInvite.bind(this, item._id)}>R</Button>
+                  <Button
+                    iconUrl="/icons/delete.svg"
+                    onClick={resendInvite.bind(this, item._id)}
+                  />
                   <Button onClick={deleteInvite.bind(this, item._id)} danger>
                     D
                   </Button>
                 </td>
-                <td>{item.response || "No"}</td>
+                <td>{item.response || "Unavailable"}</td>
               </tr>
             ))}
           </tbody>

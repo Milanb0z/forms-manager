@@ -7,8 +7,11 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  PieChart,
   ResponsiveContainer,
   XAxis,
+  Cell,
+  Pie,
 } from "recharts";
 
 import { Card, Button } from "@ui";
@@ -22,7 +25,7 @@ import CHART_COLORS from "@utils/chartColors";
 
 const SurveysCard = ({ forms }) => {
   return (
-    <Card>
+    <Card className={classes.surveys}>
       <h5>Created Surveys</h5>
 
       {forms?.length > 0 ? (
@@ -55,7 +58,7 @@ const ResultsCard = ({ forms }) => {
   const transformedRes = getResponsesSorted(forms);
   console.log(transformedRes);
   return (
-    <Card>
+    <Card className={classes.results}>
       <h5>Latest Results</h5>
 
       {transformedRes?.length > 0 ? (
@@ -85,7 +88,7 @@ const ResultsCard = ({ forms }) => {
 
 const SolvedChart = ({ formsData }) => {
   let transtformedChart = getChartData(formsData);
-  console.log(transtformedChart);
+
   return (
     <Card className={classes.charts}>
       <h3>Forms Activitiy (Last 7 Days)</h3>
@@ -113,6 +116,50 @@ const SolvedChart = ({ formsData }) => {
   );
 };
 
+const inviteData = [
+  { name: "Group A", value: 400 },
+  { name: "Group B", value: 300 },
+];
+
+const InviteStatic = () => {
+  return (
+    <Card className={classes.invites}>
+      <h3>Invites</h3>
+      <div className={classes.invites_content}>
+        <ResponsiveContainer>
+          <PieChart className={classes.invites_chart}>
+            <Pie
+              cy="100%"
+              data={inviteData}
+              innerRadius={60}
+              outerRadius={120}
+              startAngle={180}
+              endAngle={0}
+              fill="red"
+              dataKey="value"
+            >
+              {inviteData.map((entry, index) => (
+                <Cell key={`cell-${index}`} {...CHART_COLORS[index]} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
+        <div className={classes.invites_info}>
+          <div className={classes.invites_info_card}>
+            <h2>12</h2>
+            <p>Answered:</p>
+          </div>
+
+          <div className={classes.invites_info_card}>
+            <h2>12</h2>
+            <p>Total Invites:</p>
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
+};
+
 const MainDashboard = () => {
   const { data: user } = useGetProfileQuery();
 
@@ -120,10 +167,10 @@ const MainDashboard = () => {
     <div className={classes.grid}>
       <SolvedChart formsData={user.createdForms} />
       <ResultsCard forms={user.createdForms} />
-      <Card className={classes.invites}>
-        <h3>Lorem, ipsum.</h3>
+      <InviteStatic />
+      <Card className={classes.dummy}>
+        <h3>sdsd</h3>
       </Card>
-
       <SurveysCard forms={user.createdForms} />
     </div>
   );

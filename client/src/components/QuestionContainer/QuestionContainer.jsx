@@ -27,7 +27,7 @@ const QuestionContainer = memo(function QuestionContainer({
   onSubmit,
 }) {
   const [acitveCard, setAcitveCard] = useState(null);
-  const [{ isActive }, drop] = useDrop(() => ({
+  const [, drop] = useDrop(() => ({
     accept: "BOX",
     drop: onDropHandler,
     collect: (monitor) => ({
@@ -35,33 +35,18 @@ const QuestionContainer = memo(function QuestionContainer({
     }),
   }));
 
-  const onNewOrder = (e) => {
-    console.log({
-      setted: Object.values(e).map((e) => e.type),
-    });
-    setQuestions(e);
-  };
-
   const changeActiveCard = (index) => {
-    console.log({ index });
-
     setAcitveCard(index);
   };
 
-  console.log(questions);
+  const onReorderHandler = (newOrder) => {
+    setQuestions(newOrder);
+  };
 
   return (
     <div ref={drop} data-testid="dustbin" className={classes.form}>
       <Reorder.Group
-        onReorder={(e) => {
-          console.log(Object.values(e).map((e) => e.type));
-          e.map((el, i) => {
-            console.log({ el, i });
-            if (el === questions[acitveCard]) {
-              onNewOrder(moveItem(questions, acitveCard, i));
-            }
-          });
-        }}
+        onReorder={onReorderHandler}
         axis="y"
         values={questions}
         className={classes.form_main}

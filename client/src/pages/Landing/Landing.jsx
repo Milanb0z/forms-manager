@@ -8,6 +8,7 @@ import FeaturesSection from "@sections/Features/Features";
 import Summary from "@sections/Summary/Summary";
 import Header from "@sections/Header/Header";
 import Submit from "@sections/Submit/Submit";
+import TestForms from "@sections/TestForms/TestForms";
 
 const LINKS = [
   { text: "Home", src: "/#" },
@@ -18,13 +19,12 @@ const LINKS = [
 ];
 
 const Landing = () => {
-  console.log(import.meta.env.REACT_APP_BAKCEND_URL);
   return (
     <div className={classes.wrapper}>
       <div></div>
       <Header links={LINKS} />
       <HeroSection />
-
+      <TestForms />
       <Summary />
       <FeaturesSection />
       <Submit />

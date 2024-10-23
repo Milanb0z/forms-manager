@@ -5,26 +5,48 @@
 
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(12, 1fr);
+  overflow: hidden;
+}
 
-  div:nth-child(1) {
-    grid-row: span 6;
-    grid-column: span 3;
+.surveys {
+  grid-row: span 6;
+  grid-column: 4 / -1;
+}
+
+.invites {
+  grid-column: span 2;
+  grid-row: span 4;
+
+  &_chart {
+    padding: 1em;
   }
 
-  div:nth-child(2) {
-    grid-row: span 7;
-    grid-column: span 2;
+  &_content {
+    flex: 1;
+    display: flex;
+    gap: 1em;
   }
 
-  div:nth-child(3) {
-    grid-column: span 3;
-    grid-row: span 7;
+  &_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1em;
   }
+}
 
-  div:nth-child(4) {
-    grid-row: span 6;
-    grid-column: span 2;
-  }
+.dummy {
+  grid-row: span 7;
+}
+
+.charts {
+  grid-row: 1 / 7;
+  grid-column: 1 / 4;
+}
+
+.results {
+  grid-row: 1 / 8;
+  grid-column: 4 / -1;
 }
 
 .noForm {
@@ -51,11 +73,6 @@
   &:hover {
     background-color: var(--color-black-03);
   }
-}
-
-.legend {
-  background-color: red;
-  display: none;
 }
 
 .list {

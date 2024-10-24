@@ -39,6 +39,7 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignUp />,
   },
+
   {
     path: "/form/id/:formId",
     element: <SingleForm byId />,

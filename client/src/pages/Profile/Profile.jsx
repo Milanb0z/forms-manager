@@ -6,6 +6,7 @@ import { useGetProfileQuery, useUpdateUserMutation } from "@store/authSlice";
 import { Button, Input } from "@ui";
 
 import classes from "./Profile.module.scss";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -28,8 +29,15 @@ const Profile = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    updateUser(userData)
-      .unwrap()
+
+    toast
+      .promise(updateUser(userData).unwrap(), {
+        pending: "Updating User",
+        success: "User Updated",
+        error: {
+          render: ({ data }) => data?.data.error || "Something Went Wrong",
+        },
+      })
       .then(() => {
         navigate("/dashboard");
       });

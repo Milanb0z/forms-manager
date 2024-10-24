@@ -117,8 +117,8 @@ const SolvedChart = ({ formsData }) => {
 };
 
 const inviteData = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
+  { name: "Group A", value: 400, fill: "#b8fd8e" },
+  { name: "Group B", value: 300, fill: "#343434" },
 ];
 
 const InviteStatic = () => {
@@ -139,7 +139,7 @@ const InviteStatic = () => {
               dataKey="value"
             >
               {inviteData.map((entry, index) => (
-                <Cell key={`cell-${index}`} {...CHART_COLORS[index]} />
+                <Cell key={`cell-${index}`} fill={entry.fill} />
               ))}
             </Pie>
           </PieChart>

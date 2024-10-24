@@ -45,16 +45,29 @@ router.get("/profile", auth, async (req, res) => {
 
 router.patch("/", auth, async (req, res) => {
   try {
-    const user = req.user;
-    const { username } = req.body;
+    const { username, email, password } = req.body;
 
-    const updatedUser = await User.findByIdAndUpdate(
-      user._id,
-      {
-        username,
-      },
-      { new: true }
-    );
+    const existUser = await User.findOne({ username });
+
+    if (!existUser) {
+      return res.status(404).send({ error: "Username Taken" });
+    }
+
+    const fetchUser = await User.findOne({ email });
+
+    if (!fetchUser) {
+      return res.status(404).send({ error: "User not Found" });
+    }
+
+    const isPassValid = await fetchUser.isValidPassword(password);
+    if (!isPassValid) {
+      return res.status(401).send({ error: "Password is incorrect" });
+    }
+
+    fetchUser.username = username;
+
+    const updatedUser = await fetchUser.save();
+
     res.send(updatedUser);
   } catch (error) {
     console.log(error);

@@ -34,13 +34,21 @@ const SurveysCard = ({ forms }) => {
             <Link key={form._id} to={`/dashboard/invite/${form._id}`}>
               <div className={classes.list_item}>
                 <h4>{form.name}</h4>
-                <span>{form.isOpen ? "Active" : "Closed"}</span>
+                <span
+                  style={{
+                    color: form.isOpen
+                      ? "var(--color-green)"
+                      : "var(--color-red)",
+                  }}
+                >
+                  {form.isOpen ? "Active" : "Closed"}
+                </span>
               </div>
             </Link>
           ))}
-          <div className={classes.new}>
+          <Link to="/dashboard/form/new" className={classes.new}>
             <h4>Create New Form</h4>
-          </div>
+          </Link>
         </div>
       ) : (
         <div className={classes.noForm}>
@@ -56,7 +64,7 @@ const SurveysCard = ({ forms }) => {
 
 const ResultsCard = ({ forms }) => {
   const transformedRes = getResponsesSorted(forms);
-  console.log(transformedRes);
+
   return (
     <Card className={classes.results}>
       <h5>Latest Results</h5>

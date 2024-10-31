@@ -1,55 +1,58 @@
 import { Button } from "@ui";
-import Header from "@sections/Header/Header";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import classes from "./Hero.module.scss";
 
+const landingVars = {
+  animate: {
+    opacity: 1,
+    y: 0,
+  },
+  initial: {
+    opacity: 0,
+    y: 50,
+  },
+};
+
 const HeroSection = () => {
   return (
-    <div className={classes.hero}>
+    <motion.div
+      variants={{}}
+      initial="initial"
+      animate="animate"
+      transition={{ staggerChildren: 0.15 }}
+      className={classes.hero}
+    >
       <section className={classes.content}>
-        <Header />
         <div className={classes.main}>
-          <div className={classes.left}>
-            <h1>Unlock the Power of Efficient Service Tracking</h1>
-            <p>
-              Easily build forms with our drag-and-drop builder. Whether it's
-              surveys, feedback forms, or event registrations, you can design,
-              share, and analyze responses in no time.
-            </p>
-
-            <div className={classes.actions}>
-              <Button>Create Form</Button>
-              <Button outline>Get Demo</Button>
-            </div>
-
-            <div className={classes.reviews}>
-              <div className={classes.profiles}>
-                <div className={classes.profiles_icon}>1</div>
-                <div className={classes.profiles_icon}>2</div>
-                <div className={classes.profiles_icon}>3</div>
-                <div className={classes.profiles_icon}>4</div>
-              </div>
-              <div className={classes.reviews_text}>
-                <div className={classes.row}>
-                  <span>4.8</span>
-                  <div className={classes.reviews_stars}>
-                    <img src="/star.svg" alt="star" />
-                    <img src="/star.svg" alt="star" />
-                    <img src="/star.svg" alt="star" />
-                    <img src="/star.svg" alt="star" />
-                    <img src="/star.svg" alt="star" />
-                  </div>
-                </div>
-                <p>Lorem, ipsum dolor.</p>
-              </div>
-            </div>
-          </div>
-          <div className={classes.screen}>
-            <img src="/dash.jpg" alt="" />
+          <div className={classes.text}>
+            <motion.h1 variants={landingVars}>
+              Create Forms Effortlessly with Formr
+            </motion.h1>
+            <motion.p variants={landingVars}>
+              Effortlessly create custom forms using our drag-and-drop builder.
+              Choose from various question types, send invites with ease, and
+              track responses in real-time.
+            </motion.p>
+            <motion.div variants={landingVars} className={classes.row}>
+              <Link to="/login">
+                <Button>Login</Button>
+              </Link>
+              <Link to="/form/id/first">
+                <Button outline>Demo Form</Button>
+              </Link>
+            </motion.div>
+            <motion.img
+              variants={landingVars}
+              src="/assets/screen.png"
+              alt="screen"
+              className={classes.screen}
+            />
           </div>
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

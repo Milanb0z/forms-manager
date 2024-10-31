@@ -1,10 +1,19 @@
+import { memo, useState } from "react";
+import { Reorder } from "framer-motion";
 import { useDrop } from "react-dnd";
+
+import { Button } from "@ui";
 
 import DroppedQuestion from "@components/DroppedQuestion/DroppedQuestion";
 
 import classes from "./QuestionContainer.module.scss";
-import { Button } from "@ui";
-import { memo } from "react";
+
+const moveItem = (array, to, from) => {
+  const item = array[from];
+  array.splice(from, 1);
+  array.splice(to, 0, item);
+  return array;
+};
 
 const QuestionContainer = memo(function QuestionContainer({
   questions,
@@ -14,9 +23,11 @@ const QuestionContainer = memo(function QuestionContainer({
   onNewChoice,
   onChoiceEdit,
   onChoiceDelete,
+  setQuestions,
   onSubmit,
 }) {
-  const [{ isActive }, drop] = useDrop(() => ({
+  const [acitveCard, setAcitveCard] = useState(null);
+  const [, drop] = useDrop(() => ({
     accept: "BOX",
     drop: onDropHandler,
     collect: (monitor) => ({
@@ -24,28 +35,37 @@ const QuestionContainer = memo(function QuestionContainer({
     }),
   }));
 
+  const changeActiveCard = (index) => {
+    setAcitveCard(index);
+  };
+
+  const onReorderHandler = (newOrder) => {
+    setQuestions(newOrder);
+  };
+
   return (
     <div ref={drop} data-testid="dustbin" className={classes.form}>
-      <h5>Form</h5>
-      <div className={classes.form_main}>
-        {isActive ? (
-          <div className={classes.overlay}>
-            <h2>Drop Question</h2>
-          </div>
-        ) : null}
+      <Reorder.Group
+        onReorder={onReorderHandler}
+        axis="y"
+        values={questions}
+        className={classes.form_main}
+      >
         {questions.map((question, index) => (
           <DroppedQuestion
-            id={index}
+            setActive={changeActiveCard}
+            id={question.id}
+            index={index}
             question={question}
             onEdit={onEdit}
-            key={index}
-            onDelete={() => onDelete(index)}
-            onNewChoice={() => onNewChoice(index)}
+            key={question.id}
+            onDelete={onDelete.bind(this, index)}
+            onNewChoice={onNewChoice.bind(this, index)}
             onChoiceEdit={onChoiceEdit}
             onChoiceDelete={onChoiceDelete}
           />
         ))}
-      </div>
+      </Reorder.Group>
       <Button disabled={questions.length < 1} onClick={onSubmit}>
         Submit
       </Button>

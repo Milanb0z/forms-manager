@@ -5,6 +5,7 @@ import { Input, Button, TextArea, FileDropzone } from "@ui";
 import classes from "./DroppedQuestion.module.scss";
 
 import ChoiceSelector from "@components/ChoiceSelector/ChoiceSelector";
+import { Reorder, useDragControls } from "framer-motion";
 
 const QUESTION_TYPES = {
   MULTIPLE: "MULTIPLE",
@@ -22,8 +23,11 @@ const DroppedQuestion = ({
   onNewChoice,
   onChoiceEdit,
   onChoiceDelete,
+  setActive,
+  index,
 }) => {
   let content = null;
+  const controls = useDragControls();
 
   switch (question.type) {
     case QUESTION_TYPES.MULTIPLE:
@@ -37,9 +41,7 @@ const DroppedQuestion = ({
         />
       );
       break;
-    case QUESTION_TYPES.PARAGRAPH:
-      content = <TextArea placeholder="Answer" disabled />;
-      break;
+
     case QUESTION_TYPES.RADIO:
       content = (
         <ChoiceSelector
@@ -51,28 +53,45 @@ const DroppedQuestion = ({
         />
       );
       break;
+    case QUESTION_TYPES.PARAGRAPH:
     case QUESTION_TYPES.SHORT:
-      content = <Input placeholder="Answer" disabled />;
+      content = null;
       break;
     case QUESTION_TYPES.UPLOAD:
       content = <FileDropzone />;
       break;
   }
+
   return (
-    <div className={classes.card}>
+    <Reorder.Item
+      id={question.id}
+      dragListener={false}
+      dragControls={controls}
+      value={question}
+      onDragStart={() => {
+        setActive(index);
+      }}
+      className={classes.card}
+    >
       <div className={classes.card_header}>
         <p>
           Type: <span>{question.type}</span>
         </p>
-        <Button iconUrl="/exit.svg" onClick={onDelete} />
+        <div
+          onPointerDown={(e) => controls.start(e)}
+          className={classes.controle}
+        >
+          <img src="/icons/drag.svg" />
+        </div>
+        <Button danger iconUrl="/icons/exit_white.svg" onClick={onDelete} />
       </div>
       <Input
-        onChange={(e) => onEdit(e, id)}
+        onChange={(e) => onEdit(e, index)}
         value={question.title}
         placeholder="Enter Question Title"
       />
       {content}
-    </div>
+    </Reorder.Item>
   );
 };
 

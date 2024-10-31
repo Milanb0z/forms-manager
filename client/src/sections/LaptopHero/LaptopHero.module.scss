@@ -1,0 +1,34 @@
+.hero {
+  min-height: 100svh;
+  display: flex;
+}
+
+.text {
+  flex: 1;
+}
+
+.test {
+  background-color: red;
+  position: relative;
+  width: 10%;
+
+  img {
+    position: relative;
+    z-index: 500;
+    width: 100%;
+  }
+}
+
+.screen {
+  background-color: blue;
+
+  position: absolute;
+  height: 78.3%;
+  z-index: 10;
+  width: 65%;
+  transform: skewY(-7.8deg);
+  right: 1.2%;
+  top: 9%;
+  border-radius: 1em 1em 0 0;
+  padding: 1em;
+}

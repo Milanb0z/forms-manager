@@ -1,0 +1,51 @@
+.summary {
+  background-color: var(--color-green);
+  padding: 5em 2em;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 4em;
+  h2 {
+    text-align: center;
+    max-width: 30ch;
+    color: var(--color-black-03);
+  }
+}
+
+.bottom {
+  display: flex;
+  gap: 2em;
+
+  &_box {
+    rotate: 5deg;
+  }
+}
+
+@media screen and (max-width: 75em) {
+  .bottom {
+    align-items: flex-end;
+    &_box {
+      height: 5em;
+    }
+  }
+}
+
+@media screen and (max-width: 35em) {
+  .content {
+    gap: 1em;
+    h2 {
+      font-size: 2em;
+    }
+  }
+  .bottom {
+    flex-direction: column-reverse;
+    gap: 1em;
+
+    &_box {
+      rotate: 0deg;
+    }
+  }
+}

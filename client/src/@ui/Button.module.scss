@@ -11,10 +11,11 @@
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  border: 2px solid;
 
   img {
-    width: 1em;
-    height: auto;
+    height: 1em;
+    width: auto;
   }
 
   &:disabled {
@@ -26,6 +27,7 @@
 .danger {
   background-color: var(--color-red);
   color: #fff;
+  border-color: #5c1e16;
 }
 
 .outline {

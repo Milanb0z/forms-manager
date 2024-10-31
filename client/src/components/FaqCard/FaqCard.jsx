@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import classes from "./FAQCard.module.scss";
+import classes from "./FaqCard.module.scss";
 
 const FAQCard = ({ heading, body, isActive, onClickHandler }) => {
   return (

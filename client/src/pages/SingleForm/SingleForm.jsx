@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useParams } from "react-router";
+import { toast } from "react-toastify";
 
-import { Button } from "@ui";
+import { Button, Input, TextArea } from "@ui";
 
 import axios from "../../axios.default";
 
 import classes from "./SingleForm.module.scss";
-import getAnsSchema from "@utils/getAnsSchema";
+import { getAnsSchema } from "@utils/getAnsSchema";
 import QUESTION_TYPES from "@utils/questionTypes";
-import { Input } from "@ui";
-import { TextArea } from "@ui";
-import { toast } from "react-toastify";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 
 const questionVars = {
   initial: {
@@ -101,6 +100,7 @@ const SingleForm = ({ byId, inviteMode }) => {
   const [answers, setAnswers] = useState([]);
   const [infoOpen, setInfoOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSolved, setIsSolved] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -114,6 +114,7 @@ const SingleForm = ({ byId, inviteMode }) => {
         setForm(res.data);
         setAnswers(getAnsSchema(res.data.questions));
         setIsLoading(false);
+        setInfoOpen(true);
       })
       .catch(() => {
         setIsLoading(false);
@@ -163,7 +164,7 @@ const SingleForm = ({ byId, inviteMode }) => {
     axios
       .post(submitUrl, submitData)
       .then((res) => {
-        console.log(res);
+        setIsSolved(true);
         toast("Submited Succesfully");
       })
       .catch((err) => {
@@ -174,6 +175,18 @@ const SingleForm = ({ byId, inviteMode }) => {
   const toggleInfo = () => {
     setInfoOpen((p) => !p);
   };
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (isSolved) {
+    return (
+      <div className={classes.center}>
+        <h2>Form Submitted Successfully</h2>
+      </div>
+    );
+  }
 
   if (form.questions?.length > 0) {
     return (
@@ -252,7 +265,11 @@ const SingleForm = ({ byId, inviteMode }) => {
       </div>
     );
   } else {
-    return <h2>No </h2>;
+    return (
+      <div className={classes.center}>
+        <h2>Form Not Found</h2>
+      </div>
+    );
   }
 };
 

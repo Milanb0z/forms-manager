@@ -2,16 +2,12 @@
   flex: 1;
   display: flex;
   gap: 2em;
+  height: 100%;
   overflow: hidden;
 
   & > * {
     flex: 1;
   }
-}
-
-.board {
-  background-color: var(--color-black-02);
-  border-radius: 0.5em;
 }
 
 .info {
@@ -25,17 +21,9 @@
 }
 
 .question {
-  flex: 1;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1em;
-
-  &_type {
-    text-align: center;
-    padding: 1em;
-    background-color: var(--color-black-02);
-    border-radius: 0.5em;
-  }
 }
 
 @media screen and (max-width: 75em) {

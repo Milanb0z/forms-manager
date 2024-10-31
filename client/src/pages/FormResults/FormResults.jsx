@@ -21,7 +21,7 @@ const FormResults = () => {
   return (
     <div className={classes.wrapper}>
       <h1>{data.formId.name}</h1>
-      <p>{data.formId.description}</p>
+
       <p>
         Submited:
         <span> {FromatedDate(data.createdAt)}</span>

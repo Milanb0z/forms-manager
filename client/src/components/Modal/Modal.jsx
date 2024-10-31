@@ -37,7 +37,11 @@ const Modal = ({ children, title, isOpen, handleClose }) => {
         >
           <div className={classes.modal_heading}>
             <h2>{title}</h2>
-            <Button danger iconUrl="/exit_white.svg" onClick={handleClose} />
+            <Button
+              danger
+              iconUrl="/icons/exit_white.svg"
+              onClick={handleClose}
+            />
           </div>
           <div className={classes.modal_content}>{children}</div>
         </motion.div>

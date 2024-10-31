@@ -20,7 +20,7 @@ const ChoiceSelector = ({
               value={singleVal}
             />
             <Button
-              iconUrl="/exit.svg"
+              iconUrl="/icons/exit.svg"
               onClick={onChoiceDelete.bind(this, id, index)}
             />
           </div>

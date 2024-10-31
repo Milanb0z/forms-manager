@@ -26,7 +26,11 @@ const InviteTable = ({ invites }) => {
     <Card className={classes.card} isLoading={isLoading || isResendLoading}>
       <div className={classes.header}>
         <h2>Invites</h2>
-        <Button onClick={() => setIsOpen(true)} outline iconUrl="/star.svg" />
+        <Button
+          onClick={() => setIsOpen(true)}
+          outline
+          iconUrl="/icons/add.svg"
+        />
       </div>
 
       <Modal
@@ -69,12 +73,21 @@ const InviteTable = ({ invites }) => {
                 </td>
 
                 <td className={classes.table_action}>
-                  <Button onClick={resendInvite.bind(this, item._id)}>R</Button>
-                  <Button onClick={deleteInvite.bind(this, item._id)} danger>
-                    D
-                  </Button>
+                  <abbr title="Resend Mail">
+                    <Button
+                      iconUrl="/icons/resend.svg"
+                      onClick={resendInvite.bind(this, item._id)}
+                    />
+                  </abbr>
+                  <abbr title="Delete Invite">
+                    <Button
+                      iconUrl="/icons/delete.svg"
+                      onClick={deleteInvite.bind(this, item._id)}
+                      danger
+                    />
+                  </abbr>
                 </td>
-                <td>{item.response || "No"}</td>
+                <td>{item.response || "Unavailable"}</td>
               </tr>
             ))}
           </tbody>

@@ -9,14 +9,6 @@ import HamburgerIcon from "@components/HamburgerIcon/HamburgerIcon";
 import SideDrawer from "@components/SideDrawer/SideDrawer";
 import { Button } from "@ui";
 
-const LINKS = [
-  { text: "Home", src: "/#" },
-  { text: "Features", src: "/#features" },
-  { text: "steps", src: "/#steps" },
-  { text: "reviews", src: "/#reviews" },
-  { text: "FAQ", src: "/#faq" },
-];
-
 const revealVar = {
   initial: {
     y: -50,
@@ -29,7 +21,7 @@ const revealVar = {
   },
 };
 
-const Header = () => {
+const Header = ({ links }) => {
   const [isOpen, setIsOpen] = useState(false);
   const direction = useScrollDirection();
 
@@ -64,12 +56,12 @@ const Header = () => {
       <header className={classes.header}>
         <motion.div variants={revealVar} className={classes.logo}>
           <a href="/#  ">
-            <img src="/logo.svg" alt="" className={classes.icon} />
+            <img src="/icons/logo.svg" alt="" className={classes.icon} />
             <h4>formr</h4>
           </a>
         </motion.div>
         <motion.ul variants={revealVar} className={classes.links}>
-          {LINKS.map((link) => (
+          {links.map((link) => (
             <a key={link.text} href={link.src}>
               <li className={classes.links_item}> {link.text}</li>
             </a>

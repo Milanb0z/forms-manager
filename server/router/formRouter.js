@@ -7,7 +7,6 @@ const { Form } = require("../models/formModel");
 router.post("/new", auth, async (req, res) => {
   try {
     const user = req.user;
-    console.log({ user });
     const { name, description, customLink, questions } = req.body;
 
     const newForm = new Form({
@@ -21,9 +20,7 @@ router.post("/new", auth, async (req, res) => {
     const savedForm = await newForm.save();
 
     user.createdForms.push(savedForm._id);
-
     await user.save();
-
     res.send(savedForm);
   } catch (error) {
     console.log({ error });
@@ -48,9 +45,9 @@ router.get("/id/:formId", async (req, res) => {
   try {
     const { formId } = req.params;
 
-    console.log(formId);
     const fetchedForm = await Form.findOne({ customLink: formId })
       .populate("createdBy")
+      .populate("responses")
       .select("-createdBy.password");
 
     if (!fetchedForm) {
@@ -111,7 +108,6 @@ router.put("/:formId", auth, async (req, res) => {
 router.delete("/:formId", async (req, res) => {
   try {
     const { formId } = req.params;
-
     const deletedFrom = await Form.findByIdAndDelete(formId);
 
     res.send(deletedFrom);

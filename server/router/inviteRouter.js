@@ -32,6 +32,8 @@ router.get("/solve/:inviteId", async (req, res) => {
       return res.status(404).send({ error: "From Not Found" });
     }
 
+    console.log(fetchedForm);
+
     res.send(fetchedForm);
   } catch (error) {
     console.log({ error });
@@ -82,15 +84,14 @@ router.get("/:formId", async (req, res) => {
     const fetchedForm = await Form.findById(formId)
       .populate("createdBy")
       .populate("invites")
+      .populate("responses")
       .select("-createdBy.password");
 
     if (!fetchedForm) {
       return res.status(404).send({ error: "From Not Found" });
     }
 
-    const response = await Response.find({ formId });
-
-    res.send({ form: fetchedForm, response });
+    res.send({ form: fetchedForm });
   } catch (error) {
     console.log({ error });
     res.status(error).send({ error });

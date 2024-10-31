@@ -12,9 +12,9 @@ const TextArea = ({ name, value, label, ...inputProps }) => {
       <textarea
         name={name}
         className={classes.field}
-        {...inputProps}
         rows="4"
         cols="50"
+        {...inputProps}
         value={value}
       ></textarea>
     </div>

@@ -1,0 +1,64 @@
+.wrapper {
+  background-color: var(--color-black-02);
+  padding: 5em 8em;
+}
+
+.submit {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+
+  h2 {
+    max-width: 15ch;
+  }
+
+  & > * {
+    flex: 1;
+  }
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  p {
+    max-width: 45ch;
+  }
+}
+
+.form {
+  background-color: var(--color-black-01);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2em;
+  padding: 2em;
+  border-radius: 1em;
+
+  &_body {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+}
+
+.row {
+  display: flex;
+  gap: 1em;
+
+  & > * {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .submit {
+    flex-direction: column;
+    gap: 5em;
+  }
+
+  .text {
+    text-align: center;
+  }
+}

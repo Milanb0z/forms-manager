@@ -37,6 +37,18 @@
   padding: 1em;
 }
 
+.center {
+  display: flex;
+  flex: 1;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+}
+
 .info {
   position: absolute;
   background-color: var(--color-black-03);

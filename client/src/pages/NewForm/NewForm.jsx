@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { v4 } from "uuid";
 
 import useInput from "@hooks/useInput";
 import { TextArea, Input, Button } from "@ui";
@@ -96,7 +97,10 @@ const NewForm = () => {
 
   const onDropHandler = (question) => {
     const newQuestion = JSON.parse(JSON.stringify(question));
-    setQuestions((prevQuestions) => [...prevQuestions, { ...newQuestion }]);
+    setQuestions((prevQuestions) => [
+      ...prevQuestions,
+      { ...newQuestion, id: v4() },
+    ]);
   };
 
   // Choice CRUD
@@ -119,7 +123,12 @@ const NewForm = () => {
   };
   const onFormSubmit = (e) => {
     e.preventDefault();
-    let formSubmitData = { name: heading, description, customLink, questions };
+    let formSubmitData = {
+      name: heading,
+      description,
+      customLink,
+      questions: questions.map(({ id, ...otherProps }) => ({ ...otherProps })),
+    };
 
     console.log(formSubmitData);
 
@@ -138,6 +147,7 @@ const NewForm = () => {
     <DndProvider backend={HTML5Backend}>
       <div className={classes.wrapper}>
         <QuestionContainer
+          setQuestions={setQuestions}
           questions={questions}
           onDropHandler={onDropHandler}
           onDelete={onQuestionDelete}

@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
@@ -6,6 +6,7 @@ import { useGetProfileQuery, useUpdateUserMutation } from "@store/authSlice";
 import { Button, Input } from "@ui";
 
 import classes from "./Profile.module.scss";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -28,15 +29,22 @@ const Profile = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    updateUser(userData)
-      .unwrap()
+
+    toast
+      .promise(updateUser(userData).unwrap(), {
+        pending: "Updating User",
+        success: "User Updated",
+        error: {
+          render: ({ data }) => data?.data.error || "Something Went Wrong",
+        },
+      })
       .then(() => {
         navigate("/dashboard");
       });
   };
 
   return (
-    <form className={classes.content} onSubmit={onSubmitHandler}>
+    <motion.form layout className={classes.content} onSubmit={onSubmitHandler}>
       <div className={classes.content_main}>
         <Input
           onChange={onChangeHandler}
@@ -62,7 +70,7 @@ const Profile = () => {
           <Button type="submit">Update</Button>
         </div>
       </div>
-    </form>
+    </motion.form>
   );
 };
 

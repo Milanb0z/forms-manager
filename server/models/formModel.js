@@ -61,6 +61,12 @@ const formSchema = new mongoose.Schema(
         ref: "Invite",
       },
     ],
+    responses: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Response",
+      },
+    ],
   },
   { timestamps: true }
 );

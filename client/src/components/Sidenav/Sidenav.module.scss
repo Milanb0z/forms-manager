@@ -1,25 +1,26 @@
 .nav {
+  position: relative;
   padding: 2em 1.25em;
+  height: 100%;
   background-color: var(--color-black-02);
   display: flex;
-  position: relative;
   flex-direction: column;
   align-items: center;
+  border-right: 2px solid var(--color-black-03);
   gap: 2em;
+}
 
-  &_open {
-    width: 30%;
-    max-width: 20em;
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  align-self: stretch;
 
-    .links {
-      align-self: stretch;
-    }
+  img {
+    width: 3em;
   }
 }
 
-.active {
-  background-color: var(--color-green) !important;
-}
 .toggle {
   width: 2em;
   height: 2em;
@@ -28,7 +29,6 @@
   border-radius: 50%;
   display: grid;
   place-content: center;
-
   position: absolute;
   right: 0;
   top: 1em;
@@ -39,27 +39,60 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
+  align-self: stretch;
+}
+
+.line {
+  background-color: var(--color-black-03);
+  width: 100%;
+  align-self: flex-start;
+  height: 2px;
 }
 
 .link {
-  width: 3.125em;
-  height: 3.125em;
-  background-color: var(--color-black-03);
-  display: grid;
-  place-content: center;
-  border-radius: 0.5em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  &_icon {
+    background-color: var(--color-black-03);
+    width: 3.125em;
+    height: 3.125em;
+    display: grid;
+    place-content: center;
+    border-radius: 0.5em;
+  }
+
+  &_text {
+    flex: 1;
+  }
 
   img {
     width: 1.125em;
     height: 1.125em;
   }
 }
+//Activ
+.active {
+  .link_icon {
+    background-color: var(--color-red);
+  }
+  span {
+    color: var(--color-green);
+  }
+}
 
 @media screen and (max-width: 35em) {
   .nav {
     flex-direction: row;
+    width: 100% !important;
+    height: unset;
     justify-content: center;
     padding: 1em;
+    border-right: none;
+  }
+
+  .line {
+    display: none;
   }
 
   .toggle {
@@ -73,5 +106,15 @@
   .links {
     align-items: center;
     flex-direction: row;
+  }
+
+  .link_icon {
+    width: 5em;
+    height: 5em;
+
+    img {
+      width: 2em;
+      height: 2em;
+    }
   }
 }

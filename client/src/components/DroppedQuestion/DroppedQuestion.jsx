@@ -1,11 +1,9 @@
-import React from "react";
-
-import { Input, Button, TextArea, FileDropzone } from "@ui";
+import { Reorder, useDragControls } from "framer-motion";
+import { Input, Button, FileDropzone } from "@ui";
 
 import classes from "./DroppedQuestion.module.scss";
 
 import ChoiceSelector from "@components/ChoiceSelector/ChoiceSelector";
-import { Reorder, useDragControls } from "framer-motion";
 
 const QUESTION_TYPES = {
   MULTIPLE: "MULTIPLE",

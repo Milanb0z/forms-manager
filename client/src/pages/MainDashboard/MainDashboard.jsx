@@ -71,8 +71,8 @@ const ResultsCard = ({ forms }) => {
 
       {transformedRes?.length > 0 ? (
         <div className={classes.list}>
-          {transformedRes.map((rsp) => (
-            <Link key={rsp._id} to={`/dashboard/results/${rsp.id}`}>
+          {transformedRes.map((rsp, index) => (
+            <Link key={index} to={`/dashboard/results/${rsp.id}`}>
               <div className={classes.list_submit}>
                 <h4>{rsp.name}</h4>
                 <p>

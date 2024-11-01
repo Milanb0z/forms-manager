@@ -16,9 +16,9 @@ const extendedApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["form"],
     }),
     editForm: builder.mutation({
-      query: ({ formId, body }) => ({
+      query: ({ formId, data }) => ({
         url: `/form/${formId}`,
-        body,
+        body: data,
         method: "PUT",
       }),
       invalidatesTags: ["form", "auth"],

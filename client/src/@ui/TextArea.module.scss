@@ -15,10 +15,11 @@
   font-size: 1em;
   font-family: Inter;
   color: var(--grey-grey-70);
-  padding: 0.625em 1.25em;
+  padding: 1em 1.25em;
   border-radius: 0.5em;
   border: 2px solid var(--color-black-03);
   background: var(--color-black-01);
+  resize: vertical;
 
   &:disabled {
     opacity: 0.7;

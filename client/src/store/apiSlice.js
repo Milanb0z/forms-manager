@@ -3,7 +3,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://formr.onrender.com/api",
+    baseUrl: import.meta.env.DEV
+      ? "http://localhost:3000/api"
+      : "https://formr.onrender.com/api",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       if (token) {

@@ -39,6 +39,17 @@ const Login = () => {
       });
   };
 
+  const onDummyLogin = () => {
+    loginUser({ email: "112233ee@gmail.com", password: "112233ee" })
+      .unwrap()
+      .then(() => {
+        navigate("/dashboard/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <section className={classes.login}>
       <InfoSide />
@@ -84,9 +95,14 @@ const Login = () => {
                 <span>SignUp Here</span>
               </Link>
             </p>
-            <Button disabled={!email || !password} type="submit">
-              Login
-            </Button>
+            <div className={classes.row}>
+              <Button disabled={!email || !password} type="submit">
+                Login
+              </Button>
+              <Button secondary onClick={onDummyLogin} type="button">
+                Test Acc
+              </Button>
+            </div>
           </form>
         </Card>
       </motion.div>

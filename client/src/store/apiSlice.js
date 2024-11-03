@@ -5,7 +5,7 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.DEV
       ? "http://localhost:3000/api"
-      : "https://formr.onrender.com/api",
+      : "https://shark-app-j29yz.ondigitalocean.app/api/",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       if (token) {

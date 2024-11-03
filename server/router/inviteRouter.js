@@ -11,13 +11,11 @@ sgMail.setApiKey(process.env.SENDGRID_KEY);
 router.get("/solve/:inviteId", async (req, res) => {
   try {
     const { inviteId } = req.params;
-    console.log(inviteId);
     const fetchedInvite = await Invite.findById(inviteId);
 
     if (!fetchedInvite) {
       return res.status(404).send({ error: "Invite Not Found" });
     }
-    console.log(fetchedInvite.isSolved);
 
     if (fetchedInvite.isSolved) {
       return res.status(401).send({ error: "Invite Already Solved" });
@@ -31,8 +29,6 @@ router.get("/solve/:inviteId", async (req, res) => {
     if (!fetchedForm) {
       return res.status(404).send({ error: "From Not Found" });
     }
-
-    console.log(fetchedForm);
 
     res.send(fetchedForm);
   } catch (error) {
@@ -55,7 +51,6 @@ router.post("/end/:inviteId", async (req, res) => {
     if (fetchedInvite.isSolved) {
       return res.status(401).send({ error: "Invite Already Solved" });
     }
-    console.log("sd");
 
     const newResponse = new Response({
       formId: fetchedInvite.formId,
@@ -117,8 +112,6 @@ router.get("/resend/:inviteId", async (req, res) => {
       .populate("invites")
       .select("-createdBy.password");
 
-    console.log(fetchedForm);
-
     const messageMail = {
       to: fetchedInvite.email, // Change to your recipient
       from: "bozic411@gmail.com", // Change to your verified sender
@@ -153,9 +146,6 @@ router.post("/:formId", async (req, res) => {
   try {
     const { formId } = req.params;
     const { invites } = req.body;
-
-    console.log(invites);
-
     const inviteData = invites.map((email) => ({ formId, email }));
 
     const fetchedForm = await Form.findById(formId);

@@ -29,10 +29,12 @@ const DroppedQuestion = ({
 
   switch (question.type) {
     case QUESTION_TYPES.MULTIPLE:
+    case QUESTION_TYPES.RADIO:
       content = (
         <ChoiceSelector
-          options={question.options}
           id={id}
+          index={index}
+          options={question.options}
           onNewChoice={onNewChoice}
           onChoiceEdit={onChoiceEdit}
           onChoiceDelete={onChoiceDelete}
@@ -40,17 +42,6 @@ const DroppedQuestion = ({
       );
       break;
 
-    case QUESTION_TYPES.RADIO:
-      content = (
-        <ChoiceSelector
-          id={id}
-          options={question.options}
-          onNewChoice={onNewChoice}
-          onChoiceEdit={onChoiceEdit}
-          onChoiceDelete={onChoiceDelete}
-        />
-      );
-      break;
     case QUESTION_TYPES.PARAGRAPH:
     case QUESTION_TYPES.SHORT:
       content = null;

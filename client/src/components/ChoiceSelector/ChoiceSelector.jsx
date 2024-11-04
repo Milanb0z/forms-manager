@@ -8,6 +8,7 @@ const ChoiceSelector = ({
   onNewChoice,
   onChoiceEdit,
   onChoiceDelete,
+  index: queIndex,
 }) => {
   return (
     <div className={classes.selector}>
@@ -16,7 +17,7 @@ const ChoiceSelector = ({
           <div key={index} className={classes.selector_item}>
             <Input
               placeholder="Enter Option Text"
-              onChange={(e) => onChoiceEdit(id, index, e)}
+              onChange={(e) => onChoiceEdit(queIndex, index, e)}
               value={singleVal}
             />
             <Button

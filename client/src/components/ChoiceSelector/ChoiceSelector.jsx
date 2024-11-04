@@ -22,7 +22,7 @@ const ChoiceSelector = ({
             />
             <Button
               iconUrl="/icons/exit.svg"
-              onClick={onChoiceDelete.bind(this, id, index)}
+              onClick={onChoiceDelete.bind(this, queIndex, index)}
             />
           </div>
         ))

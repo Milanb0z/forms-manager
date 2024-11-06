@@ -111,6 +111,7 @@ const NewForm = () => {
   };
 
   const onChoiceEdit = (questionIndex, optionIndex, { target: { value } }) => {
+    console.log({ questionIndex, optionIndex });
     const newQuestions = [...questions];
     newQuestions[questionIndex].options[optionIndex] = value;
     setQuestions(newQuestions);

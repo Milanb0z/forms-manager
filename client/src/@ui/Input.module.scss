@@ -13,14 +13,15 @@
   font-weight: 400;
   font-size: 1em;
   font-family: inherit;
-  color: var(--color-grey);
   padding: 1em 1.25em;
   border-radius: 0.5em;
   border: 2px solid var(--color-black-03);
   background: var(--color-black-01);
+  color: #fff;
 
   &::placeholder {
     text-transform: capitalize;
+    color: var(--color-grey);
   }
 
   &:disabled {

@@ -17,6 +17,15 @@
   place-content: center;
 }
 
+.row {
+  display: flex;
+  gap: 1em;
+  align-self: stretch;
+  button {
+    flex: 1;
+  }
+}
+
 .right {
   display: flex;
   align-items: center;

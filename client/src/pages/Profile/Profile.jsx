@@ -35,7 +35,7 @@ const Profile = () => {
         pending: "Updating User",
         success: "User Updated",
         error: {
-          render: ({ data }) => data?.data.error || "Something Went Wrong",
+          render: ({ data }) => data?.data.error,
         },
       })
       .then(() => {

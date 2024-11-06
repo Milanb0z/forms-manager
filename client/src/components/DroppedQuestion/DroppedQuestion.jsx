@@ -1,11 +1,9 @@
-import React from "react";
-
-import { Input, Button, TextArea, FileDropzone } from "@ui";
+import { Reorder, useDragControls } from "framer-motion";
+import { Input, Button, FileDropzone } from "@ui";
 
 import classes from "./DroppedQuestion.module.scss";
 
 import ChoiceSelector from "@components/ChoiceSelector/ChoiceSelector";
-import { Reorder, useDragControls } from "framer-motion";
 
 const QUESTION_TYPES = {
   MULTIPLE: "MULTIPLE",
@@ -31,10 +29,12 @@ const DroppedQuestion = ({
 
   switch (question.type) {
     case QUESTION_TYPES.MULTIPLE:
+    case QUESTION_TYPES.RADIO:
       content = (
         <ChoiceSelector
-          options={question.options}
           id={id}
+          index={index}
+          options={question.options}
           onNewChoice={onNewChoice}
           onChoiceEdit={onChoiceEdit}
           onChoiceDelete={onChoiceDelete}
@@ -42,17 +42,6 @@ const DroppedQuestion = ({
       );
       break;
 
-    case QUESTION_TYPES.RADIO:
-      content = (
-        <ChoiceSelector
-          id={id}
-          options={question.options}
-          onNewChoice={onNewChoice}
-          onChoiceEdit={onChoiceEdit}
-          onChoiceDelete={onChoiceDelete}
-        />
-      );
-      break;
     case QUESTION_TYPES.PARAGRAPH:
     case QUESTION_TYPES.SHORT:
       content = null;

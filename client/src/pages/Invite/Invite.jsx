@@ -14,9 +14,9 @@ import FromatedDate from "@utils/formatDate";
 
 import Modal from "@components/Modal/Modal";
 import DeleteModal from "@components/InviteTable/DeleteModal";
+import EditModal from "@components/InviteTable/EditForm";
 
 const ResponsesCard = ({ response }) => {
-  console.log(response);
   return (
     <Card className={classes.responses}>
       <h2>Responses:</h2>
@@ -72,6 +72,7 @@ const itemVars = {
 const Invite = () => {
   const { formId } = useParams();
   const [isDelete, setIsDelete] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const { data, error, isLoading: isFetching } = useFetchFormQuery(formId);
 
   if (isFetching) {
@@ -107,25 +108,39 @@ const Invite = () => {
         {isDelete && (
           <Modal
             title="Form Will Delete"
-            handleClose={() => setIsDelete(false)}
+            handleClose={setIsDelete.bind(this, false)}
             isOpen={isDelete}
           >
             <DeleteModal
-              handleClose={() => setIsDelete(false)}
+              handleClose={setIsDelete.bind(this, false)}
               deleteKey={data.form.name}
+            />
+          </Modal>
+        )}
+
+        {isEdit && (
+          <Modal
+            title="Edit Form"
+            handleClose={setIsEdit.bind(this, false)}
+            isOpen={isEdit}
+          >
+            <EditModal
+              oldData={data.form}
+              handleClose={setIsEdit.bind(this, false)}
             />
           </Modal>
         )}
         <InviteTable invites={data.form.invites} />
         <ResponsesCard response={data.form.responses} />
         <CompleteCard invites={data.form.invites} />
-        <Card>
-          <Button onClick={() => setIsDelete(true)} danger>
+        <Card className={classes.actions}>
+          <Button onClick={setIsDelete.bind(this, true)} danger>
             DeleteForm
           </Button>
-          <Link to={`/dashboard/form/edit/${formId}`}>
-            <Button outline>Edit Form</Button>
-          </Link>
+
+          <Button onClick={setIsEdit.bind(this, true)} outline>
+            Edit Form
+          </Button>
         </Card>
       </div>
     );

@@ -1,0 +1,35 @@
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  backdrop-filter: blur(3px);
+  place-content: center;
+  z-index: 100;
+}
+
+.main {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.main {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 1em;
+}

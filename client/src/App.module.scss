@@ -1,0 +1,21 @@
+.error {
+  height: 100svh;
+  font-size: 1.4em;
+
+  display: grid;
+  place-items: center;
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    text-align: center;
+
+    img {
+      background-color: red;
+      height: 2em;
+      width: 2em;
+    }
+  }
+}

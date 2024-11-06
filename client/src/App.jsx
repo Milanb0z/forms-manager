@@ -7,7 +7,6 @@ import { ToastContainer } from "react-toastify";
 // Pages
 import {
   Invite,
-  EditForm,
   ExploreForms,
   FormResults,
   Login,
@@ -39,6 +38,7 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignUp />,
   },
+
   {
     path: "/form/id/:formId",
     element: <SingleForm byId />,
@@ -75,10 +75,6 @@ const router = createBrowserRouter([
       {
         path: "form/new",
         element: <NewForm />,
-      },
-      {
-        path: "form/edit/:formId",
-        element: <EditForm />,
       },
       {
         path: "results/:formId",

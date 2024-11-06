@@ -198,7 +198,7 @@ const SingleForm = ({ byId, inviteMode }) => {
           className={classes.info}
         >
           <div className={classes.info_header}>
-            <Button onClick={toggleInfo} iconUrl="/exit.svg" />
+            <Button onClick={toggleInfo} iconUrl="/icons/exit.svg" />
           </div>
           <div className={classes.info_text}>
             <h1>{form.name}</h1>

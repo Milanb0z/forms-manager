@@ -1,5 +1,9 @@
 import { Component } from "react";
 
+import classes from "./App.module.scss";
+import { Button } from "@ui";
+import { Link } from "react-router-dom";
+
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
@@ -13,8 +17,17 @@ class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return <h1>Something went wrong.</h1>;
+      return (
+        <section className={classes.error}>
+          <div className={classes.error_content}>
+            <h1>Uh of...</h1>
+            <p>Something went wrong.. Please try again later...</p>
+            <Link to="/dashboard">
+              <Button>Dashboard</Button>
+            </Link>
+          </div>
+        </section>
+      );
     }
 
     return this.props.children;

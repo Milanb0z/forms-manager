@@ -1,4 +1,5 @@
 
+
 <h1 align="center">
   <br>
   <a href="https://forms-manager.vercel.app/" target="_blank" ><img src="/client/public/icons/logo.svg" alt="Formr" width="120"></a>
@@ -51,6 +52,7 @@ This project have two parts, backend and frontend.
 
 #### Backend installation
 
+
 1. Clone the repo
    ```sh
    git clone https://github.com/milanb0z/forms-manager.git
@@ -63,7 +65,9 @@ This project have two parts, backend and frontend.
    ```env
    PORT=3001
    MONGO_URI=<MONGO_DB_URL>
+
    JWT_SECRET=<JWT_SECRET>
+   
    NODE_ENV=development
    ```
 4. Run Server
@@ -85,6 +89,7 @@ This project have two parts, backend and frontend.
    ```sh
    npm run dev
    ```
+
 4. View app [Here](http://127.0.0.1:3000/)
 
 ## Tech Stack
@@ -111,7 +116,6 @@ This project was developed using the MERN (MongoDB, Express.js, React, Node.js) 
 > [milanb0z.dev](https://www.milanb0z.dev) &nbsp;&middot;&nbsp;
 > GitHub [@milanb0z](https://github.com/milanb0z) &nbsp;&middot;&nbsp;
 > Instagram [@milanb0z](https://instagram.com/milanb0z)
-
 
 [Next.js]: https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
 [Next-url]: https://nodejs.org/

@@ -1,7 +1,7 @@
 .wrapper {
   background-color: var(--color-black-02);
-
   margin: 10em 0;
+  padding: 2em;
 }
 
 .text {
@@ -19,16 +19,46 @@
 }
 
 .row {
+  flex: 2;
   display: flex;
-  flex-direction: column;
+
   gap: 2em;
 }
 
 .card {
+  flex: 1;
   background-color: var(--color-black-03);
   border-radius: 1em;
-  padding: 1em;
+  padding: 2em;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 1em;
+
+  h3 {
+    max-width: 15ch;
+  }
+
+  p {
+    margin-bottom: auto;
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .forms {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 30em) {
+  .forms {
+    text-align: center;
+  }
+  .row {
+    flex-direction: column;
+  }
+
+  .card {
+    align-items: center;
+  }
 }

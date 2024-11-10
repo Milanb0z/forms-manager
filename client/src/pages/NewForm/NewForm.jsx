@@ -13,61 +13,8 @@ import classes from "./NewForm.module.scss";
 import DraggableQuestion from "@components/DraggableQuestion/DraggableQuestion";
 import QuestionContainer from "@components/QuestionContainer/QuestionContainer";
 import { useCreateFormMutation } from "@store/formSlice";
-
-const QUESTION_TYPES = {
-  MULTIPLE: "MULTIPLE",
-  RADIO: "RADIO",
-  UPLOAD: "UPLOAD",
-  SHORT: "SHORT",
-  PARAGRAPH: "PARAGRAPH",
-};
-
-const questionTypes = [
-  {
-    label: "Multiple Choice Type",
-    data: {
-      title: "",
-      options: [],
-      type: QUESTION_TYPES.MULTIPLE,
-    },
-  },
-
-  {
-    label: "Single Choice Type",
-    data: {
-      title: "",
-      options: [],
-      type: QUESTION_TYPES.RADIO,
-    },
-  },
-
-  {
-    label: "Short Text Answer",
-    data: {
-      title: "",
-      answer: "",
-      type: QUESTION_TYPES.SHORT,
-    },
-  },
-
-  {
-    label: "Paragraph Text Answer",
-    data: {
-      title: "",
-      answer: "",
-      type: QUESTION_TYPES.PARAGRAPH,
-    },
-  },
-
-  {
-    label: "Upload FIle Answer",
-    data: {
-      title: "",
-      answer: "",
-      type: QUESTION_TYPES.UPLOAD,
-    },
-  },
-];
+import { questionTypes } from "@utils/questionTypes";
+import SideModal from "@components/SideModal/SideModal";
 
 const NewForm = () => {
   const navigate = useNavigate();
@@ -131,8 +78,6 @@ const NewForm = () => {
       questions: questions.map(({ id, ...otherProps }) => ({ ...otherProps })),
     };
 
-    console.log(formSubmitData);
-
     createForm(formSubmitData)
       .unwrap()
       .then(() => {
@@ -157,13 +102,48 @@ const NewForm = () => {
           onChoiceEdit={onChoiceEdit}
           onChoiceDelete={onChoiceDelete}
           onSubmit={onFormSubmit}
+          toggleDrawer={toggleDrawer}
         />
-        <div className={classes.mobile}>
-          <Button onClick={toggleDrawer}>Add Question</Button>
-        </div>
-        <div
-          className={`${classes.info} ${openDrawer ? classes.info_open : ""}`}
+
+        <SideModal
+          title="Edit"
+          isOpen={openDrawer}
+          handleClose={() => setOpenDrawer(false)}
         >
+          <Input
+            label="Title"
+            value={heading}
+            onChange={setHeading}
+            placeholder="Title"
+          />
+          <Input
+            label="Custom Link"
+            value={customLink}
+            onChange={setCustomLink}
+            placeholder="Custom Link"
+          />
+          <TextArea
+            label="Description"
+            value={description}
+            onChange={setDescription}
+            placeholder="Description"
+          />
+
+          <h3>Question Types</h3>
+          <div className={classes.question}>
+            {questionTypes.map(({ data, label, icon }) => (
+              <DraggableQuestion
+                imgUrl={icon}
+                onClickHandler={onDropHandler}
+                data={data}
+                label={label}
+                key={label}
+              />
+            ))}
+          </div>
+        </SideModal>
+
+        <div className={classes.info}>
           <div className={classes.mobile}>
             <Button onClick={toggleDrawer}>Open</Button>
           </div>

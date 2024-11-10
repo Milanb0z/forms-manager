@@ -1,21 +1,23 @@
 import { useEffect } from "react";
-import classes from "./Modal.module.scss";
+import { motion } from "framer-motion";
+
 import ModalWrapper from "@hoc/ModalWrapper";
 import { Button } from "@ui";
-import { motion } from "framer-motion";
+
+import classes from "./SideModal.module.scss";
 
 const itemVars = {
   initial: {
-    y: 50,
+    x: 100,
     opacity: 0,
   },
   animate: {
     opacity: 1,
-    y: 0,
+    x: 0,
   },
 };
 
-const Modal = ({ children, title, isOpen, handleClose }) => {
+const SideModal = ({ children, title, isOpen, handleClose }) => {
   useEffect(() => {
     const closeOnEscapeKey = (e) => (e.key === "Escape" ? handleClose() : null);
     document.body.addEventListener("keydown", closeOnEscapeKey);
@@ -29,13 +31,13 @@ const Modal = ({ children, title, isOpen, handleClose }) => {
   return (
     <ModalWrapper>
       <div className={classes.wrapper}>
-        <motion.div
+        <motion.aside
           animate="animate"
           initial="initial"
           variants={itemVars}
-          className={classes.modal}
+          className={classes.side}
         >
-          <div className={classes.modal_heading}>
+          <div className={classes.side_heading}>
             <h2>{title}</h2>
             <Button
               danger
@@ -43,12 +45,12 @@ const Modal = ({ children, title, isOpen, handleClose }) => {
               onClick={handleClose}
             />
           </div>
-          <div className={classes.modal_content}>{children}</div>
-        </motion.div>
+          <div className={classes.side_content}>{children}</div>
+        </motion.aside>
         <div onClick={handleClose} className={classes.backdrop}></div>
       </div>
     </ModalWrapper>
   );
 };
 
-export default Modal;
+export default SideModal;

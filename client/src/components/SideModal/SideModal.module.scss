@@ -1,0 +1,43 @@
+.wrapper {
+  display: grid;
+  place-items: end end;
+  position: absolute;
+  overflow: hidden;
+  inset: 0;
+}
+
+.backdrop {
+  background-color: rgba(22, 22, 22, 0.3);
+  backdrop-filter: blur(20px);
+  position: absolute;
+  inset: 0;
+}
+
+.side {
+  z-index: 50;
+
+  width: 80%;
+  height: 100%;
+  right: 0;
+  background-color: var(--color-black-01);
+
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+
+  &_heading {
+    padding: 1em;
+    background-color: var(--color-black-03);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2em;
+  }
+
+  &_content {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
+}

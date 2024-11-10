@@ -31,7 +31,9 @@ const FormResults = () => {
         {data.response.map((ans) => (
           <div className={classes.answers_item} key={ans._id}>
             <h4> {findQuestion(ans.questionId)}</h4>
-            <span>- {ans.data.join(",")}</span>
+            <p>
+              <span>- {ans.data.join(",")}</span>
+            </p>
           </div>
         ))}
       </div>

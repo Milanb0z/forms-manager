@@ -1,5 +1,4 @@
 import classes from "./PageWrapper.module.scss";
-import { AnimatePresence, cubicBezier, motion } from "framer-motion";
 
 import Sidenav from "@components/Sidenav/Sidenav";
 import Header from "@components/Header/Header";

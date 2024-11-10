@@ -17,3 +17,9 @@
   margin-top: auto;
   align-self: flex-end;
 }
+
+@media screen and (max-width: 35em) {
+  .content_main {
+    gap: 2em;
+  }
+}

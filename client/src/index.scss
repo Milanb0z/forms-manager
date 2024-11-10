@@ -125,3 +125,27 @@ p {
     font-size: 1.2em;
   }
 }
+
+@media screen and (max-width: 35em) {
+  h2 {
+    font-size: 2.5em;
+  }
+  h3 {
+    font-size: 2em;
+  }
+
+  h4 {
+    font-size: 1.6em;
+  }
+
+  h5 {
+    font-size: 1.4em;
+  }
+
+  span {
+  }
+
+  p {
+    font-size: 1.4em;
+  }
+}

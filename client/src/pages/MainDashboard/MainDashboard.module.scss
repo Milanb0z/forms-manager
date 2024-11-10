@@ -105,3 +105,45 @@
     flex-direction: column;
   }
 }
+
+@media screen and (max-width: 35em) {
+  .grid {
+    overflow: unset;
+  }
+
+  .invites {
+    height: 27em;
+    &_content {
+      flex-direction: column;
+    }
+
+    &_info {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-evenly;
+      &_card {
+        text-align: center;
+      }
+    }
+  }
+
+  .list_item,
+  .new {
+    padding: 1.5em 1em;
+    margin-right: 0;
+  }
+
+  .surveys,
+  .results {
+    max-height: 30em;
+    overflow-y: auto;
+  }
+
+  .charts_content {
+    height: 15em !important;
+  }
+
+  .dummy {
+    display: none;
+  }
+}

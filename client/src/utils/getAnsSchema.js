@@ -1,5 +1,4 @@
-import { compileString } from "sass";
-import QUESTION_TYPES from "./questionTypes";
+import { QUESTION_TYPES } from "./questionTypes";
 
 const getAnsSchema = (questions) => {
   let questionsAns = questions.map((que) => {

@@ -8,13 +8,6 @@ import DroppedQuestion from "@components/DroppedQuestion/DroppedQuestion";
 
 import classes from "./QuestionContainer.module.scss";
 
-const moveItem = (array, to, from) => {
-  const item = array[from];
-  array.splice(from, 1);
-  array.splice(to, 0, item);
-  return array;
-};
-
 const QuestionContainer = memo(function QuestionContainer({
   questions,
   onDropHandler,
@@ -25,6 +18,7 @@ const QuestionContainer = memo(function QuestionContainer({
   onChoiceDelete,
   setQuestions,
   onSubmit,
+  toggleDrawer,
 }) {
   const [acitveCard, setAcitveCard] = useState(null);
   const [, drop] = useDrop(() => ({
@@ -66,9 +60,22 @@ const QuestionContainer = memo(function QuestionContainer({
           />
         ))}
       </Reorder.Group>
-      <Button disabled={questions.length < 1} onClick={onSubmit}>
-        Submit
-      </Button>
+      <div className={classes.row}>
+        <Button secondary className={classes.mobile} onClick={toggleDrawer}>
+          Add Question
+        </Button>
+
+        <Button
+          danger
+          className={classes.mobile}
+          onClick={toggleDrawer}
+          iconUrl="/icons/exit.svg"
+        ></Button>
+
+        <Button disabled={questions.length < 1} onClick={onSubmit}>
+          Submit
+        </Button>
+      </div>
     </div>
   );
 });

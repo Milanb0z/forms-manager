@@ -26,7 +26,7 @@ import CHART_COLORS from "@utils/chartColors";
 const SurveysCard = ({ forms }) => {
   return (
     <Card className={classes.surveys}>
-      <h5>Created Surveys</h5>
+      <h3>Created Surveys</h3>
 
       {forms?.length > 0 ? (
         <div className={classes.list}>
@@ -34,7 +34,7 @@ const SurveysCard = ({ forms }) => {
             <Link key={form._id} to={`/dashboard/invite/${form._id}`}>
               <div className={classes.list_item}>
                 <h4>{form.name}</h4>
-                <span
+                <p
                   style={{
                     color: form.isOpen
                       ? "var(--color-green)"
@@ -42,7 +42,7 @@ const SurveysCard = ({ forms }) => {
                   }}
                 >
                   {form.isOpen ? "Active" : "Closed"}
-                </span>
+                </p>
               </div>
             </Link>
           ))}
@@ -67,7 +67,7 @@ const ResultsCard = ({ forms }) => {
 
   return (
     <Card className={classes.results}>
-      <h5>Latest Results</h5>
+      <h3>Latest Results</h3>
 
       {transformedRes?.length > 0 ? (
         <div className={classes.list}>
@@ -100,7 +100,11 @@ const SolvedChart = ({ formsData }) => {
   return (
     <Card className={classes.charts}>
       <h3>Forms Activitiy (Last 7 Days)</h3>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer
+        className={classes.charts_content}
+        width="100%"
+        height="100%"
+      >
         <BarChart data={transtformedChart.chartData}>
           <CartesianGrid strokeDasharray="5 5 2" />
 

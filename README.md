@@ -1,5 +1,4 @@
 
-
 <h1 align="center">
   <br>
   <a href="https://forms-manager.vercel.app/" target="_blank" ><img src="/client/public/icons/logo.svg" alt="Formr" width="120"></a>
@@ -10,8 +9,6 @@
 
 <h4 align="center">Drag-and-drop form builder with tracking.</h4>
 <p align="center" >Formr is a Google Forms clone that simplifies form creation with a drag-and-drop builder, multiple question types, and real-time tracking. It offers seamless invite sending and custom link sharing, making form management efficient and user-friendly.</p>
-
-
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
@@ -24,24 +21,30 @@
 
 ## Key Features
 
-* **Drag-and-Drop Form Builder**  
+
+- **Drag-and-Drop Form Builder**
+
   - Easily create forms with an intuitive drag-and-drop interface.
 
-* **Multiple Question Types**  
+- **Multiple Question Types**
+
   - Customize forms with a variety of question types, from text to multiple-choice.
 
-* **Custom Link Sharing**  
+- **Custom Link Sharing**
+
   - Generate unique links for easy sharing and quick access.
 
-* **Invite Sending and Tracking**  
+- **Invite Sending and Tracking**
+
   - Send invites and track who has responded, all in one place.
 
-* **Real-Time Response Tracking**  
+- **Real-Time Response Tracking**
+
   - Monitor form responses as they come in, instantly.
 
-* **User-Friendly Interface**  
+- **User-Friendly Interface**
   - Designed for a smooth and efficient form-building experience.
- 
+
 ## How To Use
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
@@ -62,14 +65,14 @@ This project have two parts, backend and frontend.
    npm install
    ```
 3. Create Environment Variables `.env`
+
    ```env
    PORT=3001
    MONGO_URI=<MONGO_DB_URL>
 
    JWT_SECRET=<JWT_SECRET>
-   
    NODE_ENV=development
-   ```
+
 4. Run Server
    ```sh
    npm start
@@ -86,6 +89,7 @@ This project have two parts, backend and frontend.
    npm install
    ```
 3. Run App
+
    ```sh
    npm run dev
    ```

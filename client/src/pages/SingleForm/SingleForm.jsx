@@ -9,7 +9,7 @@ import axios from "../../axios.default";
 
 import classes from "./SingleForm.module.scss";
 import { getAnsSchema } from "@utils/getAnsSchema";
-import QUESTION_TYPES from "@utils/questionTypes";
+import { QUESTION_TYPES } from "@utils/questionTypes";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 
 const questionVars = {
@@ -163,7 +163,7 @@ const SingleForm = ({ byId, inviteMode }) => {
       : `/response/${form._id}`;
     axios
       .post(submitUrl, submitData)
-      .then((res) => {
+      .then(() => {
         setIsSolved(true);
         toast("Submited Succesfully");
       })
@@ -260,7 +260,7 @@ const SingleForm = ({ byId, inviteMode }) => {
           ) : (
             <Button onClick={onNextQuestion}>Next Question</Button>
           )}
-          <Button iconUrl="/options.svg" onClick={toggleInfo} />
+          <Button iconUrl="/icons/options.svg" onClick={toggleInfo} />
         </div>
       </div>
     );

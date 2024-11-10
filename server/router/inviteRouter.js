@@ -119,7 +119,7 @@ router.get("/resend/:inviteId", async (req, res) => {
       templateId: "d-12e9467c03b44f3eac6493d7655cbf68",
       dynamicTemplateData: {
         username: fetchedForm.createdBy.username,
-        solveLink: `http://localhost:3000/invite/${inviteId}`,
+        solveLink: `${process.env.CLIENT_URL}/invite/${inviteId}`,
         description: fetchedForm.description,
         title: fetchedForm.title,
       },
@@ -164,7 +164,7 @@ router.post("/:formId", async (req, res) => {
         templateId: "d-12e9467c03b44f3eac6493d7655cbf68",
         dynamicTemplateData: {
           username: fetchedForm.createdBy.username,
-          solveLink: `http://localhost:3000/invite/${invite._id}`,
+          solveLink: `${process.env.CLIENT_URL}/invite/${inviteId}`,
           description: fetchedForm.description,
           title: fetchedForm.title,
         },

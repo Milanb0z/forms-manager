@@ -6,15 +6,16 @@ const Button = ({
   outline,
   secondary,
   danger,
+  className,
   iconUrl,
   ...btnProps
 }) => {
   return (
     <button
       {...btnProps}
-      className={`${classes.btn} ${secondary ? classes.secondary : ""} ${
-        outline ? classes.outline : ""
-      }  ${danger ? classes.danger : ""}`}
+      className={` ${className} ${classes.btn} ${
+        secondary ? classes.secondary : ""
+      } ${outline ? classes.outline : ""}  ${danger ? classes.danger : ""}`}
     >
       {iconUrl ? <img src={iconUrl} alt={children} /> : null}
       {children}

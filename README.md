@@ -16,7 +16,7 @@
   <a href="#related">Related</a> •
 </p>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+![screenshot](/assets/formmanger_demo.gif)
 
 ## Key Features
 
@@ -107,11 +107,6 @@ This project was developed using the MERN (MongoDB, Express.js, React, Node.js) 
 ## Related
 
 [Portfolio Blog Post](https://www.milanb0z.dev/project/forms-manger) - Learn more about story and features of app
-
-## You may also like...
-
-- [Pomolectron](https://github.com/amitmerchant1990/pomolectron) - A pomodoro app
-- [Correo](https://github.com/amitmerchant1990/correo) - A menubar/taskbar Gmail App for Windows and macOS
 
 ---
 

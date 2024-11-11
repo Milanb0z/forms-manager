@@ -164,7 +164,7 @@ router.post("/:formId", async (req, res) => {
         templateId: "d-12e9467c03b44f3eac6493d7655cbf68",
         dynamicTemplateData: {
           username: fetchedForm.createdBy.username,
-          solveLink: `${process.env.CLIENT_URL}/invite/${inviteId}`,
+          solveLink: `${process.env.CLIENT_URL}/invite/${invite._id}`,
           description: fetchedForm.description,
           title: fetchedForm.title,
         },

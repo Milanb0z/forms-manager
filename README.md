@@ -1,3 +1,4 @@
+
 <h1 align="center">
   <br>
   <a href="https://forms-manager.vercel.app/" target="_blank" ><img src="/client/public/icons/logo.svg" alt="Formr" width="120"></a>
@@ -19,6 +20,7 @@
 ![screenshot](/assets/formmanger_demo.gif)
 
 ## Key Features
+
 
 - **Drag-and-Drop Form Builder**
 
@@ -53,6 +55,7 @@ This project have two parts, backend and frontend.
 
 #### Backend installation
 
+
 1. Clone the repo
    ```sh
    git clone https://github.com/milanb0z/forms-manager.git
@@ -68,9 +71,7 @@ This project have two parts, backend and frontend.
    MONGO_URI=<MONGO_DB_URL>
 
    JWT_SECRET=<JWT_SECRET>
-
    NODE_ENV=development
-   ```
 
 4. Run Server
    ```sh
@@ -122,3 +123,4 @@ This project was developed using the MERN (MongoDB, Express.js, React, Node.js) 
 [express-url]: https://expressjs.com/
 [mongodb]: https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white
 [mongodb-url]: https://www.mongodb.com/
+

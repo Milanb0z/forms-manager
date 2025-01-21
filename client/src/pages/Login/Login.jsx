@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
-import axios from "../../axios.default";
 
 import classes from "./Login.module.scss";
 
@@ -42,7 +39,8 @@ const Login = () => {
   const onDummyLogin = () => {
     loginUser({ email: "112233ee@gmail.com", password: "112233ee" })
       .unwrap()
-      .then(() => {
+      .then((res) => {
+        console.log(res);
         navigate("/dashboard/");
       })
       .catch((err) => {

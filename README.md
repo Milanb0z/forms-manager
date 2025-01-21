@@ -115,7 +115,7 @@ This project was developed using the MERN (MongoDB, Express.js, React, Node.js) 
 > Instagram [@milanb0z](https://instagram.com/milanb0z)
 
 [Next.js]: https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
-[Next-url]: https://nodejs.org/
+[Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [express]: https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=4FC08D

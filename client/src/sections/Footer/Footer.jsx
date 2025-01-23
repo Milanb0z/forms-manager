@@ -6,7 +6,7 @@ const Footer = ({ links }) => {
     <footer className={classes.wrapper}>
       <div className={classes.footer}>
         <div className={classes.logo}>
-          <img src="/logo.svg" alt="" className={classes.icon} />
+          <img src="/icons/logo.svg" alt="" className={classes.icon} />
           <h4>formr</h4>
         </div>
         <ul className={classes.links}>

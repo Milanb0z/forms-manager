@@ -106,7 +106,7 @@ const SolvedChart = ({ formsData }) => {
         height="100%"
       >
         <BarChart data={transtformedChart.chartData}>
-          <CartesianGrid strokeDasharray="5 5 2" />
+          <CartesianGrid strokeDasharray="4" />
 
           <Tooltip />
           <XAxis reversed hide dataKey="name" />
@@ -128,21 +128,33 @@ const SolvedChart = ({ formsData }) => {
   );
 };
 
-const inviteData = [
-  { name: "Group A", value: 400, fill: "#b8fd8e" },
-  { name: "Group B", value: 300, fill: "#343434" },
-];
+const InviteStatic = ({ forms }) => {
+  const getData = () => {
+    const allInv = [];
+    forms.forEach((form) => {
+      form.invites.forEach((i) => allInv.push(i));
+    });
+    return allInv;
+  };
 
-const InviteStatic = () => {
+  const chartData = [
+    {
+      name: "Group A",
+      value: getData().filter((p) => p.isSolved).length,
+      fill: "#b8fd8e",
+    },
+    { name: "Group B", value: getData().length, fill: "#343434" },
+  ];
+
   return (
     <Card className={classes.invites}>
-      <h3>Invites</h3>
+      <h3>Invites Response (All Forms):</h3>
       <div className={classes.invites_content}>
         <ResponsiveContainer>
           <PieChart className={classes.invites_chart}>
             <Pie
               cy="100%"
-              data={inviteData}
+              data={chartData}
               innerRadius={60}
               outerRadius={120}
               startAngle={180}
@@ -150,7 +162,7 @@ const InviteStatic = () => {
               fill="red"
               dataKey="value"
             >
-              {inviteData.map((entry, index) => (
+              {chartData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.fill} />
               ))}
             </Pie>
@@ -158,12 +170,12 @@ const InviteStatic = () => {
         </ResponsiveContainer>
         <div className={classes.invites_info}>
           <div className={classes.invites_info_card}>
-            <h2>12</h2>
+            <h2>{chartData[0].value}</h2>
             <p>Answered:</p>
           </div>
 
           <div className={classes.invites_info_card}>
-            <h2>12</h2>
+            <h2>{chartData[1].value}</h2>
             <p>Total Invites:</p>
           </div>
         </div>
@@ -179,10 +191,7 @@ const MainDashboard = () => {
     <div className={classes.grid}>
       <SolvedChart formsData={user.createdForms} />
       <ResultsCard forms={user.createdForms} />
-      <InviteStatic />
-      <Card className={classes.dummy}>
-        <h3>sdsd</h3>
-      </Card>
+      <InviteStatic forms={user.createdForms} />
       <SurveysCard forms={user.createdForms} />
     </div>
   );

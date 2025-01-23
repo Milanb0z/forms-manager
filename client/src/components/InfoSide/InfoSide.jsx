@@ -17,7 +17,7 @@ const InfoSide = () => {
     >
       <div className={classes.side_content}>
         <div className={classes.side_heading}>
-          <img src="/logo.svg" alt="" />
+          <img src="/icons/logo.svg" alt="" />
           <h1>Formr</h1>
         </div>
         <div className={classes.side_item}>

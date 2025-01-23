@@ -27,7 +27,8 @@
 
 .card {
   flex: 1;
-  background-color: var(--color-black-03);
+  background-color: var(--color-black-01);
+  border: 2px solid var(--color-black-03);
   border-radius: 1em;
   padding: 2em;
   display: flex;

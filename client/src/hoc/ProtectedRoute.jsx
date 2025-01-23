@@ -11,14 +11,13 @@ const ProtectedRoute = ({ children }) => {
       <div
         style={{ height: "100svh", display: "grid", placeContent: "center" }}
       >
-        {" "}
         <LoadingSpinner />
       </div>
     );
   }
 
   if (!user && !isLoading) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   } else {
     return children;
   }

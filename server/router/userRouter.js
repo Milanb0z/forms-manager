@@ -31,8 +31,15 @@ router.get("/profile", auth, async (req, res) => {
   try {
     const user = await req.user.populate({
       path: "createdForms",
+
+      populate: {
+        path: "invites",
+        select: "isSolved",
+      },
+
       populate: {
         path: "responses",
+        select: "_id createdAt",
       },
     });
 
@@ -46,7 +53,6 @@ router.get("/profile", auth, async (req, res) => {
 router.patch("/", auth, async (req, res) => {
   try {
     const { username, email, password } = req.body;
-
     const existUser = await User.findOne({ username });
 
     if (!existUser) {

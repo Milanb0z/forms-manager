@@ -1,11 +1,21 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import classes from "./Sidenav.module.scss";
 
 const STATIC_LINKS = [
-  { id: "sd12", iconLink: "/icons/grid.svg", url: "/dashboard" },
-  { id: "sd13", iconLink: "/icons/profile.svg", url: "/dashboard/me" },
+  {
+    id: "dashboard",
+    iconLink: "/icons/grid.svg",
+    text: "Dashboard",
+    url: "/dashboard",
+  },
+  {
+    id: "person",
+    iconLink: "/icons/profile.svg",
+    text: "Profile",
+    url: "/dashboard/me",
+  },
 ];
 
 const Sidenav = ({ isOpen, toggleState }) => {
@@ -17,7 +27,7 @@ const Sidenav = ({ isOpen, toggleState }) => {
       }}
       className={classes.nav}
     >
-      <div className={classes.logo}>
+      <Link to="/dashboard" className={classes.logo}>
         <motion.img layout src="/icons/logo.svg" alt="" />
 
         {isOpen && (
@@ -30,7 +40,7 @@ const Sidenav = ({ isOpen, toggleState }) => {
             Formr
           </motion.h2>
         )}
-      </div>
+      </Link>
 
       <motion.div layout onClick={toggleState} className={classes.toggle}>
         <motion.img
@@ -62,7 +72,7 @@ const Sidenav = ({ isOpen, toggleState }) => {
                 transition={{ delay: 0.125 }}
                 className={classes.link_text}
               >
-                Formr
+                {link.text}
               </motion.span>
             )}
           </NavLink>

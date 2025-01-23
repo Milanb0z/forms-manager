@@ -7,7 +7,7 @@ import { TextArea } from "@ui";
 
 const Submit = () => {
   return (
-    <div className={classes.wrapper}>
+    <div id="submit" className={classes.wrapper}>
       <section className={classes.submit}>
         <div className={classes.text}>
           <h2>Have an Idea for a Feature? Let Us Know!</h2>

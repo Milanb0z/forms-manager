@@ -14,8 +14,7 @@ const LINKS = [
   { text: "Home", src: "/#" },
   { text: "Features", src: "/#features" },
   { text: "steps", src: "/#steps" },
-  { text: "reviews", src: "/#reviews" },
-  { text: "FAQ", src: "/#faq" },
+  { text: "Submit Freature", src: "/#submit" },
 ];
 
 const Landing = () => {

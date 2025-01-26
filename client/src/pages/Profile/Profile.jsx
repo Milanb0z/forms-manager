@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
-import { useGetProfileQuery, useUpdateUserMutation } from "@store/authSlice";
+import { useGetProfileQuery, useUpdateUserMutation } from "@store/authApiSlice";
 import { Button, Input } from "@ui";
 
 import classes from "./Profile.module.scss";

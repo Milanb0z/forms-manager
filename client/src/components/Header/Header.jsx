@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
 import ProfileCard from "@components/ProfileCard/ProfileCard";
-import { useGetProfileQuery } from "@store/authSlice";
 import { Button } from "@ui";
 
 import classes from "./Header.module.scss";
+import { selectCurrentUser } from "@store/authSlice";
+import { useSelector } from "react-redux";
 
 const Header = ({ title, link }) => {
-  const { data: user } = useGetProfileQuery();
+  const user = useSelector(selectCurrentUser);
 
   return (
     <header className={classes.header}>

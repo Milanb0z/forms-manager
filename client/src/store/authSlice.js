@@ -1,48 +1,25 @@
-import { apiSlice } from "./apiSlice";
+import { createSlice } from "@reduxjs/toolkit";
 
-const setCookie = ({ token, user }) => {
-  if (token) {
-    localStorage.setItem("token", token);
-  }
-  return user;
-};
-
-const extendedApiSlice = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
-    getProfile: builder.query({
-      query: () => "/user/profile",
-      providesTags: ["auth"],
-      transformResponse: setCookie,
-    }),
-    getUserByUsername: builder.query({
-      query: (username) => `/user/${username}`,
-    }),
-    login: builder.mutation({
-      query: (body) => ({ url: "/user/login", body, method: "POST" }),
-      providesTags: ["auth"],
-      transformResponse: setCookie,
-    }),
-    signUp: builder.mutation({
-      query: (body) => ({ url: "/user/signup", body, method: "POST" }),
-      providesTags: ["auth"],
-      transformResponse: setCookie,
-    }),
-    updateUser: builder.mutation({
-      query: (body) => {
-        return { url: "/user/", body, method: "PATCH" };
-      },
-      invalidatesTags: ["auth"],
-      transformResponse: setCookie,
-    }),
-  }),
+const authSlice = createSlice({
+  name: "auth",
+  initialState: { user: null, token: null },
+  reducers: {
+    setCredentials: (state, action) => {
+      console.log(action.payload);
+      const { user, accessToken } = action.payload;
+      state.user = user;
+      state.token = accessToken;
+    },
+    logOut: (state) => {
+      state.user = null;
+      state.token = null;
+    },
+  },
 });
 
-export default extendedApiSlice;
+export const { setCredentials, logOut } = authSlice.actions;
 
-export const {
-  useGetProfileQuery,
-  useLoginMutation,
-  useSignUpMutation,
-  useUpdateUserMutation,
-  useGetUserByUsernameQuery,
-} = extendedApiSlice;
+export default authSlice.reducer;
+
+export const selectCurrentUser = (state) => state.auth.user;
+export const selectCurrentToken = (state) => state.auth.token;

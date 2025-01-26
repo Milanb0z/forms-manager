@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useGetUserByUsernameQuery } from "@store/authSlice";
+import { useGetUserByUsernameQuery } from "@store/authApiSlice";
 
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 

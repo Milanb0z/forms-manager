@@ -54,40 +54,43 @@ const router = createBrowserRouter([
 
   {
     path: "/dashboard",
-    element: (
-      <ProtectedRoute>
-        <PageWrapper />
-      </ProtectedRoute>
-    ),
+    element: <ProtectedRoute />,
+
     children: [
       {
         path: "",
-        element: <MainDashboard />,
-      },
-      {
-        path: "invite/:formId",
-        element: <Invite />,
-      },
-      {
-        path: "form",
-        element: <ExploreForms />,
-      },
-      {
-        path: "form/new",
-        element: <NewForm />,
-      },
-      {
-        path: "results/:formId",
-        element: <FormResults />,
-      },
-      {
-        path: "user/:username",
-        element: <UserDetails />,
-      },
+        element: <PageWrapper />,
+        children: [
+          {
+            path: "",
+            element: <MainDashboard />,
+          },
+          {
+            path: "invite/:formId",
+            element: <Invite />,
+          },
+          {
+            path: "form",
+            element: <ExploreForms />,
+          },
+          {
+            path: "form/new",
+            element: <NewForm />,
+          },
+          {
+            path: "results/:formId",
+            element: <FormResults />,
+          },
+          {
+            path: "user/:username",
+            element: <UserDetails />,
+          },
 
-      {
-        path: "me",
-        element: <Profile />,
+          {
+            path: "me",
+            element: <Profile />,
+          },
+        ],
       },
     ],
   },

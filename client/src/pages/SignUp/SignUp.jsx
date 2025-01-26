@@ -1,6 +1,5 @@
-import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
-import { toast, ToastContainer } from "react-toastify";
+
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -10,7 +9,7 @@ import { Button, Card, Input } from "@ui";
 import useInput from "@hooks/useInput";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import InfoSide from "@components/InfoSide/InfoSide";
-import { useSignUpMutation } from "@store/authSlice";
+import { useSignUpMutation } from "@store/authApiSlice";
 
 const modelVariants = {
   initial: { x: 50, opacity: 0 },

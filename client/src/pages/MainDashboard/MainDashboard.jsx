@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import {
   BarChart,
@@ -17,11 +18,11 @@ import {
 import { Card, Button } from "@ui";
 
 import classes from "./MainDashboard.module.scss";
-import { useGetProfileQuery } from "@store/authSlice";
 
 import { getResponsesSorted, getChartData } from "@utils/getAnsSchema";
 import FromatedDate from "@utils/formatDate";
 import CHART_COLORS from "@utils/chartColors";
+import { selectCurrentUser } from "@store/authSlice";
 
 const SurveysCard = ({ forms }) => {
   return (
@@ -131,8 +132,11 @@ const SolvedChart = ({ formsData }) => {
 const InviteStatic = ({ forms }) => {
   const getData = () => {
     const allInv = [];
+
     forms.forEach((form) => {
-      form.invites.forEach((i) => allInv.push(i));
+      form.invites.forEach((i) => {
+        allInv.push(i);
+      });
     });
     return allInv;
   };
@@ -185,7 +189,10 @@ const InviteStatic = ({ forms }) => {
 };
 
 const MainDashboard = () => {
-  const { data: user } = useGetProfileQuery();
+  const user = useSelector(selectCurrentUser);
+  if (!user) {
+    return <h2> NO User</h2>;
+  }
 
   return (
     <div className={classes.grid}>

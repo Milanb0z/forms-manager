@@ -8,7 +8,9 @@ import { Button, Card, Input } from "@ui";
 import useInput from "@hooks/useInput";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import InfoSide from "@components/InfoSide/InfoSide";
-import { useLoginMutation } from "@store/authSlice";
+import { useLoginMutation } from "@store/authApiSlice";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "@store/authSlice";
 
 const modelVariants = {
   initial: { x: 50, opacity: 0 },
@@ -16,6 +18,7 @@ const modelVariants = {
 };
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginUser, { isLoading }] = useLoginMutation();
 
@@ -28,7 +31,7 @@ const Login = () => {
     loginUser({ email, password })
       .unwrap()
       .then((res) => {
-        console.log(res);
+        dispatch(setCredentials(res.data));
         navigate("/dashboard/");
       })
       .catch((err) => {
@@ -38,9 +41,9 @@ const Login = () => {
 
   const onDummyLogin = () => {
     loginUser({ email: "112233ee@gmail.com", password: "112233ee" })
-      .unwrap()
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        dispatch(setCredentials(res.data));
         navigate("/dashboard");
       })
       .catch((err) => {

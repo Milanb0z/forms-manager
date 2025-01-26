@@ -1,26 +1,20 @@
-import { Navigate } from "react-router-dom";
-import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+import { useEffect } from "react";
+import { useLocation, Navigate, Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useGetProfileQuery } from "@store/authSlice";
+import { selectCurrentUser } from "@store/authSlice";
 
-const ProtectedRoute = ({ children }) => {
-  const { data: user, isLoading } = useGetProfileQuery();
+const ProtectedRoute = () => {
+  const location = useLocation();
+  const user = useSelector(selectCurrentUser);
 
-  if (isLoading) {
-    return (
-      <div
-        style={{ height: "100svh", display: "grid", placeContent: "center" }}
-      >
-        <LoadingSpinner />
-      </div>
-    );
-  }
+  console.log(user);
 
-  if (!user && !isLoading) {
-    return <Navigate to="/login" replace />;
-  } else {
-    return children;
-  }
+  return user ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/login" state={{ from: location }} replace />
+  );
 };
 
 export default ProtectedRoute;

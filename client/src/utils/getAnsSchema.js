@@ -32,11 +32,13 @@ const getResponsesSorted = (forms) => {
   let sortedList = [];
 
   //Joining Responses
-  forms.forEach(({ responses, name }) => {
+  forms.forEach((form) => {
+    console.log(form);
+    return;
     if (responses.length > 0) {
-      responses.forEach((r) =>
-        sortedList.push({ createdAt: r.createdAt, name, id: r._id })
-      );
+      responses.forEach((r) => {
+        sortedList.push({ createdAt: r.createdAt, name, _id: r._id });
+      });
     }
   });
 

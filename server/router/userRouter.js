@@ -1,10 +1,10 @@
 const router = require("express").Router();
+const jwt = require("jsonwebtoken");
 
 const { User } = require("../models/userModel");
 const generateToken = require("../utils/generateToken");
 
 const auth = require("../middleware/auth");
-const { populate } = require("dotenv");
 
 //Create User
 router.post("/signup", async (req, res) => {
@@ -94,12 +94,38 @@ router.post("/login", async (req, res) => {
       return res.status(401).send({ error: "Password is incorrect" });
     }
 
-    let token = generateToken(res, foundUser._id);
+    generateToken(res, foundUser._id);
 
-    res.send({ user: foundUser, token });
+    let accessToken = jwt.sign(
+      { userId: foundUser._id },
+      process.env.JWT_SECRET,
+      { expiresIn: 60 }
+    );
+
+    res.send({ user: foundUser, token: accessToken });
   } catch (error) {
     console.log(error);
     res.status(500).send({ error });
+  }
+});
+
+router.get("/refresh", async (req, res) => {
+  const refreshToken = req.cookies["jwt"];
+  if (!refreshToken) {
+    return res.status(401).send("Access Denied. No refresh token provided.");
+  }
+
+  try {
+    const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET);
+    const token = jwt.sign({ userId: decoded.userId }, process.env.JWT_SECRET, {
+      expiresIn: 60,
+    });
+
+    const user = await User.findById(decoded.userId).select("-password");
+
+    res.send({ token, user });
+  } catch (error) {
+    return res.status(400).send("Invalid refresh token.");
   }
 });
 

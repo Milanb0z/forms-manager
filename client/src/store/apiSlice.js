@@ -18,10 +18,12 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result?.error?.originalStatus === 403) {
+  console.log(result);
+
+  if (result?.error?.status === 403) {
     console.log("sending refresh token");
     // send refresh token to get new access token
-    const refreshResult = await baseQuery("/user/profile", api, extraOptions);
+    const refreshResult = await baseQuery("/user/refresh", api, extraOptions);
     console.log("Base Query");
     console.log(refreshResult);
     if (refreshResult?.data) {
@@ -39,7 +41,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 };
 
 export const apiSlice = createApi({
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithReauth,
   tagTypes: ["form", "auth"],
   endpoints: () => ({}),
 });

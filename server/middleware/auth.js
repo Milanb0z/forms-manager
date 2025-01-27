@@ -4,11 +4,13 @@ const { User } = require("../models/userModel");
 const auth = async (req, res, next) => {
   let token;
 
-  token = req.cookies["jwt"];
+  token = req.headers["token"];
 
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      console.log(decoded);
 
       req.user = await User.findById(decoded.userId).select("-password");
       next();

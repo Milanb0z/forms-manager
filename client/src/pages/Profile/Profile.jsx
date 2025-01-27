@@ -2,15 +2,17 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
-import { useGetProfileQuery, useUpdateUserMutation } from "@store/authApiSlice";
+import { useUpdateUserMutation } from "@store/authApiSlice";
 import { Button, Input } from "@ui";
 
 import classes from "./Profile.module.scss";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@store/authSlice";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { data: user } = useGetProfileQuery();
+  const user = useSelector(selectCurrentUser);
   const [updateUser] = useUpdateUserMutation();
   const [userData, setUserData] = useState({
     username: "",

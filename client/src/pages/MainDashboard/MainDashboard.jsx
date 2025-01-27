@@ -66,6 +66,8 @@ const SurveysCard = ({ forms }) => {
 const ResultsCard = ({ forms }) => {
   const transformedRes = getResponsesSorted(forms);
 
+  console.log(forms);
+
   return (
     <Card className={classes.results}>
       <h3>Latest Results</h3>
@@ -190,18 +192,8 @@ const InviteStatic = ({ forms }) => {
 
 const MainDashboard = () => {
   const user = useSelector(selectCurrentUser);
-  if (!user) {
-    return <h2> NO User</h2>;
-  }
 
-  return (
-    <div className={classes.grid}>
-      <SolvedChart formsData={user.createdForms} />
-      <ResultsCard forms={user.createdForms} />
-      <InviteStatic forms={user.createdForms} />
-      <SurveysCard forms={user.createdForms} />
-    </div>
-  );
+  return <div className={classes.grid}></div>;
 };
 
 export default MainDashboard;

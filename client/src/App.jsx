@@ -23,6 +23,8 @@ import ProtectedRoute from "@hoc/ProtectedRoute";
 
 import Profile from "./pages/Profile/Profile.jsx";
 import PageWrapper from "@hoc/PageWrapper.jsx";
+import { useGetProfileQuery } from "@store/authApiSlice.js";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner.jsx";
 
 const router = createBrowserRouter([
   {
@@ -102,6 +104,11 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+  const { isLoading } = useGetProfileQuery();
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <>
       <RouterProvider router={router} />

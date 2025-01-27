@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
     : "https://shark-app-j29yz.ondigitalocean.app/api/",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.token;
+    const token = localStorage.getItem("token");
     if (token) {
       headers.set("token", token);
     }

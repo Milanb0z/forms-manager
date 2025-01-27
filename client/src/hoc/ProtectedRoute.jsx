@@ -1,12 +1,10 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { selectCurrentUser } from "@store/authSlice";
-
 const ProtectedRoute = () => {
   const location = useLocation();
 
-  const user = useSelector(selectCurrentUser);
+  const { user } = useSelector((state) => state.auth);
 
   return user ? (
     <Outlet />

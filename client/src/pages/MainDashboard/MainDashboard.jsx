@@ -23,6 +23,7 @@ import { getResponsesSorted, getChartData } from "@utils/getAnsSchema";
 import FromatedDate from "@utils/formatDate";
 import CHART_COLORS from "@utils/chartColors";
 import { selectCurrentUser } from "@store/authSlice";
+import { useGetProfileQuery } from "@store/authApiSlice";
 
 const SurveysCard = ({ forms }) => {
   return (
@@ -65,8 +66,6 @@ const SurveysCard = ({ forms }) => {
 
 const ResultsCard = ({ forms }) => {
   const transformedRes = getResponsesSorted(forms);
-
-  console.log(forms);
 
   return (
     <Card className={classes.results}>
@@ -191,9 +190,22 @@ const InviteStatic = ({ forms }) => {
 };
 
 const MainDashboard = () => {
-  const user = useSelector(selectCurrentUser);
+  const { data, isLoading } = useGetProfileQuery();
 
-  return <div className={classes.grid}></div>;
+  if (isLoading) {
+    return "loading";
+  }
+
+  if (data) {
+    return (
+      <div className={classes.grid}>
+        <SolvedChart formsData={data.user.createdForms} />
+        <ResultsCard forms={data.user.createdForms} />
+        <InviteStatic forms={data.user.createdForms} />
+        <SurveysCard forms={data.user.createdForms} />
+      </div>
+    );
+  }
 };
 
 export default MainDashboard;

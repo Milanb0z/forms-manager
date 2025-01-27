@@ -31,16 +31,16 @@ router.get("/profile", auth, async (req, res) => {
   try {
     const user = await req.user.populate({
       path: "createdForms",
-
-      populate: {
-        path: "invites",
-        select: "isSolved",
-      },
-
-      populate: {
-        path: "responses",
-        select: "_id createdAt",
-      },
+      populate: [
+        {
+          path: "invites",
+          select: "isSolved",
+        },
+        {
+          path: "responses",
+          select: "_id createdAt",
+        },
+      ],
     });
 
     res.send({ user });
@@ -84,7 +84,20 @@ router.patch("/", auth, async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
-    const foundUser = await User.findOne({ email }).populate("createdForms");
+    const foundUser = await User.findOne({ email }).populate({
+      path: "createdForms",
+      populate: [
+        {
+          path: "invites",
+          select: "isSolved",
+        },
+        {
+          path: "responses",
+          select: "_id createdAt",
+        },
+      ],
+    });
+
     if (!foundUser) {
       return res.status(404).send({ error: "User not Found" });
     }
